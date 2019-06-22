@@ -8,27 +8,32 @@ import { HttpClient } from '@angular/common/http';
 import { AnalyticsManager } from './managers/analytics-manager';
 import { Config } from 'protractor';
 import { ConfigProvider } from './config-provider';
+import { HistoryManager } from './managers/history-manager';
 
 @Injectable()
 export class AppClassHelper extends AbstractClassHelper {
 
-    _configProvider: ConfigProvider = null;
+  _configProvider: ConfigProvider = null;
 
-    constructor(shell: AppShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute,
-        meta: Meta, configProvider: ConfigProvider) {
-        super(shell, windowRef, title, httpClient, activatedRoute, meta);
-        this._configProvider = configProvider;
-    }
+  constructor(shell: AppShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute,
+    meta: Meta, configProvider: ConfigProvider) {
+    super(shell, windowRef, title, httpClient, activatedRoute, meta);
+    this._configProvider = configProvider;
+  }
 
-    getAnalytics(): AnalyticsManager {
-        return this._getShell().getAnalyticsManager();
-    }
+  getAnalytics(): AnalyticsManager {
+    return this._getShell().getAnalyticsManager();
+  }
 
-    getConfigProvider(): ConfigProvider {
-        return this._configProvider;
-    }
+  getHistoryManager(): HistoryManager {
+    return this._getShell().getHistoryManager();
+  }
 
-    _getShell(): AppShell {
-        return <AppShell>this._shell;
-    }
+  getConfigProvider(): ConfigProvider {
+    return this._configProvider;
+  }
+
+  _getShell(): AppShell {
+    return <AppShell>this._shell;
+  }
 }

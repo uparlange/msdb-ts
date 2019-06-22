@@ -1,0 +1,12 @@
+.title
+{
+    width: calc(100% - 24px - 40px);
+    display: inline-block;
+}
+
+.actions-menu
+{
+    float: right;
+    top: -6px;
+    right: -6px;
+}

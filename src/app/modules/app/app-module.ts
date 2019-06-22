@@ -16,12 +16,14 @@ import { AppClassHelper } from 'src/app/common/app-class-helper';
 import { AppShell } from 'src/app/common/app-shell';
 import { AnalyticsManager } from 'src/app/common/managers/analytics-manager';
 import { BlazyManager } from 'src/app/common/managers/blazy-Manager';
+import { HistoryManager } from '../../common/managers/history-manager';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", loadChildren: () => import("./home/home-module").then(mod => mod.HomeModule) },
   { path: "search", loadChildren: () => import("./search/search-module").then(mod => mod.SearchModule) },
-  { path: "result", loadChildren: () => import("./result/result-module").then(mod => mod.ResultModule) }
+  { path: "result", loadChildren: () => import("./result/result-module").then(mod => mod.ResultModule) },
+  { path: "detail", loadChildren: () => import("./detail/detail-module").then(mod => mod.DetailModule) }
 ];
 
 @NgModule({
@@ -43,7 +45,8 @@ const routes: Routes = [
     AppShell,
     AppClassHelper,
     AnalyticsManager,
-    BlazyManager
+    BlazyManager,
+    HistoryManager
   ],
   bootstrap: [
     AppView

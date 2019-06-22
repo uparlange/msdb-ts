@@ -4,13 +4,13 @@ import { AppClassHelper } from 'src/app/common/app-class-helper';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 
 @Component({
-    selector: 'home-view',
-    templateUrl: './home-view.html',
-    styleUrls: ['./home-view.css']
+  selector: 'home-view',
+  templateUrl: './home-view.html',
+  styleUrls: ['./home-view.css']
 })
 export class HomeView extends AbstractAppView {
 
-    constructor(appClassHelper: AppClassHelper, homeModel: HomeModel) {
-        super(appClassHelper, homeModel);
-    }
+  constructor(appClassHelper: AppClassHelper, homeModel: HomeModel) {
+    super(appClassHelper, homeModel);
+  }
 }

@@ -1,0 +1,158 @@
+<mat-card>
+	<mat-card-title>
+		<span class="title">
+      <mat-icon svgIcon="heart-outline" *ngIf="model.inFavorites(model.data.game)"></mat-icon>
+			<span>{{model.data.game.description}}</span>
+		</span>
+		<button class="actions-menu" mat-icon-button [matMenuTriggerFor]="menu" *ngIf="model.data.game.name != null">
+			<mat-icon svgIcon="menu"></mat-icon>
+		</button>
+		<mat-menu #menu="matMenu">
+			<ng-template [ngIf]="!model.inFavorites(model.data.game)" [ngIfElse]="removeFromFavorites">
+				<button mat-menu-item (click)="model.addToFavorite(model.data.game)">
+          <mat-icon svgIcon="heart"></mat-icon>
+					<span>{{"L10N_ADD_TO_FAVORITES"|translate}}</span>
+				</button>
+			</ng-template>
+			<ng-template #removeFromFavorites>
+				<button mat-menu-item (click)="model.removeFromFavorites(model.data.game)">
+          <mat-icon svgIcon="heart-broken"></mat-icon>
+					<span>{{"L10N_REMOVE_FROM_FAVORITES"|translate}}</span>
+				</button>
+			</ng-template>
+			<button mat-menu-item *ngIf="model.data.gameAvailable" (click)="model.playGame(model.data.game)">
+        <mat-icon svgIcon="gamepad-variant"></mat-icon>
+				<span>{{"L10N_PLAY_GAME"|translate}}</span>
+			</button>
+			<button mat-menu-item [matMenuTriggerFor]="subMenu" *ngIf="model.data.game.dipswitchs.length > 0 || model.data.game.chips.length > 0 || model.data.game.biossets.length > 0 || model.data.game.ports.length > 0 || model.data.game.devicerefs.length > 0">
+				<mat-icon svgIcon="more"></mat-icon>
+				<span>{{"L10N_MORE"|translate}}</span>
+				<mat-menu #subMenu="matMenu">
+					<button mat-menu-item *ngIf="model.data.game.dipswitchs.length > 0" (click)="openDipSwitchsPopup()">{{'L10N_DIP_SWITCH'|translate}}</button>
+					<button mat-menu-item *ngIf="model.data.game.chips.length > 0" (click)="openChipsPopup()">{{'L10N_CHIP'|translate}}</button>
+					<button mat-menu-item *ngIf="model.data.game.biossets.length > 0" (click)="openBiossetsPopup()">{{'L10N_BIOS_SET'|translate}}</button>
+					<button mat-menu-item *ngIf="model.data.game.ports.length > 0" (click)="openPortsPopup()">{{'L10N_PORT'|translate}}</button>
+					<button mat-menu-item *ngIf="model.data.game.devicerefs.length > 0" (click)="openDeviceReferencesPopup()">{{'L10N_DEVICE_REF'|translate}}</button>
+				</mat-menu>
+			</button>
+		</mat-menu>
+	</mat-card-title>
+</mat-card>
+<mat-list>
+	<mat-list-item *ngIf="model.data.game.year != null">
+		{{'L10N_YEAR'|translate}}
+		<span class="sep">:</span>
+		<a routerLink="/result" [queryParams]="{type:'year',value:model.data.game.year}">{{model.data.game.year}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.manufacturer != null">
+		{{'L10N_MANUFACTURER'|translate}}
+		<span class="sep">:</span>
+		<a routerLink="/result" [queryParams]="{type:'manufacturer',value:model.data.game.manufacturer}">{{model.data.game.manufacturer}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.series != null">
+		{{'L10N_SERIE'|translate}}
+		<span class="sep">:</span>
+		<a routerLink="/result" [queryParams]="{type:'series',value:model.data.game.series}">{{model.data.game.series}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.category != null">
+		{{'L10N_CATEGORY'|translate}}
+		<span class="sep">:</span>
+		<a routerLink="/result" [queryParams]="{type:'category',value:model.data.game.category}">{{model.data.game.category}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.language != null">
+		{{'L10N_LANGUAGE'|translate}}
+		<span class="sep">:</span>
+		<a routerLink="/result" [queryParams]="{type:'language',value:model.data.game.language}">{{model.data.game.language}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.driver != null && model.data.game.driver.status != null">
+		{{'L10N_STATUS'|translate}}
+		<span class="sep">:</span>
+		<button [class]="'link-button ' + model.getStatusClass(model.data.game.driver.status)" (click)="openDriverPopup()">{{model.getStatusLabel(model.data.game.driver.status)|translate}}</button>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.rating != null">
+		{{'L10N_RATING'|translate}}
+		<span class="sep">:</span>
+		<a routerLink="/result" [queryParams]="{type:'rating',value:model.data.game.rating}">{{model.data.game.rating}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.input != null && model.data.game.input.players != null">
+		{{'L10N_PLAYERS_NUMBER'|translate}}
+		<span class="sep">:</span>
+		{{model.data.game.input.players}}
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.roms != null && model.data.game.roms.length > 0">
+		{{'L10N_SIZE'|translate}}
+		<span class="sep">:</span>
+		{{model.getGameSizeLabel()}}
+		<span class="sep">-</span>
+		<button class="link-button" (click)="openRomsPopup()">{{model.data.game.roms.length}} {{'L10N_ROM_OR_ROMS'|translate}}</button>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
+		{{'L10N_ROM_OF'|translate}}
+		<span class="sep">:</span>
+		<a routerLink="/detail" [queryParams]="{name:model.data.game.romof}">{{model.data.game.romof}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.isbios == 'yes'">
+		<a routerLink="/result" [queryParams]="{type:'bios',value:model.data.game.name}">{{'L10N_BIOS_GAMES'|translate}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.cloneof != null">
+		{{'L10N_CLONE_OF'|translate}}
+		<span class="sep">:</span>
+		<a routerLink="/detail" [queryParams]="{name:model.data.game.cloneof}">{{model.data.game.cloneof}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.clones != null && model.data.clones.length > 0">
+		{{'L10N_CLONE_OR_CLONES'|translate}}
+		<span class="sep">:</span>
+		<button class="link-button" (click)="openClonesPopup()">{{model.data.clones.length}}</button>
+	</mat-list-item>
+</mat-list>
+<mat-card *ngIf="model.data.game.name != null">
+	<mat-card-title>
+		{{'L10N_DOWNLOADS'|translate}}
+	</mat-card-title>
+</mat-card>
+<mat-list *ngIf="model.data.game.name != null">
+	<mat-list-item>
+		<a target="_blank" href="http://mamedev.org/">{{'L10N_MAME_EMULATOR'|translate}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.isdevice == 'no'">
+		<a target="_blank" [href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">Rom {{model.data.game.description}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
+		<a target="_blank" href="http://www.planetemu.net/roms/mame-bios-pack">Bios {{model.data.game.romof}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.manual === true">
+		<a target="_blank" [href]="model.getGameManualUrl(model.data.game)">{{'L10N_MANUAL'|translate}}</a>
+	</mat-list-item>
+</mat-list>
+<div *ngIf="model.data.images.length > 0">
+	<mat-card>
+		<mat-card-title>
+			{{'L10N_IMAGES'|translate}}
+		</mat-card-title>
+	</mat-card>
+	<div class="default-spacer"></div>
+	<gallery [colcount]="3" [gap]="5" [provider]="model.data.images"></gallery>
+</div>
+<div *ngIf="model.data.game.video === true">
+	<mat-card>
+		<mat-card-title>
+			{{'L10N_VIDEOS'|translate}}
+		</mat-card-title>
+	</mat-card>
+	<div class="default-spacer"></div>
+	<video controls>
+		<source [src]="model.getGameVideoUrl(model.data.game)" type="video/mp4" />
+	</video>
+</div>
+<div *ngIf="model.data.game.soundtracks != null && model.data.game.soundtracks.length > 0">
+	<mat-card>
+		<mat-card-title>
+			{{'L10N_SOUNDTRACKS'|translate}}
+		</mat-card-title>
+	</mat-card>
+	<mat-list>
+		<mat-list-item *ngFor="let soundtrack of model.data.game.soundtracks">
+			<a target="_blank" [href]="model.getGameSoundTrackUrl(model.data.game)">{{soundtrack}}</a>
+		</mat-list-item>
+	</mat-list>
+</div>

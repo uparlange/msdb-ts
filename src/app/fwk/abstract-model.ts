@@ -7,167 +7,159 @@ import { TranslateManager } from './managers/translate-manager';
 
 export class AbstractModel extends AbstractClass {
 
-	params: any = {};
-	data: any = this._getInitData();
+  params: any = {};
+  data: any = this._getInitData();
 
-	_helper: AbstractClassHelper = null;
-	_connectionChangeSubscriber: any = null;
+  _helper: AbstractClassHelper = null;
+  _connectionChangeSubscriber: any = null;
 
-	constructor(abstractClassHelper: AbstractClassHelper) {
-		super();
-		this._helper = abstractClassHelper;
-		this.data = this._getInitData();
-	}
+  constructor(abstractClassHelper: AbstractClassHelper) {
+    super();
+    this._helper = abstractClassHelper;
+    this.data = this._getInitData();
+  }
 
-	init(params: any) {
-		this._connectionChangeSubscriber = this._helper.getConnection().on("change").subscribe((online) => {
-			this.params.online = online;
-			if (online) {
-				this._callRefreshMethod(() => {
-					this.getRouter().restoreScrollPosition();
-				});
-			}
-		});
-		this.setTitle(null);
-		this.setKeywords(null);
-		this.getRouter().restoreScrollPosition();
-		const newParams = Object.assign({ online: this._helper.getConnection().online }, params);
-		let paramsChanged = false;
-		if (JSON.stringify(this.params) !== JSON.stringify(newParams)) {
-			this.params = newParams;
-			paramsChanged = true;
-		}
-		this._callInitMethod();
-		if (paramsChanged) {
-			this._callRefreshMethod(() => {
-				this.getRouter().restoreScrollPosition();
-			});
-		}
-	}
+  init(params: any) {
+    this._connectionChangeSubscriber = this._helper.getConnection().on("change").subscribe((online) => {
+      this.params.online = online;
+      if (online) {
+        this._callRefreshMethod(() => {
+          this.getRouter().restoreScrollPosition();
+        });
+      }
+    });
+    this.setTitle(null);
+    this.setKeywords(null);
+    this.getRouter().restoreScrollPosition();
+    const newParams = Object.assign({ online: this._helper.getConnection().online }, params);
+    let paramsChanged = false;
+    if (JSON.stringify(this.params) !== JSON.stringify(newParams)) {
+      this.params = newParams;
+      paramsChanged = true;
+    }
+    this._callInitMethod();
+    if (paramsChanged) {
+      this._callRefreshMethod(() => {
+        this.getRouter().restoreScrollPosition();
+      });
+    }
+  }
 
-	destroy() {
-		this._callDestroyMethod();
-		this._connectionChangeSubscriber.unsubscribe();
-	}
+  destroy() {
+    this._callDestroyMethod();
+    this._connectionChangeSubscriber.unsubscribe();
+  }
 
-	getEventBus() : EventManager {
-		return this._helper.getEventBus();
-	}
+  getEventBus(): EventManager {
+    return this._helper.getEventBus();
+  }
 
-	getSocket() {
-		return this._helper.getSocket();
-	}
+  getSocket() {
+    return this._helper.getSocket();
+  }
 
-	getRouter() : RouterManager {
-		return this._helper.getRouter();
-	}
+  getRouter(): RouterManager {
+    return this._helper.getRouter();
+  }
 
-	getCache() : CacheManager {
-		return this._helper.getCache();
-	}
+  getCache(): CacheManager {
+    return this._helper.getCache();
+  }
 
-	getLabels() : TranslateManager {
-		return this._helper.getLabels();
-	}
+  getLabels(): TranslateManager {
+    return this._helper.getLabels();
+  }
 
-	getHistory() {
-		return this._helper.getHistory();
-	}
+  getGameIconUrl(game) {
+    //return AppUtils.getGameIconUrl(game);
+  }
 
-	getFavorites() {
-		return this._helper.getFavorites();
-	}
+  getGameVideoUrl(game) {
+    //return AppUtils.getGameVideoUrl(game);
+  }
 
-	getGameIconUrl(game) {
-		//return AppUtils.getGameIconUrl(game);
-	}
+  getGameManualUrl(game) {
+    //return AppUtils.getGameManualUrl(game);
+  }
 
-	getGameVideoUrl(game) {
-		//return AppUtils.getGameVideoUrl(game);
-	}
+  getGameSoundTrackUrl(game) {
+    //return AppUtils.getGameSoundTrackUrl(game);
+  }
 
-	getGameManualUrl(game) {
-		//return AppUtils.getGameManualUrl(game);
-	}
+  getGameFolder(game) {
+    //return AppUtils.getGameFolder(game);
+  }
 
-	getGameSoundTrackUrl(game) {
-		//return AppUtils.getGameSoundTrackUrl(game);
-	}
+  getSizeLabel(value: number): string {
+    return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
+  }
 
-	getGameFolder(game) {
-		//return AppUtils.getGameFolder(game);
-	}
+  getFrequencyLabel(value: number): string {
+    return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
+  }
 
-	getSizeLabel(value: number): string {
-		return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
-	}
+  setTitle(value: string) {
+    let title = "Mame Smart Database";
+    if (typeof value === "string") {
+      title += ` - ${value}`;
+    }
+    this._helper.getTitle().setTitle(title);
+  }
 
-	getFrequencyLabel(value: number): string {
-		return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
-	}
+  setKeywords(value: string): void {
+    let content = "mame, mess, arcade, emulation, database, base de donnée, game, jeu";
+    if (typeof value === "string") {
+      content += `, ${value}`;
+    }
+    this._helper.getMeta().updateTag({
+      content: content,
+      name: "keywords"
+    });
+  }
 
-	setTitle(value: string) {
-		let title = "Mame Smart Database";
-		if (typeof value === "string") {
-			title += ` - ${value}`;
-		}
-		this._helper.getTitle().setTitle(title);
-	}
+  onInit(): void {
+    // need override
+  }
 
-	setKeywords(value: string): void {
-		let content = "mame, mess, arcade, emulation, database, base de donnée, game, jeu";
-		if (typeof value === "string") {
-			content += `, ${value}`;
-		}
-		this._helper.getMeta().updateTag({
-			content: content,
-			name: "keywords"
-		});
-	}
+  onRefresh(callback: Function) {
+    // need override
+  }
 
-	onInit(): void {
-		// need override
-	}
+  onDestroy(): void {
+    // need override
+  }
 
-	onRefresh(callback: Function) {
-		// need override
-	}
+  _getUnitLabel(value: number, steps: Array<string>, stepMultiplier: number): string {
+    let step = null;
+    steps.forEach((item, index) => {
+      const stepValue = Math.pow(stepMultiplier, index);
+      if (value >= stepValue) {
+        step = { unit: item, value: stepValue };
+      }
+      else {
+        return;
+      }
+    });
+    return `${Math.round(value / step.value * 100) / 100} ${step.unit}`;
+  }
 
-	onDestroy(): void {
-		// need override
-	}
+  _callInitMethod(): void {
+    //this.getLogger().debug("onInit");
+    this.onInit();
+  }
 
-	_getUnitLabel(value: number, steps: Array<string>, stepMultiplier: number): string {
-		let step = null;
-		steps.forEach((item, index) => {
-			const stepValue = Math.pow(stepMultiplier, index);
-			if (value >= stepValue) {
-				step = { unit: item, value: stepValue };
-			}
-			else {
-				return;
-			}
-		});
-		return `${Math.round(value / step.value * 100) / 100} ${step.unit}`;
-	}
+  _callRefreshMethod(callback: Function): void {
+    //this.getLogger().debug("onRefresh");
+    this.onRefresh(callback);
+  }
 
-	_callInitMethod(): void {
-		//this.getLogger().debug("onInit");
-		this.onInit();
-	}
+  _callDestroyMethod(): void {
+    //this.getLogger().debug("onDestroy");
+    this.onDestroy();
+  }
 
-	_callRefreshMethod(callback: Function): void {
-		//this.getLogger().debug("onRefresh");
-		this.onRefresh(callback);
-	}
-
-	_callDestroyMethod(): void {
-		//this.getLogger().debug("onDestroy");
-		this.onDestroy();
-	}
-
-	_getInitData(): any {
-		// need override
-		return {};
-	}
+  _getInitData(): any {
+    // need override
+    return {};
+  }
 }

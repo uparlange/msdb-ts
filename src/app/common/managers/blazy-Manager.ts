@@ -5,23 +5,23 @@ import Blazy from 'blazy';
 @Injectable()
 export class BlazyManager extends AbstractManager {
 
-    _blazy: BlazyInstance = new Blazy(undefined);
-    _timeoutInterval: any = null;
+  _blazy: BlazyInstance = new Blazy(undefined);
+  _timeoutInterval: any = null;
 
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    init(): void {
-        super.init();
-    }
+  init(): void {
+    super.init();
+  }
 
-    refresh() {
-        if (this._timeoutInterval !== null) {
-            clearTimeout(this._timeoutInterval);
-        }
-        this._timeoutInterval = setTimeout(() => {
-            this._blazy.revalidate();
-        }, 50);
+  refresh() {
+    if (this._timeoutInterval !== null) {
+      clearTimeout(this._timeoutInterval);
     }
+    this._timeoutInterval = setTimeout(() => {
+      this._blazy.revalidate();
+    }, 50);
+  }
 }

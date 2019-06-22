@@ -12,72 +12,64 @@ import { AbstractShell } from './abstract-shell';
 
 export class AbstractClassHelper extends AbstractClass {
 
-    _title: Title = null;
-    _shell: AbstractShell = null;
-    _httpClient: HttpClient = null;
-    _activatedRoute: ActivatedRoute = null;
-    _windowRef: WindowRef = null;
-    _meta: Meta = null;
+  _title: Title = null;
+  _shell: AbstractShell = null;
+  _httpClient: HttpClient = null;
+  _activatedRoute: ActivatedRoute = null;
+  _windowRef: WindowRef = null;
+  _meta: Meta = null;
 
-    constructor(shell: AbstractShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute, meta: Meta) {
-        super();
-        this._title = title;
-        this._shell = shell;
-        this._httpClient = httpClient;
-        this._activatedRoute = activatedRoute;
-        this._windowRef = windowRef;
-        this._meta = meta;
-    }
+  constructor(shell: AbstractShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute, meta: Meta) {
+    super();
+    this._title = title;
+    this._shell = shell;
+    this._httpClient = httpClient;
+    this._activatedRoute = activatedRoute;
+    this._windowRef = windowRef;
+    this._meta = meta;
+  }
 
-    getHttpClient(): HttpClient {
-        return this._httpClient;
-    }
+  getHttpClient(): HttpClient {
+    return this._httpClient;
+  }
 
-    getWindowRef(): WindowRef {
-        return this._windowRef;
-    }
+  getWindowRef(): WindowRef {
+    return this._windowRef;
+  }
 
-    getActivatedRoute(): ActivatedRoute {
-        return this._activatedRoute;
-    }
+  getActivatedRoute(): ActivatedRoute {
+    return this._activatedRoute;
+  }
 
-    getMeta(): Meta {
-        return this._meta;
-    }
+  getMeta(): Meta {
+    return this._meta;
+  }
 
-    getTitle(): Title {
-        return this._title;
-    }
+  getTitle(): Title {
+    return this._title;
+  }
 
-    getLabels(): TranslateManager {
-        return this._shell.getTranslateManager();
-    }
+  getLabels(): TranslateManager {
+    return this._shell.getTranslateManager();
+  }
 
-    getConnection(): ConnectionManager {
-        return this._shell.getConnectionManager();
-    }
+  getConnection(): ConnectionManager {
+    return this._shell.getConnectionManager();
+  }
 
-    getEventBus(): EventManager {
-        return this._shell.getEventManager();
-    }
+  getEventBus(): EventManager {
+    return this._shell.getEventManager();
+  }
 
-    getSocket(): any {
-        // TODO
-    }
+  getSocket(): any {
+    // TODO
+  }
 
-    getRouter(): RouterManager {
-        return this._shell.getRouterManager();
-    }
+  getRouter(): RouterManager {
+    return this._shell.getRouterManager();
+  }
 
-    getCache(): CacheManager {
-        return this._shell.getCacheManager();
-    }
-
-    getHistory(): any {
-        // TODO
-    }
-
-    getFavorites(): any {
-        // TODO
-    }
+  getCache(): CacheManager {
+    return this._shell.getCacheManager();
+  }
 }

@@ -8,12 +8,16 @@ import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { MatIconModule } from '@angular/material';
 import { MatIconButtonDirective } from '../../directives/mat-icon-button-directive';
 import { BlazyDirective } from '../../directives/blazy-directive';
+import { GalleryComponent } from '../../components/gallery/gallery-component';
+import { NgForItemComponent } from '../../components/ng-for-item/ng-for-item-component';
 
 @NgModule({
   declarations: [
     TranslatePipe,
     MatIconButtonDirective,
-    BlazyDirective
+    BlazyDirective,
+    GalleryComponent,
+    NgForItemComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,9 @@ import { BlazyDirective } from '../../directives/blazy-directive';
     MatIconModule,
     TranslatePipe,
     MatIconButtonDirective,
-    BlazyDirective
+    BlazyDirective,
+    GalleryComponent,
+    NgForItemComponent
   ]
 })
 export class SharedModule extends AbstractModule {
