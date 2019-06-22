@@ -1,0 +1,22 @@
+mat-checkbox
+{
+    margin-right: 10px;
+}
+
+img
+{
+    width:40px;
+    height:40px;
+    border-radius: 20px;
+}
+
+.mat-column-description
+{
+    width: 100%;
+    padding-left:24px;
+}
+
+.mat-paginator 
+{
+	float: right;
+}

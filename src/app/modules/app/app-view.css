@@ -1,0 +1,59 @@
+::ng-deep body
+{
+	background-size: 100% 100%;
+	background-attachment: fixed;
+	background-image: url("/assets/background.jpg");
+}
+
+.header
+{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	width: 100%;
+	max-width: 800px;
+	margin: auto;
+	z-index:2;
+}
+
+.header mat-toolbar
+{
+	height: 64px;
+}
+
+.header img
+{
+	vertical-align:middle;
+}
+
+.header mat-progress-bar
+{
+	position:absolute;
+	top:64px;
+}
+
+.network-status
+{
+	position: absolute;
+    top: 0px;
+}
+
+.container
+{
+	max-width: 800px;
+	margin: auto;
+	height:100%;
+	background:white;
+}
+
+.container-header
+{
+	height:64px;
+}
+
+.container-content
+{
+	background:white;
+	padding:10px;
+}

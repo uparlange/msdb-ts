@@ -1,0 +1,205 @@
+/* You can add global styles to this file, and also import other style files */
+html
+{
+	width:100%;
+	height:100%;
+}
+
+body
+{
+	width:100%;
+	height:100%;
+	margin:0px;
+	padding:0px;
+	background-color: #ff5722;
+}
+
+a
+{
+	cursor: pointer;
+	text-decoration: none;	
+	color:#0079C2;
+}
+
+video
+{
+	max-width: 100%;
+}
+
+table 
+{
+	width: 100%;
+}
+
+[routerLink]
+{
+	cursor:pointer;
+}
+
+[mat-dialog-close]
+{
+	float:right;
+	margin-left: 10px !important;
+}
+
+.noscript
+{
+	text-align:center;
+	color:white;
+	margin-top:20px;
+}
+
+.mat-chip
+{
+	background-color:#0079C2 !important;
+}
+
+.mat-card
+{
+	margin:0px;
+	padding:10px !important;
+}
+
+.mat-card-title > button.mat-mini-fab
+{
+	float:right;
+	top: -6px;
+}
+
+.mat-toolbar-row
+{
+	height:64px !important;
+}
+
+.mat-tab-label
+{
+	min-width:0px !important;
+	padding-left:12px !important;
+	padding-right:12px !important;
+}
+
+.mat-list
+{
+	padding:0px !important;
+	margin:0px !important;
+}
+
+.mat-list-item-content
+{
+	width:100%;
+	font-size:14px;
+}
+
+.mat-tree-node
+{
+	cursor:pointer;
+}
+
+.default-spacer
+{
+	height:10px;
+}
+
+.fill-remaining-space
+{
+	flex: 1 1 auto;
+}
+
+.justify
+{
+	text-align: justify;
+}
+
+.label-good
+{
+    color: green !important;
+    font-weight: bold;
+}
+
+.label-imperfect
+{
+    color: orange !important;
+    font-weight: bold;
+}
+
+.label-preliminary
+{
+    color: red !important;
+    font-weight: bold;
+}
+
+.label-baddump
+{
+	color: red;
+    font-weight: bold;
+}
+
+.label-nodump
+{
+	color: black;
+    font-weight: bold;
+	text-decoration:line-through;
+}
+
+.biosset-default
+{
+	font-weight: bold;
+}
+
+.dipvalue-default
+{
+	font-weight: bold;
+}
+
+.sep
+{
+	margin-left:5px;
+	margin-right:5px;
+}
+
+.link-button
+{
+	margin:0px;
+	padding:0px;
+	border:none;
+	cursor:pointer;
+	background: none;
+	color:#0079C2;
+	font-size:14px;
+}
+
+.b-lazy
+{
+	background:#D3D3D3;
+}
+
+.b-lazy.b-loaded
+{
+	background:none;
+}
+
+.full-width
+{
+	width:100%;
+}
+
+.no-data
+{
+	text-align: center;
+}
+
+button.mat-menu-item 
+{
+	line-height: 24px !important;
+}
+
+a.mat-menu-item > mat-icon 
+{
+	margin-bottom: 14px;
+}
+
+.mat-icon svg 
+{
+	height: 24px;
+	width: 24px;
+}

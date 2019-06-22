@@ -1,0 +1,14 @@
+<form #descriptionForm="ngForm">
+	<mat-form-field>
+		<input matInput #valueInput pattern=".{3,}" required name="value" [autocomplete]="'LION_GAME_NAME'|translate"
+			autocomplete="game-description" [placeholder]="'LION_GAME_NAME'|translate" [(ngModel)]="model.data.value">
+	</mat-form-field>
+	<button *ngIf="model.data.value.length > 0" (click)="model.data.value = '';valueInput.focus();" type="button"
+		mat-mini-fab>
+		<mat-icon svgIcon="close" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
+	</button>
+	<button *ngIf="descriptionForm.form.valid" routerLink="/result"
+		[queryParams]="{type:'description', value:model.data.value}" mat-mini-fab>
+		<mat-icon svgIcon="magnify" [matTooltip]="'L10N_SEARCH'|translate"></mat-icon>
+	</button>
+</form>

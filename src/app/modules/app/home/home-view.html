@@ -1,0 +1,91 @@
+<mat-card>
+	<mat-card-title>
+		{{'L10N_MAME_KESAKO'|translate}}
+	</mat-card-title>
+	<mat-card-content class="justify">
+		{{'L10N_DESCRIPTION'|translate}}
+	</mat-card-content>
+</mat-card>
+<div class="default-spacer"></div>
+<mat-card *ngIf="model.data.mame.build != null">
+	<mat-card-title>
+		<a routerLink="/result"
+			[queryParams]="{type:'version',value:model.data.mame.version}">{{'L10N_VERSION'|translate}}
+			{{model.data.mame.version}}</a>
+	</mat-card-title>
+	<mat-card-content>
+		<ul>
+			<li>
+				Machines : {{model.data.mame.machineCount}}
+				<ul>
+					<li>Parent : {{model.data.mame.parentCount}}</li>
+					<li>Clones : {{model.data.mame.cloneCount}}</li>
+				</ul>
+			</li>
+			<li>Bios : <a routerLink="/result"
+					[queryParams]="{type:'bios',value:'all'}">{{model.data.mame.biosCount}}</a></li>
+			<li>Devices : <a routerLink="/result"
+					[queryParams]="{type:'device',value:'all'}">{{model.data.mame.deviceCount}}</a></li>
+			<li>Mechanicals : <a routerLink="/result"
+					[queryParams]="{type:'mechanical',value:'all'}">{{model.data.mame.mechanicalCount}}</a></li>
+			<li>MESS : <a routerLink="/result"
+					[queryParams]="{type:'mess',value:'all'}">{{model.data.mame.messCount}}</a></li>
+		</ul>
+	</mat-card-content>
+</mat-card>
+<div class="default-spacer"></div>
+<mat-card>
+	<mat-card-title>
+		{{'L10N_HOW_TO_PLAY'|translate}}
+	</mat-card-title>
+	<mat-card-content>
+		<ol>
+			<li>
+				{{'L10N_FIND_GAME'|translate}}
+				<ul>
+					<li><a routerLink="/search/description">{{'L10N_SEARCH_BY_DESCRIPTION'|translate}}</a></li>
+					<li><a routerLink="/search/ratings">{{'L10N_SEARCH_BY_RATING'|translate}}</a></li>
+					<li><a routerLink="/search/categories">{{'L10N_SEARCH_BY_CATEGORY'|translate}}</a></li>
+					<li><a routerLink="/search/series">{{'L10N_SEARCH_BY_SERIES'|translate}}</a></li>
+					<li><a routerLink="/search/years">{{'L10N_SEARCH_BY_YEAR'|translate}}</a></li>
+					<li><a routerLink="/search/languages">{{'L10N_SEARCH_BY_LANGUAGE'|translate}}</a></li>
+					<li><a routerLink="/search/versions">{{'L10N_SEARCH_BY_VERSION'|translate}}</a></li>
+					<li><a routerLink="/search/manufacturers">{{'L10N_SEARCH_BY_MANUFACTURER'|translate}}</a></li>
+				</ul>
+			</li>
+			<li><a target="_blank" href="http://mamedev.org/">{{'L10N_DOWNLOAD_EMULATOR'|translate}}</a>
+			</li>
+			<li><a target="_blank" href="http://www.planetemu.net/roms/mame-roms">{{'L10N_DOWNLOAD_GAME'|translate}}</a>
+			</li>
+			<li>{{'L10N_HAVE_FUN'|translate}}</li>
+		</ol>
+	</mat-card-content>
+</mat-card>
+<div class="default-spacer"></div>
+<mat-card>
+	<mat-card-title>
+		{{'L10N_REFERENCES'|translate}}
+	</mat-card-title>
+	<mat-card-content>
+		<ul>
+			<li><a target="_blank" href="http://www.mame.net/">MAME Multiple Arcade Machine Emulator</a>
+			</li>
+			<li><a target="_blank" href="http://www.progettosnaps.net/">MAME progetto-SNAPS</a>
+			</li>
+			<li><a target="_blank" href="http://www.progettoemma.net/">Progetto EMMA</a></li>
+			<li><a target="_blank" href="http://www.mameworld.info/">MAMEWorld</a></li>
+			<li><a target="_blank" href="http://www.planetemu.net/">Planet Emulation</a></li>
+		</ul>
+	</mat-card-content>
+</mat-card>
+<div class="default-spacer"></div>
+<mat-card>
+	<mat-card-title>
+		{{'L10N_COMMUNITY'|translate}}
+	</mat-card-title>
+	<mat-card-content>
+		<ul>
+			<li><a target="_blank" href="https://github.com/uparlange/msdb">Github</a></li>
+		</ul>
+	</mat-card-content>
+</mat-card>

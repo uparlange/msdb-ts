@@ -1,0 +1,42 @@
+<header>
+	<div class="header">
+
+		<mat-toolbar color="primary">
+			<div class="network-status">
+				<mat-icon [svgIcon]="model.params.online ? 'wifi' : 'wifi-off'"></mat-icon>
+			</div>
+			<a routerLink="/home">
+				<img alt="logo" src="assets/logo.png">
+			</a>
+			<span class="fill-remaining-space"></span>
+			<button mat-icon-button [matMenuTriggerFor]="menu">
+				<mat-icon svgIcon="menu"></mat-icon>
+			</button>
+			<mat-menu #menu="matMenu">
+				<nav>
+					<button mat-menu-item routerLink="/search/{{model.data.searchLastType}}">
+						<mat-icon svgIcon="magnify" style="size:36px"></mat-icon>
+						<span>{{"L10N_SEARCH"|translate}}</span>
+					</button>
+					<button mat-menu-item routerLink="/favorites">
+						<mat-icon svgIcon="heart-outline" style="size:36px"></mat-icon>
+						<span>{{"L10N_FAVORITES"|translate}}</span>
+					</button>
+					<button mat-menu-item routerLink="/history">
+						<mat-icon svgIcon="history" style="size:36px"></mat-icon>
+						<span>{{"L10N_HISTORY"|translate}}</span>
+					</button>
+				</nav>
+			</mat-menu>
+		</mat-toolbar>
+		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	</div>
+</header>
+<div class="container">
+	<div class="container-header"></div>
+	<div class="container-content">
+		<main>
+			<router-outlet></router-outlet>
+		</main>
+	</div>
+</div>
