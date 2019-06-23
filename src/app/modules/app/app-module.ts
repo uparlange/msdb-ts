@@ -17,6 +17,7 @@ import { AppShell } from 'src/app/common/app-shell';
 import { AnalyticsManager } from 'src/app/common/managers/analytics-manager';
 import { BlazyManager } from 'src/app/common/managers/blazy-Manager';
 import { HistoryManager } from '../../common/managers/history-manager';
+import { FavoritesManager } from 'src/app/common/managers/favorites-manager';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -46,7 +47,8 @@ const routes: Routes = [
     AppClassHelper,
     AnalyticsManager,
     BlazyManager,
-    HistoryManager
+    HistoryManager,
+    FavoritesManager
   ],
   bootstrap: [
     AppView

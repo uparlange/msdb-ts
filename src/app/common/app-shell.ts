@@ -8,6 +8,7 @@ import { AbstractShell } from 'src/app/fwk/abstract-shell';
 import { Injectable } from '@angular/core';
 import { BlazyManager } from './managers/blazy-Manager';
 import { HistoryManager } from './managers/history-manager';
+import { FavoritesManager } from './managers/favorites-manager';
 
 @Injectable()
 export class AppShell extends AbstractShell {
@@ -15,19 +16,23 @@ export class AppShell extends AbstractShell {
   _analyticsManager: AnalyticsManager = null;
   _blazyManager: BlazyManager = null;
   _historyManager: HistoryManager = null;
+  _favoritesManager: FavoritesManager = null;
 
   constructor(translateManager: TranslateManager, connectionManager: ConnectionManager, cacheManager: CacheManager, routerManager: RouterManager, eventManager: EventManager,
-    analyticsManager: AnalyticsManager, blazyManager: BlazyManager, historyManager: HistoryManager) {
+    analyticsManager: AnalyticsManager, blazyManager: BlazyManager, historyManager: HistoryManager, favoritesManager: FavoritesManager) {
     super(translateManager, connectionManager, cacheManager, routerManager, eventManager);
     this._analyticsManager = analyticsManager;
     this._blazyManager = blazyManager;
     this._historyManager = historyManager;
+    this._favoritesManager = favoritesManager;
   }
 
   init(): void {
     super.init();
     this._analyticsManager.init();
     this._blazyManager.init();
+    this._historyManager.init();
+    this._favoritesManager.init();
   }
 
   getAnalyticsManager(): AnalyticsManager {
@@ -40,5 +45,9 @@ export class AppShell extends AbstractShell {
 
   getHistoryManager(): HistoryManager {
     return this._historyManager;
+  }
+
+  getFavoritesManager(): FavoritesManager {
+    return this._favoritesManager;
   }
 }

@@ -1,7 +1,6 @@
 import { Component, ElementRef, Renderer } from '@angular/core';
 import Masonry from 'masonry-layout';
 import PhotoSwipe from 'photoswipe';
-import PhotoSwipeUI_Default from 'photoswipe';
 import { AbstractComponent } from '../../../fwk/abstract-component';
 import { AppClassHelper } from '../../app-class-helper';
 
@@ -75,7 +74,7 @@ export class GalleryComponent extends AbstractComponent {
       shareEl: false,
       history: false
     };
-    this._gallery = new PhotoSwipe<PhotoSwipeUI_Default.Options>(this._getPhotoSwipeContainer(), PhotoSwipeUI_Default, this.provider, options);
+    this._gallery = new PhotoSwipe<PhotoSwipeUI_Default.Options>(this._getPhotoSwipeContainer(), true, this.provider, options);
     this._gallery.init();
   }
 

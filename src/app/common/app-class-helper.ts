@@ -9,6 +9,7 @@ import { AnalyticsManager } from './managers/analytics-manager';
 import { Config } from 'protractor';
 import { ConfigProvider } from './config-provider';
 import { HistoryManager } from './managers/history-manager';
+import { FavoritesManager } from './managers/favorites-manager';
 
 @Injectable()
 export class AppClassHelper extends AbstractClassHelper {
@@ -21,12 +22,16 @@ export class AppClassHelper extends AbstractClassHelper {
     this._configProvider = configProvider;
   }
 
-  getAnalytics(): AnalyticsManager {
+  getAnalyticsManager(): AnalyticsManager {
     return this._getShell().getAnalyticsManager();
   }
 
   getHistoryManager(): HistoryManager {
     return this._getShell().getHistoryManager();
+  }
+
+  getFavoritesManager(): FavoritesManager {
+    return this._getShell().getFavoritesManager();
   }
 
   getConfigProvider(): ConfigProvider {
