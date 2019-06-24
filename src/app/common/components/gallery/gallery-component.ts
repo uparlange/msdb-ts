@@ -1,6 +1,7 @@
 import { Component, ElementRef, Renderer } from '@angular/core';
 import Masonry from 'masonry-layout';
 import PhotoSwipe from 'photoswipe';
+import PhotoSwipeUI_Default from 'photoswipe';
 import { AbstractComponent } from '../../../fwk/abstract-component';
 import { AppClassHelper } from '../../app-class-helper';
 

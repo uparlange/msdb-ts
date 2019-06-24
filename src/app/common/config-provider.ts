@@ -24,6 +24,14 @@ export class ConfigProvider extends AbstractClass {
     return `${this._getBaseClientUrl()}games/${game.name}`;
   }
 
+  getSocketPort(): number {
+    return 3000;
+  }
+
+  getSocketUrl(): string {
+    return `${this._getBaseServerUrl()}:${this.getSocketPort()}`;
+  }
+
   _productionMode(): boolean {
     return this._windowRef.nativeWindow.location.href.indexOf(this._getBaseServerUrl()) === -1;
   }

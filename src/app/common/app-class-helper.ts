@@ -10,6 +10,7 @@ import { Config } from 'protractor';
 import { ConfigProvider } from './config-provider';
 import { HistoryManager } from './managers/history-manager';
 import { FavoritesManager } from './managers/favorites-manager';
+import { SocketManager } from './managers/socket-manager';
 
 @Injectable()
 export class AppClassHelper extends AbstractClassHelper {
@@ -32,6 +33,10 @@ export class AppClassHelper extends AbstractClassHelper {
 
   getFavoritesManager(): FavoritesManager {
     return this._getShell().getFavoritesManager();
+  }
+
+  getSocketManager(): SocketManager {
+    return this._getShell().getSocketManager();
   }
 
   getConfigProvider(): ConfigProvider {

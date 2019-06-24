@@ -4,6 +4,7 @@ import { MsdbProvider } from './msdb-provider';
 import { HistoryManager } from './managers/history-manager';
 import { AppClassHelper } from './app-class-helper';
 import { FavoritesManager } from './managers/favorites-manager';
+import { SocketManager } from './managers/socket-manager';
 
 export class AbstractAppModel extends AbstractModel {
 
@@ -24,6 +25,10 @@ export class AbstractAppModel extends AbstractModel {
 
   getFavorites(): FavoritesManager {
     return this._getHelper().getFavoritesManager();
+  }
+
+  getSocket(): SocketManager {
+    return this._getHelper().getSocketManager();
   }
 
   getGameFolder(game: any): string {

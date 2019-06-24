@@ -4,6 +4,7 @@ import { EventManager } from './managers/event-manager';
 import { RouterManager } from './managers/router-manager';
 import { CacheManager } from './managers/cache-manager';
 import { TranslateManager } from './managers/translate-manager';
+import { SocketManager } from '../common/managers/socket-manager';
 
 export class AbstractModel extends AbstractClass {
 
@@ -52,10 +53,6 @@ export class AbstractModel extends AbstractClass {
 
   getEventBus(): EventManager {
     return this._helper.getEventBus();
-  }
-
-  getSocket() {
-    return this._helper.getSocket();
   }
 
   getRouter(): RouterManager {

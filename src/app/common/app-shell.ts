@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { BlazyManager } from './managers/blazy-Manager';
 import { HistoryManager } from './managers/history-manager';
 import { FavoritesManager } from './managers/favorites-manager';
+import { SocketManager } from './managers/socket-manager';
 
 @Injectable()
 export class AppShell extends AbstractShell {
@@ -17,14 +18,18 @@ export class AppShell extends AbstractShell {
   _blazyManager: BlazyManager = null;
   _historyManager: HistoryManager = null;
   _favoritesManager: FavoritesManager = null;
+  _socketManager: SocketManager = null;
 
-  constructor(translateManager: TranslateManager, connectionManager: ConnectionManager, cacheManager: CacheManager, routerManager: RouterManager, eventManager: EventManager,
-    analyticsManager: AnalyticsManager, blazyManager: BlazyManager, historyManager: HistoryManager, favoritesManager: FavoritesManager) {
+  constructor(translateManager: TranslateManager, connectionManager: ConnectionManager, cacheManager: CacheManager,
+    routerManager: RouterManager, eventManager: EventManager, analyticsManager: AnalyticsManager,
+    blazyManager: BlazyManager, historyManager: HistoryManager, favoritesManager: FavoritesManager,
+    socketManager: SocketManager) {
     super(translateManager, connectionManager, cacheManager, routerManager, eventManager);
     this._analyticsManager = analyticsManager;
     this._blazyManager = blazyManager;
     this._historyManager = historyManager;
     this._favoritesManager = favoritesManager;
+    this._socketManager = socketManager;
   }
 
   init(): void {
@@ -33,6 +38,7 @@ export class AppShell extends AbstractShell {
     this._blazyManager.init();
     this._historyManager.init();
     this._favoritesManager.init();
+    this._socketManager.init();
   }
 
   getAnalyticsManager(): AnalyticsManager {
@@ -49,5 +55,9 @@ export class AppShell extends AbstractShell {
 
   getFavoritesManager(): FavoritesManager {
     return this._favoritesManager;
+  }
+
+  getSocketManager(): SocketManager {
+    return this._socketManager;
   }
 }

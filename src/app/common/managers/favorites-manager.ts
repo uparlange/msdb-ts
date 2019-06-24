@@ -6,7 +6,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 export class FavoritesManager extends AbstractManager {
 
   _cacheManager: CacheManager = null;
-  _favorites: Array<any> = null;
+  _favorites: Array<any> = new Array();;
 
   constructor(cacheManager: CacheManager) {
     super();
@@ -15,7 +15,7 @@ export class FavoritesManager extends AbstractManager {
 
   init(): void {
     super.init();
-    this._cacheManager.getItem("favorites", []).subscribe((value:Array<any>) => {
+    this._cacheManager.getItem("favorites", []).subscribe((value: Array<any>) => {
       this._favorites = value;
     });
   }

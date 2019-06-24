@@ -9,6 +9,7 @@ import { TranslateManager } from './managers/translate-manager';
 import { RouterManager } from './managers/router-manager';
 import { EventManager } from './managers/event-manager';
 import { AbstractShell } from './abstract-shell';
+import { SocketManager } from '../common/managers/socket-manager';
 
 export class AbstractClassHelper extends AbstractClass {
 
@@ -59,10 +60,6 @@ export class AbstractClassHelper extends AbstractClass {
 
   getEventBus(): EventManager {
     return this._shell.getEventManager();
-  }
-
-  getSocket(): any {
-    // TODO
   }
 
   getRouter(): RouterManager {

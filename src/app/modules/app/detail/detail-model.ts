@@ -2,11 +2,12 @@ import { AbstractAppModel } from '../../../common/abstract-app-model';
 import { AppClassHelper } from '../../../common/app-class-helper';
 import { MsdbProvider } from '../../../common/msdb-provider';
 import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Injectable()
 export class DetailModel extends AbstractAppModel {
 
-  _socketConfigChangedSubscriber: any = null;
+  _socketConfigChangedSubscription: Subscription = null;
 
   constructor(appClassHelper: AppClassHelper, msdbProvider: MsdbProvider) {
     super(appClassHelper, msdbProvider);
@@ -14,11 +15,9 @@ export class DetailModel extends AbstractAppModel {
 
   onInit(): void {
     super.onInit();
-    /*
-		this._socketConfigChangedSubscriber = this.getSocket().on("CONFIG_CHANGED").subscribe(() => {
-			this._refreshGameAvailability();
-		});
-    */
+    this._socketConfigChangedSubscription = this.getSocket().on("CONFIG_CHANGED").subscribe(() => {
+      this._refreshGameAvailability();
+    });
   }
 
   onRefresh(callback): void {
@@ -55,7 +54,7 @@ export class DetailModel extends AbstractAppModel {
 
   onDestroy() {
     super.onDestroy();
-    //this._socketConfigChangedSubscriber.unsubscribe();
+    this._socketConfigChangedSubscription.unsubscribe();
   }
 
   inFavorites(game) {

@@ -18,6 +18,7 @@ import { AnalyticsManager } from 'src/app/common/managers/analytics-manager';
 import { BlazyManager } from 'src/app/common/managers/blazy-Manager';
 import { HistoryManager } from '../../common/managers/history-manager';
 import { FavoritesManager } from 'src/app/common/managers/favorites-manager';
+import { SocketManager } from 'src/app/common/managers/socket-manager';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -48,7 +49,8 @@ const routes: Routes = [
     AnalyticsManager,
     BlazyManager,
     HistoryManager,
-    FavoritesManager
+    FavoritesManager,
+    SocketManager
   ],
   bootstrap: [
     AppView
