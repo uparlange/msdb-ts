@@ -4,22 +4,27 @@ import { SharedModule } from '../../../common/modules/shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailView } from './detail-view';
 import { DetailModel } from './detail-model';
+import { BiossetsView } from './biossets/biossets-view';
 
 const routes: Routes = [
-    { path: "", component: DetailView }
+  { path: "", component: DetailView }
 ];
 
 @NgModule({
-    imports: [
-        SharedModule,
-        RouterModule.forChild(routes)
-    ],
-    providers: [
-        DetailModel
-    ],
-    declarations: [
-        DetailView
-    ]
+  imports: [
+    SharedModule,
+    RouterModule.forChild(routes)
+  ],
+  providers: [
+    DetailModel
+  ],
+  declarations: [
+    DetailView,
+    BiossetsView
+  ],
+  entryComponents: [
+    BiossetsView
+  ]
 })
 export class DetailModule extends AbstractModule {
 

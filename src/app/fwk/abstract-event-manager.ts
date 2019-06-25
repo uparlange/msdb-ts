@@ -18,7 +18,7 @@ export class AbstractEventManager extends AbstractClass {
         return eventEmitter;
     }
 
-    emit(eventName: string, evt: any) {
+    emit(eventName: string, evt: any = undefined) {
         const eventEmitter: EventEmitter<any> = this._eventEmitters.get(eventName);
         if (eventEmitter !== undefined) {
             eventEmitter.emit(evt);

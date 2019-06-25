@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>
+	{{'L10N_BIOS_SET'|translate}}
+	<button mat-dialog-close mat-icon-button>
+    <mat-icon svgIcon="close"></mat-icon>
+	</button>
+</h1>
+<mat-dialog-content>
+	<mat-list>
+		<mat-list-item *ngFor="let biosset of model.data.game.biossets; trackBy:model.trackByName" [class]="biosset.default == 'yes' ? 'biosset-default' : null">
+			{{biosset.name}}
+			<span class="sep">:</span>
+			{{biosset.description}}
+		</mat-list-item>
+	</mat-list>
+</mat-dialog-content>

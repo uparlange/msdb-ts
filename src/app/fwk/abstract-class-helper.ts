@@ -20,7 +20,8 @@ export class AbstractClassHelper extends AbstractClass {
   _windowRef: WindowRef = null;
   _meta: Meta = null;
 
-  constructor(shell: AbstractShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute, meta: Meta) {
+  constructor(shell: AbstractShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute,
+    meta: Meta) {
     super();
     this._title = title;
     this._shell = shell;
@@ -68,5 +69,9 @@ export class AbstractClassHelper extends AbstractClass {
 
   getCache(): CacheManager {
     return this._shell.getCacheManager();
+  }
+
+  getPopups() {
+    return this._shell.getPopupManager();
   }
 }

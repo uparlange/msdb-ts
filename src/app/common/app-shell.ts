@@ -10,6 +10,7 @@ import { BlazyManager } from './managers/blazy-Manager';
 import { HistoryManager } from './managers/history-manager';
 import { FavoritesManager } from './managers/favorites-manager';
 import { SocketManager } from './managers/socket-manager';
+import { PopupManager } from '../fwk/managers/popup-manager';
 
 @Injectable()
 export class AppShell extends AbstractShell {
@@ -23,8 +24,9 @@ export class AppShell extends AbstractShell {
   constructor(translateManager: TranslateManager, connectionManager: ConnectionManager, cacheManager: CacheManager,
     routerManager: RouterManager, eventManager: EventManager, analyticsManager: AnalyticsManager,
     blazyManager: BlazyManager, historyManager: HistoryManager, favoritesManager: FavoritesManager,
-    socketManager: SocketManager) {
-    super(translateManager, connectionManager, cacheManager, routerManager, eventManager);
+    socketManager: SocketManager, popupManager: PopupManager) {
+    super(translateManager, connectionManager, cacheManager, routerManager, eventManager,
+      popupManager);
     this._analyticsManager = analyticsManager;
     this._blazyManager = blazyManager;
     this._historyManager = historyManager;
