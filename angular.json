@@ -24,7 +24,9 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/theme.scss"
+              "src/theme.scss",
+              "node_modules/photoswipe/dist/photoswipe.css",
+              "node_modules/photoswipe/dist/default-skin/default-skin.css"
             ],
             "scripts": []
           },
@@ -84,7 +86,9 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/theme.scss"
+              "src/theme.scss",
+              "node_modules/photoswipe/dist/photoswipe.css",
+              "node_modules/photoswipe/dist/default-skin/default-skin.css"
             ],
             "scripts": []
           }
