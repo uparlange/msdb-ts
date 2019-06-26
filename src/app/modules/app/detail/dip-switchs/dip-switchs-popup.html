@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>
+	{{'L10N_DIP_SWITCH'|translate}}
+	<button mat-dialog-close mat-icon-button>
+		<mat-icon svgIcon="close"></mat-icon>
+	</button>
+</h1>
+<mat-dialog-content>
+	<div *ngFor="let item of provider; trackBy:model.trackByName">
+		<b>{{item.name}}</b>
+		<ul>
+			<li *ngFor="let switch of item.switchs; trackBy:model.trackByName">
+				{{switch.name}}
+				<ul>
+					<li *ngFor="let value of switch.values; trackBy:model.trackByName" [class]="value.default == 'yes' ? 'dipvalue-default' : null">
+						{{value.name}} ({{value.value}})
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</mat-dialog-content>

@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>
+	{{'L10N_ROM_INFOS'|translate}}
+	<button mat-dialog-close mat-icon-button>
+		<mat-icon svgIcon="close"></mat-icon>
+	</button>
+</h1>
+<mat-dialog-content>
+	<mat-list>
+		<mat-list-item *ngFor="let rom of model.data.game.roms; trackBy:model.trackByName">
+			<span [class]="model.getStatusClass(rom.status)">{{rom.name}}</span>
+			<span class="sep">:</span>
+			{{model.getSizeLabel(rom.size)}}
+		</mat-list-item>
+	</mat-list>
+</mat-dialog-content>

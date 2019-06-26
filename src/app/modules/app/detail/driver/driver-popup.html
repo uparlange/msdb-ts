@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>
+	{{'L10N_DRIVER_INFOS'|translate}}
+	<button mat-dialog-close mat-icon-button>
+		<mat-icon svgIcon="close"></mat-icon>
+	</button>
+</h1>
+<mat-dialog-content>
+	<mat-list>
+		<mat-list-item>
+			{{'L10N_SINCE_MAME'|translate}}
+			<span class="sep">:</span>
+			<a (click)="showGamesForMameVersion(model.data.game.version)">{{model.data.game.version}}</a>
+		</mat-list-item>
+		<mat-list-item>
+			{{'L10N_EMULATION'|translate}}
+			<span class="sep">:</span>
+			<span [class]="model.getStatusClass(model.data.game.driver.emulation)">{{model.getStatusLabel(model.data.game.driver.emulation)|translate}}</span>
+		</mat-list-item>
+		<mat-list-item>
+			{{'L10N_SAVESTATE'|translate}}
+			<span class="sep">:</span>
+			{{model.getStatusLabel(model.data.game.driver.savestate)|translate}}
+		</mat-list-item>
+	</mat-list>
+</mat-dialog-content>

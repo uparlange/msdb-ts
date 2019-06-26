@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>
+	{{'L10N_CHIP'|translate}}
+	<button mat-dialog-close mat-icon-button>
+		<mat-icon svgIcon="close"></mat-icon>
+	</button>
+</h1>
+<mat-dialog-content>
+	<div *ngFor="let item of provider; trackBy:model.trackByName">
+		<b>{{item.name}}</b>
+		<ul>
+			<li *ngFor="let value of item.values; trackBy:model.trackByTag">
+				{{value.tag}}
+				<b>{{value.name}}</b>
+				<span *ngIf="value.clock != null">@{{model.getFrequencyLabel(value.clock)}}</span>
+			</li>
+		</ul>
+	</div>
+</mat-dialog-content>

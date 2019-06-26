@@ -7,8 +7,8 @@ export class AbstractPopup extends AbstractComponent {
 
   model: AbstractModel = null;
 
-  _popupsAfterOpenSubscriber: Subscription = null;
-  _popupsBeforeCloseSubscriber: Subscription = null;
+  _popupsAfterOpenSubscription: Subscription = null;
+  _popupsBeforeCloseSubscription: Subscription = null;
 
   constructor(abstractClassHelper: AbstractClassHelper, model: AbstractModel) {
     super(abstractClassHelper);
@@ -17,18 +17,18 @@ export class AbstractPopup extends AbstractComponent {
 
   ngOnInit() {
     super.ngOnInit();
-    this._popupsAfterOpenSubscriber = this._helper.getPopups().on("afterOpen").subscribe(() => {
+    this._popupsAfterOpenSubscription = this._helper.getPopups().on("afterOpen").subscribe(() => {
       this.afterOpen();
     });
-    this._popupsBeforeCloseSubscriber = this._helper.getPopups().on("beforeClose").subscribe(() => {
+    this._popupsBeforeCloseSubscription = this._helper.getPopups().on("beforeClose").subscribe(() => {
       this.beforeClose();
     });
   }
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    this._popupsAfterOpenSubscriber.unsubscribe();
-    this._popupsBeforeCloseSubscriber.unsubscribe();
+    this._popupsAfterOpenSubscription.unsubscribe();
+    this._popupsBeforeCloseSubscription.unsubscribe();
     this.model = null;
   }
 
