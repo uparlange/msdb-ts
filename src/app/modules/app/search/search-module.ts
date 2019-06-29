@@ -13,7 +13,9 @@ const routes: Routes = [
             { path: "description", loadChildren: () => import("./description/description-module").then(mod => mod.DescriptionModule) },
             { path: "ratings", loadChildren: () => import("./ratings/ratings-module").then(mod => mod.RatingsModule) },
             { path: "categories", loadChildren: () => import("./categories/categories-module").then(mod => mod.CategoriesModule) },
-            { path: "series", loadChildren: () => import("./series/series-module").then(mod => mod.SeriesModule) }
+            { path: "series", loadChildren: () => import("./series/series-module").then(mod => mod.SeriesModule) },
+            { path: "years", loadChildren: () => import("./years/years-module").then(mod => mod.YearsModule) },
+            { path: "languages", loadChildren: () => import("./languages/languages-module").then(mod => mod.LanguagesModule) }
         ]
     }
 ];
