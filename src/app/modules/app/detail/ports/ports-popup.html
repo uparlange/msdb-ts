@@ -6,7 +6,7 @@
 </h1>
 <mat-dialog-content>
 	<mat-list>
-		<mat-list-item *ngFor="let port of model.data.game.ports; trackBy:model.trackByTag">
+		<mat-list-item *ngFor="let port of model.data.game.ports; trackBy:trackByTag">
 			{{getPortValue(port.tag)}}
 		</mat-list-item>
 	</mat-list>

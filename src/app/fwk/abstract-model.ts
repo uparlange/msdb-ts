@@ -1,27 +1,25 @@
-import { AbstractClass } from './abstract-class';
-import { AbstractClassHelper } from './abstract-class-helper';
+import { AbstractHelperObject } from './abstract-helper-object';
 import { EventManager } from './managers/event-manager';
 import { RouterManager } from './managers/router-manager';
 import { CacheManager } from './managers/cache-manager';
 import { TranslateManager } from './managers/translate-manager';
-import { SocketManager } from '../common/managers/socket-manager';
+import { Subscription } from 'rxjs';
+import { AbstractHelper } from './abstract-helper';
 
-export class AbstractModel extends AbstractClass {
+export class AbstractModel extends AbstractHelper {
 
   params: any = {};
   data: any = this._getInitData();
 
-  _helper: AbstractClassHelper = null;
-  _connectionChangeSubscriber: any = null;
+  _connectionChangeSubscription: Subscription = null;
 
-  constructor(abstractClassHelper: AbstractClassHelper) {
-    super();
-    this._helper = abstractClassHelper;
+  constructor(AbstractHelperObject: AbstractHelperObject) {
+    super(AbstractHelperObject);
     this.data = this._getInitData();
   }
 
   init(params: any) {
-    this._connectionChangeSubscriber = this._helper.getConnection().on("change").subscribe((online) => {
+    this._connectionChangeSubscription = this._helper.getConnection().on("change").subscribe((online: boolean) => {
       this.params.online = online;
       if (online) {
         this._callRefreshMethod(() => {
@@ -48,7 +46,7 @@ export class AbstractModel extends AbstractClass {
 
   destroy() {
     this._callDestroyMethod();
-    this._connectionChangeSubscriber.unsubscribe();
+    this._connectionChangeSubscription.unsubscribe();
   }
 
   getEventBus(): EventManager {
@@ -141,17 +139,17 @@ export class AbstractModel extends AbstractClass {
   }
 
   _callInitMethod(): void {
-    //this.getLogger().debug("onInit");
+    this.getLogger().debug("onInit");
     this.onInit();
   }
 
   _callRefreshMethod(callback: Function): void {
-    //this.getLogger().debug("onRefresh");
+    this.getLogger().debug("onRefresh");
     this.onRefresh(callback);
   }
 
   _callDestroyMethod(): void {
-    //this.getLogger().debug("onDestroy");
+    this.getLogger().debug("onDestroy");
     this.onDestroy();
   }
 

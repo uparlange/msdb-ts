@@ -2,25 +2,24 @@ import { WindowRef } from './window-ref';
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { AbstractClass } from './abstract-class';
 import { ConnectionManager } from './managers/connection-manager';
 import { CacheManager } from './managers/cache-manager';
 import { TranslateManager } from './managers/translate-manager';
 import { RouterManager } from './managers/router-manager';
-import { EventManager } from './managers/event-manager';
-import { AbstractShell } from './abstract-shell';
-import { SocketManager } from '../common/managers/socket-manager';
+import { EventManager } from './managers/event-manager'
+import { AbstractObject } from './abstract-object';
+import { FwkShell } from './fwk-shell';
 
-export class AbstractClassHelper extends AbstractClass {
+export class AbstractHelperObject extends AbstractObject {
 
   _title: Title = null;
-  _shell: AbstractShell = null;
+  _shell: FwkShell = null;
   _httpClient: HttpClient = null;
   _activatedRoute: ActivatedRoute = null;
   _windowRef: WindowRef = null;
   _meta: Meta = null;
 
-  constructor(shell: AbstractShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute,
+  constructor(shell: FwkShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute,
     meta: Meta) {
     super();
     this._title = title;

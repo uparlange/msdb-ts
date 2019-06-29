@@ -1,7 +1,7 @@
-import { AbstractClass } from './abstract-class';
 import { EventEmitter } from '@angular/core';
+import { AbstractObject } from './abstract-object';
 
-export class AbstractEventManager extends AbstractClass {
+export class AbstractEventManager extends AbstractObject {
 
     _eventEmitters: Map<string, EventEmitter<any>> = new Map();
 
@@ -18,7 +18,7 @@ export class AbstractEventManager extends AbstractClass {
         return eventEmitter;
     }
 
-    emit(eventName: string, evt: any = undefined) {
+    emit(eventName: string, evt?: any) {
         const eventEmitter: EventEmitter<any> = this._eventEmitters.get(eventName);
         if (eventEmitter !== undefined) {
             eventEmitter.emit(evt);

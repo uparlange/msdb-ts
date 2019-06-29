@@ -1,6 +1,6 @@
 import { Directive, SimpleChanges } from '@angular/core';
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
-import { AppClassHelper } from '../app-class-helper';
+import { AppHelperObject } from '../app-helper-object';
 import { BlazyManager } from '../managers/blazy-Manager';
 
 @Directive({
@@ -19,8 +19,8 @@ export class BlazyDirective extends AbstractDirective {
 
     _lazyManager: BlazyManager = null;
 
-    constructor(appClassHelper: AppClassHelper, lazyManager: BlazyManager) {
-        super(appClassHelper);
+    constructor(appHelperObject: AppHelperObject, lazyManager: BlazyManager) {
+        super(appHelperObject);
         this._lazyManager = lazyManager;
     }
 

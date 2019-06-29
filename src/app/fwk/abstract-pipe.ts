@@ -1,20 +1,17 @@
 
 import { OnDestroy } from '@angular/core';
 import { TranslateManager } from './managers/translate-manager';
-import { AbstractClassHelper } from './abstract-class-helper';
-import { AbstractClass } from './abstract-class';
+import { AbstractHelperObject } from './abstract-helper-object';
+import { AbstractHelper } from './abstract-helper';
 
-export class AbstractPipe extends AbstractClass implements OnDestroy {
+export class AbstractPipe extends AbstractHelper implements OnDestroy {
 
-    _helper: AbstractClassHelper = null;
-
-    constructor(abstractClassHelper: AbstractClassHelper) {
-        super();
-        this._helper = abstractClassHelper;
+    constructor(AbstractHelperObject: AbstractHelperObject) {
+        super(AbstractHelperObject);
     }
 
     ngOnDestroy(): void {
-        //this.getLogger().debug("onDestroy");
+        this.getLogger().debug("onDestroy");
         this.onDestroy();
         this._helper = null;
     }

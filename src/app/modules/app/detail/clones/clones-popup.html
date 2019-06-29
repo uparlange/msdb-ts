@@ -6,7 +6,7 @@
 </h1>
 <mat-dialog-content>
 	<mat-list>
-		<mat-list-item *ngFor="let clone of model.data.clones; trackBy:model.trackByName">
+		<mat-list-item *ngFor="let clone of model.data.clones; trackBy:trackByName">
 			<a (click)="showCloneDetail(clone.name)">{{clone.description}}</a>
 		</mat-list-item>
 	</mat-list>

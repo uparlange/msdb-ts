@@ -14,12 +14,12 @@
 		<mat-list-item>
 			{{'L10N_EMULATION'|translate}}
 			<span class="sep">:</span>
-			<span [class]="model.getStatusClass(model.data.game.driver.emulation)">{{model.getStatusLabel(model.data.game.driver.emulation)|translate}}</span>
+			<span [class]="getStatusClass(model.data.game.driver.emulation)">{{getStatusLabel(model.data.game.driver.emulation)|translate}}</span>
 		</mat-list-item>
 		<mat-list-item>
 			{{'L10N_SAVESTATE'|translate}}
 			<span class="sep">:</span>
-			{{model.getStatusLabel(model.data.game.driver.savestate)|translate}}
+			{{getStatusLabel(model.data.game.driver.savestate)|translate}}
 		</mat-list-item>
 	</mat-list>
 </mat-dialog-content>

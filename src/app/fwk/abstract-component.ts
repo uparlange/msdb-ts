@@ -1,9 +1,9 @@
 import { AbstractDirective } from './abstract-directive';
-import { AbstractClassHelper } from './abstract-class-helper';
+import { AbstractHelperObject } from './abstract-helper-object';
 
 export class AbstractComponent extends AbstractDirective {
 
-    constructor(abstractClassHelper: AbstractClassHelper) {
-        super(abstractClassHelper);
+    constructor(AbstractHelperObject: AbstractHelperObject) {
+        super(AbstractHelperObject);
     }
 }

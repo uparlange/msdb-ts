@@ -1,20 +1,17 @@
 import { OnChanges, OnInit, DoCheck, OnDestroy, SimpleChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
-import { AbstractClass } from './abstract-class';
-import { AbstractClassHelper } from './abstract-class-helper';
+import { AbstractHelperObject } from './abstract-helper-object';
 import { EventManager } from './managers/event-manager';
 import { RouterManager } from './managers/router-manager';
 import { ConnectionManager } from './managers/connection-manager';
 import { TranslateManager } from './managers/translate-manager';
 import { WindowRef } from './window-ref';
 import { PopupManager } from './managers/popup-manager';
+import { AbstractHelper } from './abstract-helper';
 
-export class AbstractDirective extends AbstractClass implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
+export class AbstractDirective extends AbstractHelper implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
-  _helper: AbstractClassHelper = null;
-
-  constructor(abstractClassHelper: AbstractClassHelper) {
-    super();
-    this._helper = abstractClassHelper;
+  constructor(AbstractHelperObject: AbstractHelperObject) {
+    super(AbstractHelperObject);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -22,37 +19,37 @@ export class AbstractDirective extends AbstractClass implements OnChanges, OnIni
   }
 
   ngOnInit(): void {
-    //this.getLogger().debug("onInit");
+    this.getLogger().debug("onInit");
     this.onInit();
   }
 
   ngDoCheck(): void {
-    //this.getLogger().debug("doCheck");
+    this.getLogger().debug("doCheck");
     this.doCheck();
   }
 
   ngAfterContentInit(): void {
-    //this.getLogger().debug("afterContentInit");
+    this.getLogger().debug("afterContentInit");
     this.afterContentInit();
   }
 
   ngAfterContentChecked(): void {
-    //this.getLogger().debug("afterContentChecked");
+    this.getLogger().debug("afterContentChecked");
     this.afterContentChecked();
   }
 
   ngAfterViewInit(): void {
-    //this.getLogger().debug("afterViewInit");
+    this.getLogger().debug("afterViewInit");
     this.afterViewInit();
   }
 
   ngAfterViewChecked(): void {
-    //this.getLogger().debug("afterViewChecked");
+    this.getLogger().debug("afterViewChecked");
     this.afterViewChecked();
   }
 
   ngOnDestroy(): void {
-    //this.getLogger().debug("onDestroy");
+    this.getLogger().debug("onDestroy");
     this.onDestroy();
   }
 

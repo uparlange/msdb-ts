@@ -1,6 +1,6 @@
-import { AbstractClass } from './abstract-class';
+import { AbstractObject } from './abstract-object';
 
-export class AbstractModule extends AbstractClass {
+export class AbstractModule extends AbstractObject {
 
     constructor() {
         super();

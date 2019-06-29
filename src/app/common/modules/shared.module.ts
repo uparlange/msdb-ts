@@ -2,18 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from './material/material.module';
-import { TranslatePipe } from '../../../fwk/pipes/translate.pipe';
+import { MaterialModule } from './material.module';
 import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { MatIconModule } from '@angular/material';
-import { MatIconButtonDirective } from '../../directives/mat-icon-button-directive';
-import { BlazyDirective } from '../../directives/blazy-directive';
-import { GalleryComponent } from '../../components/gallery/gallery-component';
-import { NgForItemComponent } from '../../components/ng-for-item/ng-for-item-component';
+import { MatIconButtonDirective } from '../directives/mat-icon-button-directive';
+import { BlazyDirective } from '../directives/blazy-directive';
+import { GalleryComponent } from '../components/gallery/gallery-component';
+import { NgForItemComponent } from '../components/ng-for-item/ng-for-item-component';
+import { FwkSharedModule } from 'src/app/fwk/modules/fwk-shared-module';
 
 @NgModule({
   declarations: [
-    TranslatePipe,
     MatIconButtonDirective,
     BlazyDirective,
     GalleryComponent,
@@ -24,14 +23,15 @@ import { NgForItemComponent } from '../../components/ng-for-item/ng-for-item-com
     FormsModule,
     HttpClientModule,
     MaterialModule,
-    MatIconModule
+    MatIconModule,
+    FwkSharedModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     MaterialModule,
     MatIconModule,
-    TranslatePipe,
+    FwkSharedModule,
     MatIconButtonDirective,
     BlazyDirective,
     GalleryComponent,

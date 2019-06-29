@@ -1,9 +1,8 @@
 import { AbstractManager } from '../abstract-manager';
-import { Router, NavigationStart, NavigationEnd, Params } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd, Params, NavigationExtras } from '@angular/router';
 import { CacheManager } from './cache-manager';
 import { NgZone, Injectable } from '@angular/core';
 import { WindowRef } from '../window-ref';
-import { AnalyticsManager } from '../../common/managers/analytics-manager';
 import { Subscription } from 'rxjs';
 
 @Injectable()
@@ -49,7 +48,7 @@ export class RouterManager extends AbstractManager {
         this._cacheManager.setItem(`scrollTop_${this._getCurrentPath()}`, scrollPosition.y, "version");
     }
 
-    navigate(commands: any[], extras: any): void {
+    navigate(commands: any[], extras?: NavigationExtras): void {
         this._ngZone.run(() => {
             this._router.navigate(commands, extras);
         });

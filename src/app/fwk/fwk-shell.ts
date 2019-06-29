@@ -1,12 +1,12 @@
-import { AbstractClass } from './abstract-class';
 import { TranslateManager } from './managers/translate-manager';
 import { ConnectionManager } from './managers/connection-manager';
 import { CacheManager } from './managers/cache-manager';
 import { RouterManager } from './managers/router-manager';
 import { EventManager } from './managers/event-manager';
 import { PopupManager } from './managers/popup-manager';
+import { AbstractObject } from './abstract-object';
 
-export class AbstractShell extends AbstractClass {
+export class FwkShell extends AbstractObject {
 
   _translateManager: TranslateManager = null;
   _connectionManager: ConnectionManager = null;

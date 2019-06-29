@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MsdbProvider } from 'src/app/common/msdb-provider';
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 
 @Injectable()
 export class HomeModel extends AbstractAppModel {
 
-    constructor(appClassHelper: AppClassHelper, msdbProvider: MsdbProvider) {
-        super(appClassHelper, msdbProvider);
+    constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
+        super(appHelperObject, msdbProvider);
     }
 
     onInit() {

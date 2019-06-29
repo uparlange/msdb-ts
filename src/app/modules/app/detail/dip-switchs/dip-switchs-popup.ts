@@ -1,19 +1,19 @@
 import { DetailModel } from '../detail-model';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
-import { AbstractPopup } from 'src/app/fwk/abstract-popup';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { Component } from '@angular/core';
+import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
 
 @Component({
   selector: 'dip-switchs-popup',
   templateUrl: './dip-switchs-popup.html',
   styleUrls: ['./dip-switchs-popup.css']
 })
-export class DipSwitchsPopup extends AbstractPopup {
+export class DipSwitchsPopup extends AbstractAppPopup {
 
   provider: Array<any> = null;
 
-  constructor(appClassHelper: AppClassHelper, detailModel: DetailModel) {
-    super(appClassHelper, detailModel);
+  constructor(appHelperObject: AppHelperObject, detailModel: DetailModel) {
+    super(appHelperObject, detailModel);
   }
 
   onInit(): void {

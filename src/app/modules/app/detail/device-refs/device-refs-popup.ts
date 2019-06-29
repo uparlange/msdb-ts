@@ -1,19 +1,19 @@
-import { AbstractPopup } from 'src/app/fwk/abstract-popup';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { Component } from '@angular/core';
 import { DetailModel } from '../detail-model';
+import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
 
 @Component({
   selector: 'device-refs-popup',
   templateUrl: './device-refs-popup.html',
   styleUrls: ['./device-refs-popup.css']
 })
-export class DeviceRefsPopup extends AbstractPopup {
+export class DeviceRefsPopup extends AbstractAppPopup {
 
   _routerAction: any = null;
 
-  constructor(appClassHelper: AppClassHelper, detailModel: DetailModel) {
-    super(appClassHelper, detailModel);
+  constructor(appHelperObject: AppHelperObject, detailModel: DetailModel) {
+    super(appHelperObject, detailModel);
   }
 
   showDeviceDetail(name: string): void {

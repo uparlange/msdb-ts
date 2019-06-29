@@ -5,7 +5,7 @@
 	</button>
 </h1>
 <mat-dialog-content>
-	<div *ngFor="let item of provider; trackBy:model.trackByName">
+	<div *ngFor="let item of provider; trackBy:trackByName">
 		<b>{{item.name}}</b>
 		<ul>
 			<li *ngFor="let value of item.values; trackBy:model.trackByTag">

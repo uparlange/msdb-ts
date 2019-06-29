@@ -1,9 +1,9 @@
-import { AbstractClass } from '../fwk/abstract-class';
+import { AbstractObject } from '../fwk/abstract-object';
 import { WindowRef } from '../fwk/window-ref';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class ConfigProvider extends AbstractClass {
+export class ConfigProvider extends AbstractObject {
 
   _windowRef: WindowRef = null;
 
@@ -32,6 +32,10 @@ export class ConfigProvider extends AbstractClass {
     return `${this._getBaseServerUrl()}:${this.getSocketPort()}`;
   }
 
+  runInNw(): boolean {
+    return this._windowRef.nativeWindow.hasOwnProperty("nw");
+  }
+
   _productionMode(): boolean {
     return this._windowRef.nativeWindow.location.href.indexOf(this._getBaseServerUrl()) === -1;
   }
@@ -40,14 +44,10 @@ export class ConfigProvider extends AbstractClass {
     return "http://localhost";
   }
 
-  _runInNw(): boolean {
-    return this._windowRef.nativeWindow.hasOwnProperty("nw");
-  }
-
   _getBaseClientUrl(): string {
     /*
       let path = "";
-      if (!this._productionMode() || this._runInNw()) {
+      if (!this._productionMode() || this.runInNw()) {
           path = "https://msdb.lapli.fr/";
       }
       return path;

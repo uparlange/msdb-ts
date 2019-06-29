@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform, OnDestroy } from '@angular/core';
 import { AbstractPipe } from '../abstract-pipe';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
+import { Subscription } from 'rxjs';
 
 @Pipe({
   name: 'translate',
@@ -11,11 +12,11 @@ export class TranslatePipe extends AbstractPipe implements PipeTransform {
   _tranlateKey: string = null;
   _translateParams: string = null
   _tranlateValue: string = null;
-  _onLanguageChangeSubscriber: any = null;
+  _onLanguageChangeSubscription: Subscription = null;
 
-  constructor(appClassHelper: AppClassHelper) {
-    super(appClassHelper);
-    this._onLanguageChangeSubscriber = this.getLabels().on("languageChange").subscribe(() => {
+  constructor(appHelperObject: AppHelperObject) {
+    super(appHelperObject);
+    this._onLanguageChangeSubscription = this.getLabels().on("languageChange").subscribe(() => {
       this._refreshTranslation();
     });
   }
@@ -37,7 +38,7 @@ export class TranslatePipe extends AbstractPipe implements PipeTransform {
 
   onDestroy() {
     super.onDestroy();
-    this._onLanguageChangeSubscriber.unsubscribe();
+    this._onLanguageChangeSubscription.unsubscribe();
   }
 
   _refreshTranslation() {

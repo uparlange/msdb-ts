@@ -33,18 +33,18 @@ export class SocketManager extends AbstractManager {
     return eventEmitter;
   }
 
-  emit(eventName: string, params: any): EventEmitter<any> {
+  emit(eventName: string, params?: any): EventEmitter<any> {
     const eventEmitter: EventEmitter<any> = new EventEmitter();
-    this._eventManager.emit("HTTP_BEGIN", undefined);
+    this._eventManager.emit("HTTP_BEGIN");
     this._getSocket().subscribe((socket) => {
       if (socket !== null) {
         socket.emit(eventName, params, (result) => {
-          this._eventManager.emit("HTTP_END", undefined);
+          this._eventManager.emit("HTTP_END");
           eventEmitter.emit(result);
         });
       }
       else {
-        this._eventManager.emit("HTTP_END", undefined);
+        this._eventManager.emit("HTTP_END");
         eventEmitter.emit(null);
       }
     });
@@ -53,7 +53,7 @@ export class SocketManager extends AbstractManager {
 
   _getSocket(): EventEmitter<any> {
     const eventEmitter: EventEmitter<any> = new EventEmitter();
-    if (this._configProvider._runInNw()) {
+    if (this._configProvider.runInNw()) {
       if (this._socket === null) {
         this._socket = io(this._configProvider.getSocketUrl(), {
           reconnection: false

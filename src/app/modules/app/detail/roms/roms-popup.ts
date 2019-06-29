@@ -1,16 +1,16 @@
-import { AbstractPopup } from 'src/app/fwk/abstract-popup';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { Component } from '@angular/core';
 import { DetailModel } from '../detail-model';
+import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
 
 @Component({
   selector: 'roms-popup',
   templateUrl: './roms-popup.html',
   styleUrls: ['./roms-popup.css']
 })
-export class RomsPopup extends AbstractPopup {
+export class RomsPopup extends AbstractAppPopup {
 
-  constructor(appClassHelper: AppClassHelper, detailModel: DetailModel) {
-    super(appClassHelper, detailModel);
+  constructor(appHelperObject: AppHelperObject, detailModel: DetailModel) {
+    super(appHelperObject, detailModel);
   }
 }

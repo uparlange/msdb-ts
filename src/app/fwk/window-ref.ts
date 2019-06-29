@@ -1,8 +1,8 @@
-import { AbstractClass } from './abstract-class';
+import { AbstractObject } from './abstract-object';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class WindowRef extends AbstractClass {
+export class WindowRef extends AbstractObject {
 
     nativeWindow: Window = window;
 

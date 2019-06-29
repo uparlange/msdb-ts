@@ -1,19 +1,19 @@
 import { DetailModel } from '../detail-model';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
-import { AbstractPopup } from 'src/app/fwk/abstract-popup';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { Component } from '@angular/core';
+import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
 
 @Component({
   selector: 'chips-popup',
   templateUrl: './chips-popup.html',
   styleUrls: ['./chips-popup.css']
 })
-export class ChipsPopup extends AbstractPopup {
+export class ChipsPopup extends AbstractAppPopup {
 
   provider: Array<any> = null;
 
-  constructor(appClassHelper: AppClassHelper, detailModel: DetailModel) {
-    super(appClassHelper, detailModel);
+  constructor(appHelperObject: AppHelperObject, detailModel: DetailModel) {
+    super(appHelperObject, detailModel);
   }
 
   onInit(): void {

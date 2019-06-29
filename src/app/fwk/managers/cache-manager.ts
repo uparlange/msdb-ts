@@ -17,7 +17,7 @@ export class CacheManager extends AbstractManager {
 
     setItem(key: string, newValue: any, namespace: string): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
-        this.getItem(key, undefined).subscribe((oldValue: any) => {
+        this.getItem(key).subscribe((oldValue: any) => {
             this._db["properties"].put({ key: key, value: newValue, namespace: (namespace || "default") });
             const change = {
                 key: key,
@@ -30,9 +30,9 @@ export class CacheManager extends AbstractManager {
         return eventEmitter;
     }
 
-    getItem(key: string, defaultValue: any): EventEmitter<any> {
+    getItem(key: string, defaultValue?: any): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
-        this._db["properties"].get({ key: key }).then((property) => {
+        this._db["properties"].get({ key: key }).then((property: any) => {
             let value = null;
             if (property != undefined) {
                 value = property.value;
@@ -45,8 +45,8 @@ export class CacheManager extends AbstractManager {
     }
 
     deleteNamespace(namespace: string): void {
-        this._db["properties"].where("namespace").equals(namespace).delete().then((deleteCount) => {
-            //this.getLogger().debug("Deleted " + deleteCount + " objects from cache");
+        this._db["properties"].where("namespace").equals(namespace).delete().then((deleteCount: number) => {
+            this.getLogger().debug("Deleted " + deleteCount + " objects from cache");
         });
     }
 }

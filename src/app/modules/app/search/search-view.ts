@@ -1,4 +1,4 @@
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { SearchModel } from './search-model';
 import { Component } from '@angular/core';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
@@ -10,14 +10,14 @@ import { AbstractAppView } from 'src/app/common/abstract-app-view';
 })
 export class SearchView extends AbstractAppView {
 
-    constructor(appClassHelper: AppClassHelper, searchModel: SearchModel) {
-        super(appClassHelper, searchModel);
+    constructor(appHelperObject: AppHelperObject, searchModel: SearchModel) {
+        super(appHelperObject, searchModel);
     }
 
     tabChanged(event: any): void {
         this._getModel().tabChanged(event);
         const url = `/search/${this._getModel().getTabsInfo().byIndex(event.index).type}`;
-        this.getRouter().navigate([url], undefined);
+        this.getRouter().navigate([url]);
     }
 
     getSearchTabLabel(index: number): any {

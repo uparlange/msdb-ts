@@ -1,5 +1,5 @@
 import { ResultModel } from './result-model';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
@@ -13,8 +13,8 @@ export class ResultView extends AbstractAppView {
 
     @ViewChild(MatPaginator, { static: false }) matPaginator !: MatPaginator;
 
-    constructor(appClassHelper: AppClassHelper, resultModel: ResultModel) {
-        super(appClassHelper, resultModel);
+    constructor(appHelperObject: AppHelperObject, resultModel: ResultModel) {
+        super(appHelperObject, resultModel);
     }
 
     afterViewInit(): void {

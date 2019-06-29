@@ -1,5 +1,5 @@
 import { AbstractAppView } from '../../../common/abstract-app-view';
-import { AppClassHelper } from '../../../common/app-class-helper';
+import { AppHelperObject } from '../../../common/app-helper-object';
 import { DetailModel } from './detail-model';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
@@ -21,9 +21,25 @@ export class DetailView extends AbstractAppView {
 
   _matDialog: MatDialog = null;
 
-  constructor(appClassHelper: AppClassHelper, detailModel: DetailModel, matDialog: MatDialog) {
-    super(appClassHelper, detailModel);
+  constructor(appHelperObject: AppHelperObject, detailModel: DetailModel, matDialog: MatDialog) {
+    super(appHelperObject, detailModel);
     this._matDialog = matDialog;
+  }
+
+  playGame(game: any): void {
+    this.getSocket().emit("PLAY_GAME", game.name);
+  }
+
+  inFavorites(game: any): boolean {
+    return this.getFavorites().has(game.name);
+  }
+
+  addToFavorite(game: any): void {
+    this.getFavorites().add(game.name);
+  }
+
+  removeFromFavorites(game: any): void {
+    this.getFavorites().remove(game.name);
   }
 
   openDriverPopup(): void {

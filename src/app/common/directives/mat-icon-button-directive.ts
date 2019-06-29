@@ -1,5 +1,5 @@
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
-import { AppClassHelper } from '../app-class-helper';
+import { AppHelperObject } from '../app-helper-object';
 import { Directive, ContentChild } from '@angular/core';
 import { MatIcon } from '@angular/material';
 
@@ -15,8 +15,8 @@ export class MatIconButtonDirective extends AbstractDirective {
 
     ariaLabel: string = "";
 
-    constructor(appClassHelper: AppClassHelper) {
-        super(appClassHelper);
+    constructor(appHelperObject: AppHelperObject) {
+        super(appHelperObject);
     }
 
     afterContentInit(): void {

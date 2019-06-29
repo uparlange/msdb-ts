@@ -6,7 +6,7 @@
 </h1>
 <mat-dialog-content>
 	<mat-list>
-		<mat-list-item *ngFor="let deviceref of model.data.game.devicerefs; trackBy:model.trackByName">
+		<mat-list-item *ngFor="let deviceref of model.data.game.devicerefs; trackBy:trackByName">
 			<a (click)="showDeviceDetail(deviceref.name)">{{deviceref.name}}</a>
 		</mat-list-item>
 	</mat-list>

@@ -1,4 +1,3 @@
-import { AbstractClassHelper } from '../fwk/abstract-class-helper';
 import { Injectable } from '@angular/core';
 import { AppShell } from './app-shell';
 import { WindowRef } from '../fwk/window-ref';
@@ -6,14 +5,14 @@ import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AnalyticsManager } from './managers/analytics-manager';
-import { Config } from 'protractor';
 import { ConfigProvider } from './config-provider';
 import { HistoryManager } from './managers/history-manager';
 import { FavoritesManager } from './managers/favorites-manager';
 import { SocketManager } from './managers/socket-manager';
+import { AbstractHelperObject } from '../fwk/abstract-helper-object';
 
 @Injectable()
-export class AppClassHelper extends AbstractClassHelper {
+export class AppHelperObject extends AbstractHelperObject {
 
   _configProvider: ConfigProvider = null;
 

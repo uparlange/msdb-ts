@@ -6,7 +6,7 @@
 </h1>
 <mat-dialog-content>
 	<mat-list>
-		<mat-list-item *ngFor="let rom of model.data.game.roms; trackBy:model.trackByName">
+		<mat-list-item *ngFor="let rom of model.data.game.roms; trackBy:trackByName">
 			<span [class]="model.getStatusClass(rom.status)">{{rom.name}}</span>
 			<span class="sep">:</span>
 			{{model.getSizeLabel(rom.size)}}

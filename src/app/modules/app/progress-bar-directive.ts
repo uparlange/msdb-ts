@@ -1,7 +1,7 @@
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
 import { Directive } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 
 @Directive({
     selector: "mat-progress-bar",
@@ -17,8 +17,8 @@ export class ProgressBarDirective extends AbstractDirective {
     _httpEndSubscription: Subscription = null;
     _counter: number = 0;
 
-    constructor(appClassHelper: AppClassHelper) {
-        super(appClassHelper);
+    constructor(appHelperObject: AppHelperObject) {
+        super(appHelperObject);
     }
 
     onInit(): void {

@@ -3,7 +3,7 @@ import Masonry from 'masonry-layout';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
 import { AbstractComponent } from '../../../fwk/abstract-component';
-import { AppClassHelper } from '../../app-class-helper';
+import { AppHelperObject } from '../../app-helper-object';
 
 @Component({
   selector: "gallery",
@@ -25,8 +25,8 @@ export class GalleryComponent extends AbstractComponent {
   _masonry: Masonry = null;
   _resizeTimeout: any = null;
 
-  constructor(appClassHelper: AppClassHelper, elementRef: ElementRef, renderer: Renderer) {
-    super(appClassHelper);
+  constructor(appHelperObject: AppHelperObject, elementRef: ElementRef, renderer: Renderer) {
+    super(appHelperObject);
     this._element = elementRef.nativeElement;
     this._renderer = renderer;
   }
@@ -54,7 +54,7 @@ export class GalleryComponent extends AbstractComponent {
     return item ? item.name : undefined;
   }
 
-  getItemStyles(image): any {
+  getItemStyles(image: any): any {
     const colwidth: number = this._getColWidth();
     const styles = {
       'float': 'left',
@@ -83,7 +83,7 @@ export class GalleryComponent extends AbstractComponent {
     this._refreshMasonry();
   }
 
-  _getItemHeight(requiredWidth, image): number {
+  _getItemHeight(requiredWidth: number, image: any): number {
     return Math.round(requiredWidth * image.h / image.w);
   }
 

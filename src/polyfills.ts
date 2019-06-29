@@ -61,3 +61,10 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+// nwjs
+declare global {
+    interface Window {
+        nw: any;
+    }
+}

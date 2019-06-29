@@ -2,7 +2,7 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { EventEmitter, Injectable } from '@angular/core';
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
 import { MsdbProvider } from 'src/app/common/msdb-provider';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 
 @Injectable()
 export class ResultModel extends AbstractAppModel {
@@ -12,8 +12,8 @@ export class ResultModel extends AbstractAppModel {
     _FILTER_BIOS: string = "bios";
     _FILTER_DEVICE: string = "device";
 
-    constructor(appClassHelper: AppClassHelper, msdbProvider: MsdbProvider) {
-        super(appClassHelper, msdbProvider);
+    constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
+        super(appHelperObject, msdbProvider);
     }
 
     onInit(): void {

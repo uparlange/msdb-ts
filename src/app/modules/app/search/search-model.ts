@@ -1,5 +1,5 @@
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { MsdbProvider } from 'src/app/common/msdb-provider';
 import { Injectable } from '@angular/core';
 
@@ -8,8 +8,8 @@ export class SearchModel extends AbstractAppModel {
 
     _tabsInfo: any = null;
 
-    constructor(appClassHelper: AppClassHelper, msdbProvider: MsdbProvider) {
-        super(appClassHelper, msdbProvider);
+    constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
+        super(appHelperObject, msdbProvider);
         this._tabsInfo = this._getTabsInfo();
     }
 

@@ -1,8 +1,7 @@
 import { AbstractModel } from '../fwk/abstract-model';
-import { AbstractClassHelper } from '../fwk/abstract-class-helper';
 import { MsdbProvider } from './msdb-provider';
 import { HistoryManager } from './managers/history-manager';
-import { AppClassHelper } from './app-class-helper';
+import { AppHelperObject } from './app-helper-object';
 import { FavoritesManager } from './managers/favorites-manager';
 import { SocketManager } from './managers/socket-manager';
 
@@ -10,8 +9,8 @@ export class AbstractAppModel extends AbstractModel {
 
   _provider: MsdbProvider = null;
 
-  constructor(abstractClassHelper: AbstractClassHelper, provider: MsdbProvider) {
-    super(abstractClassHelper);
+  constructor(appHelperObject: AppHelperObject, provider: MsdbProvider) {
+    super(appHelperObject);
     this._provider = provider;
   }
 
@@ -35,7 +34,17 @@ export class AbstractAppModel extends AbstractModel {
     return this._getHelper().getConfigProvider().getGameFolder(game);
   }
 
-  _getHelper(): AppClassHelper {
-    return <AppClassHelper>this._helper;
+  getGameSizeLabel(): string {
+    let size = 0;
+    if (this.data.game.roms !== undefined) {
+      this.data.game.roms.forEach((element: any) => {
+        size += parseInt(element.size);
+      });
+    }
+    return this.getSizeLabel(size);
+  }
+
+  _getHelper(): AppHelperObject {
+    return <AppHelperObject>this._helper;
   }
 }

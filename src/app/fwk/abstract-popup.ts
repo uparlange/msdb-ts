@@ -1,5 +1,5 @@
 import { AbstractComponent } from './abstract-component';
-import { AbstractClassHelper } from './abstract-class-helper';
+import { AbstractHelperObject } from './abstract-helper-object';
 import { Subscription } from 'rxjs';
 import { AbstractModel } from './abstract-model';
 
@@ -10,8 +10,8 @@ export class AbstractPopup extends AbstractComponent {
   _popupsAfterOpenSubscription: Subscription = null;
   _popupsBeforeCloseSubscription: Subscription = null;
 
-  constructor(abstractClassHelper: AbstractClassHelper, model: AbstractModel) {
-    super(abstractClassHelper);
+  constructor(AbstractHelperObject: AbstractHelperObject, model: AbstractModel) {
+    super(AbstractHelperObject);
     this.model = model;
   }
 

@@ -1,17 +1,14 @@
-import { AbstractClass } from './abstract-class';
-import { AbstractClassHelper } from './abstract-class-helper';
+import { AbstractHelperObject } from './abstract-helper-object';
 import { EventEmitter } from '@angular/core';
 import { CacheManager } from './managers/cache-manager';
 import { EventManager } from './managers/event-manager';
 import { Observable } from 'rxjs';
+import { AbstractHelper } from './abstract-helper';
 
-export class AbstractProvider extends AbstractClass {
+export class AbstractProvider extends AbstractHelper {
 
-    _helper: AbstractClassHelper = null;
-
-    constructor(abstractClassHelper: AbstractClassHelper) {
-        super();
-        this._helper = abstractClassHelper;
+    constructor(AbstractHelperObject: AbstractHelperObject) {
+        super(AbstractHelperObject);
     }
 
     httpGet(config: any): EventEmitter<any> {
@@ -39,13 +36,13 @@ export class AbstractProvider extends AbstractClass {
         if (defaultValue === undefined) {
             defaultValue = null;
         }
-        this.getEventBus().emit("HTTP_BEGIN", undefined);
+        this.getEventBus().emit("HTTP_BEGIN");
         // source.timeout(AppUtils.getHttpRequestTimeOut())
         source.subscribe((result: any) => {
-            this.getEventBus().emit("HTTP_END", undefined);
+            this.getEventBus().emit("HTTP_END");
             eventEmitter.emit(result);
         }, () => {
-            this.getEventBus().emit("HTTP_END", undefined);
+            this.getEventBus().emit("HTTP_END");
             eventEmitter.emit(defaultValue);
         });
         return eventEmitter;

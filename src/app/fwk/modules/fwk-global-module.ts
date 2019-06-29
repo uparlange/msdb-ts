@@ -19,7 +19,7 @@ import { PopupManager } from '../managers/popup-manager';
     PopupManager
   ]
 })
-export class FwkModule extends AbstractModule {
+export class FwkGlobalModule extends AbstractModule {
 
   constructor() {
     super();

@@ -4,16 +4,16 @@ import { CacheManager } from 'src/app/fwk/managers/cache-manager';
 import { RouterManager } from 'src/app/fwk/managers/router-manager';
 import { EventManager } from 'src/app/fwk/managers/event-manager';
 import { AnalyticsManager } from './managers/analytics-manager';
-import { AbstractShell } from 'src/app/fwk/abstract-shell';
 import { Injectable } from '@angular/core';
 import { BlazyManager } from './managers/blazy-Manager';
 import { HistoryManager } from './managers/history-manager';
 import { FavoritesManager } from './managers/favorites-manager';
 import { SocketManager } from './managers/socket-manager';
 import { PopupManager } from '../fwk/managers/popup-manager';
+import { FwkShell } from '../fwk/fwk-shell';
 
 @Injectable()
-export class AppShell extends AbstractShell {
+export class AppShell extends FwkShell {
 
   _analyticsManager: AnalyticsManager = null;
   _blazyManager: BlazyManager = null;

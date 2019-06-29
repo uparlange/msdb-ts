@@ -1,7 +1,7 @@
 import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'src/app/common/modules/shared/shared.module';
+import { SharedModule } from 'src/app/common/modules/shared.module';
 import { SearchModel } from './search-model';
 import { SearchView } from './search-view';
 

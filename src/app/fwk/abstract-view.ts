@@ -1,5 +1,5 @@
 import { AbstractComponent } from './abstract-component';
-import { AbstractClassHelper } from './abstract-class-helper';
+import { AbstractHelperObject } from './abstract-helper-object';
 import { AbstractModel } from './abstract-model';
 import { Subscription } from 'rxjs';
 
@@ -9,8 +9,8 @@ export class AbstractView extends AbstractComponent {
 
     _queryParamsSubscription: Subscription = null;
 
-    constructor(abstractClassHelper: AbstractClassHelper, model: AbstractModel) {
-        super(abstractClassHelper);
+    constructor(AbstractHelperObject: AbstractHelperObject, model: AbstractModel) {
+        super(AbstractHelperObject);
         this.model = model;
     }
 

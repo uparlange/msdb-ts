@@ -1,4 +1,4 @@
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { DescriptionModel } from './description-model';
 import { Component } from '@angular/core';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
@@ -10,7 +10,7 @@ import { AbstractAppView } from 'src/app/common/abstract-app-view';
 })
 export class DescriptionView extends AbstractAppView {
 
-    constructor(appClassHelper: AppClassHelper, descriptionModel: DescriptionModel) {
-        super(appClassHelper, descriptionModel);
+    constructor(appHelperObject: AppHelperObject, descriptionModel: DescriptionModel) {
+        super(appHelperObject, descriptionModel);
     }
 }

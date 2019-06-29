@@ -1,7 +1,7 @@
 import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { Routes, RouterModule } from '@angular/router';
 import { DescriptionView } from './description-view';
-import { SharedModule } from 'src/app/common/modules/shared/shared.module';
+import { SharedModule } from 'src/app/common/modules/shared.module';
 import { NgModule } from '@angular/core';
 import { DescriptionModel } from './description-model';
 

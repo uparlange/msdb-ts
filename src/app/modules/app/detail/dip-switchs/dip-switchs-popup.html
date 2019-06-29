@@ -5,13 +5,14 @@
 	</button>
 </h1>
 <mat-dialog-content>
-	<div *ngFor="let item of provider; trackBy:model.trackByName">
+	<div *ngFor="let item of provider; trackBy:trackByName">
 		<b>{{item.name}}</b>
 		<ul>
-			<li *ngFor="let switch of item.switchs; trackBy:model.trackByName">
+			<li *ngFor="let switch of item.switchs; trackBy:trackByName">
 				{{switch.name}}
 				<ul>
-					<li *ngFor="let value of switch.values; trackBy:model.trackByName" [class]="value.default == 'yes' ? 'dipvalue-default' : null">
+					<li *ngFor="let value of switch.values; trackBy:trackByName"
+						[class]="value.default == 'yes' ? 'dipvalue-default' : null">
 						{{value.name}} ({{value.value}})
 					</li>
 				</ul>

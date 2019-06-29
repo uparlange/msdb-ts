@@ -17,7 +17,7 @@ export class AnalyticsManager extends AbstractManager {
         super.init();
         this._gtag("js", new Date());
         this._gtag("config", this._gaMeasurementId);
-        this._routerManager.on("navigationEnd").subscribe((event) => {
+        this._routerManager.on("navigationEnd").subscribe((event: any) => {
             this._gtag("config", this._gaMeasurementId, { "page_path": event.urlAfterRedirects });
         });
         this._loadScript();
@@ -31,7 +31,7 @@ export class AnalyticsManager extends AbstractManager {
         head.appendChild(script);
     }
 
-    _gtag(...args: any[]) {
+    _gtag(...args: any[]): void {
         this._getDataLayer().push(args);
     }
 

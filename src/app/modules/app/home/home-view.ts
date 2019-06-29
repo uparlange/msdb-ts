@@ -1,6 +1,6 @@
 import { HomeModel } from './home-model';
 import { Component } from '@angular/core';
-import { AppClassHelper } from 'src/app/common/app-class-helper';
+import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 
 @Component({
@@ -10,7 +10,7 @@ import { AbstractAppView } from 'src/app/common/abstract-app-view';
 })
 export class HomeView extends AbstractAppView {
 
-  constructor(appClassHelper: AppClassHelper, homeModel: HomeModel) {
-    super(appClassHelper, homeModel);
+  constructor(appHelperObject: AppHelperObject, homeModel: HomeModel) {
+    super(appHelperObject, homeModel);
   }
 }

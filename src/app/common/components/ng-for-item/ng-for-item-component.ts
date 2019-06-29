@@ -1,6 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
 import { AbstractComponent } from '../../../fwk/abstract-component';
-import { AppClassHelper } from '../../app-class-helper';
+import { AppHelperObject } from '../../app-helper-object';
 
 @Component({
   selector: "ngForItem",
@@ -14,8 +14,8 @@ export class NgForItemComponent extends AbstractComponent {
   onLast: EventEmitter<any> = new EventEmitter();
   last: boolean = false;
 
-  constructor(appClassHelper: AppClassHelper) {
-    super(appClassHelper);
+  constructor(appHelperObject: AppHelperObject) {
+    super(appHelperObject);
   }
 
   afterContentInit(): void {

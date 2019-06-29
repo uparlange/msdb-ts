@@ -2,7 +2,7 @@ import { AbstractProvider } from '../fwk/abstract-provider';
 import { ConfigProvider } from './config-provider';
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { AppClassHelper } from './app-class-helper';
+import { AppHelperObject } from './app-helper-object';
 
 @Injectable()
 export class MsdbProvider extends AbstractProvider {
@@ -11,8 +11,8 @@ export class MsdbProvider extends AbstractProvider {
     _token: string = null;
     _configProvider: ConfigProvider = null;
 
-    constructor(appClassHelper: AppClassHelper, configProvider: ConfigProvider) {
-        super(appClassHelper);
+    constructor(appHelperObject: AppHelperObject, configProvider: ConfigProvider) {
+        super(appHelperObject);
         this._configProvider = configProvider;
     }
 
@@ -103,7 +103,7 @@ export class MsdbProvider extends AbstractProvider {
     _callService(config): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
         const cacheKey = this._getCacheKey(config);
-        this.getCache().getItem(cacheKey, undefined).subscribe((value: any) => {
+        this.getCache().getItem(cacheKey).subscribe((value: any) => {
             if (config.useCache === true && value !== null) {
                 setTimeout(() => {
                     eventEmitter.emit(value);

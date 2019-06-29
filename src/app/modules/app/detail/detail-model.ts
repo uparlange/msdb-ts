@@ -1,5 +1,5 @@
 import { AbstractAppModel } from '../../../common/abstract-app-model';
-import { AppClassHelper } from '../../../common/app-class-helper';
+import { AppHelperObject } from '../../../common/app-helper-object';
 import { MsdbProvider } from '../../../common/msdb-provider';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -9,8 +9,8 @@ export class DetailModel extends AbstractAppModel {
 
   _socketConfigChangedSubscription: Subscription = null;
 
-  constructor(appClassHelper: AppClassHelper, msdbProvider: MsdbProvider) {
-    super(appClassHelper, msdbProvider);
+  constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
+    super(appHelperObject, msdbProvider);
   }
 
   onInit(): void {
@@ -20,10 +20,10 @@ export class DetailModel extends AbstractAppModel {
     });
   }
 
-  onRefresh(callback): void {
+  onRefresh(callback: Function): void {
     super.onRefresh(callback);
     this.data = this._getInitData();
-    this.getProvider().getDetail(this.params.name).subscribe((data) => {
+    this.getProvider().getDetail(this.params.name).subscribe((data: any) => {
       if (data === null) {
         this.data.game.description = this.params.name;
       } else {
@@ -43,7 +43,7 @@ export class DetailModel extends AbstractAppModel {
         this.data.images = images;
         this.setTitle(`${this.data.game.description}`);
         this.setKeywords(`${this.data.game.name}, ${this.data.game.description}`);
-        this.getProvider().search("clones", this.params.name).subscribe((data) => {
+        this.getProvider().search("clones", this.params.name).subscribe((data: any) => {
           this.data.clones = data;
           callback();
         });
@@ -52,63 +52,21 @@ export class DetailModel extends AbstractAppModel {
     });
   }
 
-  onDestroy() {
+  onDestroy(): void {
     super.onDestroy();
     this._socketConfigChangedSubscription.unsubscribe();
   }
 
-  inFavorites(game) {
-    return this.getFavorites().has(game.name);
-  }
-
-  addToFavorite(game) {
-    this.getFavorites().add(game.name);
-  }
-
-  removeFromFavorites(game) {
-    this.getFavorites().remove(game.name);
-  }
-
-  playGame(game) {
-    this.getSocket().emit("PLAY_GAME", game.name);
-  }
-
-  getStatusClass(status) {
-    return `label-${status}`;
-  }
-
-  getStatusLabel(status) {
-    return (status != null) ? `L10N_${status.toUpperCase()}` : null;
-  }
-
-  getGameSizeLabel() {
-    let size = 0;
-    if (this.data.game.roms !== undefined) {
-      this.data.game.roms.forEach((element) => {
-        size += parseInt(element.size);
-      });
-    }
-    return this.getSizeLabel(size);
-  }
-
-  trackByName(index, item) {
-    return item ? item.name : undefined;
-  }
-
-  trackByTag(index, item) {
-    return item ? item.tag : undefined;
-  }
-
-  _refreshGameAvailability() {
+  _refreshGameAvailability(): void {
     this.data.gameAvailable = false;
-    this.getSocket().emit("IS_ROM_AVAILABLE", this.params.name).subscribe((result) => {
+    this.getSocket().emit("IS_ROM_AVAILABLE", this.params.name).subscribe((result: any) => {
       if (result !== null && result.name === this.params.name) {
         this.data.gameAvailable = result.available;
       }
     });
   }
 
-  _getInitData() {
+  _getInitData(): any {
     return {
       game: {
         dipswitchs: [],
