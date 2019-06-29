@@ -1,6 +1,6 @@
 import { AbstractModule } from '../../../fwk/abstract-module';
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../common/modules/shared.module';
+import { SharedModule } from '../../../common/modules/shared-module';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailView } from './detail-view';
 import { DetailModel } from './detail-model';

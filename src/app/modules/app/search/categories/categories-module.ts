@@ -1,12 +1,12 @@
 import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { Routes, RouterModule } from '@angular/router';
-import { DescriptionView } from './description-view';
 import { SharedModule } from 'src/app/common/modules/shared-module';
 import { NgModule } from '@angular/core';
-import { DescriptionModel } from './description-model';
+import { CategoriesView } from './categories-view';
+import { CategoriesModel } from './categories-model';
 
 const routes: Routes = [
-    { path: "", component: DescriptionView }
+    { path: "", component: CategoriesView }
 ];
 
 @NgModule({
@@ -15,13 +15,13 @@ const routes: Routes = [
         RouterModule.forChild(routes)
     ],
     providers: [
-        DescriptionModel
+        CategoriesModel
     ],
     declarations: [
-        DescriptionView
+        CategoriesView
     ]
 })
-export class DescriptionModule extends AbstractModule {
+export class CategoriesModule extends AbstractModule {
 
     constructor() {
         super();

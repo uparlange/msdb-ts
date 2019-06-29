@@ -29,4 +29,8 @@ export class ChipsPopup extends AbstractAppPopup {
     });
     this.provider = provider;
   }
+
+  getFrequencyLabel(value: number): string {
+    return this._getHelper().getConfigProvider().getFrequencyLabel(value);
+  }
 }

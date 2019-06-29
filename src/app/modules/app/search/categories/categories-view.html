@@ -1,0 +1,16 @@
+<mat-tree [treeControl]="model.data.treeControl" [dataSource]="model.data.dataSource" [trackBy]="trackByData">
+    <mat-tree-node role="treeitem" *matTreeNodeDef="let node" matTreeNodePadding>
+        <button mat-icon-button disabled matTreeNodeToggle></button>
+        <a routerLink="/result" [queryParams]="{type:'category', value:node.data}">
+            {{node.label}}
+        </a>
+    </mat-tree-node>
+    <mat-tree-node role="treeitem" *matTreeNodeDef="let node; when: model.hasChild" matTreeNodePadding
+        matTreeNodeToggle>
+        <button mat-icon-button [attr.aria-label]="'toggle ' + node.label">
+            <mat-icon [svgIcon]="model.data.treeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right'"
+                class="mat-icon-rtl-mirror"></mat-icon>
+        </button>
+        {{node.label}}
+    </mat-tree-node>
+</mat-tree>

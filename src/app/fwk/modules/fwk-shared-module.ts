@@ -6,9 +6,6 @@ import { TranslatePipe } from '../pipes/translate-pipe';
     declarations: [
         TranslatePipe
     ],
-    imports: [
-
-    ],
     exports: [
         TranslatePipe
     ]

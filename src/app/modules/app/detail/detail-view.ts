@@ -26,6 +26,18 @@ export class DetailView extends AbstractAppView {
     this._matDialog = matDialog;
   }
 
+  getGameVideoUrl(game: any): string {
+    return this._getHelper().getConfigProvider().getGameVideoUrl(game);
+  }
+
+  getGameManualUrl(game: any): string {
+    return this._getHelper().getConfigProvider().getGameManualUrl(game);
+  }
+
+  getGameSoundTrackUrl(game: any): string {
+    return this._getHelper().getConfigProvider().getGameSoundTrackUrl(game);
+  }
+
   playGame(game: any): void {
     this.getSocket().emit("PLAY_GAME", game.name);
   }

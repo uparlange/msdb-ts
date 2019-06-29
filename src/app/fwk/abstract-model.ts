@@ -65,34 +65,6 @@ export class AbstractModel extends AbstractHelper {
     return this._helper.getLabels();
   }
 
-  getGameIconUrl(game) {
-    //return AppUtils.getGameIconUrl(game);
-  }
-
-  getGameVideoUrl(game) {
-    //return AppUtils.getGameVideoUrl(game);
-  }
-
-  getGameManualUrl(game) {
-    //return AppUtils.getGameManualUrl(game);
-  }
-
-  getGameSoundTrackUrl(game) {
-    //return AppUtils.getGameSoundTrackUrl(game);
-  }
-
-  getGameFolder(game) {
-    //return AppUtils.getGameFolder(game);
-  }
-
-  getSizeLabel(value: number): string {
-    return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
-  }
-
-  getFrequencyLabel(value: number): string {
-    return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
-  }
-
   setTitle(value: string) {
     let title = "Mame Smart Database";
     if (typeof value === "string") {
@@ -116,26 +88,12 @@ export class AbstractModel extends AbstractHelper {
     // need override
   }
 
-  onRefresh(callback: Function) {
+  onRefresh(callback: Function): void {
     // need override
   }
 
   onDestroy(): void {
     // need override
-  }
-
-  _getUnitLabel(value: number, steps: Array<string>, stepMultiplier: number): string {
-    let step = null;
-    steps.forEach((item, index) => {
-      const stepValue = Math.pow(stepMultiplier, index);
-      if (value >= stepValue) {
-        step = { unit: item, value: stepValue };
-      }
-      else {
-        return;
-      }
-    });
-    return `${Math.round(value / step.value * 100) / 100} ${step.unit}`;
   }
 
   _callInitMethod(): void {

@@ -1,12 +1,12 @@
 import { AbstractModule } from 'src/app/fwk/abstract-module';
-import { HomeModel } from './home-model';
 import { NgModule } from '@angular/core';
-import { HomeView } from './home-view';
 import { SharedModule } from '../../../common/modules/shared-module';
 import { Routes, RouterModule } from '@angular/router';
+import { HistoryView } from './history-view';
+import { HistoryModel } from './history-model';
 
 const routes: Routes = [
-    { path: "", component: HomeView }
+    { path: "", component: HistoryView }
 ];
 
 @NgModule({
@@ -15,13 +15,13 @@ const routes: Routes = [
         RouterModule.forChild(routes)
     ],
     providers: [
-        HomeModel
+        HistoryModel
     ],
     declarations: [
-        HomeView
+        HistoryView
     ]
 })
-export class HomeModule extends AbstractModule {
+export class HistoryModule extends AbstractModule {
 
     constructor() {
         super();

@@ -1,6 +1,6 @@
 import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../common/modules/shared.module';
+import { SharedModule } from '../../../common/modules/shared-module';
 import { Routes, RouterModule } from '@angular/router';
 import { ConfigView } from './config-view';
 import { ConfigModel } from './config-model';

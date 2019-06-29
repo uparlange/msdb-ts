@@ -9,6 +9,7 @@ import { RouterManager } from './managers/router-manager';
 import { EventManager } from './managers/event-manager'
 import { AbstractObject } from './abstract-object';
 import { FwkShell } from './fwk-shell';
+import { PopupManager } from './managers/popup-manager';
 
 export class AbstractHelperObject extends AbstractObject {
 
@@ -70,7 +71,7 @@ export class AbstractHelperObject extends AbstractObject {
     return this._shell.getCacheManager();
   }
 
-  getPopups() {
+  getPopups(): PopupManager {
     return this._shell.getPopupManager();
   }
 }

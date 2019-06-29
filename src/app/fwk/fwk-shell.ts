@@ -5,7 +5,9 @@ import { RouterManager } from './managers/router-manager';
 import { EventManager } from './managers/event-manager';
 import { PopupManager } from './managers/popup-manager';
 import { AbstractObject } from './abstract-object';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class FwkShell extends AbstractObject {
 
   _translateManager: TranslateManager = null;

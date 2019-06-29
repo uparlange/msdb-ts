@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './material-module';
 import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { MatIconModule } from '@angular/material';
 import { MatIconButtonDirective } from '../directives/mat-icon-button-directive';

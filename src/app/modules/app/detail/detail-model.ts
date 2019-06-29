@@ -57,6 +57,16 @@ export class DetailModel extends AbstractAppModel {
     this._socketConfigChangedSubscription.unsubscribe();
   }
 
+  getGameSizeLabel() {
+    let size = 0;
+    if (this.data.game.roms !== undefined) {
+      this.data.game.roms.forEach((element) => {
+        size += parseInt(element.size);
+      });
+    }
+    return this.getSizeLabel(size);
+  }
+
   _refreshGameAvailability(): void {
     this.data.gameAvailable = false;
     this.getSocket().emit("IS_ROM_AVAILABLE", this.params.name).subscribe((result: any) => {

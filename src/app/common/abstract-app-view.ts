@@ -2,7 +2,6 @@ import { AbstractView } from '../fwk/abstract-view';
 import { AppHelperObject } from './app-helper-object';
 import { AbstractAppModel } from './abstract-app-model';
 import { ConfigProvider } from './config-provider';
-import { RouterManager } from '../fwk/managers/router-manager';
 import { FavoritesManager } from './managers/favorites-manager';
 import { SocketManager } from './managers/socket-manager';
 
@@ -12,12 +11,20 @@ export class AbstractAppView extends AbstractView {
         super(appHelperObject, abstractAppModel);
     }
 
-    getGameIconUrl(game: any): string {
-        return this._getHelper().getConfigProvider().getGameIconUrl(game);
-    }
-
     trackByName(index: number, item: any): string {
         return item ? item.name : undefined;
+    }
+
+    trackByLabel(index: number, item: any): string {
+        return item ? item.label : undefined;
+    }
+
+    trackByData(index: number, item: any) {
+        return item ? item.data : undefined;
+    }
+
+    getGameIconUrl(game: any): string {
+        return this._getHelper().getConfigProvider().getGameIconUrl(game);
     }
 
     getStatusClass(status: string): string {
@@ -32,16 +39,12 @@ export class AbstractAppView extends AbstractView {
         return this._getHelper().getConfigProvider();
     }
 
-    getRouter(): RouterManager {
-        return this._getHelper().getRouter();
+    getSocket(): SocketManager {
+        return this._getHelper().getSocketManager();
     }
 
     getFavorites(): FavoritesManager {
         return this._getHelper().getFavoritesManager();
-    }
-
-    getSocket(): SocketManager {
-        return this._getHelper().getSocketManager();
     }
 
     _getHelper(): AppHelperObject {

@@ -2,23 +2,15 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { SharedModule } from "../../common/modules/shared.module";
+import { SharedModule } from "../../common/modules/shared-module";
 import { AbstractModule } from "src/app/fwk/abstract-module";
 import { AppModel } from "./app-model";
 import { ProgressBarDirective } from "./progress-bar-directive";
 import { AppView } from './app-view';
-import { MsdbProvider } from 'src/app/common/msdb-provider';
-import { ConfigProvider } from 'src/app/common/config-provider';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AppShell } from 'src/app/common/app-shell';
-import { AnalyticsManager } from 'src/app/common/managers/analytics-manager';
-import { BlazyManager } from 'src/app/common/managers/blazy-Manager';
-import { HistoryManager } from '../../common/managers/history-manager';
-import { FavoritesManager } from 'src/app/common/managers/favorites-manager';
-import { SocketManager } from 'src/app/common/managers/socket-manager';
 import { FwkGlobalModule } from 'src/app/fwk/modules/fwk-global-module';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
+import { GlobalModule } from 'src/app/common/modules/global-module';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -26,7 +18,9 @@ const routes: Routes = [
   { path: "search", loadChildren: () => import("./search/search-module").then(mod => mod.SearchModule) },
   { path: "result", loadChildren: () => import("./result/result-module").then(mod => mod.ResultModule) },
   { path: "detail", loadChildren: () => import("./detail/detail-module").then(mod => mod.DetailModule) },
-  { path: "config", loadChildren: () => import("./config/config-module").then(mod => mod.ConfigModule) }
+  { path: "config", loadChildren: () => import("./config/config-module").then(mod => mod.ConfigModule) },
+  { path: "history", loadChildren: () => import("./history/history-module").then(mod => mod.HistoryModule) },
+  { path: "favorites", loadChildren: () => import("./favorites/favorites-module").then(mod => mod.FavoritesModule) }
 ];
 
 @NgModule({
@@ -39,19 +33,11 @@ const routes: Routes = [
     BrowserAnimationsModule,
     SharedModule,
     FwkGlobalModule,
+    GlobalModule,
     RouterModule.forRoot(routes, { useHash: true })
   ],
   providers: [
-    AppModel,
-    MsdbProvider,
-    ConfigProvider,
-    AppShell,
-    AppHelperObject,
-    AnalyticsManager,
-    BlazyManager,
-    HistoryManager,
-    FavoritesManager,
-    SocketManager
+    AppModel
   ],
   bootstrap: [
     AppView

@@ -13,4 +13,8 @@ export class RomsPopup extends AbstractAppPopup {
   constructor(appHelperObject: AppHelperObject, detailModel: DetailModel) {
     super(appHelperObject, detailModel);
   }
+
+  getSizeLabel(value: number): string {
+    return this.getConfigProvider().getSizeLabel(value);
+  }
 }

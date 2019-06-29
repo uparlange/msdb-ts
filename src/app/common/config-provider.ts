@@ -24,6 +24,18 @@ export class ConfigProvider extends AbstractObject {
     return `${this._getBaseClientUrl()}games/${game.name}`;
   }
 
+  getGameManualUrl(game: any): string {
+    return `http://www.progettosnaps.net/manuals/pdf/${game.name}.pdf`;
+  }
+
+  getGameVideoUrl(game: any): string {
+    return `http://www.progettosnaps.net/videosnaps/mp4/${game.name}.mp4`;
+  }
+
+  getGameSoundTrackUrl(game: any): string {
+    return `http://www.progettosnaps.net/soundtrack/packs/mp3/${game.name}.zip`;
+  }
+
   getSocketPort(): number {
     return 3000;
   }
@@ -36,12 +48,34 @@ export class ConfigProvider extends AbstractObject {
     return this._windowRef.nativeWindow.hasOwnProperty("nw");
   }
 
+  getSizeLabel(value: number): string {
+    return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
+  }
+
+  getFrequencyLabel(value: number): string {
+    return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
+  }
+
   _productionMode(): boolean {
     return this._windowRef.nativeWindow.location.href.indexOf(this._getBaseServerUrl()) === -1;
   }
 
   _getBaseServerUrl(): string {
     return "http://localhost";
+  }
+
+  _getUnitLabel(value: number, steps: Array<string>, stepMultiplier: number): string {
+    let step = null;
+    steps.forEach((item, index) => {
+      const stepValue = Math.pow(stepMultiplier, index);
+      if (value >= stepValue) {
+        step = { unit: item, value: stepValue };
+      }
+      else {
+        return;
+      }
+    });
+    return `${Math.round(value / step.value * 100) / 100} ${step.unit}`;
   }
 
   _getBaseClientUrl(): string {

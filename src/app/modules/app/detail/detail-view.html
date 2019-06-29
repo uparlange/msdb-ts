@@ -8,13 +8,13 @@
 			<mat-icon svgIcon="menu"></mat-icon>
 		</button>
 		<mat-menu #menu="matMenu">
-			<ng-template [ngIf]="!inFavorites(model.data.game)" [ngIfElse]="removeFromFavorites">
+			<ng-template [ngIf]="!inFavorites(model.data.game)" [ngIfElse]="notInFavorites">
 				<button mat-menu-item (click)="addToFavorite(model.data.game)">
 					<mat-icon svgIcon="heart"></mat-icon>
 					<span>{{"L10N_ADD_TO_FAVORITES"|translate}}</span>
 				</button>
 			</ng-template>
-			<ng-template #removeFromFavorites>
+			<ng-template #notInFavorites>
 				<button mat-menu-item (click)="removeFromFavorites(model.data.game)">
 					<mat-icon svgIcon="heart-broken"></mat-icon>
 					<span>{{"L10N_REMOVE_FROM_FAVORITES"|translate}}</span>
@@ -137,7 +137,7 @@
 		<a target="_blank" href="http://www.planetemu.net/roms/mame-bios-pack">Bios {{model.data.game.romof}}</a>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.manual === true">
-		<a target="_blank" [href]="model.getGameManualUrl(model.data.game)">{{'L10N_MANUAL'|translate}}</a>
+		<a target="_blank" [href]="getGameManualUrl(model.data.game)">{{'L10N_MANUAL'|translate}}</a>
 	</mat-list-item>
 </mat-list>
 <div *ngIf="model.data.images.length > 0">
@@ -157,7 +157,7 @@
 	</mat-card>
 	<div class="default-spacer"></div>
 	<video controls>
-		<source [src]="model.getGameVideoUrl(model.data.game)" type="video/mp4" />
+		<source [src]="getGameVideoUrl(model.data.game)" type="video/mp4" />
 	</video>
 </div>
 <div *ngIf="model.data.game.soundtracks != null && model.data.game.soundtracks.length > 0">
@@ -168,7 +168,7 @@
 	</mat-card>
 	<mat-list>
 		<mat-list-item *ngFor="let soundtrack of model.data.game.soundtracks">
-			<a target="_blank" [href]="model.getGameSoundTrackUrl(model.data.game)">{{soundtrack}}</a>
+			<a target="_blank" [href]="getGameSoundTrackUrl(model.data.game)">{{soundtrack}}</a>
 		</mat-list-item>
 	</mat-list>
 </div>

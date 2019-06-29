@@ -21,6 +21,8 @@ export class MatIconButtonDirective extends AbstractDirective {
 
     afterContentInit(): void {
         super.afterContentInit();
-        this.ariaLabel = this.matIcon.svgIcon;
+        if (this.matIcon) {
+            this.ariaLabel = this.matIcon.svgIcon;
+        }
     }
 }

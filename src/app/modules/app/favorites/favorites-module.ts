@@ -1,12 +1,12 @@
 import { AbstractModule } from 'src/app/fwk/abstract-module';
-import { HomeModel } from './home-model';
 import { NgModule } from '@angular/core';
-import { HomeView } from './home-view';
 import { SharedModule } from '../../../common/modules/shared-module';
 import { Routes, RouterModule } from '@angular/router';
+import { FavoritesView } from './favorites-view';
+import { FavoritesModel } from './favorites-model';
 
 const routes: Routes = [
-    { path: "", component: HomeView }
+    { path: "", component: FavoritesView }
 ];
 
 @NgModule({
@@ -15,13 +15,13 @@ const routes: Routes = [
         RouterModule.forChild(routes)
     ],
     providers: [
-        HomeModel
+        FavoritesModel
     ],
     declarations: [
-        HomeView
+        FavoritesView
     ]
 })
-export class HomeModule extends AbstractModule {
+export class FavoritesModule extends AbstractModule {
 
     constructor() {
         super();

@@ -11,7 +11,7 @@
 			<li *ngFor="let value of item.values; trackBy:model.trackByTag">
 				{{value.tag}}
 				<b>{{value.name}}</b>
-				<span *ngIf="value.clock != null">@{{model.getFrequencyLabel(value.clock)}}</span>
+				<span *ngIf="value.clock != null">@{{getFrequencyLabel(value.clock)}}</span>
 			</li>
 		</ul>
 	</div>
