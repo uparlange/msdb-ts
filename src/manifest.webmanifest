@@ -1,6 +1,6 @@
 {
-  "name": "msdb-ts",
-  "short_name": "msdb-ts",
+  "name": "MSDB",
+  "short_name": "MSDB",
   "theme_color": "#ff5722",
   "background_color": "#ff5722",
   "display": "standalone",
