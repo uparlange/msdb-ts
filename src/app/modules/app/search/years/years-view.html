@@ -1,6 +1,6 @@
 <mat-form-field>
     <input #filterValueInput [ngModel]="model.data.filterValue" matInput (keyup)="applyFilter($event.target.value)"
-        [autocomplete]="game-year" [placeholder]="'L10N_FILTER'|translate">
+        [placeholder]="'L10N_FILTER'|translate">
 </mat-form-field>
 <button *ngIf="model.data.filterValue.length > 0" (click)="clearFilter();filterValueInput.focus();" type="button"
     mat-mini-fab>

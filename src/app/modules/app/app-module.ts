@@ -11,6 +11,8 @@ import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FwkGlobalModule } from 'src/app/fwk/modules/fwk-global-module';
 import { GlobalModule } from 'src/app/common/modules/global-module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from './../../../environments/environment';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -35,7 +37,8 @@ const routes: Routes = [
     SharedModule,
     FwkGlobalModule,
     GlobalModule,
-    RouterModule.forRoot(routes, { useHash: true })
+    RouterModule.forRoot(routes, { useHash: true }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     AppModel

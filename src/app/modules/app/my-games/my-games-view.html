@@ -6,8 +6,7 @@
 <div class="default-spacer"></div>
 <mat-form-field>
     <input #filterValueInput [disabled]="model.data.list.data.length == 0" [ngModel]="model.data.filterValue" matInput
-        (keyup)="applyFilter($event.target.value)" [autocomplete]="game-description"
-        [placeholder]="'L10N_FILTER'|translate">
+        (keyup)="applyFilter($event.target.value)" [placeholder]="'L10N_FILTER'|translate">
 </mat-form-field>
 <button *ngIf="model.data.filterValue.length > 0" (click)="clearFilter();filterValueInput.focus();" type="button"
     mat-mini-fab>
@@ -18,7 +17,7 @@
 <table mat-table [dataSource]="model.data.list" [trackBy]="trackByName">
     <ng-container matColumnDef="icon">
         <td mat-cell *matCellDef="let element">
-            <img [alt]="element.name+'-icon'" mat-list-avatar [lazySrc]="getGameIconUrl(element)">
+            <img [alt]="element.name+'-icon'" mat-list-avatar [blazySrc]="getGameIconUrl(element)">
         </td>
     </ng-container>
     <ng-container matColumnDef="description">

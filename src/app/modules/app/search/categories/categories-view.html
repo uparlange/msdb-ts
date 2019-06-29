@@ -5,7 +5,7 @@
             {{node.label}}
         </a>
     </mat-tree-node>
-    <mat-tree-node role="treeitem" *matTreeNodeDef="let node; when: model.hasChild" matTreeNodePadding
+    <mat-tree-node role="treeitem" *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding
         matTreeNodeToggle>
         <button mat-icon-button [attr.aria-label]="'toggle ' + node.label">
             <mat-icon [svgIcon]="model.data.treeControl.isExpanded(node) ? 'chevron-down' : 'chevron-right'"
