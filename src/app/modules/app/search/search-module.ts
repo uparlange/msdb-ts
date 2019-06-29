@@ -12,7 +12,8 @@ const routes: Routes = [
         children: [
             { path: "description", loadChildren: () => import("./description/description-module").then(mod => mod.DescriptionModule) },
             { path: "ratings", loadChildren: () => import("./ratings/ratings-module").then(mod => mod.RatingsModule) },
-            { path: "categories", loadChildren: () => import("./categories/categories-module").then(mod => mod.CategoriesModule) }
+            { path: "categories", loadChildren: () => import("./categories/categories-module").then(mod => mod.CategoriesModule) },
+            { path: "series", loadChildren: () => import("./series/series-module").then(mod => mod.SeriesModule) }
         ]
     }
 ];
