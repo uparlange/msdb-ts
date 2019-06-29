@@ -33,7 +33,7 @@ export class MsdbProvider extends AbstractProvider {
         return this._callService(config);
     }
 
-    search(type: string, value: string): EventEmitter<any> {
+    search(type: string, value: Array<string>): EventEmitter<any> {
         const s = {};
         s[type] = value;
         const config = {
