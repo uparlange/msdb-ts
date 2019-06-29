@@ -11,7 +11,6 @@ export class AbstractPipe extends AbstractHelper implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.getLogger().debug("onDestroy");
         this.onDestroy();
         this._helper = null;
     }

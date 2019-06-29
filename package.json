@@ -1,6 +1,6 @@
 {
   "name": "msdb-ts",
-  "version": "1.0.0",
+  "version": "5.0.0",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -8,10 +8,10 @@
   "favicon": "images/favicon/apple-touch-icon.png",
   "repository": {
     "type": "git",
-    "url": "git://github.com/uparlange/msdb.git"
+    "url": "git://github.com/uparlange/msdb-ts.git"
   },
   "bugs": {
-    "url": "https://github.com/uparlange/msdb/issues"
+    "url": "https://github.com/uparlange/msdb-ts/issues"
   },
   "main": "index.html",
   "window": {
@@ -26,15 +26,21 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "postbuild": "cpx ./package.json ./dist/msdb-ts/",
+    "build-prod": "ng build --prod",
+    "postbuild-prod": "cpx ./package.json ./dist/msdb-ts/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "node ./postinstall.js",
     "web-debug": "ng serve --port=80",
-    "prod-debug": "ng build --prod && node express",
-    "nw-debug": "concurrently \"ng build\" \"nw .\""
+    "web-prod": "node server",
+    "preweb-prod": "npm run build-prod",
+    "desktop-debug": "nw ./dist/msdb-ts/",
+    "predesktop-debug": "npm run build",
+    "desktop-prod": "nw ./dist/msdb-ts/",
+    "predesktop-prod": "npm run build-prod"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^8.0.3",
     "@angular/cdk": "^8.0.1",
@@ -78,6 +84,7 @@
     "codelyzer": "^5.0.0",
     "compression": "^1.7.4",
     "concurrently": "^4.1.1",
+    "cpx": "^1.5.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",

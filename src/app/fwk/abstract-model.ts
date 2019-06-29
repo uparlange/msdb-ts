@@ -22,7 +22,7 @@ export class AbstractModel extends AbstractHelper {
     this._connectionChangeSubscription = this._helper.getConnection().on("change").subscribe((online: boolean) => {
       this.params.online = online;
       if (online) {
-        this._callRefreshMethod(() => {
+        this.onRefresh(() => {
           this.getRouter().restoreScrollPosition();
         });
       }
@@ -36,16 +36,16 @@ export class AbstractModel extends AbstractHelper {
       this.params = newParams;
       paramsChanged = true;
     }
-    this._callInitMethod();
+    this.onInit();
     if (paramsChanged) {
-      this._callRefreshMethod(() => {
+      this.onRefresh(() => {
         this.getRouter().restoreScrollPosition();
       });
     }
   }
 
   destroy() {
-    this._callDestroyMethod();
+    this.onDestroy();
     this._connectionChangeSubscription.unsubscribe();
   }
 
@@ -94,21 +94,6 @@ export class AbstractModel extends AbstractHelper {
 
   onDestroy(): void {
     // need override
-  }
-
-  _callInitMethod(): void {
-    this.getLogger().debug("onInit");
-    this.onInit();
-  }
-
-  _callRefreshMethod(callback: Function): void {
-    this.getLogger().debug("onRefresh");
-    this.onRefresh(callback);
-  }
-
-  _callDestroyMethod(): void {
-    this.getLogger().debug("onDestroy");
-    this.onDestroy();
   }
 
   _getInitData(): any {

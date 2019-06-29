@@ -38,10 +38,6 @@ export class CategoriesModel extends AbstractAppModel {
         });
     }
 
-    hasChild(_: number, _nodeData: any): boolean {
-        return _nodeData.expandable;
-    }
-
     _transformer(node: any, level: number) {
         return {
             expandable: !!node.children,

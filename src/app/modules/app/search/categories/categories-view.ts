@@ -15,7 +15,7 @@ export class CategoriesView extends AbstractAppView {
     }
 
     hasChild(_: number, _nodeData: any): boolean {
-        return this._getModel().hasChild(_, _nodeData);
+        return _nodeData.expandable;
     }
 
     showSubCategory(item: any): void {
@@ -24,9 +24,5 @@ export class CategoriesView extends AbstractAppView {
 
     showCategoryItems(item: any): void {
         this.getRouter().navigate(["/result"], { queryParams: { type: "category", value: item.data } });
-    }
-
-    _getModel(): CategoriesModel {
-        return <CategoriesModel>this.model;
     }
 }

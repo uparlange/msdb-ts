@@ -19,37 +19,30 @@ export class AbstractDirective extends AbstractHelper implements OnChanges, OnIn
   }
 
   ngOnInit(): void {
-    this.getLogger().debug("onInit");
     this.onInit();
   }
 
   ngDoCheck(): void {
-    this.getLogger().debug("doCheck");
     this.doCheck();
   }
 
   ngAfterContentInit(): void {
-    this.getLogger().debug("afterContentInit");
     this.afterContentInit();
   }
 
   ngAfterContentChecked(): void {
-    this.getLogger().debug("afterContentChecked");
     this.afterContentChecked();
   }
 
   ngAfterViewInit(): void {
-    this.getLogger().debug("afterViewInit");
     this.afterViewInit();
   }
 
   ngAfterViewChecked(): void {
-    this.getLogger().debug("afterViewChecked");
     this.afterViewChecked();
   }
 
   ngOnDestroy(): void {
-    this.getLogger().debug("onDestroy");
     this.onDestroy();
   }
 
