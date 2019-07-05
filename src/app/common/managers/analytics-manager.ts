@@ -15,30 +15,10 @@ export class AnalyticsManager extends AbstractManager {
 
     init(): void {
         super.init();
-        this._gtag("js", new Date());
-        this._gtag("config", this._gaMeasurementId);
+        window.gtag('js', new Date());
+        window.gtag('config', this._gaMeasurementId);
         this._routerManager.on("navigationEnd").subscribe((event: any) => {
-            this._gtag("config", this._gaMeasurementId, { "page_path": event.urlAfterRedirects });
+            window.gtag("config", this._gaMeasurementId, { "page_path": event.urlAfterRedirects });
         });
-        this._loadScript();
-    }
-
-    _loadScript(): void {
-        const head = document.getElementsByTagName("head")[0];
-        const script = document.createElement("script");
-        script.src = "https://www.googletagmanager.com/gtag/js?id=" + this._gaMeasurementId;
-        script.async = true;
-        head.appendChild(script);
-    }
-
-    _gtag(...args: any[]): void {
-        this._getDataLayer().push(args);
-    }
-
-    _getDataLayer(): Array<any> {
-        if (!window["dataLayer"]) {
-            window["dataLayer"] = new Array();
-        }
-        return window["dataLayer"];
     }
 }

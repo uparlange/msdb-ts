@@ -1,4 +1,3 @@
-import { AbstractModel } from 'src/app/fwk/abstract-model';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppHelperObject } from 'src/app/common/app-helper-object';

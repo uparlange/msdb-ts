@@ -23,7 +23,7 @@
     </ng-container>
     <ng-container matColumnDef="changelog">
         <td mat-cell *matCellDef="let element">
-            <a *ngIf="changeLogAvailable(element.label)" target="_blank"
+            <a *ngIf="changeLogAvailable(element.label)"
                 [href]="'http://mamedev.org/releases/whatsnew_'+getVersion(element.label)+'.txt'">
                 <mat-icon svgIcon="radar" [matTooltip]="'L10N_CHANGELOG'|translate"></mat-icon>
             </a>

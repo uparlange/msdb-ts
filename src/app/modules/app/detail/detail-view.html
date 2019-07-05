@@ -126,18 +126,18 @@
 </mat-card>
 <mat-list *ngIf="model.data.game.name != null">
 	<mat-list-item>
-		<a target="_blank" href="http://mamedev.org/">{{'L10N_MAME_EMULATOR'|translate}}</a>
+		<a href="http://mamedev.org/">{{'L10N_MAME_EMULATOR'|translate}}</a>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.isdevice == 'no'">
-		<a target="_blank"
+		<a
 			[href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">Rom
 			{{model.data.game.description}}</a>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
-		<a target="_blank" href="http://www.planetemu.net/roms/mame-bios-pack">Bios {{model.data.game.romof}}</a>
+		<a href="http://www.planetemu.net/roms/mame-bios-pack">Bios {{model.data.game.romof}}</a>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.manual === true">
-		<a target="_blank" [href]="getGameManualUrl(model.data.game)">{{'L10N_MANUAL'|translate}}</a>
+		<a [href]="getGameManualUrl(model.data.game)">{{'L10N_MANUAL'|translate}}</a>
 	</mat-list-item>
 </mat-list>
 <div *ngIf="model.data.images.length > 0">
@@ -168,7 +168,7 @@
 	</mat-card>
 	<mat-list>
 		<mat-list-item *ngFor="let soundtrack of model.data.game.soundtracks">
-			<a target="_blank" [href]="getGameSoundTrackUrl(model.data.game)">{{soundtrack}}</a>
+			<a [href]="getGameSoundTrackUrl(model.data.game)">{{soundtrack}}</a>
 		</mat-list-item>
 	</mat-list>
 </div>

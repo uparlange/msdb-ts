@@ -1,17 +1,17 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef, HostBinding } from '@angular/core';
 import { AppModel } from './app-model';
 import { AppShell } from 'src/app/common/app-shell';
 import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
-import { VERSION } from '@angular/material/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import pkg from './../../../../package.json';
 
-// TODO manager version
+
 @Component({
   selector: 'app-view',
   host: {
-    "mat-version": "?"
+    "mat-version": "?",
+    "app-version": pkg.version
   },
   templateUrl: './app-view.html',
   styleUrls: ['./app-view.css']

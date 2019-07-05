@@ -1,33 +1,39 @@
 import { AbstractDirective } from '../abstract-directive';
 import { AppHelperObject } from 'src/app/common/app-helper-object';
-import { Directive } from '@angular/core';
+import { Directive, HostBinding, PLATFORM_ID, Inject, Input } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
-    selector: "a",
-    inputs: ["target"],
+    selector: 'a[href]',
     host: {
-        "[attr.rel]": "rel",
         "(click)": "onClick($event)"
     }
 })
 export class LinkDirective extends AbstractDirective {
 
-    rel: string = null;
+    @HostBinding('attr.rel') relAttr = '';
+    @HostBinding('attr.target') targetAttr = '';
+    @HostBinding('attr.href') hrefAttr = '';
+    @Input() href: string;
 
-    constructor(appHelperObject: AppHelperObject) {
+    constructor(appHelperObject: AppHelperObject, @Inject(PLATFORM_ID) private platformId: string) {
         super(appHelperObject);
     }
 
     onChanges(event: any): void {
         super.onChanges(event);
-        if (event.hasOwnProperty("target")) {
-            if (event.target.currentValue === "_blank") {
-                this.rel = "noopener";
-            }
+        this.hrefAttr = this.href;
+        if (this._isLinkExternal()) {
+            this.relAttr = 'noopener';
+            this.targetAttr = '_blank';
         }
     }
 
     onClick() {
         this.getRouter().saveCurrentViewScrollPosition();
+    }
+
+    private _isLinkExternal() {
+        return isPlatformBrowser(this.platformId) && !this.href.includes(location.hostname);
     }
 }
