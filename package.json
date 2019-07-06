@@ -1,6 +1,6 @@
 {
   "name": "msdb",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -13,7 +13,6 @@
   "bugs": {
     "url": "https://github.com/uparlange/msdb-ts/issues"
   },
-  "private": true,
   "main": "index.html",
   "window": {
     "title": "Mame Smart Database",

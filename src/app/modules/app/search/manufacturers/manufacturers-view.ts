@@ -5,7 +5,6 @@ import { ViewChild, Component } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 
 @Component({
-    selector: 'manufacturers-view',
     templateUrl: './manufacturers-view.html',
     styleUrls: ['./manufacturers-view.css']
 })

@@ -1,17 +1,12 @@
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
-import { Directive } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppHelperObject } from 'src/app/common/app-helper-object';
 
-@Directive({
-    selector: "mat-progress-bar",
-    host: {
-        "[style.display]": "display"
-    }
-})
+@Directive({ selector: "mat-progress-bar" })
 export class ProgressBarDirective extends AbstractDirective {
 
-    display = "none";
+    @HostBinding("style.display") display = "none";
 
     _httpBeginSubscription: Subscription = null;
     _httpEndSubscription: Subscription = null;

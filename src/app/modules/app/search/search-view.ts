@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 
 @Component({
-    selector: 'search-view',
     templateUrl: './search-view.html',
     styleUrls: ['./search-view.css']
 })

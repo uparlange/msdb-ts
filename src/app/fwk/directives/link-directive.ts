@@ -1,19 +1,15 @@
 import { AbstractDirective } from '../abstract-directive';
 import { AppHelperObject } from 'src/app/common/app-helper-object';
-import { Directive, HostBinding, PLATFORM_ID, Inject, Input } from '@angular/core';
+import { Directive, HostBinding, PLATFORM_ID, Inject, Input, HostListener } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-@Directive({
-    selector: 'a[href]',
-    host: {
-        "(click)": "onClick($event)"
-    }
-})
+@Directive({ selector: 'a[href]' })
 export class LinkDirective extends AbstractDirective {
 
-    @HostBinding('attr.rel') relAttr = '';
-    @HostBinding('attr.target') targetAttr = '';
-    @HostBinding('attr.href') hrefAttr = '';
+    @HostBinding("attr.rel") relAttr = '';
+    @HostBinding("attr.target") targetAttr = '';
+    @HostBinding("attr.href") hrefAttr = '';
+
     @Input() href: string;
 
     constructor(appHelperObject: AppHelperObject, @Inject(PLATFORM_ID) private platformId: string) {
@@ -29,7 +25,7 @@ export class LinkDirective extends AbstractDirective {
         }
     }
 
-    onClick() {
+    @HostListener("click") onClick(event: any) {
         this.getRouter().saveCurrentViewScrollPosition();
     }
 

@@ -1,21 +1,16 @@
-import { Directive, SimpleChanges } from '@angular/core';
+import { Directive, SimpleChanges, Input, HostBinding } from '@angular/core';
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
 import { AppHelperObject } from '../app-helper-object';
 import { BlazyManager } from '../managers/blazy-Manager';
 
-@Directive({
-    selector: "[blazySrc]",
-    inputs: ["blazySrc"],
-    host: {
-        "[class.b-lazy]": "true",
-        "[attr.src]": "src",
-        "[attr.data-src]": "dataSrc"
-    }
-})
+@Directive({ selector: "[blazySrc]" })
 export class BlazyDirective extends AbstractDirective {
 
-    dataSrc: string = null;
-    src: string = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+    @HostBinding("class.b-lazy") bLazy: boolean = true;
+    @HostBinding("attr.src") src: string = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+    @HostBinding("attr.data-src") dataSrc: string = null;
+
+    @Input() blazySrc: String = null;
 
     _lazyManager: BlazyManager = null;
 

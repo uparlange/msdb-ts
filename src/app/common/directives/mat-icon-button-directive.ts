@@ -1,19 +1,14 @@
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
 import { AppHelperObject } from '../app-helper-object';
-import { Directive, ContentChild } from '@angular/core';
+import { Directive, ContentChild, HostBinding } from '@angular/core';
 import { MatIcon } from '@angular/material';
 
-@Directive({
-    selector: "[mat-icon-button]",
-    host: {
-        "[attr.aria-label]": "ariaLabel"
-    }
-})
+@Directive({ selector: "[mat-icon-button]" })
 export class MatIconButtonDirective extends AbstractDirective {
 
     @ContentChild(MatIcon, { static: false }) matIcon !: MatIcon;
 
-    ariaLabel: string = "";
+    @HostBinding("attr.aria-label") ariaLabel: string = "";
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);

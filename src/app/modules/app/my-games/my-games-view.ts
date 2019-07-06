@@ -5,7 +5,6 @@ import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { MyGamesModel } from './my-games-model';
 
 @Component({
-    selector: 'my-games-view',
     templateUrl: './my-games-view.html',
     styleUrls: ['./my-games-view.css']
 })

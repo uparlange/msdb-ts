@@ -4,7 +4,6 @@ import { CategoriesModel } from './categories-model';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'categories-view',
     templateUrl: './categories-view.html',
     styleUrls: ['./categories-view.css']
 })

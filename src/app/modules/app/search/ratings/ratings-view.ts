@@ -4,7 +4,6 @@ import { RatingsModel } from './ratings-model';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'ratings-view',
     templateUrl: './ratings-view.html',
     styleUrls: ['./ratings-view.css']
 })

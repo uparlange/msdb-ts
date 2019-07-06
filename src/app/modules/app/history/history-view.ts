@@ -4,7 +4,6 @@ import { HistoryModel } from './history-model';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'history-view',
     templateUrl: './history-view.html',
     styleUrls: ['./history-view.css']
   })

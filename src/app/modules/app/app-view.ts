@@ -9,14 +9,13 @@ import pkg from './../../../../package.json';
 
 @Component({
   selector: 'app-view',
-  host: {
-    "mat-version": "?",
-    "app-version": pkg.version
-  },
   templateUrl: './app-view.html',
   styleUrls: ['./app-view.css']
 })
 export class AppView extends AbstractAppView {
+
+  @HostBinding("attr.mat-version") matVersion: String = "?";
+  @HostBinding("attr.app-version") appVersion: String = pkg.version;
 
   _shell: AppShell = null;
   _viewContainerRef: ViewContainerRef = null;

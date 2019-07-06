@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 import Masonry from 'masonry-layout';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
@@ -7,25 +7,23 @@ import { AppHelperObject } from '../../app-helper-object';
 
 @Component({
   selector: "gallery",
-  inputs: ["provider", "colcount", "gap"],
   templateUrl: './gallery-component.html',
   styleUrls: ['./gallery-component.css']
 })
 export class GalleryComponent extends AbstractComponent {
 
-  provider: Array<any> = new Array();
-  colcount: number = 3;
-  gap: number = 5;
+  @Input() provider: Array<any> = new Array();
+  @Input() colcount: number = 3;
+  @Input() gap: number = 5;
 
   _element: any = null;
-  _renderer: Renderer = null;
+  _renderer: Renderer2 = null;
   _windowResizeHandler: Function = null;
-  _onWindowResizeHandler: Function = null;
   _gallery: PhotoSwipe<any> = null;
   _masonry: Masonry = null;
   _resizeTimeout: any = null;
 
-  constructor(appHelperObject: AppHelperObject, elementRef: ElementRef, renderer: Renderer) {
+  constructor(appHelperObject: AppHelperObject, elementRef: ElementRef, renderer: Renderer2) {
     super(appHelperObject);
     this._element = elementRef.nativeElement;
     this._renderer = renderer;
@@ -33,10 +31,9 @@ export class GalleryComponent extends AbstractComponent {
 
   onInit(): void {
     super.onInit();
-    this._onWindowResizeHandler = () => {
+    this._windowResizeHandler = this._renderer.listen(this.getWindowRef().nativeWindow, "resize", () => {
       this._refreshMasonry();
-    };
-    this._windowResizeHandler = this._renderer.listen(this.getWindowRef().nativeWindow, "resize", this._onWindowResizeHandler);
+    });
   }
 
   onDestroy(): void {

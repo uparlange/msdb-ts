@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 
 @Component({
-    selector: 'description-view',
     templateUrl: './description-view.html',
     styleUrls: ['./description-view.css']
 })

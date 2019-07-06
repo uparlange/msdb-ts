@@ -4,7 +4,6 @@ import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { YearsModel } from './years-model';
 
 @Component({
-    selector: 'years-view',
     templateUrl: './years-view.html',
     styleUrls: ['./years-view.css']
 })

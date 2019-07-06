@@ -5,7 +5,6 @@ import { MatPaginator } from '@angular/material';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 
 @Component({
-    selector: 'result-view',
     templateUrl: './result-view.html',
     styleUrls: ['./result-view.css']
 })

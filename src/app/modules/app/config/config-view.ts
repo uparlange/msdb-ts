@@ -4,7 +4,6 @@ import { ConfigModel } from './config-model';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'config-view',
     templateUrl: './config-view.html',
     styleUrls: ['./config-view.css']
 })

@@ -13,7 +13,6 @@ import { PortsPopup } from './ports/ports-popup';
 import { RomsPopup } from './roms/roms-popup';
 
 @Component({
-  selector: 'detail-view',
   templateUrl: './detail-view.html',
   styleUrls: ['./detail-view.css']
 })

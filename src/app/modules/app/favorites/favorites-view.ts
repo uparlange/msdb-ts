@@ -5,7 +5,6 @@ import { ViewChild, Component } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 
 @Component({
-    selector: 'favorites-view',
     templateUrl: './favorites-view.html',
     styleUrls: ['./favorites-view.css']
 })

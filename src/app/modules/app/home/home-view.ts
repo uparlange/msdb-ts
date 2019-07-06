@@ -4,7 +4,6 @@ import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 
 @Component({
-  selector: 'home-view',
   templateUrl: './home-view.html',
   styleUrls: ['./home-view.css']
 })

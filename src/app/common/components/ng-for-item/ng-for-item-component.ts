@@ -1,19 +1,18 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractComponent } from '../../../fwk/abstract-component';
 import { AppHelperObject } from '../../app-helper-object';
 
 @Component({
   selector: "ngForItem",
-  inputs: ["last"],
-  outputs: ["onLast"],
   templateUrl: './ng-for-item-component.html',
   styleUrls: ['./ng-for-item-component.css']
 })
 export class NgForItemComponent extends AbstractComponent {
 
-  onLast: EventEmitter<any> = new EventEmitter();
-  last: boolean = false;
+  @Input() last: boolean = false;
 
+  @Output() onLast: EventEmitter<any> = new EventEmitter();
+  
   constructor(appHelperObject: AppHelperObject) {
     super(appHelperObject);
   }
