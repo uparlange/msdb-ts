@@ -23,7 +23,8 @@ const routes: Routes = [
   { path: "config", loadChildren: () => import("./config/config-module").then(mod => mod.ConfigModule) },
   { path: "history", loadChildren: () => import("./history/history-module").then(mod => mod.HistoryModule) },
   { path: "favorites", loadChildren: () => import("./favorites/favorites-module").then(mod => mod.FavoritesModule) },
-  { path: "mygames", loadChildren: () => import("./my-games/my-games-module").then(mod => mod.MyGamesModule) }
+  { path: "mygames", loadChildren: () => import("./my-games/my-games-module").then(mod => mod.MyGamesModule) },
+  { path: "**", loadChildren: () => import("./page-not-found/page-not-found-module").then(mod => mod.PageNotFoundModule) }
 ];
 
 @NgModule({

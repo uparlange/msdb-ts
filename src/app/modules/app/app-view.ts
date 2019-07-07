@@ -3,7 +3,7 @@ import { AppModel } from './app-model';
 import { AppShell } from 'src/app/common/app-shell';
 import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig, VERSION } from '@angular/material';
 import pkg from './../../../../package.json';
 
 
@@ -14,7 +14,7 @@ import pkg from './../../../../package.json';
 })
 export class AppView extends AbstractAppView {
 
-  @HostBinding("attr.mat-version") matVersion: String = "?";
+  @HostBinding("attr.mat-version") matVersion: String = VERSION.full;
   @HostBinding("attr.app-version") appVersion: String = pkg.version;
 
   _shell: AppShell = null;
