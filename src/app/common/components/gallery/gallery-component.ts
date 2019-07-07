@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Component, Input, HostListener, ViewChild, ElementRef } from '@angular/core';
 import Masonry from 'masonry-layout';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
@@ -16,24 +16,19 @@ export class GalleryComponent extends AbstractComponent {
   @Input() colcount: number = 3;
   @Input() gap: number = 5;
 
-  _element: any = null;
-  _renderer: Renderer2 = null;
-  _windowResizeHandler: Function = null;
+  @ViewChild("galleryContainer", { static: false }) galleryContainer: ElementRef;
+  @ViewChild("pswpContainer", { static: false }) pswpContainer: ElementRef;
+
   _gallery: PhotoSwipe<any> = null;
   _masonry: Masonry = null;
-  _resizeTimeout: any = null;
+  _refreshTimeout: any = null;
 
-  constructor(appHelperObject: AppHelperObject, elementRef: ElementRef, renderer: Renderer2) {
+  constructor(appHelperObject: AppHelperObject) {
     super(appHelperObject);
-    this._element = elementRef.nativeElement;
-    this._renderer = renderer;
   }
 
   onInit(): void {
     super.onInit();
-    this._windowResizeHandler = this._renderer.listen(this.getWindowRef().nativeWindow, "resize", () => {
-      this._refreshMasonry();
-    });
   }
 
   onDestroy(): void {
@@ -44,7 +39,10 @@ export class GalleryComponent extends AbstractComponent {
     if (this._masonry !== null) {
       this._masonry.destroy();
     }
-    this._windowResizeHandler();
+  }
+
+  @HostListener("window:resize", ["$event"]) onResize(event: any): void {
+    this._refreshMasonry();
   }
 
   trackByName(index: number, item: any): void {
@@ -72,7 +70,7 @@ export class GalleryComponent extends AbstractComponent {
       shareEl: false,
       history: false
     };
-    this._gallery = new PhotoSwipe<PhotoSwipeUI_Default.Options>(this._getPhotoSwipeContainer(), PhotoSwipeUI_Default, this.provider, options);
+    this._gallery = new PhotoSwipe<PhotoSwipeUI_Default.Options>(this.pswpContainer.nativeElement, PhotoSwipeUI_Default, this.provider, options);
     this._gallery.init();
   }
 
@@ -85,7 +83,10 @@ export class GalleryComponent extends AbstractComponent {
   }
 
   _refreshMasonry(): void {
-    setTimeout(() => {
+    if (this._refreshTimeout != null) {
+      clearTimeout(this._refreshTimeout);
+    }
+    this._refreshTimeout = setTimeout(() => {
       if (this._masonry !== null) {
         this._masonry.destroy();
       }
@@ -95,21 +96,15 @@ export class GalleryComponent extends AbstractComponent {
         gutter: this.gap,
         resize: false
       });
-    }, 50);
-  }
-
-  _getGalleryContainer(): any {
-    /* TODO get reference in other way ? */
-    return this._element.getElementsByClassName("gallery")[0];
-  }
-
-  _getPhotoSwipeContainer(): any {
-    /* TODO get reference in other way ? */
-    return this._element.getElementsByClassName("pswp")[0];
+    }, 10);
   }
 
   _getColWidth(): number {
-    const colcount = Math.min(this.colcount, this.provider.length);
-    return Math.round((this._getGalleryContainer().clientWidth - (colcount * this.gap)) / colcount);
+    const cCount = Math.min(this.colcount, this.provider.length);
+    let cWidth = 0;
+    if (this.galleryContainer) {
+      cWidth = Math.round((this.galleryContainer.nativeElement.clientWidth - (cCount * this.gap)) / cCount);
+    }
+    return cWidth;
   }
 }
