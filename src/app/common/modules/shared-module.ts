@@ -7,7 +7,6 @@ import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { MatIconModule } from '@angular/material';
 import { MatIconButtonDirective } from '../directives/mat-icon-button-directive';
 import { BlazyDirective } from '../directives/blazy-directive';
-import { GalleryComponent } from '../components/gallery/gallery-component';
 import { NgForItemComponent } from '../components/ng-for-item/ng-for-item-component';
 import { FwkSharedModule } from 'src/app/fwk/modules/fwk-shared-module';
 
@@ -15,7 +14,6 @@ import { FwkSharedModule } from 'src/app/fwk/modules/fwk-shared-module';
   declarations: [
     MatIconButtonDirective,
     BlazyDirective,
-    GalleryComponent,
     NgForItemComponent
   ],
   imports: [
@@ -34,7 +32,6 @@ import { FwkSharedModule } from 'src/app/fwk/modules/fwk-shared-module';
     FwkSharedModule,
     MatIconButtonDirective,
     BlazyDirective,
-    GalleryComponent,
     NgForItemComponent
   ]
 })
