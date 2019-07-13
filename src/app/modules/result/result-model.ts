@@ -18,7 +18,6 @@ export class ResultModel extends AbstractAppModel {
 
     onInit(): void {
         super.onInit();
-        this._setFilterText("");
         this._setFilterList([]);
         this._getTitle().subscribe((title: string) => {
             this.data.title = title;
@@ -28,7 +27,7 @@ export class ResultModel extends AbstractAppModel {
 
     onRefresh(callback: Function): void {
         super.onRefresh(callback);
-        this.data.list.data = [];
+        this.data.provider = [];
         this.getProvider().search(this.params.type, this.params.value).subscribe((data: any) => {
             this.data.source = data || [];
             this._initFilters();
@@ -37,35 +36,9 @@ export class ResultModel extends AbstractAppModel {
         });
     }
 
-    onDestroy(): void {
-        super.onDestroy();
-        this.data.list.paginator = null;
-    }
-
-    setPaginator(matPaginator: MatPaginator): void {
-        this.data.list.paginator = matPaginator;
-    }
-
-    pageChanged(event: any): void {
-        this.data.pageIndex = event.pageIndex;
-    }
-
-    applyFilter(value: string): void {
-        this._setFilterText(value);
-    }
-
-    clearFilter(): void {
-        this._setFilterText("");
-    }
-
     filterChange(event: any): void {
         this.data.filter.list = event.value;
         this._filterList();
-    }
-
-    _setFilterText(value: string): void {
-        this.data.filter.text = value;
-        this.data.list.filter = value;
     }
 
     _setFilterList(value: Array<string>): void {
@@ -108,7 +81,7 @@ export class ResultModel extends AbstractAppModel {
     }
 
     _filterList(): void {
-        this.data.list.data = this.data.source.filter((game) => {
+        this.data.provider = this.data.source.filter((game: any) => {
             return !(
                 (game.ismess && !this.data.filter.list.includes(this._FILTER_MESS)) ||
                 (game.cloneof != null && !this.data.filter.list.includes(this._FILTER_CLONE)) ||
@@ -121,9 +94,8 @@ export class ResultModel extends AbstractAppModel {
     _getInitData(): any {
         return {
             source: [],
-            list: new MatTableDataSource(),
-            displayedColumns: ["icon", "description"],
-            pageIndex: 0,
+            filterValue: "",
+            provider: [],
             filter: {
                 messDisabled: true,
                 cloneDisabled: true,

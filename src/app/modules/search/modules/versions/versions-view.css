@@ -1,14 +1,4 @@
-.mat-column-label
+mat-icon
 {
-	width: 100%;
-}
-
-.mat-column-addcount
-{
-	padding-right:20px;
-}
-
-.mat-paginator 
-{
-	float: right;
+	padding-left:24px;
 }

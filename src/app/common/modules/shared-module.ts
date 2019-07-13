@@ -9,12 +9,16 @@ import { MatIconButtonDirective } from '../directives/mat-icon-button-directive'
 import { BlazyDirective } from '../directives/blazy-directive';
 import { NgForItemComponent } from '../components/ng-for-item/ng-for-item-component';
 import { FwkSharedModule } from 'src/app/fwk/modules/fwk-shared-module';
+import { AdvTableComponent } from '../components/adv-table/adv-table-component';
+import { AdvTableColumnDirective } from '../components/adv-table/adv-table-column-directive';
 
 @NgModule({
   declarations: [
     MatIconButtonDirective,
     BlazyDirective,
-    NgForItemComponent
+    NgForItemComponent,
+    AdvTableComponent,
+    AdvTableColumnDirective
   ],
   imports: [
     CommonModule,
@@ -32,7 +36,9 @@ import { FwkSharedModule } from 'src/app/fwk/modules/fwk-shared-module';
     FwkSharedModule,
     MatIconButtonDirective,
     BlazyDirective,
-    NgForItemComponent
+    NgForItemComponent,
+    AdvTableComponent,
+    AdvTableColumnDirective
   ]
 })
 export class SharedModule extends AbstractModule {
