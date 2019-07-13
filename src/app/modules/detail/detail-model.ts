@@ -28,7 +28,7 @@ export class DetailModel extends AbstractAppModel {
         this.data.game.description = this.params.name;
       } else {
         this.data.game = data;
-        this.getHistory().add({ label: this.data.game.description, url: this.getRouter().getUrl(), icon: "gamepad" });
+        this.getHistory().add(this.data.game.description, "gamepad");
         const images = [];
         this.data.game.images.forEach((image) => {
           if (image.name.indexOf(".ico") === -1) {

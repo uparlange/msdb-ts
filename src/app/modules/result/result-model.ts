@@ -21,7 +21,7 @@ export class ResultModel extends AbstractAppModel {
         this._setFilterList([]);
         this._getTitle().subscribe((title: string) => {
             this.data.title = title;
-            this.getHistory().add({ label: title, url: this.getRouter().getUrl(), icon: "magnify" });
+            this.getHistory().add(title, "magnify");
         })
     }
 

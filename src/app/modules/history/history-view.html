@@ -11,6 +11,6 @@
         </mat-icon>
     </ng-template>
     <ng-template columnName="label" columnWidth="100%" let-row>
-        <a [href]="'#'+row.url">{{row.label}}</a>
+        <a [routerLink]="row.url" [queryParams]="row.queryParams">{{row.label}}</a>
     </ng-template>
 </advTable>
