@@ -4,7 +4,6 @@ import { DetailModel } from '../../detail-model';
 import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
 
 @Component({
-  selector: 'roms-popup',
   templateUrl: './roms-popup.html',
   styleUrls: ['./roms-popup.css']
 })

@@ -15,6 +15,9 @@ export class ManufacturersModel extends AbstractAppModel {
         this.getCache().getItem("searchByManufacturerFilterValue", "").subscribe((value: string) => {
             this.data.filterValue = value;
         });
+        this.getCache().getItem("searchByManufacturerPageIndex", 0).subscribe((value: number) => {
+            this.data.pageIndex = value;
+        });
     }
 
     onRefresh(callback: Function): void {
@@ -27,11 +30,13 @@ export class ManufacturersModel extends AbstractAppModel {
     onDestroy(): void {
         super.onDestroy();
         this.getCache().setItem("searchByManufacturerFilterValue", this.data.filterValue, "version");
+        this.getCache().setItem("searchByManufacturerPageIndex", this.data.pageIndex, "version");
     }
 
     _getInitData(): any {
         return {
             filterValue: "",
+            pageIndex: 0,
             provider: []
         };
     }

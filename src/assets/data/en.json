@@ -60,9 +60,9 @@
 	"L10N_SEARCH_BY_RATING": "Best games",
 	"L10N_SEARCH_BY_BIOS": "Bios",
 	"L10N_SEARCH_BY_DEVICE": "Device",
-	"L10N_SEARCH_BY_MECHANICAL" : "Mechanical",
-	"L10N_SEARCH_BY_MESS" : "MESS",
-	"L10N_SEARCH_BY_LANGUAGE" : "Language",
+	"L10N_SEARCH_BY_MECHANICAL": "Mechanical",
+	"L10N_SEARCH_BY_MESS": "MESS",
+	"L10N_SEARCH_BY_LANGUAGE": "Language",
 	"L10N_NO_MATCHES_FOUND": "No matches found",
 	"L10N_BACK": "Back",
 	"L10N_REFERENCES": "References",
@@ -112,5 +112,6 @@
 	"L10N_HISTORY": "History",
 	"L10N_FAVORITES": "Favorites",
 	"L10N_ADD_TO_FAVORITES": "Add to favorites",
-	"L10N_REMOVE_FROM_FAVORITES": "Remove from to favorites"
+	"L10N_REMOVE_FROM_FAVORITES": "Remove from to favorites",
+	"L10N_SCROLL_TO_TOP": "Scroll to top"
 }

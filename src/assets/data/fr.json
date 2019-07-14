@@ -112,5 +112,6 @@
 	"L10N_HISTORY": "Historique",
 	"L10N_FAVORITES": "Favoris",
 	"L10N_ADD_TO_FAVORITES": "Ajouter aux favoris",
-	"L10N_REMOVE_FROM_FAVORITES": "Supprimer des favoris"
+	"L10N_REMOVE_FROM_FAVORITES": "Supprimer des favoris",
+	"L10N_SCROLL_TO_TOP": "Défiler jusqu'en haut"
 }

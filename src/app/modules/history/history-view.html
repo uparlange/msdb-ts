@@ -5,7 +5,7 @@
 </mat-card>
 <div class="default-spacer"></div>
 <advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="false"
-    [filterEnabled]="false">
+    [filterEnabled]="false" [rowTrackId]="'label'">
     <ng-template columnName="icon" let-row>
         <mat-icon [svgIcon]="row.icon">
         </mat-icon>

@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
 
 @Component({
-  selector: 'dip-switchs-popup',
   templateUrl: './dip-switchs-popup.html',
   styleUrls: ['./dip-switchs-popup.css']
 })

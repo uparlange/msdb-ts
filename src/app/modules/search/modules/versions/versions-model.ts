@@ -15,6 +15,9 @@ export class VersionsModel extends AbstractAppModel {
         this.getCache().getItem("searchByVersionsFilterValue", "").subscribe((value: string) => {
             this.data.filterValue = value;
         });
+        this.getCache().getItem("searchByVersionsPageIndex", 0).subscribe((value: number) => {
+            this.data.pageIndex = value;
+        });
     }
 
     onRefresh(callback: Function): void {
@@ -28,11 +31,13 @@ export class VersionsModel extends AbstractAppModel {
     onDestroy(): void {
         super.onDestroy();
         this.getCache().setItem("searchByVersionsFilterValue", this.data.filterValue, "version");
+        this.getCache().setItem("searchByVersionsPageIndex", this.data.pageIndex, "version");
     }
 
     _getInitData(): any {
         return {
             filterValue: "",
+            pageIndex: 0,
             provider: []
         };
     }

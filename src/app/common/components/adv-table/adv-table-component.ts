@@ -19,12 +19,14 @@ export class AdvTableComponent extends AbstractComponent {
     @Input() filterValue: string = "";
     @Input() paginationEnabled: boolean = true;
     @Input() filterEnabled: boolean = true;
+    @Input() rowTrackId: string = null;
+    @Input() pageIndex: Number = 0;
 
     @Output() filterValueChange: EventEmitter<any> = new EventEmitter();
+    @Output() pageIndexChange: EventEmitter<any> = new EventEmitter();
 
     displayedColumns: Array<string> = [];
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
-    pageIndex: Number = 0;
     pageSize: Number = 200;
 
     constructor(appHelperObject: AppHelperObject) {
@@ -56,6 +58,9 @@ export class AdvTableComponent extends AbstractComponent {
         if (changes.filterValue) {
             this._setFilterValue(this.filterValue);
         }
+        if (changes.pageIndex) {
+            this.pageChanged({ pageIndex: this.pageIndex });
+        }
     }
 
     applyFilter(value: string): void {
@@ -68,6 +73,15 @@ export class AdvTableComponent extends AbstractComponent {
 
     pageChanged(event: any): void {
         this.pageIndex = event.pageIndex;
+        this.pageIndexChange.emit(this.pageIndex);
+    }
+
+    trackByColumnName(index: number, item: any): string {
+        return item ? item.columnName : undefined;
+    }
+
+    trackByRowId(index: number, item: any): string {
+        return (item && this.rowTrackId) ? item[this.rowTrackId] : undefined;
     }
 
     _initDisplayedColumns(): void {

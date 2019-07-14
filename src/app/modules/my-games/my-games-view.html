@@ -5,7 +5,7 @@
 </mat-card>
 <div class="default-spacer"></div>
 <advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="true"
-    [filterEnabled]="true">
+    [filterEnabled]="true" [rowTrackId]="'name'" [(pageIndex)]="model.data.pageIndex">
     <ng-template columnName="icon" let-row>
         <img [alt]="row.name+'-icon'" mat-list-avatar [blazySrc]="getGameIconUrl(row)">
     </ng-template>

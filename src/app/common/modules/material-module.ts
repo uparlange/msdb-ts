@@ -15,11 +15,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AbstractModule } from 'src/app/fwk/abstract-module';
+import { MatPaginatorL10n } from '../providers/MatPaginatorL10n';
 
 @NgModule({
   declarations: [],
@@ -44,6 +45,9 @@ import { AbstractModule } from 'src/app/fwk/abstract-module';
     MatTreeModule,
     MatChipsModule,
     MatButtonToggleModule
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: MatPaginatorL10n }
   ],
   exports: [
     MatToolbarModule,

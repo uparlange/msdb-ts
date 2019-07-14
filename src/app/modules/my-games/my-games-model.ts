@@ -2,7 +2,6 @@ import { AbstractAppModel } from 'src/app/common/abstract-app-model';
 import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { MsdbProvider } from 'src/app/common/msdb-provider';
 import { Subscription } from 'rxjs';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -29,6 +28,9 @@ export class MyGamesModel extends AbstractAppModel {
         this.getCache().getItem("myGamesFilterValue", "").subscribe((value: string) => {
             this.data.filterValue = value;
         });
+        this.getCache().getItem("myGamesPageIndex", 0).subscribe((value: number) => {
+            this.data.pageIndex = value;
+        });
         if (this._changeInRomsDirectorySubscription == null) {
             this._changeInRomsDirectorySubscription = this.getSocket().on("CHANGE_IN_ROMS_DIRECTORY").subscribe(() => {
                 this._needRefresh = true;
@@ -46,6 +48,7 @@ export class MyGamesModel extends AbstractAppModel {
     onDestroy(): void {
         super.onDestroy();
         this.getCache().setItem("myGamesFilterValue", this.data.filterValue, "version");
+        this.getCache().setItem("myGamesPageIndex", this.data.pageIndex, "version");
         this._viewActive = false;
     }
 
@@ -79,6 +82,7 @@ export class MyGamesModel extends AbstractAppModel {
     _getInitData(): any {
         return {
             filterValue: "",
+            pageIndex: 0,
             provider: []
         };
     }

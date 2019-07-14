@@ -1,5 +1,5 @@
 <advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="true"
-    [filterEnabled]="true">
+    [filterEnabled]="true" [rowTrackId]="'label'" [(pageIndex)]="model.data.pageIndex">
     <ng-template columnName="label" columnWidth="100%" let-row>
         <a routerLink="/result" [queryParams]="{type:'series', value:row.label}">{{row.label}}</a>
     </ng-template>

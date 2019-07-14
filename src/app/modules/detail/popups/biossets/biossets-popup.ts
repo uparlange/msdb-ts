@@ -4,7 +4,6 @@ import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
 import { DetailModel } from '../../detail-model';
 
 @Component({
-  selector: 'biossets-popup',
   templateUrl: './biossets-popup.html',
   styleUrls: ['./biossets-popup.css']
 })

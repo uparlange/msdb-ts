@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
 
 @Component({
-  selector: 'chips-popup',
   templateUrl: './chips-popup.html',
   styleUrls: ['./chips-popup.css']
 })

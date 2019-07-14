@@ -27,6 +27,9 @@ export class FavoritesModel extends AbstractAppModel {
         this.getCache().getItem("favoritesFilterValue", "").subscribe((value: string) => {
             this.data.filterValue = value;
         });
+        this.getCache().getItem("favoritesPageIndex", 0).subscribe((value: number) => {
+            this.data.pageIndex = value;
+        });
         this._refreshList();
     }
 
@@ -38,6 +41,7 @@ export class FavoritesModel extends AbstractAppModel {
     onDestroy(): void {
         super.onDestroy();
         this.getCache().setItem("favoritesFilterValue", this.data.filterValue, "version");
+        this.getCache().setItem("favoritesPageIndex", this.data.pageIndex, "version");
         this._viewActive = false;
     }
 
@@ -59,6 +63,7 @@ export class FavoritesModel extends AbstractAppModel {
     _getInitData(): any {
         return {
             filterValue: "",
+            pageIndex: 0,
             provider: []
         };
     }
