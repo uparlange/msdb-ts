@@ -1,4 +1,4 @@
-import { Directive, SimpleChanges, Input, HostBinding } from '@angular/core';
+import { Directive, SimpleChanges, Input, HostBinding, ElementRef } from '@angular/core';
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
 import { AppHelperObject } from '../app-helper-object';
 import { BlazyManager } from '../managers/blazy-Manager';
@@ -13,19 +13,20 @@ export class BlazyDirective extends AbstractDirective {
     @Input() blazySrc: String = null;
 
     _lazyManager: BlazyManager = null;
+    _elementRef: ElementRef = null;
 
-    constructor(appHelperObject: AppHelperObject, lazyManager: BlazyManager) {
+    constructor(appHelperObject: AppHelperObject, lazyManager: BlazyManager, elementRef: ElementRef) {
         super(appHelperObject);
         this._lazyManager = lazyManager;
+        this._elementRef = elementRef;
     }
 
     onChanges(changes: SimpleChanges): void {
         super.onChanges(changes);
-        if (changes.hasOwnProperty("blazySrc")) {
-            if (typeof changes.blazySrc.currentValue === "string") {
-                this.dataSrc = changes.blazySrc.currentValue;
-                this._lazyManager.refresh();
-            }
+        if (changes.blazySrc) {
+            this._elementRef.nativeElement.classList.remove("b-loaded");
+            this.dataSrc = changes.blazySrc.currentValue;
+            this._lazyManager.refresh();
         }
     }
 }
