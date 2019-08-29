@@ -1,9 +1,12 @@
 import { EventEmitter } from '@angular/core';
 import { AbstractObject } from 'src/app/fwk/abstract-object';
+import { AppView } from './app-view';
+import pkg from './../../package.json';
 
 // https://github.com/nwutils/nw-angular-cli-example
 export class AppNw extends AbstractObject {
 
+    _appView: AppView = null;
     _watcher: any = null;
     _socket: any = null;
 
@@ -11,7 +14,49 @@ export class AppNw extends AbstractObject {
         super();
     }
 
-    init(): void {
+    refreshMenuBar(translations:any): void {
+        const menu = new window.nw.Menu({ type: "menubar" });
+        const fileSubMenu = new window.nw.Menu();
+        fileSubMenu.append(new window.nw.MenuItem({
+            label: translations.L10N_QUIT,
+            click: () => {
+                window.nw.App.quit();
+            }
+        }));
+        menu.append(new window.nw.MenuItem({
+            label: translations.L10N_FILE,
+            submenu: fileSubMenu
+        }));
+        const displaySubMenu = new window.nw.Menu();
+        displaySubMenu.append(new window.nw.MenuItem({
+            label: translations.L10N_MY_GAMES,
+            click: () => {
+                this._appView.showView("/mygames");
+            }
+        }));
+        displaySubMenu.append(new window.nw.MenuItem({
+            label: translations.L10N_CONFIGURATION,
+            click: () => {
+                this._appView.showView("/config");
+            }
+        }));
+        menu.append(new window.nw.MenuItem({
+            label: translations.L10N_DISPLAY,
+            submenu: displaySubMenu
+        }));
+        const infoSubMenu = new window.nw.Menu();
+        infoSubMenu.append(new window.nw.MenuItem({
+            label: `v${pkg.version}`
+        }));
+        menu.append(new window.nw.MenuItem({
+            label: "?",
+            submenu: infoSubMenu
+        }));
+        window.nw.Window.get().menu = menu;
+    }
+
+    init(appView: AppView): void {
+        this._appView = appView;
         this._initServer();
         this._initUpdateWatcher();
     }

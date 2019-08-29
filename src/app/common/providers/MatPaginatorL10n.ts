@@ -1,6 +1,8 @@
-import { AppHelperObject } from '../app-helper-object';
 import { MatPaginatorIntl } from '@angular/material';
+import { AppHelperObject } from '../app-helper-object';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class MatPaginatorL10n extends MatPaginatorIntl {
 
     _helper: AppHelperObject = null;

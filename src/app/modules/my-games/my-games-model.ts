@@ -65,7 +65,7 @@ export class MyGamesModel extends AbstractAppModel {
                                 return 0;
                             });
                         }
-                        this.data.list.data = data || [];
+                        this.data.provider = data || [];
                         if (callback) {
                             callback();
                         }

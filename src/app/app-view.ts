@@ -5,6 +5,7 @@ import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 import { MatSnackBar, MatSnackBarConfig, VERSION } from '@angular/material';
 import pkg from './../../package.json';
+import { AppNw } from './app-nw';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class AppView extends AbstractAppView {
   _shell: AppShell = null;
   _viewContainerRef: ViewContainerRef = null;
   _matSnackBar: MatSnackBar = null;
+  _appNw: AppNw = null;
 
   constructor(appHelperObject: AppHelperObject, appModel: AppModel, shell: AppShell, viewContainerRef: ViewContainerRef, matSnackBar: MatSnackBar,
   ) {
@@ -38,69 +40,34 @@ export class AppView extends AbstractAppView {
     }
   }
 
-  _initNw(): void {
-    this._initMenuBar();
-    import("./app-nw").then((mod) => {
-      new mod.AppNw().init();
-    });
-  }
-
-  _showView(view: string): void {
+  showView(view: string): void {
     this.getRouter().navigate([view]);
   }
 
-  _initMenuBar(): void {
-    this.getLabels().on("languageChange").subscribe(() => {
-      this.getLabels().getValues(["L10N_QUIT", "L10N_FILE", "L10N_MY_GAMES", "L10N_CONFIGURATION", "L10N_DISPLAY"]).subscribe((translations) => {
-        const menu = new window.nw.Menu({ type: "menubar" });
-        const fileSubMenu = new window.nw.Menu();
-        fileSubMenu.append(new window.nw.MenuItem({
-          label: translations.L10N_QUIT,
-          click: () => {
-            window.nw.App.quit();
-          }
-        }));
-        menu.append(new window.nw.MenuItem({
-          label: translations.L10N_FILE,
-          submenu: fileSubMenu
-        }));
-        const displaySubMenu = new window.nw.Menu();
-        displaySubMenu.append(new window.nw.MenuItem({
-          label: translations.L10N_MY_GAMES,
-          click: () => {
-            this._showView("/mygames");
-          }
-        }));
-        displaySubMenu.append(new window.nw.MenuItem({
-          label: translations.L10N_CONFIGURATION,
-          click: () => {
-            this._showView("/config");
-          }
-        }));
-        menu.append(new window.nw.MenuItem({
-          label: translations.L10N_DISPLAY,
-          submenu: displaySubMenu
-        }));
-        const infoSubMenu = new window.nw.Menu();
-        infoSubMenu.append(new window.nw.MenuItem({
-          label: `v${pkg.version}`
-        }));
-        menu.append(new window.nw.MenuItem({
-          label: "?",
-          submenu: infoSubMenu
-        }));
-        window.nw.Window.get().menu = menu;
+  _refreshMenuBar(): void {
+    this.getLabels().getValues(["L10N_QUIT", "L10N_FILE", "L10N_MY_GAMES", "L10N_CONFIGURATION", "L10N_DISPLAY"]).subscribe((translations) => {
+      this._appNw.refreshMenuBar(translations)
+    });
+  }
+
+  _initNw(): void {
+    import("./app-nw").then((mod) => {
+      this._appNw = new mod.AppNw();
+      this._appNw.init(this);
+      this._refreshMenuBar();
+      this.getLabels().on("languageChange").subscribe(() => {
+        this._refreshMenuBar();
       });
     });
   }
 
   _initToaster() {
-    this.getConnection().on("change").subscribe((online) => {
+    this.getConnection().on("change").subscribe((online:boolean) => {
       const config = new MatSnackBarConfig();
       config.duration = 1500;
       config.viewContainerRef = this._viewContainerRef;
       const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";
-      this.getLabels().getValues([key]).subscribe((translations) => {
+      this.getLabels().getValues([key]).subscribe((translations:any) => {
         this._matSnackBar.open(translations[key], null, config);
       });
     });
