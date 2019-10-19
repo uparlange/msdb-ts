@@ -1,4 +1,3 @@
-import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { EventEmitter, Injectable } from '@angular/core';
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
 import { MsdbProvider } from 'src/app/common/msdb-provider';

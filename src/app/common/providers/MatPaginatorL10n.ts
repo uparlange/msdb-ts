@@ -1,4 +1,4 @@
-import { MatPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { AppHelperObject } from '../app-helper-object';
 import { Injectable } from '@angular/core';
 

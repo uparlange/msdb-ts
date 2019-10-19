@@ -6,7 +6,7 @@ import { AbstractModule } from "src/app/fwk/abstract-module";
 import { AppModel } from "./app-model";
 import { ProgressBarDirective } from "./directives/progress-bar-directive";
 import { AppView } from './app-view';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FwkGlobalModule } from 'src/app/fwk/modules/fwk-global-module';
 import { GlobalModule } from 'src/app/common/modules/global-module';

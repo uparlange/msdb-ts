@@ -1,6 +1,6 @@
 import { DetailModel } from './detail-model';
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { BiossetsPopup } from './popups/biossets/biossets-popup';
 import { ChipsPopup } from './popups/chips/chips-popup';
 import { ClonesPopup } from './popups/clones/clones-popup';

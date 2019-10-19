@@ -1,7 +1,7 @@
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
 import { AppHelperObject } from '../app-helper-object';
 import { Directive, ContentChild, HostBinding } from '@angular/core';
-import { MatIcon } from '@angular/material';
+import { MatIcon } from '@angular/material/icon';
 
 @Directive({ selector: "[mat-icon-button]" })
 export class MatIconButtonDirective extends AbstractDirective {

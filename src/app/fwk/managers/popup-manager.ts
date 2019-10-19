@@ -1,6 +1,6 @@
 import { AbstractManager } from '../abstract-manager';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { Observable, Subscription } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 export class PopupManager extends AbstractManager {
 

@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material-module';
 import { AbstractModule } from 'src/app/fwk/abstract-module';
-import { MatIconModule } from '@angular/material';
 import { MatIconButtonDirective } from '../directives/mat-icon-button-directive';
 import { BlazyDirective } from '../directives/blazy-directive';
 import { NgForItemComponent } from '../components/ng-for-item/ng-for-item-component';
@@ -27,14 +26,12 @@ import { ScrollToTopDirective } from '../directives/scroll-to-top-directive';
     FormsModule,
     HttpClientModule,
     MaterialModule,
-    MatIconModule,
     FwkSharedModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    MatIconModule,
     FwkSharedModule,
     MatIconButtonDirective,
     BlazyDirective,

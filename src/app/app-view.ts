@@ -3,9 +3,10 @@ import { AppModel } from './app-model';
 import { AppShell } from 'src/app/common/app-shell';
 import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
-import { MatSnackBar, MatSnackBarConfig, VERSION } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import pkg from './../../package.json';
 import { AppNw } from './app-nw';
+import { VERSION } from '@angular/material/core';
 
 
 @Component({
@@ -62,12 +63,12 @@ export class AppView extends AbstractAppView {
   }
 
   _initToaster() {
-    this.getConnection().on("change").subscribe((online:boolean) => {
+    this.getConnection().on("change").subscribe((online: boolean) => {
       const config = new MatSnackBarConfig();
       config.duration = 1500;
       config.viewContainerRef = this._viewContainerRef;
       const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";
-      this.getLabels().getValues([key]).subscribe((translations:any) => {
+      this.getLabels().getValues([key]).subscribe((translations: any) => {
         this._matSnackBar.open(translations[key], null, config);
       });
     });
