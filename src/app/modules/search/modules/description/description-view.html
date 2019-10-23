@@ -1,14 +1,40 @@
-<form #descriptionForm="ngForm">
-	<mat-form-field>
-		<input matInput #valueInput pattern=".{3,}" required name="value" [autocomplete]="'LION_GAME_NAME'|translate"
-			autocomplete="game-description" [placeholder]="'LION_GAME_NAME'|translate" [(ngModel)]="model.data.value">
-	</mat-form-field>
-	<button *ngIf="model.data.value.length > 0" (click)="model.data.value = '';valueInput.focus();" type="button"
-		mat-mini-fab>
-		<mat-icon svgIcon="close" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
-	</button>
-	<button *ngIf="descriptionForm.form.valid" routerLink="/result"
-		[queryParams]="{type:'description', value:model.data.value}" mat-mini-fab>
-		<mat-icon svgIcon="magnify" [matTooltip]="'L10N_SEARCH'|translate"></mat-icon>
-	</button>
-</form>
+<mat-card>
+	<mat-card-content>
+		<form #descriptionForm="ngForm">
+			<mat-form-field>
+				<input matInput #valueInput pattern=".{3,}" required name="value"
+					[autocomplete]="'LION_GAME_NAME'|translate" autocomplete="game-description"
+					[placeholder]="'LION_GAME_NAME'|translate" [(ngModel)]="model.data.value">
+			</mat-form-field>
+			<button *ngIf="model.data.value.length > 0" (click)="model.data.value = '';valueInput.focus();"
+				type="button" mat-mini-fab>
+				<mat-icon svgIcon="close" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
+			</button>
+			<button *ngIf="descriptionForm.form.valid" routerLink="/result"
+				[queryParams]="{type:'description', value:model.data.value}" mat-mini-fab>
+				<mat-icon svgIcon="magnify" [matTooltip]="'L10N_SEARCH'|translate"></mat-icon>
+			</button>
+		</form>
+	</mat-card-content>
+</mat-card>
+<div class="default-spacer"></div>
+<mat-card>
+	<mat-card-content>
+		{{'L10N_SHORTCUTS'|translate}}
+		<ul>
+			<li><a routerLink="/result" [queryParams]="{type:'bios',value:'all'}">{{'L10N_ALL_OF'|translate}}
+					"{{'L10N_SEARCH_BY_BIOS'|translate}}"</a>
+			</li>
+			<li><a routerLink="/result" [queryParams]="{type:'device',value:'all'}">{{'L10N_ALL_OF'|translate}}
+					"{{'L10N_SEARCH_BY_DEVICE'|translate}}"</a></li>
+			<li><a routerLink="/result" [queryParams]="{type:'mechanical',value:'all'}">{{'L10N_ALL_OF'|translate}}
+					"{{'L10N_SEARCH_BY_MECHANICAL'|translate}}"</a></li>
+			<li><a routerLink="/result" [queryParams]="{type:'mess',value:'all'}">{{'L10N_ALL_OF'|translate}}
+					"{{'L10N_SEARCH_BY_MESS'|translate}}"</a>
+			</li>
+			<li><a routerLink="/result" [queryParams]="{type:'adult',value:'all'}">{{'L10N_ALL_OF'|translate}}
+					"{{'L10N_SEARCH_BY_ADULT'|translate}}"</a>
+			</li>
+		</ul>
+	</mat-card-content>
+</mat-card>

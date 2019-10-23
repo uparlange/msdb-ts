@@ -13,7 +13,7 @@
 	"L10N_DESCRIPTION": "MAME (Multiple Arcade Machine Emulator) is an emulator of arcade games. The list of games is such that it is considered a sort of large library or 'memory' of the arcade game. This application lists games (ROMs) for a given version of MAME.",
 	"L10N_VERSION": "Version",
 	"L10N_HOW_TO_PLAY": "How to play ?",
-	"LION_GAME_NAME": "Game name",
+	"LION_GAME_NAME": "Name or Description",
 	"L10N_FIND_GAME": "Find your game.",
 	"L10N_DOWNLOAD_EMULATOR": "Download the emulator.",
 	"L10N_DOWNLOAD_GAME": "Download the game.",
@@ -51,7 +51,7 @@
 	"L10N_IMAGES": "Image(s)",
 	"L10N_VIDEOS": "Video(s)",
 	"L10N_SOUNDTRACKS": "Soundtrack(s)",
-	"L10N_SEARCH_BY_DESCRIPTION": "Description",
+	"L10N_SEARCH_BY_DESCRIPTION": "Free entry",
 	"L10N_SEARCH_BY_CATEGORY": "Category",
 	"L10N_SEARCH_BY_MANUFACTURER": "Publisher",
 	"L10N_SEARCH_BY_YEAR": "Year",
@@ -63,6 +63,7 @@
 	"L10N_SEARCH_BY_MECHANICAL": "Mechanical",
 	"L10N_SEARCH_BY_MESS": "MESS",
 	"L10N_SEARCH_BY_LANGUAGE": "Language",
+	"L10N_SEARCH_BY_ADULT": "Adult",
 	"L10N_NO_MATCHES_FOUND": "No matches found",
 	"L10N_BACK": "Back",
 	"L10N_REFERENCES": "References",
@@ -113,5 +114,7 @@
 	"L10N_FAVORITES": "Favorites",
 	"L10N_ADD_TO_FAVORITES": "Add to favorites",
 	"L10N_REMOVE_FROM_FAVORITES": "Remove from to favorites",
-	"L10N_SCROLL_TO_TOP": "Scroll to top"
+	"L10N_SCROLL_TO_TOP": "Scroll to top",
+	"L10N_ALL_OF": "All of",
+	"L10N_SHORTCUTS": "Shortcuts"
 }

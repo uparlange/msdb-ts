@@ -22,13 +22,13 @@
 					<li>Clones : {{model.data.mame.cloneCount}}</li>
 				</ul>
 			</li>
-			<li>Bios : <a routerLink="/result"
+			<li>{{'L10N_SEARCH_BY_BIOS'|translate}} : <a routerLink="/result"
 					[queryParams]="{type:'bios',value:'all'}">{{model.data.mame.biosCount}}</a></li>
-			<li>Devices : <a routerLink="/result"
+			<li>{{'L10N_SEARCH_BY_DEVICE'|translate}} : <a routerLink="/result"
 					[queryParams]="{type:'device',value:'all'}">{{model.data.mame.deviceCount}}</a></li>
-			<li>Mechanicals : <a routerLink="/result"
+			<li>{{'L10N_SEARCH_BY_MECHANICAL'|translate}} : <a routerLink="/result"
 					[queryParams]="{type:'mechanical',value:'all'}">{{model.data.mame.mechanicalCount}}</a></li>
-			<li>MESS : <a routerLink="/result"
+			<li>{{'L10N_SEARCH_BY_MESS'|translate}} : <a routerLink="/result"
 					[queryParams]="{type:'mess',value:'all'}">{{model.data.mame.messCount}}</a></li>
 		</ul>
 	</mat-card-content>
