@@ -18,6 +18,10 @@ export class WindowRef extends AbstractObject {
         this.nativeWindow.scrollTo(x, y);
     }
 
+    showPreviousPage() {
+        this.nativeWindow.history.back();
+    }
+
     getScrollPosition(): any {
         return {
             x: this.nativeWindow.pageXOffset,

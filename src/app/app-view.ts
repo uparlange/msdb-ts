@@ -41,6 +41,10 @@ export class AppView extends AbstractAppView {
     }
   }
 
+  showPreviousPage(): void {
+    this.getWindowRef().showPreviousPage();
+  }
+
   showView(view: string): void {
     this.getRouter().navigate([view]);
   }
