@@ -1,9 +1,9 @@
 import { AbstractView } from '../fwk/abstract-view';
-import { AppHelperObject } from './app-helper-object';
 import { AbstractAppModel } from './abstract-app-model';
-import { ConfigProvider } from './config-provider';
 import { FavoritesManager } from './managers/favorites-manager';
 import { SocketManager } from './managers/socket-manager';
+import { ConfigProvider } from './providers/config-provider';
+import { AppHelperObject } from './providers/app-helper-object';
 
 export class AbstractAppView extends AbstractView {
 

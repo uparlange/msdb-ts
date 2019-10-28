@@ -1,7 +1,7 @@
 import { AbstractDirective } from '../abstract-directive';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { Directive, HostBinding, PLATFORM_ID, Inject, Input, HostListener } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Directive({ selector: 'a[href]' })
 export class LinkDirective extends AbstractDirective {

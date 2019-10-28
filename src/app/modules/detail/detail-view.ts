@@ -10,7 +10,7 @@ import { DriverPopup } from './popups/driver/driver-popup';
 import { PortsPopup } from './popups/ports/ports-popup';
 import { RomsPopup } from './popups/roms/roms-popup';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Component({
   templateUrl: './detail-view.html',

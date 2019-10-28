@@ -1,7 +1,7 @@
 import { Directive, SimpleChanges, Input, HostBinding, ElementRef } from '@angular/core';
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
-import { AppHelperObject } from '../app-helper-object';
 import { BlazyManager } from '../managers/blazy-Manager';
+import { AppHelperObject } from '../providers/app-helper-object';
 
 @Directive({ selector: "[blazySrc]" })
 export class BlazyDirective extends AbstractDirective {

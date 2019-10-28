@@ -1,8 +1,8 @@
 import { AbstractAppGuard } from 'src/app/common/abstract-app-guard';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { EventEmitter, Injectable } from '@angular/core';
 import { ConfigModel } from '../config-model';
 import { ConfigView } from '../config-view';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Injectable()
 export class ConfigCanDeactivate extends AbstractAppGuard {

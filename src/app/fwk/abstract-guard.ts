@@ -1,6 +1,6 @@
 import { AbstractHelperObject } from './abstract-helper-object';
 import { TranslateManager } from './managers/translate-manager';
-import { WindowRef } from './window-ref';
+import { WindowRef } from './providers/window-ref';
 import { AbstractHelper } from './abstract-helper';
 
 export class AbstractGuard extends AbstractHelper {

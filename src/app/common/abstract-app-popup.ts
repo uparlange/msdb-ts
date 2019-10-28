@@ -1,7 +1,7 @@
 import { AbstractPopup } from '../fwk/abstract-popup';
-import { AppHelperObject } from './app-helper-object';
 import { AbstractModel } from '../fwk/abstract-model';
-import { ConfigProvider } from './config-provider';
+import { ConfigProvider } from './providers/config-provider';
+import { AppHelperObject } from './providers/app-helper-object';
 
 export class AbstractAppPopup extends AbstractPopup {
 

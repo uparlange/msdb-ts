@@ -1,12 +1,12 @@
 import { Component, ViewContainerRef, HostBinding } from '@angular/core';
 import { AppModel } from './app-model';
-import { AppShell } from 'src/app/common/app-shell';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import pkg from './../../package.json';
 import { AppNw } from './app-nw';
 import { VERSION } from '@angular/material/core';
+import { AppHelperObject } from './common/providers/app-helper-object';
+import { AppShell } from './common/providers/app-shell';
 
 
 @Component({

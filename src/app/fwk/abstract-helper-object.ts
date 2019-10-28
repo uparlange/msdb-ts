@@ -1,4 +1,4 @@
-import { WindowRef } from './window-ref';
+import { WindowRef } from './providers/window-ref';
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -8,8 +8,8 @@ import { TranslateManager } from './managers/translate-manager';
 import { RouterManager } from './managers/router-manager';
 import { EventManager } from './managers/event-manager'
 import { AbstractObject } from './abstract-object';
-import { FwkShell } from './fwk-shell';
 import { PopupManager } from './managers/popup-manager';
+import { FwkShell } from './providers/fwk-shell';
 
 export class AbstractHelperObject extends AbstractObject {
 

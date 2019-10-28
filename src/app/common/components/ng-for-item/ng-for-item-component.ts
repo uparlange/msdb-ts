@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractComponent } from '../../../fwk/abstract-component';
-import { AppHelperObject } from '../../app-helper-object';
+import { AppHelperObject } from '../../providers/app-helper-object';
 
 @Component({
   selector: "ngForItem",

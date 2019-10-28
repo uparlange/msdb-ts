@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { DetailModel } from '../../detail-model';
 import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Component({
   templateUrl: './clones-popup.html',

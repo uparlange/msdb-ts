@@ -1,8 +1,9 @@
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
-import { MsdbProvider } from 'src/app/common/msdb-provider';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { AppEvents } from 'src/app/app-events';
+import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
 
 @Injectable()
 export class MyGamesModel extends AbstractAppModel {
@@ -20,7 +21,7 @@ export class MyGamesModel extends AbstractAppModel {
         super.onInit();
         this._viewActive = true;
         if (this._configChangedSubscription == null) {
-            this._configChangedSubscription = this.getEventBus().on("CONFIG_CHANGED").subscribe(() => {
+            this._configChangedSubscription = this.getEventBus().on(AppEvents.CONFIG_CHANGED).subscribe(() => {
                 this._needRefresh = true;
                 this._refreshList();
             });

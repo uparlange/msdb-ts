@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { AbstractManager } from 'src/app/fwk/abstract-manager';
 import { HttpClient } from '@angular/common/http';
-import { WindowRef } from 'src/app/fwk/window-ref';
+import { WindowRef } from 'src/app/fwk/providers/window-ref';
 
 @Injectable()
 export class TranslateManager extends AbstractManager {

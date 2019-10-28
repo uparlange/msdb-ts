@@ -10,3 +10,12 @@
     top: -6px;
     right: -6px;
 }
+
+.mat-list-base .mat-list-item.mat-2-line, .mat-list-base .mat-list-option.mat-2-line
+{
+    height:64px;
+}
+
+.mat-list-base .mat-list-item.mat-3-line, .mat-list-base .mat-list-option.mat-3-line {
+    height: 80px;
+}

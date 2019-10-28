@@ -1,5 +1,5 @@
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { VersionsModel } from './versions-model';
 import { Component } from '@angular/core';
 

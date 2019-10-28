@@ -1,7 +1,7 @@
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { FavoritesModel } from './favorites-model';
 import { Component } from '@angular/core';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Component({
     templateUrl: './favorites-view.html',

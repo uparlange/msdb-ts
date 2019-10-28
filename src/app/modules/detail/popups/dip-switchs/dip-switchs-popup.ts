@@ -1,7 +1,7 @@
 import { DetailModel } from '../../detail-model';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { Component } from '@angular/core';
 import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Component({
   templateUrl: './dip-switchs-popup.html',

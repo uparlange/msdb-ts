@@ -3,7 +3,7 @@ import Masonry from 'masonry-layout';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
 import { AbstractComponent } from 'src/app/fwk/abstract-component';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Component({
   selector: "gallery",

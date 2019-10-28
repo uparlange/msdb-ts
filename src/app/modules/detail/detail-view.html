@@ -126,18 +126,32 @@
 </mat-card>
 <mat-list *ngIf="model.data.game.name != null">
 	<mat-list-item>
-		<a href="http://mamedev.org/">{{'L10N_MAME_EMULATOR'|translate}}</a>
+		<p matLine><b>{{'L10N_EMULATOR'|translate}}</b></p>
+		<p matLine>Mamedev : <a href="http://mamedev.org/">Mame</a></p>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.isdevice == 'no'">
-		<a
-			[href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">Rom
-			{{model.data.game.description}}</a>
+		<span matLine><b>Rom</b></span>
+		<span matLine>Planetemu : <a
+				[href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">{{model.data.game.description}}</a></span>
+		<span matLine>Retroroms ({{'L10N_ACCOUNT_NEEDED'|translate}}) : <a
+				[href]="'https://bda.retroroms.info:82/downloads/mame/currentroms/'+model.data.game.name+'.zip'">{{model.data.game.description}}</a></span>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
-		<a href="http://www.planetemu.net/roms/mame-bios-pack">Bios {{model.data.game.romof}}</a>
+		<span matLine><b>Bios</b></span>
+		<span matLine>Planetemu : <a href="http://www.planetemu.net/roms/mame-bios-pack">Mame Bios Pack</a></span>
+		<span matLine>Retroroms ({{'L10N_ACCOUNT_NEEDED'|translate}}) : <a
+				[href]="'https://bda.retroroms.info:82/downloads/mame/currentroms/'+model.data.game.romof+'.zip'">{{model.data.game.romof}}</a>
+		</span>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.soundtracks != null && model.data.game.soundtracks.length > 0">
+		<span matLine><b>{{'L10N_SOUNDTRACKS'|translate}}</b></span>
+		<span matLine>Progettosnaps : <a
+				[href]="getGameSoundTrackUrl(model.data.game)">{{model.data.game.description}}</a></span>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.manual === true">
-		<a [href]="getGameManualUrl(model.data.game)">{{'L10N_MANUAL'|translate}}</a>
+		<span matLine><b>{{'L10N_MANUAL'|translate}}</b></span>
+		<span matLine>Progettosnaps : <a
+				[href]="getGameManualUrl(model.data.game)">{{model.data.game.description}}</a></span>
 	</mat-list-item>
 </mat-list>
 <div *ngIf="model.data.images.length > 0">
@@ -159,16 +173,4 @@
 	<video controls>
 		<source [src]="getGameVideoUrl(model.data.game)" type="video/mp4" />
 	</video>
-</div>
-<div *ngIf="model.data.game.soundtracks != null && model.data.game.soundtracks.length > 0">
-	<mat-card>
-		<mat-card-title>
-			{{'L10N_SOUNDTRACKS'|translate}}
-		</mat-card-title>
-	</mat-card>
-	<mat-list>
-		<mat-list-item *ngFor="let soundtrack of model.data.game.soundtracks">
-			<a [href]="getGameSoundTrackUrl(model.data.game)">{{soundtrack}}</a>
-		</mat-list-item>
-	</mat-list>
 </div>

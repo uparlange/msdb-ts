@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { MsdbProvider } from 'src/app/common/msdb-provider';
+import { AppEvents } from './app-events';
+import { MsdbProvider } from './common/providers/msdb-provider';
+import { AppHelperObject } from './common/providers/app-helper-object';
 
 @Injectable()
 export class AppModel extends AbstractAppModel {
 
     _cacheChangeSubscription: Subscription = null;
+    _setBackgroundClassSubscription: Subscription = null;
 
     constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
         super(appHelperObject, msdbProvider);
@@ -23,16 +25,22 @@ export class AppModel extends AbstractAppModel {
                 this.data.searchLastType = event.newValue;
             }
         });
+        this.data.contentClass = null;
+        this._setBackgroundClassSubscription = this.getEventBus().on(AppEvents.SET_BACKGROUND_CLASS).subscribe((className) => {
+            this.data.contentClass = className;
+        });
     }
 
     onDestroy() {
         super.onDestroy();
         this._cacheChangeSubscription.unsubscribe();
+        this._setBackgroundClassSubscription.unsubscribe();
     }
 
     _getInitData() {
         return {
-            searchLastType: null
+            searchLastType: null,
+            contentClass: null
         };
     }
 

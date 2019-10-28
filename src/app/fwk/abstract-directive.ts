@@ -4,9 +4,9 @@ import { EventManager } from './managers/event-manager';
 import { RouterManager } from './managers/router-manager';
 import { ConnectionManager } from './managers/connection-manager';
 import { TranslateManager } from './managers/translate-manager';
-import { WindowRef } from './window-ref';
 import { PopupManager } from './managers/popup-manager';
 import { AbstractHelper } from './abstract-helper';
+import { WindowRef } from './providers/window-ref';
 
 export class AbstractDirective extends AbstractHelper implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 

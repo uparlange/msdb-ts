@@ -2,8 +2,8 @@ import { AbstractManager } from '../abstract-manager';
 import { Router, NavigationStart, NavigationEnd, Params, NavigationExtras } from '@angular/router';
 import { CacheManager } from './cache-manager';
 import { NgZone, Injectable } from '@angular/core';
-import { WindowRef } from '../window-ref';
 import { Subscription } from 'rxjs';
+import { WindowRef } from '../providers/window-ref';
 
 @Injectable()
 export class RouterManager extends AbstractManager {

@@ -1,6 +1,6 @@
-import { AppHelperObject } from '../app-helper-object';
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
 import { Directive, HostListener } from '@angular/core';
+import { AppHelperObject } from '../providers/app-helper-object';
 
 @Directive({ selector: "[scrollToTop]" })
 export class ScrollToTopDirective extends AbstractDirective {

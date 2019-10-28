@@ -1,6 +1,6 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
-import { AppHelperObject } from '../../app-helper-object';
+import { AppHelperObject } from '../../providers/app-helper-object';
 
 @Directive({ selector: "ng-template[columnName]" })
 export class AdvTableColumnDirective extends AbstractDirective {

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
-import { MsdbProvider } from 'src/app/common/msdb-provider';
+import { AppEvents } from 'src/app/app-events';
+import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Injectable()
 export class DetailModel extends AbstractAppModel {
@@ -28,6 +29,9 @@ export class DetailModel extends AbstractAppModel {
         this.data.game.description = this.params.name;
       } else {
         this.data.game = data;
+        if (this.data.game.adult) {
+          this.getEventBus().emit(AppEvents.SET_BACKGROUND_CLASS, "background-adult");
+        }
         this.getHistory().add(this.data.game.description, "gamepad");
         const images = [];
         this.data.game.images.forEach((image) => {

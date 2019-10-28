@@ -1,6 +1,6 @@
 import { AbstractGuard } from '../fwk/abstract-guard';
-import { AppHelperObject } from './app-helper-object';
-import { ConfigProvider } from './config-provider';
+import { ConfigProvider } from './providers/config-provider';
+import { AppHelperObject } from './providers/app-helper-object';
 
 export class AbstractAppGuard extends AbstractGuard {
 

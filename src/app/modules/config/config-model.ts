@@ -1,7 +1,8 @@
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
-import { MsdbProvider } from 'src/app/common/msdb-provider';
 import { Injectable } from '@angular/core';
+import { AppEvents } from 'src/app/app-events';
+import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Injectable()
 export class ConfigModel extends AbstractAppModel {
@@ -14,7 +15,7 @@ export class ConfigModel extends AbstractAppModel {
         super.onInit();
         this.data.selectedLanguage = this.getLabels().getCurrentLanguage();
     }
-    
+
     onRefresh(callback: Function): void {
         this._getConfiguration(callback);
     }
@@ -22,7 +23,7 @@ export class ConfigModel extends AbstractAppModel {
     save(): void {
         this.getSocket().emit("SAVE_CONFIGURATION", this.data.newValue).subscribe((result: any) => {
             if (result !== null) {
-                this.getEventBus().emit("CONFIG_CHANGED");
+                this.getEventBus().emit(AppEvents.CONFIG_CHANGED);
                 this._getConfiguration();
             }
         });

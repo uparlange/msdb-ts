@@ -1,9 +1,9 @@
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
-import { MsdbProvider } from 'src/app/common/msdb-provider';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { Injectable } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
+import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
 
 @Injectable()
 export class CategoriesModel extends AbstractAppModel {

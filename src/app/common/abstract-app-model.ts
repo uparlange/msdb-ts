@@ -1,9 +1,9 @@
 import { AbstractModel } from '../fwk/abstract-model';
-import { MsdbProvider } from './msdb-provider';
 import { HistoryManager } from './managers/history-manager';
-import { AppHelperObject } from './app-helper-object';
 import { SocketManager } from './managers/socket-manager';
 import { FavoritesManager } from './managers/favorites-manager';
+import { MsdbProvider } from './providers/msdb-provider';
+import { AppHelperObject } from './providers/app-helper-object';
 
 export class AbstractAppModel extends AbstractModel {
 

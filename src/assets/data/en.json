@@ -8,7 +8,6 @@
 	"L10N_BACKGROUND": "Background",
 	"L10N_LOGO": "Logo",
 	"L10N_SEARCH_BY": "Find by",
-	"L10N_MAME_EMULATOR": "Mame emulator",
 	"L10N_MAME_KESAKO": "Mame - What's this ?",
 	"L10N_DESCRIPTION": "MAME (Multiple Arcade Machine Emulator) is an emulator of arcade games. The list of games is such that it is considered a sort of large library or 'memory' of the arcade game. This application lists games (ROMs) for a given version of MAME.",
 	"L10N_VERSION": "Version",
@@ -50,7 +49,7 @@
 	"L10N_DOWNLOADS": "Download(s)",
 	"L10N_IMAGES": "Image(s)",
 	"L10N_VIDEOS": "Video(s)",
-	"L10N_SOUNDTRACKS": "Soundtrack(s)",
+	"L10N_SOUNDTRACKS": "Soundtrack",
 	"L10N_SEARCH_BY_DESCRIPTION": "Free entry",
 	"L10N_SEARCH_BY_CATEGORY": "Category",
 	"L10N_SEARCH_BY_MANUFACTURER": "Publisher",
@@ -116,5 +115,7 @@
 	"L10N_REMOVE_FROM_FAVORITES": "Remove from to favorites",
 	"L10N_SCROLL_TO_TOP": "Scroll to top",
 	"L10N_ALL_OF": "All of",
-	"L10N_SHORTCUTS": "Shortcuts"
+	"L10N_SHORTCUTS": "Shortcuts",
+	"L10N_ACCOUNT_NEEDED": "Account Needed",
+	"L10N_EMULATOR": "Emulator"
 }

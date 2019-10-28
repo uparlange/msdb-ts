@@ -1,7 +1,7 @@
-import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 import { ConfigModel } from './config-model';
 import { Component } from '@angular/core';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Component({
     templateUrl: './config-view.html',

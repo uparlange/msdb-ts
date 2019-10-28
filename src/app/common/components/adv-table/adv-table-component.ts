@@ -1,9 +1,9 @@
 import { Component, Input, ViewChild, SimpleChanges, ContentChildren, QueryList, Output, EventEmitter } from '@angular/core';
 import { AbstractComponent } from 'src/app/fwk/abstract-component';
-import { AppHelperObject } from '../../app-helper-object';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { AdvTableColumnDirective } from './adv-table-column-directive';
+import { AppHelperObject } from '../../providers/app-helper-object';
 
 @Component({
     selector: "advTable",

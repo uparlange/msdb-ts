@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform, OnDestroy } from '@angular/core';
 import { AbstractPipe } from '../abstract-pipe';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
 import { Subscription } from 'rxjs';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Pipe({
   name: 'translate',

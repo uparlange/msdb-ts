@@ -1,7 +1,7 @@
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
-import { MsdbProvider } from 'src/app/common/msdb-provider';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { Injectable } from '@angular/core';
+import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
 
 @Injectable()
 export class SeriesModel extends AbstractAppModel {

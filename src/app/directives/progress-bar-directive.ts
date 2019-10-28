@@ -1,7 +1,8 @@
 import { AbstractDirective } from 'src/app/fwk/abstract-directive';
 import { Directive, HostBinding } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AppHelperObject } from 'src/app/common/app-helper-object';
+import { AppEvents } from '../app-events';
+import { AppHelperObject } from '../common/providers/app-helper-object';
 
 @Directive({ selector: "mat-progress-bar" })
 export class ProgressBarDirective extends AbstractDirective {
@@ -19,11 +20,11 @@ export class ProgressBarDirective extends AbstractDirective {
     onInit(): void {
         super.onInit();
         this._hide();
-        this._httpBeginSubscription = this.getEventBus().on("HTTP_BEGIN").subscribe(() => {
+        this._httpBeginSubscription = this.getEventBus().on(AppEvents.HTTP_BEGIN).subscribe(() => {
             this._counter++;
             this._show();
         });
-        this._httpEndSubscription = this.getEventBus().on("HTTP_END").subscribe(() => {
+        this._httpEndSubscription = this.getEventBus().on(AppEvents.HTTP_END).subscribe(() => {
             this._counter--;
             if (this._counter === 0) {
                 this._hide();

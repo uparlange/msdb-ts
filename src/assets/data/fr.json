@@ -8,7 +8,6 @@
 	"L10N_BACKGROUND": "Fond d'écran",
 	"L10N_LOGO": "Logo",
 	"L10N_SEARCH_BY": "Rechercher par",
-	"L10N_MAME_EMULATOR": "Emulateur Mame",
 	"L10N_MAME_KESAKO": "Mame - Késako ?",
 	"L10N_DESCRIPTION": "MAME (Multiple Arcade Machine Emulator) est un émulateur de jeux d'arcade. La liste des jeux est telle qu'il est considéré comme une sorte de grande bibliothèque ou de 'mémoire' du jeu d'arcade. Cette application répertorie les fiches des jeux (ROMS) pour une version de MAME donnée.",
 	"L10N_VERSION": "Version",
@@ -50,7 +49,7 @@
 	"L10N_DOWNLOADS": "Téléchargement(s)",
 	"L10N_IMAGES": "Image(s)",
 	"L10N_VIDEOS": "Vidéo(s)",
-	"L10N_SOUNDTRACKS": "Bande(s) sonore(s)",
+	"L10N_SOUNDTRACKS": "Bande son",
 	"L10N_SEARCH_BY_DESCRIPTION": "Saisie libre",
 	"L10N_SEARCH_BY_CATEGORY": "Catégorie",
 	"L10N_SEARCH_BY_MANUFACTURER": "Editeur",
@@ -116,5 +115,7 @@
 	"L10N_REMOVE_FROM_FAVORITES": "Supprimer des favoris",
 	"L10N_SCROLL_TO_TOP": "Défiler jusqu'en haut",
 	"L10N_ALL_OF": "Tous les",
-	"L10N_SHORTCUTS": "Raccourcis"
+	"L10N_SHORTCUTS": "Raccourcis",
+	"L10N_ACCOUNT_NEEDED": "Compte nécessaire",
+	"L10N_EMULATOR": "Emulateur"
 }

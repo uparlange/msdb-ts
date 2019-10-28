@@ -1,8 +1,8 @@
 import { AbstractManager } from '../../fwk/abstract-manager';
 import { Injectable, EventEmitter } from '@angular/core';
 import { EventManager } from '../../fwk/managers/event-manager';
-import { ConfigProvider } from '../config-provider';
 import io from 'socket.io-client';
+import { ConfigProvider } from '../providers/config-provider';
 
 @Injectable()
 export class SocketManager extends AbstractManager {

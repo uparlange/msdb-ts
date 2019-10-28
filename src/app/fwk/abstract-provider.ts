@@ -4,6 +4,7 @@ import { CacheManager } from './managers/cache-manager';
 import { EventManager } from './managers/event-manager';
 import { Observable } from 'rxjs';
 import { AbstractHelper } from './abstract-helper';
+import { AppEvents } from '../app-events';
 
 export class AbstractProvider extends AbstractHelper {
 
@@ -36,13 +37,13 @@ export class AbstractProvider extends AbstractHelper {
         if (defaultValue === undefined) {
             defaultValue = null;
         }
-        this.getEventBus().emit("HTTP_BEGIN");
+        this.getEventBus().emit(AppEvents.HTTP_BEGIN);
         // source.timeout(AppUtils.getHttpRequestTimeOut())
         source.subscribe((result: any) => {
-            this.getEventBus().emit("HTTP_END");
+            this.getEventBus().emit(AppEvents.HTTP_END);
             eventEmitter.emit(result);
         }, () => {
-            this.getEventBus().emit("HTTP_END");
+            this.getEventBus().emit(AppEvents.HTTP_END);
             eventEmitter.emit(defaultValue);
         });
         return eventEmitter;

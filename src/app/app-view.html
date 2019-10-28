@@ -1,6 +1,5 @@
 <header>
 	<div class="header">
-
 		<mat-toolbar color="primary">
 			<div class="network-status">
 				<mat-icon [svgIcon]="model.params.online ? 'wifi' : 'wifi-off'"></mat-icon>
@@ -43,7 +42,7 @@
 </header>
 <div class="container">
 	<div class="container-header"></div>
-	<div class="container-content">
+	<div class="container-content" [ngClass]="model.data.contentClass">
 		<main>
 			<router-outlet></router-outlet>
 		</main>
