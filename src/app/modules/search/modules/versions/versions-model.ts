@@ -23,8 +23,13 @@ export class VersionsModel extends AbstractAppModel {
     onRefresh(callback: Function): void {
         super.onRefresh(callback);
         this.getProvider().getVersions().subscribe((data: any) => {
-            this.data.provider = data;
-            callback();
+            this.getProvider().getMameInfos().subscribe((infos: any) => {
+                data.forEach((element: any) => {
+                    Object.assign(element, infos.history[element.label]);
+                });
+                this.data.provider = data;
+                callback();
+            });
         });
     }
 

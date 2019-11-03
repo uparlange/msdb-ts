@@ -1,7 +1,10 @@
 <advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="true"
-    [filterEnabled]="true" [rowTrackId]="'label'" [(pageIndex)]="model.data.pageIndex">
+    [filterEnabled]="true" [rowTrackId]="'label'" [(pageIndex)]="model.data.pageIndex" [pageSize]="150">
     <ng-template columnName="label" columnWidth="100%" let-row>
-        <a routerLink="/result" [queryParams]="{type:'version', value:row.label}">{{row.label}}</a>
+        <a routerLink="/result" [queryParams]="{type:'version', value:row.label}">
+            <span>{{row.label}}</span>
+            <span *ngIf="row.date != null"> ({{row.date}})</span>
+        </a>
     </ng-template>
     <ng-template columnName="addcount" let-row>
         <mat-chip-list [selectable]="false">
@@ -9,8 +12,7 @@
         </mat-chip-list>
     </ng-template>
     <ng-template columnName="changelog" let-row>
-        <a *ngIf="changeLogAvailable(row.label)"
-            [href]="'http://mamedev.org/releases/whatsnew_'+getVersion(row.label)+'.txt'">
+        <a *ngIf="row.filename != null" [href]="'http://mamedev.org/releases/'+row.filename">
             <mat-icon svgIcon="radar" [matTooltip]="'L10N_CHANGELOG'|translate"></mat-icon>
         </a>
     </ng-template>

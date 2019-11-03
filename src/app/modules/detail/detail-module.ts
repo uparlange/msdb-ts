@@ -37,16 +37,6 @@ const routes: Routes = [
     PortsPopup,
     RomsPopup,
     GalleryComponent
-  ],
-  entryComponents: [
-    BiossetsPopup,
-    ChipsPopup,
-    ClonesPopup,
-    DeviceRefsPopup,
-    DipSwitchsPopup,
-    DriverPopup,
-    PortsPopup,
-    RomsPopup
   ]
 })
 export class DetailModule extends AbstractModule {

@@ -12,16 +12,4 @@ export class VersionsView extends AbstractAppView {
     constructor(appHelperObject: AppHelperObject, versionsModel: VersionsModel) {
         super(appHelperObject, versionsModel);
     }
-
-    getVersion(value: string): string {
-        let version = value;
-        version = version.replace("0.00", "0");
-        version = version.replace("0.0", "0");
-        version = version.replace("0.", "0");
-        return version.toLowerCase();
-    }
-
-    changeLogAvailable(value: string): boolean {
-        return (value.indexOf("u") === -1);
-    }
 }

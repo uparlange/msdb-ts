@@ -22,13 +22,13 @@ export class AdvTableComponent extends AbstractComponent {
     @Input() filterEnabled: boolean = true;
     @Input() rowTrackId: string = null;
     @Input() pageIndex: Number = 0;
+    @Input() pageSize: Number = 100;
 
     @Output() filterValueChange: EventEmitter<any> = new EventEmitter();
     @Output() pageIndexChange: EventEmitter<any> = new EventEmitter();
 
     displayedColumns: Array<string> = [];
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
-    pageSize: Number = 200;
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);
