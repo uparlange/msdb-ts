@@ -11,7 +11,7 @@ import { SocketManager } from '../managers/socket-manager';
 import { WindowRef } from 'src/app/fwk/providers/window-ref';
 import { AppShell } from './app-shell';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class AppHelperObject extends AbstractHelperObject {
 
   _configProvider: ConfigProvider = null;

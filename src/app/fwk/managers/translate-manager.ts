@@ -3,7 +3,7 @@ import { AbstractManager } from 'src/app/fwk/abstract-manager';
 import { HttpClient } from '@angular/common/http';
 import { WindowRef } from 'src/app/fwk/providers/window-ref';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class TranslateManager extends AbstractManager {
 
   _http: HttpClient = null;

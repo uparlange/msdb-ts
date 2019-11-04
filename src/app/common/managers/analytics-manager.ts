@@ -2,7 +2,7 @@ import { AbstractManager } from '../../fwk/abstract-manager';
 import { RouterManager } from 'src/app/fwk/managers/router-manager';
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class AnalyticsManager extends AbstractManager {
 
     _gaMeasurementId: string = "UA-141763528-1";

@@ -1,7 +1,9 @@
 import { AbstractManager } from '../abstract-manager';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { Injectable } from '@angular/core';
 
+@Injectable({ providedIn: "root" })
 export class PopupManager extends AbstractManager {
 
   _matDialogRef: MatDialogRef<any, any> = null;

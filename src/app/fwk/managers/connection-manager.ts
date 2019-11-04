@@ -2,7 +2,7 @@ import { AbstractManager } from '../abstract-manager';
 import { Injectable } from '@angular/core';
 import { WindowRef } from '../providers/window-ref';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class ConnectionManager extends AbstractManager {
 
     _windowRef: WindowRef = null;

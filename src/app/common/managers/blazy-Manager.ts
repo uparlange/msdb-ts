@@ -2,7 +2,7 @@ import { AbstractManager } from '../../fwk/abstract-manager';
 import { Injectable } from '@angular/core';
 import Blazy from 'blazy';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class BlazyManager extends AbstractManager {
 
   _blazy: BlazyInstance = new Blazy(null);

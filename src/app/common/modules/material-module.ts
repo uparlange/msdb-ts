@@ -20,7 +20,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AbstractModule } from 'src/app/fwk/abstract-module';
-import { MatPaginatorL10n } from '../providers/MatPaginatorL10n';
+import { MatPaginatorL10n } from '../providers/mat-paginator-l10n';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({

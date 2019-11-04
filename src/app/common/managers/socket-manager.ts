@@ -4,7 +4,7 @@ import { EventManager } from '../../fwk/managers/event-manager';
 import io from 'socket.io-client';
 import { ConfigProvider } from '../providers/config-provider';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class SocketManager extends AbstractManager {
 
   _eventManager: EventManager = null;

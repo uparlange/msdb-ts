@@ -2,7 +2,7 @@ import { AbstractManager } from '../../fwk/abstract-manager';
 import { CacheManager } from '../../fwk/managers/cache-manager';
 import { EventEmitter, Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class FavoritesManager extends AbstractManager {
 
   _cacheManager: CacheManager = null;

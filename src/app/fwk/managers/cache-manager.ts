@@ -2,7 +2,7 @@ import { AbstractManager } from '../abstract-manager';
 import Dexie from 'dexie';
 import { EventEmitter, Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class CacheManager extends AbstractManager {
 
     _db: Dexie = null;

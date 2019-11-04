@@ -12,7 +12,7 @@ import { FavoritesManager } from '../managers/favorites-manager';
 import { SocketManager } from '../managers/socket-manager';
 import { PopupManager } from 'src/app/fwk/managers/popup-manager';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class AppShell extends FwkShell {
 
   _analyticsManager: AnalyticsManager = null;

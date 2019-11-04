@@ -5,7 +5,7 @@ import { NgZone, Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WindowRef } from '../providers/window-ref';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class RouterManager extends AbstractManager {
 
     _router: Router = null;

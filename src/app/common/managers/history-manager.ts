@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterManager } from 'src/app/fwk/managers/router-manager';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class HistoryManager extends AbstractManager {
 
   _history: Array<any> = new Array();

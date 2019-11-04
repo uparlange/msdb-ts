@@ -8,11 +8,10 @@ import { ProgressBarDirective } from "./directives/progress-bar-directive";
 import { AppView } from './app-view';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FwkGlobalModule } from 'src/app/fwk/modules/fwk-global-module';
-import { GlobalModule } from 'src/app/common/modules/global-module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from './../environments/environment';
 import { SharedModule } from './common/modules/shared-module';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -37,10 +36,9 @@ const routes: Routes = [
     BrowserAnimationsModule,
     HammerModule,
     SharedModule,
-    FwkGlobalModule,
-    GlobalModule,
+    HttpClientModule,
     RouterModule.forRoot(routes, { useHash: true }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production })
   ],
   providers: [
     AppModel

@@ -4,7 +4,7 @@ import { ConfigProvider } from './config-provider';
 import { AbstractProvider } from 'src/app/fwk/abstract-provider';
 import { AppHelperObject } from './app-helper-object';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class MsdbProvider extends AbstractProvider {
 
     _mameInfos: any = null;

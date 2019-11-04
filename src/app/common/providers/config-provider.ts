@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractObject } from 'src/app/fwk/abstract-object';
 import { WindowRef } from 'src/app/fwk/providers/window-ref';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class ConfigProvider extends AbstractObject {
 
   _windowRef: WindowRef = null;

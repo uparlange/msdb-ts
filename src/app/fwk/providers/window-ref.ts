@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractObject } from '../abstract-object';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class WindowRef extends AbstractObject {
 
     nativeWindow: Window = window;

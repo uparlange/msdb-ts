@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material-module';
 import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { MatIconButtonDirective } from '../directives/mat-icon-button-directive';
@@ -24,7 +23,6 @@ import { ScrollToTopDirective } from '../directives/scroll-to-top-directive';
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule,
     MaterialModule,
     FwkSharedModule
   ],
