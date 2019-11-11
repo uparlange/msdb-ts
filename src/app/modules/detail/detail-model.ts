@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
 import { AppEvents } from 'src/app/app-events';
-import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
 import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 
 @Injectable()
@@ -10,8 +9,8 @@ export class DetailModel extends AbstractAppModel {
 
   _socketConfigChangedSubscription: Subscription = null;
 
-  constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
-    super(appHelperObject, msdbProvider);
+  constructor(appHelperObject: AppHelperObject) {
+    super(appHelperObject);
   }
 
   onInit(): void {
@@ -24,7 +23,7 @@ export class DetailModel extends AbstractAppModel {
   onRefresh(callback: Function): void {
     super.onRefresh(callback);
     this.data = this._getInitData();
-    this.getProvider().getDetail(this.params.name).subscribe((data: any) => {
+    this.getMsdbProvider().getDetail(this.params.name).subscribe((data: any) => {
       if (data === null) {
         this.data.game.description = this.params.name;
       } else {
@@ -47,7 +46,7 @@ export class DetailModel extends AbstractAppModel {
         this.data.images = images;
         this.setTitle(`${this.data.game.description}`);
         this.setKeywords(`${this.data.game.name}, ${this.data.game.description}`);
-        this.getProvider().search("clones", this.params.name).subscribe((data: any) => {
+        this.getMsdbProvider().search("clones", this.params.name).subscribe((data: any) => {
           this.data.clones = data;
           callback();
         });

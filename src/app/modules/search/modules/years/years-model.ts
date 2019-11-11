@@ -1,13 +1,12 @@
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
 import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { Injectable } from '@angular/core';
-import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
 
 @Injectable()
 export class YearsModel extends AbstractAppModel {
 
-    constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
-        super(appHelperObject, msdbProvider);
+    constructor(appHelperObject: AppHelperObject) {
+        super(appHelperObject);
     }
 
     onInit(): void {
@@ -19,7 +18,7 @@ export class YearsModel extends AbstractAppModel {
 
     onRefresh(callback: Function): void {
         super.onRefresh(callback);
-        this.getProvider().getYears().subscribe((data: any) => {
+        this.getMsdbProvider().getYears().subscribe((data: any) => {
             this.data.provider = data;
             callback();
         });

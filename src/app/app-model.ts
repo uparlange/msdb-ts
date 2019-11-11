@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
 import { AppEvents } from './app-events';
-import { MsdbProvider } from './common/providers/msdb-provider';
 import { AppHelperObject } from './common/providers/app-helper-object';
 
 @Injectable()
@@ -11,8 +10,8 @@ export class AppModel extends AbstractAppModel {
     _cacheChangeSubscription: Subscription = null;
     _setBackgroundClassSubscription: Subscription = null;
 
-    constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
-        super(appHelperObject, msdbProvider);
+    constructor(appHelperObject: AppHelperObject) {
+        super(appHelperObject);
     }
 
     onInit(): void {

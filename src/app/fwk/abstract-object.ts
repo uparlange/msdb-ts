@@ -7,11 +7,14 @@ export class AbstractObject {
     getLogger(): any {
         const that = this;
         return {
-            debug(message: string) {
+            debug(message: any) {
                 console.debug(that.getClassName(), message);
             },
-            info(message: string) {
+            info(message: any) {
                 console.info(that.getClassName(), message);
+            },
+            error(message: any) {
+                console.error(that.getClassName(), message);
             }
         }
     }

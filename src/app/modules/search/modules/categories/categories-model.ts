@@ -3,20 +3,19 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { Injectable } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
-import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
 
 @Injectable()
 export class CategoriesModel extends AbstractAppModel {
 
-    constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
-        super(appHelperObject, msdbProvider);
+    constructor(appHelperObject: AppHelperObject) {
+        super(appHelperObject);
     }
 
     onRefresh(callback: Function): void {
         super.onRefresh(callback);
         const categories = [];
         const category_map = {};
-        this.getProvider().getCategories().subscribe((data: any) => {
+        this.getMsdbProvider().getCategories().subscribe((data: any) => {
             data.forEach((item: any) => {
                 const item_split = item.label.split("/");
                 const category = item_split[0].trim();

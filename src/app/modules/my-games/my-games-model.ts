@@ -3,7 +3,6 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AppEvents } from 'src/app/app-events';
-import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
 
 @Injectable()
 export class MyGamesModel extends AbstractAppModel {
@@ -13,8 +12,8 @@ export class MyGamesModel extends AbstractAppModel {
     _changeInRomsDirectorySubscription: Subscription = null;
     _viewActive: boolean = false;
 
-    constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
-        super(appHelperObject, msdbProvider);
+    constructor(appHelperObject: AppHelperObject) {
+        super(appHelperObject);
     }
 
     onInit(): void {
@@ -58,7 +57,7 @@ export class MyGamesModel extends AbstractAppModel {
             this._needRefresh = false;
             this.getSocket().emit("GET_MY_GAMES", null).subscribe((result: any) => {
                 if (Array.isArray(result)) {
-                    this.getProvider().search("name", result).subscribe((data: any) => {
+                    this.getMsdbProvider().search("name", result).subscribe((data: any) => {
                         if (Array.isArray(data)) {
                             data.sort((x, y) => {
                                 if (x.isbios < y.isbios) return -1;

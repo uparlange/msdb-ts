@@ -11,6 +11,7 @@ import { HistoryManager } from '../managers/history-manager';
 import { FavoritesManager } from '../managers/favorites-manager';
 import { SocketManager } from '../managers/socket-manager';
 import { PopupManager } from 'src/app/fwk/managers/popup-manager';
+import { NotificationManager } from '../managers/notification-manager';
 
 @Injectable({ providedIn: "root" })
 export class AppShell extends FwkShell {
@@ -20,11 +21,12 @@ export class AppShell extends FwkShell {
   _historyManager: HistoryManager = null;
   _favoritesManager: FavoritesManager = null;
   _socketManager: SocketManager = null;
+  _notificationManager: NotificationManager = null;
 
   constructor(translateManager: TranslateManager, connectionManager: ConnectionManager, cacheManager: CacheManager,
     routerManager: RouterManager, eventManager: EventManager, analyticsManager: AnalyticsManager,
     blazyManager: BlazyManager, historyManager: HistoryManager, favoritesManager: FavoritesManager,
-    socketManager: SocketManager, popupManager: PopupManager) {
+    socketManager: SocketManager, popupManager: PopupManager, notificationManager: NotificationManager) {
     super(translateManager, connectionManager, cacheManager, routerManager, eventManager,
       popupManager);
     this._analyticsManager = analyticsManager;
@@ -32,6 +34,7 @@ export class AppShell extends FwkShell {
     this._historyManager = historyManager;
     this._favoritesManager = favoritesManager;
     this._socketManager = socketManager;
+    this._notificationManager = notificationManager;
   }
 
   init(): void {
@@ -41,6 +44,7 @@ export class AppShell extends FwkShell {
     this._historyManager.init();
     this._favoritesManager.init();
     this._socketManager.init();
+    this._notificationManager.init();
   }
 
   getAnalyticsManager(): AnalyticsManager {
@@ -61,5 +65,9 @@ export class AppShell extends FwkShell {
 
   getSocketManager(): SocketManager {
     return this._socketManager;
+  }
+
+  getNotificationManager(): NotificationManager {
+    return this._notificationManager;
   }
 }

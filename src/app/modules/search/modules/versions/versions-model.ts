@@ -1,13 +1,12 @@
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
 import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { Injectable } from '@angular/core';
-import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
 
 @Injectable()
 export class VersionsModel extends AbstractAppModel {
 
-    constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
-        super(appHelperObject, msdbProvider);
+    constructor(appHelperObject: AppHelperObject) {
+        super(appHelperObject);
     }
 
     onInit(): void {
@@ -22,8 +21,8 @@ export class VersionsModel extends AbstractAppModel {
 
     onRefresh(callback: Function): void {
         super.onRefresh(callback);
-        this.getProvider().getVersions().subscribe((data: any) => {
-            this.getProvider().getMameInfos().subscribe((infos: any) => {
+        this.getMsdbProvider().getVersions().subscribe((data: any) => {
+            this.getMsdbProvider().getMameInfos().subscribe((infos: any) => {
                 data.forEach((element: any) => {
                     Object.assign(element, infos.history[element.label]);
                 });

@@ -10,16 +10,19 @@ import { FavoritesManager } from '../managers/favorites-manager';
 import { SocketManager } from '../managers/socket-manager';
 import { WindowRef } from 'src/app/fwk/providers/window-ref';
 import { AppShell } from './app-shell';
+import { MsdbProvider } from './msdb-provider';
 
 @Injectable({ providedIn: "root" })
 export class AppHelperObject extends AbstractHelperObject {
 
   _configProvider: ConfigProvider = null;
+  _msdbProvider: MsdbProvider = null;
 
   constructor(shell: AppShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute,
-    meta: Meta, configProvider: ConfigProvider) {
+    meta: Meta, configProvider: ConfigProvider, msdbProvider: MsdbProvider) {
     super(shell, windowRef, title, httpClient, activatedRoute, meta);
     this._configProvider = configProvider;
+    this._msdbProvider = msdbProvider;
   }
 
   getAnalyticsManager(): AnalyticsManager {
@@ -40,6 +43,10 @@ export class AppHelperObject extends AbstractHelperObject {
 
   getConfigProvider(): ConfigProvider {
     return this._configProvider;
+  }
+
+  getMsdbProvider(): MsdbProvider {
+    return this._msdbProvider;
   }
 
   _getShell(): AppShell {

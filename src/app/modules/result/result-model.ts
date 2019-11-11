@@ -1,7 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
 import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
-import { MsdbProvider } from 'src/app/common/providers/msdb-provider';
 
 @Injectable()
 export class ResultModel extends AbstractAppModel {
@@ -11,8 +10,8 @@ export class ResultModel extends AbstractAppModel {
     _FILTER_BIOS: string = "bios";
     _FILTER_DEVICE: string = "device";
 
-    constructor(appHelperObject: AppHelperObject, msdbProvider: MsdbProvider) {
-        super(appHelperObject, msdbProvider);
+    constructor(appHelperObject: AppHelperObject) {
+        super(appHelperObject);
     }
 
     onInit(): void {
@@ -27,7 +26,7 @@ export class ResultModel extends AbstractAppModel {
     onRefresh(callback: Function): void {
         super.onRefresh(callback);
         this.data.provider = [];
-        this.getProvider().search(this.params.type, this.params.value).subscribe((data: any) => {
+        this.getMsdbProvider().search(this.params.type, this.params.value).subscribe((data: any) => {
             this.data.source = data || [];
             this._initFilters();
             this._filterList();

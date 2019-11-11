@@ -7,19 +7,16 @@ import { AppHelperObject } from './providers/app-helper-object';
 
 export class AbstractAppModel extends AbstractModel {
 
-  _provider: MsdbProvider = null;
-
-  constructor(appHelperObject: AppHelperObject, provider: MsdbProvider) {
+  constructor(appHelperObject: AppHelperObject) {
     super(appHelperObject);
-    this._provider = provider;
   }
 
   getSocket(): SocketManager {
     return this._getHelper().getSocketManager();
   }
 
-  getProvider(): MsdbProvider {
-    return this._provider;
+  getMsdbProvider(): MsdbProvider {
+    return this._getHelper().getMsdbProvider();
   }
 
   getHistory(): HistoryManager {
