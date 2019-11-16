@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractManager } from 'src/app/fwk/abstract-manager';
 import { SwPush } from '@angular/service-worker';
 import { MsdbProvider } from '../providers/msdb-provider';
+import { ConfigProvider } from '../providers/config-provider';
 
 // https://blog.angular-university.io/angular-push-notifications/
 @Injectable({ providedIn: "root" })
@@ -11,35 +12,46 @@ export class NotificationManager extends AbstractManager {
 
     _swPush: SwPush = null;
     _msdbProvider: MsdbProvider = null;
+    _configProvider: ConfigProvider = null;
 
-    constructor(swPush: SwPush, msdbProvider: MsdbProvider) {
+    constructor(swPush: SwPush, msdbProvider: MsdbProvider, configProvider: ConfigProvider) {
         super();
         this._swPush = swPush;
         this._msdbProvider = msdbProvider;
+        this._configProvider = configProvider;
     }
 
     init(): void {
         this.getLogger().info("Push Notifications enabled : " + this._swPush.isEnabled);
         if (this._swPush.isEnabled) {
-            this._swPush.subscription.subscribe((sub) => {
-                if (sub == null) {
-                    this._swPush.requestSubscription({
-                        serverPublicKey: this._vapidPublicKey
-                    }).then((sub) => {
-                        this._msdbProvider.addPushSubscription(sub).subscribe((data: any) => {
-                            this.getLogger().info("Subscription saved successfully");
-                        });
-                    }).catch((err) => {
-                        this.getLogger().error(err);
+            // Beta feature until generalisation
+            if (this._configProvider.inBetaMode()) {
+                this._swPush.messages.subscribe((payload: any) => {
+                    // received message ack
+                    this._msdbProvider.setMessageReceived(payload.notification.data).subscribe(() => {
+                        // Don't act !
                     });
-                } else {
-                    this._logSubscriptionUsed(sub);
-                }
-            });
+                });
+                this._swPush.notificationClicks.subscribe((payload: any) => {
+                    // clicked message ack
+                    this._msdbProvider.setMessageClicked(payload.notification.data).subscribe(() => {
+                        // Don't act !
+                    });
+                });
+                this._swPush.requestSubscription({
+                    serverPublicKey: this._vapidPublicKey
+                }).then((sub: any) => {
+                    this.getLogger().info("Subscription used : " + JSON.stringify(sub));
+                    // Try to save subscription to backend on each launch
+                    // Duplicates are managed (by hash)
+                    this._msdbProvider.addPushSubscription(sub).subscribe((data: string) => {
+                        this.getLogger().info("Subscription id : " + data);
+                    });
+                }).catch((err: any) => {
+                    this.getLogger().error(err);
+                });
+            }
         }
     }
 
-    _logSubscriptionUsed(sub: any) {
-        this.getLogger().info("Subscription used : " + JSON.stringify(sub));
-    }
 }

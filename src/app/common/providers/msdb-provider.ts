@@ -54,6 +54,24 @@ export class MsdbProvider extends AbstractObject {
         return this._callService(config);
     }
 
+    setMessageReceived(data: any): EventEmitter<any> {
+        const config = {
+            url: this._configProvider.getServiceUrl("notification/messagereceived"),
+            params: new HttpParams().set("newsId", data.newsId).set("subId", data.subId),
+            useCache: false
+        };
+        return this._callService(config);
+    }
+
+    setMessageClicked(data: any): EventEmitter<any> {
+        const config = {
+            url: this._configProvider.getServiceUrl("notification/messageclicked"),
+            params: new HttpParams().set("newsId", data.newsId).set("subId", data.subId),
+            useCache: false
+        };
+        return this._callService(config);
+    }
+
     getDetail(name: string): EventEmitter<any> {
         const config = {
             url: this._configProvider.getServiceUrl("detail"),

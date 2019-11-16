@@ -48,6 +48,10 @@ export class ConfigProvider extends AbstractObject {
     return this._windowRef.nativeWindow.hasOwnProperty("nw");
   }
 
+  inBetaMode() : boolean {
+    return this._windowRef.nativeWindow.location.href.indexOf("beta") !== -1;
+  }
+
   getSizeLabel(value: number): string {
     return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
   }
