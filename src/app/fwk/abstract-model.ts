@@ -10,6 +10,7 @@ export class AbstractModel extends AbstractHelper {
 
   params: any = {};
   data: any = this._getInitData();
+  needRefresh: boolean = true;
 
   _connectionChangeSubscription: Subscription = null;
 
@@ -22,26 +23,19 @@ export class AbstractModel extends AbstractHelper {
     this._connectionChangeSubscription = this._helper.getConnection().on("change").subscribe((online: boolean) => {
       this.params.online = online;
       if (online) {
-        this.onRefresh(() => {
-          this.getRouter().restoreScrollPosition();
-        });
+        this.needRefresh = true;
+        this._refresh();
       }
     });
     this.setTitle(null);
     this.setKeywords(null);
-    this.getRouter().restoreScrollPosition();
     const newParams = Object.assign({ online: this._helper.getConnection().online }, params);
-    let paramsChanged = false;
     if (JSON.stringify(this.params) !== JSON.stringify(newParams)) {
       this.params = newParams;
-      paramsChanged = true;
+      this.needRefresh = true;
     }
-    this.onInit();
-    if (paramsChanged) {
-      this.onRefresh(() => {
-        this.getRouter().restoreScrollPosition();
-      });
-    }
+    this._init();
+    this._refresh();
   }
 
   destroy() {
@@ -94,6 +88,20 @@ export class AbstractModel extends AbstractHelper {
 
   onDestroy(): void {
     // need override
+  }
+
+  _init(): void {
+    this.onInit();
+    this.getRouter().restoreScrollPosition();
+  }
+
+  _refresh(): void {
+    if (this.needRefresh) {
+      this.needRefresh = false;
+      this.onRefresh(() => {
+        this.getRouter().restoreScrollPosition();
+      });
+    }
   }
 
   _getInitData(): any {

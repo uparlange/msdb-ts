@@ -22,6 +22,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AbstractModule } from 'src/app/fwk/abstract-module';
 import { MatPaginatorL10n } from '../providers/mat-paginator-l10n';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -46,7 +47,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatTreeModule,
     MatChipsModule,
     MatButtonToggleModule,
-    MatIconModule
+    MatIconModule,
+    MatSlideToggleModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorL10n }
@@ -72,7 +74,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatTreeModule,
     MatChipsModule,
     MatButtonToggleModule,
-    MatIconModule
+    MatIconModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule extends AbstractModule {

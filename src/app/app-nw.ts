@@ -9,12 +9,13 @@ export class AppNw extends AbstractObject {
     _appView: AppView = null;
     _watcher: any = null;
     _socket: any = null;
+    _httpServer: any = null;
 
     constructor() {
         super();
     }
 
-    refreshMenuBar(translations:any): void {
+    refreshMenuBar(translations: any): void {
         const menu = new window.nw.Menu({ type: "menubar" });
         const fileSubMenu = new window.nw.Menu();
         fileSubMenu.append(new window.nw.MenuItem({
@@ -57,6 +58,9 @@ export class AppNw extends AbstractObject {
 
     init(appView: AppView): void {
         this._appView = appView;
+        window.onbeforeunload = () => {
+            this._httpServer.close();
+        }
         this._initServer();
         this._initUpdateWatcher();
     }
@@ -70,10 +74,11 @@ export class AppNw extends AbstractObject {
         const ioInstance = io(httpInstance);
         const bodyParser = window.nw.require("body-parser");
         expressInstance.use(bodyParser.json());
-        //const serverPort = AppUtils.getSocketPort();
-        const serverPort = 3000;
-        httpInstance.listen(serverPort, () => {
+        const serverPort = pkg["ws-port"];
+        this._httpServer = httpInstance.listen(serverPort, () => {
             this.getLogger().info(`(EXPRESS) Listening on port ${serverPort}`);
+        }).on("error", (err: any) => {
+            this.getLogger().error(`(EXPRESS) ${err}`);
         });
         ioInstance.on("connection", (socket: any) => {
             this.getLogger().info(`(SOCKET.IO) User (${socket.id}) connected`);
@@ -116,7 +121,6 @@ export class AppNw extends AbstractObject {
 
     _getConfigFile(): string {
         const os = window.nw.require("os");
-        const pkg = window.nw.require("./package.json");
         return `${os.homedir()}\\${pkg.name}.json`;
     }
 
@@ -210,7 +214,7 @@ export class AppNw extends AbstractObject {
     _playGame(name: string, callback: Function): void {
         const fs = window.nw.require("fs");
         this.getLogger().info(`(MAME) Launch game ${name}`);
-        this._getConfiguration((configuration) => {
+        this._getConfiguration((configuration: any) => {
             const mameDirectory = configuration.mameDirectory;
             let mameFileName = "mame64.exe";
             if (!fs.existsSync(`${mameDirectory}\\${mameFileName}`)) {

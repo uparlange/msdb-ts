@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AbstractManager } from 'src/app/fwk/abstract-manager';
 import { SwPush } from '@angular/service-worker';
 import { MsdbProvider } from '../providers/msdb-provider';
@@ -13,6 +13,7 @@ export class NotificationManager extends AbstractManager {
     _swPush: SwPush = null;
     _msdbProvider: MsdbProvider = null;
     _configProvider: ConfigProvider = null;
+    _sub: any = null;
 
     constructor(swPush: SwPush, msdbProvider: MsdbProvider, configProvider: ConfigProvider) {
         super();
@@ -22,36 +23,84 @@ export class NotificationManager extends AbstractManager {
     }
 
     init(): void {
-        this.getLogger().info("Push Notifications enabled : " + this._swPush.isEnabled);
-        if (this._swPush.isEnabled) {
-            // Beta feature until generalisation
-            if (this._configProvider.inBetaMode()) {
-                this._swPush.messages.subscribe((payload: any) => {
-                    // received message ack
-                    this._msdbProvider.setMessageReceived(payload.notification.data).subscribe(() => {
-                        // Don't act !
-                    });
+        this.getLogger().info("Push Notifications enabled : " + this.isEnabled());
+        if (this.isEnabled()) {
+            this._swPush.subscription.subscribe((sub) => {
+                this.getLogger().info("Subscription used : " + JSON.stringify(sub));
+                this._sub = sub;
+            });
+            this._swPush.messages.subscribe((payload: any) => {
+                // received message ack
+                this._msdbProvider.setMessageReceived(payload.notification.data).subscribe(() => {
+                    // Don't act !
                 });
-                this._swPush.notificationClicks.subscribe((payload: any) => {
-                    // clicked message ack
-                    this._msdbProvider.setMessageClicked(payload.notification.data).subscribe(() => {
-                        // Don't act !
-                    });
+            });
+            this._swPush.notificationClicks.subscribe((payload: any) => {
+                // clicked message ack
+                this._msdbProvider.setMessageClicked(payload.notification.data).subscribe(() => {
+                    // Don't act !
                 });
-                this._swPush.requestSubscription({
-                    serverPublicKey: this._vapidPublicKey
-                }).then((sub: any) => {
-                    this.getLogger().info("Subscription used : " + JSON.stringify(sub));
-                    // Try to save subscription to backend on each launch
-                    // Duplicates are managed (by hash)
-                    this._msdbProvider.addPushSubscription(sub).subscribe((data: string) => {
-                        this.getLogger().info("Subscription id : " + data);
-                    });
-                }).catch((err: any) => {
-                    this.getLogger().error(err);
-                });
-            }
+            });
         }
+    }
+
+    isEnabled(): boolean {
+        return this._swPush.isEnabled;
+    }
+
+    getSubscription(): any {
+        const eventEmitter: EventEmitter<any> = new EventEmitter();
+        setTimeout(() => {
+            eventEmitter.emit(this._sub);
+        }, 0);
+        return eventEmitter;
+    }
+
+    subscribe(): EventEmitter<any> {
+        const eventEmitter: EventEmitter<any> = new EventEmitter();
+        if (this.isEnabled()) {
+            this._swPush.requestSubscription({
+                serverPublicKey: this._vapidPublicKey
+            }).then((sub: any) => {
+                this._sub = sub;
+                // Try to save subscription to backend on each launch
+                // Duplicates are managed (by hash)
+                this._msdbProvider.addPushSubscription(this._sub).subscribe((data: string) => {
+                    this.getLogger().info("Subscription added : " + data);
+                    eventEmitter.emit(this._sub);
+                });
+            }).catch((err: any) => {
+                this.getLogger().error(err);
+                eventEmitter.emit(this._sub);
+            });
+        } else {
+            setTimeout(() => {
+                eventEmitter.emit(this._sub);
+            }, 0);
+        }
+        return eventEmitter;
+    }
+
+    unsubscribe(): EventEmitter<any> {
+        const eventEmitter: EventEmitter<any> = new EventEmitter();
+        if (this.isEnabled() && this._sub != null) {
+            const currentSub = this._sub;
+            this._swPush.unsubscribe().then(() => {
+                this._sub = null;
+                this._msdbProvider.removePushSubscription(currentSub).subscribe((data: string) => {
+                    this.getLogger().info("Subscription removed : " + data);
+                    eventEmitter.emit(this._sub);
+                });
+            }).catch((err: any) => {
+                this.getLogger().error(err);
+                eventEmitter.emit(this._sub);
+            });
+        } else {
+            setTimeout(() => {
+                eventEmitter.emit(this._sub);
+            }, 0);
+        }
+        return eventEmitter;
     }
 
 }

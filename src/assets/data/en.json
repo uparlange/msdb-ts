@@ -117,5 +117,8 @@
 	"L10N_ALL_OF": "All of",
 	"L10N_SHORTCUTS": "Shortcuts",
 	"L10N_ACCOUNT_NEEDED": "Account Needed",
-	"L10N_EMULATOR": "Emulator"
+	"L10N_EMULATOR": "Emulator",
+	"L10N_NOTIFICATION": "Notification",
+	"L10N_SUBSCRIBE": "Subscribe",
+	"L10N_UNUBSCRIBE": "Unsubscribe"
 }

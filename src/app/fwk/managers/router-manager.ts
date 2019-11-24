@@ -4,6 +4,7 @@ import { CacheManager } from './cache-manager';
 import { NgZone, Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WindowRef } from '../providers/window-ref';
+import { Location } from '@angular/common';
 
 @Injectable({ providedIn: "root" })
 export class RouterManager extends AbstractManager {
@@ -15,13 +16,15 @@ export class RouterManager extends AbstractManager {
     _mutationObserver: MutationObserver = null;
     _eventsSubscription: Subscription = null;
     _creationCompleteTimeout: any = null;
+    _location: Location = null;
 
-    constructor(router: Router, cacheManager: CacheManager, ngZone: NgZone, windowRef: WindowRef) {
+    constructor(router: Router, cacheManager: CacheManager, ngZone: NgZone, windowRef: WindowRef, location: Location) {
         super();
         this._router = router;
         this._cacheManager = cacheManager;
         this._ngZone = ngZone;
         this._windowRef = windowRef;
+        this._location = location;
     }
 
     init(): void {
@@ -52,6 +55,10 @@ export class RouterManager extends AbstractManager {
         this._ngZone.run(() => {
             this._router.navigate(commands, extras);
         });
+    }
+
+    back(): void {
+        this._location.back();
     }
 
     getUrl(): string {

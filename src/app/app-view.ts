@@ -42,7 +42,7 @@ export class AppView extends AbstractAppView {
   }
 
   showPreviousPage(): void {
-    this.getWindowRef().showPreviousPage();
+    this.getRouter().back();
   }
 
   showView(view: string): void {
@@ -68,14 +68,18 @@ export class AppView extends AbstractAppView {
 
   _initToaster() {
     this.getConnection().on("change").subscribe((online: boolean) => {
-      const config = new MatSnackBarConfig();
-      config.duration = 1500;
-      config.viewContainerRef = this._viewContainerRef;
       const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";
       this.getLabels().getValues([key]).subscribe((translations: any) => {
-        this._matSnackBar.open(translations[key], null, config);
+        this._showToast(translations[key]);
       });
     });
+  }
+
+  _showToast(message: string) {
+    const config = new MatSnackBarConfig();
+    config.duration = 1500;
+    config.viewContainerRef = this._viewContainerRef;
+    this._matSnackBar.open(message, null, config);
   }
 
 }

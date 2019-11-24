@@ -4,6 +4,7 @@ import { SocketManager } from './managers/socket-manager';
 import { FavoritesManager } from './managers/favorites-manager';
 import { MsdbProvider } from './providers/msdb-provider';
 import { AppHelperObject } from './providers/app-helper-object';
+import { NotificationManager } from './managers/notification-manager';
 
 export class AbstractAppModel extends AbstractModel {
 
@@ -13,6 +14,10 @@ export class AbstractAppModel extends AbstractModel {
 
   getSocket(): SocketManager {
     return this._getHelper().getSocketManager();
+  }
+
+  getNotification(): NotificationManager {
+    return this._getHelper().getNotificationManager();
   }
 
   getMsdbProvider(): MsdbProvider {

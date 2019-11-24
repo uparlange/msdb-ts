@@ -11,6 +11,8 @@ import { SocketManager } from '../managers/socket-manager';
 import { WindowRef } from 'src/app/fwk/providers/window-ref';
 import { AppShell } from './app-shell';
 import { MsdbProvider } from './msdb-provider';
+import { BlazyManager } from '../managers/blazy-Manager';
+import { NotificationManager } from '../managers/notification-manager';
 
 @Injectable({ providedIn: "root" })
 export class AppHelperObject extends AbstractHelperObject {
@@ -29,6 +31,10 @@ export class AppHelperObject extends AbstractHelperObject {
     return this._getShell().getAnalyticsManager();
   }
 
+  getLazyManager(): BlazyManager {
+    return this._getShell().getLazyManager();
+  }
+
   getHistoryManager(): HistoryManager {
     return this._getShell().getHistoryManager();
   }
@@ -39,6 +45,10 @@ export class AppHelperObject extends AbstractHelperObject {
 
   getSocketManager(): SocketManager {
     return this._getShell().getSocketManager();
+  }
+
+  getNotificationManager(): NotificationManager {
+    return this._getShell().getNotificationManager();
   }
 
   getConfigProvider(): ConfigProvider {

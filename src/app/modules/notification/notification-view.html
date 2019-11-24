@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-title>
+        {{'L10N_NOTIFICATION'|translate}}
+        <mat-slide-toggle disabled="true" [checked]="model.data.sub != null"></mat-slide-toggle>
+    </mat-card-title>
+</mat-card>
+<div class="default-spacer"></div>
+<mat-card>
+    <mat-card-content>
+        <button mat-raised-button color="primary" (click)="subscribe()" [disabled]="!model.data.enabled || model.data.sub != null">
+            {{'L10N_SUBSCRIBE'|translate}}
+        </button>
+        <span class="sep"></span>
+        <button mat-raised-button color="accent" (click)="unsubscribe()" [disabled]="!model.data.enabled || model.data.sub == null">
+            {{'L10N_UNUBSCRIBE'|translate}}
+        </button>
+    </mat-card-content>
+</mat-card>

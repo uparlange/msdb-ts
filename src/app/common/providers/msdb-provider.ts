@@ -54,6 +54,15 @@ export class MsdbProvider extends AbstractObject {
         return this._callService(config);
     }
 
+    removePushSubscription(sub: any): EventEmitter<any> {
+        const config = {
+            url: this._configProvider.getServiceUrl("notification/delsub"),
+            params: new HttpParams().set("sub", JSON.stringify(sub)),
+            useCache: false
+        };
+        return this._callService(config);
+    }
+
     setMessageReceived(data: any): EventEmitter<any> {
         const config = {
             url: this._configProvider.getServiceUrl("notification/messagereceived"),

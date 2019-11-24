@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: "history", loadChildren: () => import("./modules/history/history-module").then(mod => mod.HistoryModule) },
   { path: "favorites", loadChildren: () => import("./modules/favorites/favorites-module").then(mod => mod.FavoritesModule) },
   { path: "mygames", loadChildren: () => import("./modules/my-games/my-games-module").then(mod => mod.MyGamesModule) },
+  { path: "notification", loadChildren: () => import("./modules/notification/notification-module").then(mod => mod.NotificationModule) },
   { path: "**", loadChildren: () => import("./modules/page-not-found/page-not-found-module").then(mod => mod.PageNotFoundModule) }
 ];
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractObject } from 'src/app/fwk/abstract-object';
 import { WindowRef } from 'src/app/fwk/providers/window-ref';
+import pkg from './../../../../package.json';
 
 @Injectable({ providedIn: "root" })
 export class ConfigProvider extends AbstractObject {
@@ -36,8 +37,8 @@ export class ConfigProvider extends AbstractObject {
     return `http://www.progettosnaps.net/soundtrack/packs/mp3/${game.name}.zip`;
   }
 
-  getSocketPort(): number {
-    return 3000;
+  getSocketPort(): string {
+    return pkg["ws-port"];
   }
 
   getSocketUrl(): string {
@@ -48,7 +49,7 @@ export class ConfigProvider extends AbstractObject {
     return this._windowRef.nativeWindow.hasOwnProperty("nw");
   }
 
-  inBetaMode() : boolean {
+  inBetaMode(): boolean {
     return this._windowRef.nativeWindow.location.href.indexOf("beta") !== -1;
   }
 
