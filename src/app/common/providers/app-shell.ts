@@ -12,6 +12,7 @@ import { FavoritesManager } from '../managers/favorites-manager';
 import { SocketManager } from '../managers/socket-manager';
 import { PopupManager } from 'src/app/fwk/managers/popup-manager';
 import { NotificationManager } from '../managers/notification-manager';
+import { NwManager } from '../managers/nw-manager';
 
 @Injectable({ providedIn: "root" })
 export class AppShell extends FwkShell {
@@ -22,11 +23,13 @@ export class AppShell extends FwkShell {
   _favoritesManager: FavoritesManager = null;
   _socketManager: SocketManager = null;
   _notificationManager: NotificationManager = null;
+  _nwManager: NwManager = null;
 
   constructor(translateManager: TranslateManager, connectionManager: ConnectionManager, cacheManager: CacheManager,
     routerManager: RouterManager, eventManager: EventManager, analyticsManager: AnalyticsManager,
     blazyManager: BlazyManager, historyManager: HistoryManager, favoritesManager: FavoritesManager,
-    socketManager: SocketManager, popupManager: PopupManager, notificationManager: NotificationManager) {
+    socketManager: SocketManager, popupManager: PopupManager, notificationManager: NotificationManager,
+    nwManager: NwManager) {
     super(translateManager, connectionManager, cacheManager, routerManager, eventManager,
       popupManager);
     this._analyticsManager = analyticsManager;
@@ -35,6 +38,7 @@ export class AppShell extends FwkShell {
     this._favoritesManager = favoritesManager;
     this._socketManager = socketManager;
     this._notificationManager = notificationManager;
+    this._nwManager = nwManager;
   }
 
   init(): void {
@@ -45,6 +49,7 @@ export class AppShell extends FwkShell {
     this._favoritesManager.init();
     this._socketManager.init();
     this._notificationManager.init();
+    this._nwManager.init();
   }
 
   getAnalyticsManager(): AnalyticsManager {
@@ -69,5 +74,9 @@ export class AppShell extends FwkShell {
 
   getNotificationManager(): NotificationManager {
     return this._notificationManager;
+  }
+
+  getNwManager(): NwManager {
+    return this._nwManager;
   }
 }

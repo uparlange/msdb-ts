@@ -5,6 +5,8 @@ import { FavoritesManager } from './managers/favorites-manager';
 import { MsdbProvider } from './providers/msdb-provider';
 import { AppHelperObject } from './providers/app-helper-object';
 import { NotificationManager } from './managers/notification-manager';
+import { ConfigProvider } from './providers/config-provider';
+import { NwManager } from './managers/nw-manager';
 
 export class AbstractAppModel extends AbstractModel {
 
@@ -24,6 +26,10 @@ export class AbstractAppModel extends AbstractModel {
     return this._getHelper().getMsdbProvider();
   }
 
+  getConfigProvider(): ConfigProvider {
+    return this._getHelper().getConfigProvider();
+  }
+
   getHistory(): HistoryManager {
     return this._getHelper().getHistoryManager();
   }
@@ -38,6 +44,10 @@ export class AbstractAppModel extends AbstractModel {
 
   getFavorites(): FavoritesManager {
     return this._getHelper().getFavoritesManager();
+  }
+
+  getNw(): NwManager {
+    return this._getHelper().getNwManager();
   }
 
   _getHelper(): AppHelperObject {

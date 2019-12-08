@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractObject } from 'src/app/fwk/abstract-object';
 import { WindowRef } from 'src/app/fwk/providers/window-ref';
-import pkg from './../../../../package.json';
+import { environment } from './../../../environments/environment';
 
 @Injectable({ providedIn: "root" })
 export class ConfigProvider extends AbstractObject {
@@ -18,7 +18,7 @@ export class ConfigProvider extends AbstractObject {
   }
 
   getGameIconUrl(game: any): string {
-    return game.icon !== null ? `${this.getGameFolder(game)}/${game.icon.name}` : "assets/game.png";
+    return game.icon !== null ? `${this.getGameFolder(game)}/${game.icon.name}` : environment.assetsFolder + "/game.png";
   }
 
   getGameFolder(game: any): string {
@@ -38,7 +38,7 @@ export class ConfigProvider extends AbstractObject {
   }
 
   getSocketPort(): string {
-    return pkg["ws-port"];
+    return environment.wsPort;
   }
 
   getSocketUrl(): string {
@@ -59,6 +59,10 @@ export class ConfigProvider extends AbstractObject {
 
   getFrequencyLabel(value: number): string {
     return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
+  }
+
+  getUpdateUrl(): string {
+    return "https://raw.githubusercontent.com/uparlange/msdb-ts/master/release/versions.nsis.json";
   }
 
   _productionMode(): boolean {
@@ -84,14 +88,6 @@ export class ConfigProvider extends AbstractObject {
   }
 
   _getBaseClientUrl(): string {
-    /*
-      let path = "";
-      if (!this._productionMode() || this.runInNw()) {
-          path = "https://msdb.lapli.fr/";
-      }
-      return path;
-      //return "http://localhost/msdb2/dist/";
-      */
     return "https://msdb.lapli.fr/";
   }
 }

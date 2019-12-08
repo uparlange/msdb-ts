@@ -13,6 +13,7 @@ import { AppShell } from './app-shell';
 import { MsdbProvider } from './msdb-provider';
 import { BlazyManager } from '../managers/blazy-Manager';
 import { NotificationManager } from '../managers/notification-manager';
+import { NwManager } from '../managers/nw-manager';
 
 @Injectable({ providedIn: "root" })
 export class AppHelperObject extends AbstractHelperObject {
@@ -49,6 +50,10 @@ export class AppHelperObject extends AbstractHelperObject {
 
   getNotificationManager(): NotificationManager {
     return this._getShell().getNotificationManager();
+  }
+
+  getNwManager(): NwManager {
+    return this._getShell().getNwManager();
   }
 
   getConfigProvider(): ConfigProvider {

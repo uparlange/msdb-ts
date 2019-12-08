@@ -1,6 +1,6 @@
 {
   "name": "msdb-ts",
-  "version": "5.1.9",
+  "version": "5.2.0",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -15,50 +15,46 @@
   },
   "main": "http://localhost",
   "node-remote": "http://localhost",
-  "ws-port": "56789",
   "window": {
     "title": "Mame Smart Database",
     "min_width": 500,
     "width": 500,
     "min_height": 700,
-    "height": 700,
-    "icon": "assets/favicons/apple-touch-icon.png"
+    "height": 700
   },
   "scripts": {
+    "postinstall": "node ./scripts/postinstall.js",
     "ng": "ng",
-    "start": "ng serve --port=80",
-    "build": "ng build",
-    "postbuild": "node ./scripts/postbuild.js",
-    "build-prod": "ng build --prod",
-    "postbuild-prod": "node ./scripts/postbuild.js",
-    "build-prod-nw": "ng build --prod --serviceWorker=false",
-    "postbuild-prod-nw": "node ./scripts/postbuild.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "node ./scripts/postinstall.js",
-    "web-debug": "npm run start",
-    "web-prod": "node server.js",
-    "preweb-prod": "npm run build-prod",
-    "desktop-debug": "concurrently \"npm run web-debug\" \"wait-on http://localhost && nw .\"",
-    "desktop-prod": "nw ./dist/msdb-ts/",
-    "predesktop-prod": "npm run build-prod-nw",
-    "release-nw": "npm run build-prod-nw",
-    "postrelease-nw": "node ./scripts/postreleasenw.js"
+    "clean": "rimraf ./dist-ng ./dist-nwjs",
+    "debug": "ng serve --port=80",
+    "web:debug": "npm run debug",
+    "web:build-prod": "ng build --prod --output-path ./dist-ng",
+    "postweb:build-prod": "node ./scripts/postbuild.js",
+    "preweb:debug-prod": "npm run clean",
+    "web:debug-prod": "npm run web:build-prod",
+    "postweb:debug-prod": "node server.js",
+    "desktop:debug": "concurrently \"npm run debug\" \"wait-on http://localhost && nw .\"",
+    "desktop:build-prod": "ng build --prod --serviceWorker=false --output-path ./dist-ng",
+    "predesktop:release-win64": "npm run clean",
+    "desktop:release-win64": "npm run desktop:build-prod",
+    "postdesktop:release-win64": "build --tasks win-x64 --mirror https://dl.nwjs.io/ ."
   },
   "dependencies": {
-    "@angular/animations": "^9.0.0-rc.3",
-    "@angular/cdk": "^9.0.0-rc.4",
-    "@angular/common": "^9.0.0-rc.3",
-    "@angular/compiler": "^9.0.0-rc.3",
-    "@angular/core": "^9.0.0-rc.3",
-    "@angular/forms": "^9.0.0-rc.3",
-    "@angular/material": "^9.0.0-rc.4",
-    "@angular/platform-browser": "^9.0.0-rc.3",
-    "@angular/platform-browser-dynamic": "^9.0.0-rc.3",
-    "@angular/pwa": "^0.803.19",
-    "@angular/router": "^9.0.0-rc.3",
-    "@angular/service-worker": "^9.0.0-rc.3",
+    "@angular/animations": "^9.0.0-rc.5",
+    "@angular/cdk": "^9.0.0-rc.5",
+    "@angular/common": "^9.0.0-rc.5",
+    "@angular/compiler": "^9.0.0-rc.5",
+    "@angular/core": "^9.0.0-rc.5",
+    "@angular/forms": "^9.0.0-rc.5",
+    "@angular/material": "^9.0.0-rc.5",
+    "@angular/platform-browser": "^9.0.0-rc.5",
+    "@angular/platform-browser-dynamic": "^9.0.0-rc.5",
+    "@angular/pwa": "^0.803.20",
+    "@angular/router": "^9.0.0-rc.5",
+    "@angular/service-worker": "^9.0.0-rc.5",
     "@mdi/angular-material": "^4.6.95",
     "blazy": "^1.8.2",
     "body-parser": "^1.19.0",
@@ -67,6 +63,7 @@
     "express": "^4.17.1",
     "hammerjs": "^2.0.8",
     "masonry-layout": "^4.2.2",
+    "nsis-compat-updater": "^1.2.0",
     "photoswipe": "^4.1.3",
     "rxjs": "~6.5.3",
     "socket.io": "^2.3.0",
@@ -75,20 +72,19 @@
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.900.0-rc.3",
-    "@angular/cli": "^9.0.0-rc.3",
-    "@angular/compiler-cli": "^9.0.0-rc.3",
-    "@angular/language-service": "^9.0.0-rc.3",
+    "@angular-devkit/build-angular": "^0.900.0-rc.5",
+    "@angular/cli": "^9.0.0-rc.5",
+    "@angular/compiler-cli": "^9.0.0-rc.5",
+    "@angular/language-service": "^9.0.0-rc.5",
     "@types/blazy": "^1.5.31",
     "@types/jasmine": "^3.5.0",
     "@types/jasminewd2": "^2.0.8",
     "@types/masonry-layout": "^4.2.1",
-    "@types/node": "^12.12.12",
+    "@types/node": "^12.12.14",
     "@types/photoswipe": "^4.0.29",
     "@types/socket.io-client": "^1.4.32",
     "codelyzer": "^5.2.0",
     "concurrently": "^5.0.0",
-    "fs-extra": "^8.1.0",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^4.4.1",
@@ -96,12 +92,72 @@
     "karma-coverage-istanbul-reporter": "^2.1.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
-    "nw": "0.42.5-sdk",
+    "nw": "^0.42.6-sdk",
+    "nwjs-builder-phoenix": "^1.15.0",
     "protractor": "~5.4.0",
-    "ts-node": "^8.5.2",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
     "typescript": "^3.6.4",
-    "wait-on": "^3.3.0",
-    "zip-a-folder": "0.0.9"
+    "wait-on": "^3.3.0"
+  },
+  "chromium-args": "--enable-node-worker",
+  "build": {
+    "nwVersion": "v0.42.6",
+    "nwFlavor": "normal",
+    "output": "dist-nwjs",
+    "targets": [
+      "zip",
+      "nsis7z"
+    ],
+    "files": [
+      "**/*"
+    ],
+    "excludes": [
+      ".theia/**/*",
+      "e2e/**/*",
+      "release/**/*",
+      "scripts/**/*",
+      "src/**/*",
+      ".editorconfig",
+      ".gitignore",
+      "angular.json",
+      "browserslist",
+      "karma.conf.js",
+      "ngsw-config.json",
+      "package-lock.json",
+      "README.md",
+      "server.js",
+      "tsconfig.app.json",
+      "tsconfig.json",
+      "tsconfig.spec.json",
+      "tslint.json"
+    ],
+    "strippedProperties": [
+      "ManifestComments",
+      "node-remote",
+      "scripts",
+      "devDependencies",
+      "build"
+    ],
+    "overriddenProperties": {
+      "main": "dist-ng/index.html",
+      "node-remote": ""
+    },
+    "win": {
+      "icon": "src/assets/favicons/favicon.ico"
+    },
+    "mac": {
+      "icon": "assets/icon.icns"
+    },
+    "nsis": {
+      "icon": "src/assets/favicons/favicon.ico",
+      "unIcon": "src/assets/favicons/favicon.ico",
+      "languages": [
+        "English"
+      ],
+      "diffUpdaters": false,
+      "hashCalculation": true
+    }
   }
 }

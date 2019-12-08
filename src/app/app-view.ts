@@ -3,67 +3,55 @@ import { AppModel } from './app-model';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import pkg from './../../package.json';
-import { AppNw } from './app-nw';
 import { VERSION } from '@angular/material/core';
 import { AppHelperObject } from './common/providers/app-helper-object';
 import { AppShell } from './common/providers/app-shell';
-
+import { environment } from './../environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
-  selector: 'app-view',
+  selector: 'body',
   templateUrl: './app-view.html',
   styleUrls: ['./app-view.css']
 })
 export class AppView extends AbstractAppView {
 
-  @HostBinding("attr.mat-version") matVersion: String = VERSION.full;
-  @HostBinding("attr.app-version") appVersion: String = pkg.version;
+  @HostBinding("attr.mat-version") matVersion: string = VERSION.full;
+  @HostBinding("attr.app-version") appVersion: string = pkg.version;
+  @HostBinding("style.background-image") backgroundImage: any = null;
 
   _shell: AppShell = null;
   _viewContainerRef: ViewContainerRef = null;
   _matSnackBar: MatSnackBar = null;
-  _appNw: AppNw = null;
+  _domSanitizer: DomSanitizer = null;
 
   constructor(appHelperObject: AppHelperObject, appModel: AppModel, shell: AppShell, viewContainerRef: ViewContainerRef, matSnackBar: MatSnackBar,
-  ) {
+    domSanitizer: DomSanitizer) {
     super(appHelperObject, appModel);
     this._shell = shell;
     this._viewContainerRef = viewContainerRef;
     this._matSnackBar = matSnackBar;
+    this._domSanitizer = domSanitizer;
   }
 
   onInit(): void {
     super.onInit();
+    this.backgroundImage = this._domSanitizer.bypassSecurityTrustStyle("url(" + environment.assetsFolder + "/background.jpg)");
     this._shell.init();
     this._initToaster();
-    if (this.getConfigProvider().runInNw()) {
-      this._initNw();
-    }
   }
 
   showPreviousPage(): void {
     this.getRouter().back();
   }
 
-  showView(view: string): void {
-    this.getRouter().navigate([view]);
+  showView(view: string, extras?: NavigationExtras): void {
+    this.getRouter().navigate([view], extras);
   }
 
-  _refreshMenuBar(): void {
-    this.getLabels().getValues(["L10N_QUIT", "L10N_FILE", "L10N_MY_GAMES", "L10N_CONFIGURATION", "L10N_DISPLAY"]).subscribe((translations) => {
-      this._appNw.refreshMenuBar(translations)
-    });
-  }
-
-  _initNw(): void {
-    import("./app-nw").then((mod) => {
-      this._appNw = new mod.AppNw();
-      this._appNw.init(this);
-      this._refreshMenuBar();
-      this.getLabels().on("languageChange").subscribe(() => {
-        this._refreshMenuBar();
-      });
-    });
+  getLogoUrl() {
+    return environment.assetsFolder + "/logo.png";
   }
 
   _initToaster() {

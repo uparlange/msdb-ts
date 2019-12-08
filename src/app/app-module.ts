@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: "favorites", loadChildren: () => import("./modules/favorites/favorites-module").then(mod => mod.FavoritesModule) },
   { path: "mygames", loadChildren: () => import("./modules/my-games/my-games-module").then(mod => mod.MyGamesModule) },
   { path: "notification", loadChildren: () => import("./modules/notification/notification-module").then(mod => mod.NotificationModule) },
+  { path: "update", loadChildren: () => import("./modules/update/update-module").then(mod => mod.UpdateModule) },
   { path: "**", loadChildren: () => import("./modules/page-not-found/page-not-found-module").then(mod => mod.PageNotFoundModule) }
 ];
 
@@ -52,7 +53,7 @@ export class AppModule extends AbstractModule {
 
   constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
     super();
-    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'));
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl(environment.assetsFolder + "/mdi.svg"));
   }
 
 }

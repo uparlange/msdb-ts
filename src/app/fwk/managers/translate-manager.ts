@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { AbstractManager } from 'src/app/fwk/abstract-manager';
 import { HttpClient } from '@angular/common/http';
 import { WindowRef } from 'src/app/fwk/providers/window-ref';
+import { environment } from './../../../environments/environment';
 
 @Injectable({ providedIn: "root" })
 export class TranslateManager extends AbstractManager {
@@ -9,7 +10,7 @@ export class TranslateManager extends AbstractManager {
   _http: HttpClient = null;
   _windowRef: WindowRef = null;
   _properties: any = {};
-  _propertyFilePattern: string = "/assets/data/{locale}.json";
+  _propertyFilePattern: string = environment.assetsFolder + "/data/{locale}.json";
   _loading: boolean = false;
   _pendingRequests: Array<any> = new Array();
   _currentLang: string = null;
