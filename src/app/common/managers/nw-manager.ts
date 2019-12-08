@@ -159,12 +159,12 @@ export class NwManager extends AbstractManager {
         expressInstance.use(bodyParser.json());
         const serverPort = environment.wsPort;
         this._httpServer = httpInstance.listen(serverPort, () => {
-            this.getLogger().info(`(EXPRESS) Listening on port ${serverPort}`);
+            this._getLogger().info(`(EXPRESS) Listening on port ${serverPort}`);
         }).on("error", (err: any) => {
-            this.getLogger().error(`(EXPRESS) ${err}`);
+            this._getLogger().error(`(EXPRESS) ${err}`);
         });
         ioInstance.on("connection", (socket: any) => {
-            this.getLogger().info(`(SOCKET.IO) User (${socket.id}) connected`);
+            this._getLogger().info(`(SOCKET.IO) User (${socket.id}) connected`);
             this._socket = socket;
             socket.on("GET_MY_GAMES", (params: any, callback: Function) => {
                 this._getMyGames(params, callback);
@@ -220,7 +220,7 @@ export class NwManager extends AbstractManager {
         try {
             config = JSON.parse(fs.readFileSync(this._getConfigFile()));
         } catch (e) {
-            this.getLogger().info("(CONFIG) No configuration file found !");
+            this._getLogger().info("(CONFIG) No configuration file found !");
         }
         if (config === null) {
             config = {
@@ -277,17 +277,17 @@ export class NwManager extends AbstractManager {
 
     private _execCmd(cmd: string): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
-        this.getLogger().info(`(CMD) Execute '${cmd}'`);
+        this._getLogger().info(`(CMD) Execute '${cmd}'`);
         const child_process = window.nw.require("child_process");
         child_process.exec(cmd, (error: string, stdout: string, stderr: string) => {
             if (error != null && error.length > 0) {
-                this.getLogger().error(`(CMD) ${error.toString()}`);
+                this._getLogger().error(`(CMD) ${error.toString()}`);
             }
             if (stdout != null && stdout.length > 0) {
-                this.getLogger().info(`(CMD) ${stdout}`);
+                this._getLogger().info(`(CMD) ${stdout}`);
             }
             if (stderr != null && stderr.length > 0) {
-                this.getLogger().error(`(CMD) ${stderr}`);
+                this._getLogger().error(`(CMD) ${stderr}`);
             }
             eventEmitter.emit();
         });
@@ -296,7 +296,7 @@ export class NwManager extends AbstractManager {
 
     private _playGame(name: string, callback: Function): void {
         const fs = window.nw.require("fs");
-        this.getLogger().info(`(MAME) Launch game ${name}`);
+        this._getLogger().info(`(MAME) Launch game ${name}`);
         this._getConfiguration((configuration: any) => {
             const mameDirectory = configuration.mameDirectory;
             let mameFileName = "mame64.exe";

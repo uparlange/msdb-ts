@@ -23,10 +23,10 @@ export class NotificationManager extends AbstractManager {
     }
 
     init(): void {
-        this.getLogger().info("Push Notifications enabled : " + this.isEnabled());
+        this._getLogger().info("Push Notifications enabled : " + this.isEnabled());
         if (this.isEnabled()) {
             this._swPush.subscription.subscribe((sub) => {
-                this.getLogger().info("Subscription used : " + JSON.stringify(sub));
+                this._getLogger().info("Subscription used : " + JSON.stringify(sub));
                 this._sub = sub;
             });
             this._swPush.messages.subscribe((payload: any) => {
@@ -66,11 +66,11 @@ export class NotificationManager extends AbstractManager {
                 // Try to save subscription to backend on each launch
                 // Duplicates are managed (by hash)
                 this._msdbProvider.addPushSubscription(this._sub).subscribe((data: string) => {
-                    this.getLogger().info("Subscription added : " + data);
+                    this._getLogger().info("Subscription added : " + data);
                     eventEmitter.emit(this._sub);
                 });
             }).catch((err: any) => {
-                this.getLogger().error(err);
+                this._getLogger().error(err);
                 eventEmitter.emit(this._sub);
             });
         } else {
@@ -88,11 +88,11 @@ export class NotificationManager extends AbstractManager {
             this._swPush.unsubscribe().then(() => {
                 this._sub = null;
                 this._msdbProvider.removePushSubscription(currentSub).subscribe((data: string) => {
-                    this.getLogger().info("Subscription removed : " + data);
+                    this._getLogger().info("Subscription removed : " + data);
                     eventEmitter.emit(this._sub);
                 });
             }).catch((err: any) => {
-                this.getLogger().error(err);
+                this._getLogger().error(err);
                 eventEmitter.emit(this._sub);
             });
         } else {

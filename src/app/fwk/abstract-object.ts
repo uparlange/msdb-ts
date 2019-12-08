@@ -4,22 +4,22 @@ export class AbstractObject {
 
     }
 
-    getLogger(): any {
+    protected _getLogger(): any {
         const that = this;
         return {
             debug(message: any) {
-                console.debug(that.getClassName(), message);
+                console.debug(that._getClassName(), message);
             },
             info(message: any) {
-                console.info(that.getClassName(), message);
+                console.info(that._getClassName(), message);
             },
             error(message: any) {
-                console.error(that.getClassName(), message);
+                console.error(that._getClassName(), message);
             }
         }
     }
 
-    getClassName() {
+    private _getClassName() {
         return this.constructor.name;
     }
 }

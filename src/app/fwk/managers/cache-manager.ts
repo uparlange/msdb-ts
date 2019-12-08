@@ -46,7 +46,7 @@ export class CacheManager extends AbstractManager {
 
     deleteNamespace(namespace: string): void {
         this._db["properties"].where("namespace").equals(namespace).delete().then((deleteCount: number) => {
-            this.getLogger().info(deleteCount + " object(s) deleted from cache");
+            this._getLogger().info(deleteCount + " object(s) deleted from cache");
         });
     }
 }
