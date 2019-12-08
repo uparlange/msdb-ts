@@ -12,7 +12,7 @@ export class AbstractModel extends AbstractHelper {
   data: any = this._getInitData();
   needRefresh: boolean = true;
 
-  _connectionChangeSubscription: Subscription = null;
+  private _connectionChangeSubscription: Subscription = null;
 
   constructor(AbstractHelperObject: AbstractHelperObject) {
     super(AbstractHelperObject);
@@ -90,12 +90,12 @@ export class AbstractModel extends AbstractHelper {
     // need override
   }
 
-  _init(): void {
+  private _init(): void {
     this.onInit();
     this.getRouter().restoreScrollPosition();
   }
 
-  _refresh(): void {
+  private _refresh(): void {
     if (this.needRefresh) {
       this.needRefresh = false;
       this.onRefresh(() => {
@@ -104,7 +104,7 @@ export class AbstractModel extends AbstractHelper {
     }
   }
 
-  _getInitData(): any {
+  protected _getInitData(): any {
     // need override
     return {};
   }

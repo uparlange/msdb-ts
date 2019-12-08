@@ -7,7 +7,7 @@ export class AbstractView extends AbstractComponent {
 
     model: AbstractModel = null;
 
-    _queryParamsSubscription: Subscription = null;
+    private _queryParamsSubscription: Subscription = null;
 
     constructor(AbstractHelperObject: AbstractHelperObject, model: AbstractModel) {
         super(AbstractHelperObject);

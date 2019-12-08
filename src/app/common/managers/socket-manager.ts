@@ -7,9 +7,9 @@ import { ConfigProvider } from '../providers/config-provider';
 @Injectable({ providedIn: "root" })
 export class SocketManager extends AbstractManager {
 
-  _eventManager: EventManager = null;
-  _configProvider: ConfigProvider = null;
-  _socket: SocketIOClient.Socket = null;
+  private _eventManager: EventManager = null;
+  private _configProvider: ConfigProvider = null;
+  private _socket: SocketIOClient.Socket = null;
 
   constructor(eventManager: EventManager, configProvider: ConfigProvider) {
     super();
@@ -51,7 +51,7 @@ export class SocketManager extends AbstractManager {
     return eventEmitter;
   }
 
-  _getSocket(): EventEmitter<any> {
+  private _getSocket(): EventEmitter<any> {
     const eventEmitter: EventEmitter<any> = new EventEmitter();
     if (this._configProvider.runInNw()) {
       if (this._socket === null) {

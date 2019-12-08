@@ -17,7 +17,7 @@ export class UpdateView extends AbstractAppView {
         this._getModel().update();
     }
 
-    _getModel(): UpdateModel {
+    private _getModel(): UpdateModel {
         return <UpdateModel>this.model;
     }
 

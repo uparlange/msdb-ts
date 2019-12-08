@@ -25,11 +25,11 @@ export class WindowRef extends AbstractObject {
         }
     }
 
-    _isInWebAppiOS(): boolean {
+    private _isInWebAppiOS(): boolean {
         return (this.nativeWindow.navigator["standalone"] == true);
     }
 
-    _isInWebAppChrome(): boolean {
+    private _isInWebAppChrome(): boolean {
         return (this.nativeWindow.matchMedia('(display-mode: standalone)').matches);
     }
 }

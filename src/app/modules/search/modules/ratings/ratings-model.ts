@@ -17,7 +17,7 @@ export class RatingsModel extends AbstractAppModel {
         });
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             filterValue: "",
             provider: []

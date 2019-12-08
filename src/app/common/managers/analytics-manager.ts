@@ -6,9 +6,9 @@ import { WindowRef } from 'src/app/fwk/providers/window-ref';
 @Injectable({ providedIn: "root" })
 export class AnalyticsManager extends AbstractManager {
 
-    _gaMeasurementId: string = "UA-141763528-1";
-    _routerManager: RouterManager = null;
-    _windowRef: WindowRef = null;
+    private _gaMeasurementId: string = "UA-141763528-1";
+    private _routerManager: RouterManager = null;
+    private _windowRef: WindowRef = null;
 
     constructor(routerManager: RouterManager, windowRef: WindowRef) {
         super();

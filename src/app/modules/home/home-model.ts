@@ -9,14 +9,14 @@ export class HomeModel extends AbstractAppModel {
         super(appHelperObject);
     }
 
-    onInit() {
+    onInit(): void {
         super.onInit();
         this.getCache().getItem("searchLastType", "description").subscribe((value: string) => {
             this.data.searchLastType = value;
         });
     }
 
-    onRefresh(callback: Function) {
+    onRefresh(callback: Function): void {
         super.onRefresh(callback);
         if (this.data.mame.build === null) {
             this.getMsdbProvider().getMameInfos().subscribe((data: any) => {
@@ -29,7 +29,7 @@ export class HomeModel extends AbstractAppModel {
         }
     }
 
-    _getInitData() {
+    protected _getInitData(): any {
         return {
             searchLastType: null,
             mame: {

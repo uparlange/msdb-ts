@@ -18,8 +18,8 @@ import { NwManager } from '../managers/nw-manager';
 @Injectable({ providedIn: "root" })
 export class AppHelperObject extends AbstractHelperObject {
 
-  _configProvider: ConfigProvider = null;
-  _msdbProvider: MsdbProvider = null;
+  private _configProvider: ConfigProvider = null;
+  private _msdbProvider: MsdbProvider = null;
 
   constructor(shell: AppShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute,
     meta: Meta, configProvider: ConfigProvider, msdbProvider: MsdbProvider) {
@@ -64,7 +64,7 @@ export class AppHelperObject extends AbstractHelperObject {
     return this._msdbProvider;
   }
 
-  _getShell(): AppShell {
+  private _getShell(): AppShell {
     return <AppShell>this._shell;
   }
 }

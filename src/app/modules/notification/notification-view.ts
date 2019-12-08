@@ -21,7 +21,7 @@ export class NotificationView extends AbstractAppView {
         this._getModel().unsubscribe();
     }
 
-    _getModel(): NotificationModel {
+    private _getModel(): NotificationModel {
         return <NotificationModel>this.model;
     }
 }

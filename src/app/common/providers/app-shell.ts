@@ -17,13 +17,13 @@ import { NwManager } from '../managers/nw-manager';
 @Injectable({ providedIn: "root" })
 export class AppShell extends FwkShell {
 
-  _analyticsManager: AnalyticsManager = null;
-  _blazyManager: BlazyManager = null;
-  _historyManager: HistoryManager = null;
-  _favoritesManager: FavoritesManager = null;
-  _socketManager: SocketManager = null;
-  _notificationManager: NotificationManager = null;
-  _nwManager: NwManager = null;
+  private _analyticsManager: AnalyticsManager = null;
+  private _blazyManager: BlazyManager = null;
+  private _historyManager: HistoryManager = null;
+  private _favoritesManager: FavoritesManager = null;
+  private _socketManager: SocketManager = null;
+  private _notificationManager: NotificationManager = null;
+  private _nwManager: NwManager = null;
 
   constructor(translateManager: TranslateManager, connectionManager: ConnectionManager, cacheManager: CacheManager,
     routerManager: RouterManager, eventManager: EventManager, analyticsManager: AnalyticsManager,

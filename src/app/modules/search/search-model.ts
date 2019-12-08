@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SearchModel extends AbstractAppModel {
 
-    _tabsInfo: any = null;
+    private _tabsInfo: any = null;
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);
@@ -33,13 +33,7 @@ export class SearchModel extends AbstractAppModel {
         return this._tabsInfo;
     }
 
-    _getInitData(): any {
-        return {
-            selectedIndex: 0
-        };
-    }
-
-    _getTabsInfo(): any {
+    private _getTabsInfo(): any {
         return {
             _tabs: [
                 { index: 0, key: "L10N_SEARCH_BY_DESCRIPTION", type: "description", icon: "magnify" },
@@ -74,6 +68,12 @@ export class SearchModel extends AbstractAppModel {
                 });
                 return tab;
             }
+        };
+    }
+
+    protected _getInitData(): any {
+        return {
+            selectedIndex: 0
         };
     }
 }

@@ -13,15 +13,15 @@ import { EventManager } from 'src/app/fwk/managers/event-manager';
 @Injectable({ providedIn: "root" })
 export class NwManager extends AbstractManager {
 
-    _watcher: any = null;
-    _socket: any = null;
-    _httpServer: any = null;
-    _translateManager: TranslateManager = null;
-    _routerManager: RouterManager = null;
-    _eventManager: EventManager = null;
-    _configProvider: ConfigProvider = null;
-    _updater: any = null;
-    _updatedVersion: any = null;
+    private _watcher: any = null;
+    private _socket: any = null;
+    private _httpServer: any = null;
+    private _translateManager: TranslateManager = null;
+    private _routerManager: RouterManager = null;
+    private _eventManager: EventManager = null;
+    private _configProvider: ConfigProvider = null;
+    private _updater: any = null;
+    private _updatedVersion: any = null;
 
     constructor(translateManager: TranslateManager, routerManager: RouterManager, configProvider: ConfigProvider,
         eventManager: EventManager) {
@@ -59,12 +59,12 @@ export class NwManager extends AbstractManager {
         });
     }
 
-    _setUpdatedVersion(version: any): void {
+    private _setUpdatedVersion(version: any): void {
         this._updatedVersion = version;
         this.emit("updatedVersionChanged");
     }
 
-    _init(): void {
+    private _init(): void {
         window.onbeforeunload = () => {
             this._httpServer.close();
         }
@@ -74,18 +74,18 @@ export class NwManager extends AbstractManager {
         this._initUpdateWatcher();
     }
 
-    _showView(view: string, extras?: NavigationExtras): void {
+    private _showView(view: string, extras?: NavigationExtras): void {
         this._routerManager.navigate([view], extras);
     }
 
-    _initMenuBar(): void {
+    private _initMenuBar(): void {
         this._refreshMenuBar();
         this._translateManager.on("languageChange").subscribe(() => {
             this._refreshMenuBar();
         });
     }
 
-    _refreshMenuBar(): void {
+    private _refreshMenuBar(): void {
         this._translateManager.getValues(["L10N_QUIT", "L10N_FILE", "L10N_MY_GAMES", "L10N_CONFIGURATION", "L10N_DISPLAY"]).subscribe((translations: any) => {
             const menu = new window.nw.Menu({ type: "menubar" });
             const fileSubMenu = new window.nw.Menu();
@@ -128,7 +128,7 @@ export class NwManager extends AbstractManager {
         });
     }
 
-    _checkForUpdates(): void {
+    private _checkForUpdates(): void {
         const os = window.nw.require("os");
         const { NsisCompatUpdater } = window.nw.require("nsis-compat-updater");
         this._updater = new NsisCompatUpdater(this._configProvider.getUpdateUrl(), this.getCurrentVersion(), os.arch());
@@ -148,7 +148,7 @@ export class NwManager extends AbstractManager {
         });
     }
 
-    _initServer(): void {
+    private _initServer(): void {
         const express = window.nw.require("express");
         const expressInstance = express();
         const http = window.nw.require("http");
@@ -184,7 +184,7 @@ export class NwManager extends AbstractManager {
         });
     }
 
-    _initUpdateWatcher(): void {
+    private _initUpdateWatcher(): void {
         const chokidar = window.nw.require("chokidar");
         const fs = window.nw.require("fs");
         this._getConfiguration((configuration: any) => {
@@ -202,19 +202,19 @@ export class NwManager extends AbstractManager {
         });
     }
 
-    _getConfigFile(): string {
+    private _getConfigFile(): string {
         const os = window.nw.require("os");
         return `${os.homedir()}\\${pkg.name}.json`;
     }
 
-    _saveConfiguration(config: string, callback: Function): void {
+    private _saveConfiguration(config: string, callback: Function): void {
         const fs = window.nw.require("fs");
         fs.writeFileSync(this._getConfigFile(), JSON.stringify(config));
         this._initUpdateWatcher();
         callback();
     }
 
-    _getConfiguration(callback: Function): void {
+    private _getConfiguration(callback: Function): void {
         const fs = window.nw.require("fs");
         let config = null;
         try {
@@ -233,7 +233,7 @@ export class NwManager extends AbstractManager {
         callback(config);
     }
 
-    _initMame(mameDirectory: string, mameFileName: string): EventEmitter<any> {
+    private _initMame(mameDirectory: string, mameFileName: string): EventEmitter<any> {
         const fs = window.nw.require("fs");
         const eventEmitter: EventEmitter<any> = new EventEmitter();
         const mameIni = `${mameDirectory}\\mame.ini`;
@@ -275,7 +275,7 @@ export class NwManager extends AbstractManager {
         return eventEmitter;
     }
 
-    _execCmd(cmd: string): EventEmitter<any> {
+    private _execCmd(cmd: string): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
         this.getLogger().info(`(CMD) Execute '${cmd}'`);
         const child_process = window.nw.require("child_process");
@@ -294,7 +294,7 @@ export class NwManager extends AbstractManager {
         return eventEmitter;
     }
 
-    _playGame(name: string, callback: Function): void {
+    private _playGame(name: string, callback: Function): void {
         const fs = window.nw.require("fs");
         this.getLogger().info(`(MAME) Launch game ${name}`);
         this._getConfiguration((configuration: any) => {
@@ -317,7 +317,7 @@ export class NwManager extends AbstractManager {
         });
     }
 
-    _getMyGames(name: string, callback: Function): void {
+    private _getMyGames(name: string, callback: Function): void {
         const fs = window.nw.require("fs");
         this._getConfiguration((configuration: any) => {
             const path = window.nw.require("path");
@@ -337,7 +337,7 @@ export class NwManager extends AbstractManager {
         });
     }
 
-    _isRomAvailable(name: string, callback: Function): void {
+    private _isRomAvailable(name: string, callback: Function): void {
         const fs = window.nw.require("fs");
         this._getConfiguration((configuration: any) => {
             const result = {

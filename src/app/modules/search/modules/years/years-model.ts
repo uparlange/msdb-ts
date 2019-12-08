@@ -29,7 +29,7 @@ export class YearsModel extends AbstractAppModel {
         this.getCache().setItem("searchByYearsFilterValue", this.data.filterValue, "version");
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             filterValue: "",
             provider: []

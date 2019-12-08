@@ -5,7 +5,7 @@ import { AppHelperObject } from './app-helper-object';
 @Injectable({ providedIn: "root" })
 export class MatPaginatorL10n extends MatPaginatorIntl {
 
-    _helper: AppHelperObject = null;
+    private _helper: AppHelperObject = null;
 
     constructor(appHelperObject: AppHelperObject) {
         super();
@@ -25,7 +25,7 @@ export class MatPaginatorL10n extends MatPaginatorIntl {
         }
     }
 
-    _refreshTranslation() {
+    private _refreshTranslation() {
         this._getLabels().getValues(["L10N_FIRST_PAGE", "L10N_LAST_PAGE", "L10N_NEXT_PAGE", "L10N_PREVIOUS_PAGE", "L10N_ITEMS_PER_PAGE"]).subscribe((translations) => {
             this.firstPageLabel = translations.L10N_FIRST_PAGE;
             this.itemsPerPageLabel = translations.L10N_ITEMS_PER_PAGE;
@@ -35,7 +35,7 @@ export class MatPaginatorL10n extends MatPaginatorIntl {
         });
     }
 
-    _getLabels() {
+    private _getLabels() {
         return this._helper.getLabels();
     }
 }

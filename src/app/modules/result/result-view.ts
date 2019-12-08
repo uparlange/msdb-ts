@@ -17,7 +17,7 @@ export class ResultView extends AbstractAppView {
         this._getModel().filterChange(event);
     }
 
-    _getModel(): ResultModel {
+    private _getModel(): ResultModel {
         return <ResultModel>this.model;
     }
 }

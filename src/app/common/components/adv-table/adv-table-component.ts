@@ -85,7 +85,7 @@ export class AdvTableComponent extends AbstractComponent {
         return (item && this.rowTrackId) ? item[this.rowTrackId] : undefined;
     }
 
-    _initDisplayedColumns(): void {
+    private _initDisplayedColumns(): void {
         const displayedColumns: Array<string> = [];
         this.columns.forEach((column: AdvTableColumnDirective) => {
             displayedColumns.push(column.columnName);
@@ -93,7 +93,7 @@ export class AdvTableComponent extends AbstractComponent {
         this.displayedColumns = displayedColumns;
     }
 
-    _setFilterValue(value: string): void {
+    private _setFilterValue(value: string): void {
         this.filterValue = value;
         this.dataSource.filter = value;
         this.filterValueChange.emit(value);

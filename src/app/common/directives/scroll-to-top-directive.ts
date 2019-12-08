@@ -5,7 +5,7 @@ import { AppHelperObject } from '../providers/app-helper-object';
 @Directive({ selector: "[scrollToTop]" })
 export class ScrollToTopDirective extends AbstractDirective {
 
-    _scrollDuration: number = 250;
+    private _scrollDuration: number = 250;
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);

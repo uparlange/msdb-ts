@@ -19,9 +19,9 @@ export class GalleryComponent extends AbstractComponent {
   @ViewChild("galleryContainer", { static: false }) galleryContainer: ElementRef;
   @ViewChild("pswpContainer", { static: false }) pswpContainer: ElementRef;
 
-  _gallery: PhotoSwipe<any> = null;
-  _masonry: Masonry = null;
-  _refreshTimeout: any = null;
+  private _gallery: PhotoSwipe<any> = null;
+  private _masonry: Masonry = null;
+  private _refreshTimeout: any = null;
 
   constructor(appHelperObject: AppHelperObject) {
     super(appHelperObject);
@@ -78,11 +78,11 @@ export class GalleryComponent extends AbstractComponent {
     this._refreshMasonry();
   }
 
-  _getItemHeight(requiredWidth: number, image: any): number {
+  private _getItemHeight(requiredWidth: number, image: any): number {
     return Math.round(requiredWidth * image.h / image.w);
   }
 
-  _refreshMasonry(): void {
+  private _refreshMasonry(): void {
     if (this._refreshTimeout != null) {
       clearTimeout(this._refreshTimeout);
     }
@@ -99,7 +99,7 @@ export class GalleryComponent extends AbstractComponent {
     }, 10);
   }
 
-  _getColWidth(): number {
+  private _getColWidth(): number {
     const cCount = Math.min(this.colcount, this.provider.length);
     let cWidth = 0;
     if (this.galleryContainer) {

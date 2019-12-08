@@ -9,10 +9,10 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class TranslatePipe extends AbstractPipe implements PipeTransform {
 
-  _tranlateKey: string = null;
-  _translateParams: string = null
-  _tranlateValue: string = null;
-  _onLanguageChangeSubscription: Subscription = null;
+  private _tranlateKey: string = null;
+  private _translateParams: string = null
+  private _tranlateValue: string = null;
+  private _onLanguageChangeSubscription: Subscription = null;
 
   constructor(appHelperObject: AppHelperObject) {
     super(appHelperObject);
@@ -41,7 +41,7 @@ export class TranslatePipe extends AbstractPipe implements PipeTransform {
     this._onLanguageChangeSubscription.unsubscribe();
   }
 
-  _refreshTranslation() {
+  private _refreshTranslation() {
     let param: any = this._tranlateKey;
     if (this._translateParams != null) {
       param = {

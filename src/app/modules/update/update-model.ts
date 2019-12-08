@@ -6,8 +6,8 @@ import { Subscription } from 'rxjs';
 @Injectable()
 export class UpdateModel extends AbstractAppModel {
 
-    _updatedVersionChangedSubscription: Subscription = null;
-    _downloadProgressSubscription: Subscription = null;
+    private _updatedVersionChangedSubscription: Subscription = null;
+    private _downloadProgressSubscription: Subscription = null;
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);
@@ -40,14 +40,14 @@ export class UpdateModel extends AbstractAppModel {
         this.getNw().update();
     }
 
-    _updateVersion(): void {
+    private _updateVersion(): void {
         const version = this.getNw().getUpdatedVersion();
         if (version != null) {
             this.data.updatedVersion = version;
         }
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             currentVersion: null,
             updatedVersion: {

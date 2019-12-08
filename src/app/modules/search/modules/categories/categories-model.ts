@@ -37,7 +37,7 @@ export class CategoriesModel extends AbstractAppModel {
         });
     }
 
-    _transformer(node: any, level: number) {
+    private _transformer(node: any, level: number): any {
         return {
             expandable: !!node.children,
             label: node.label,
@@ -46,7 +46,7 @@ export class CategoriesModel extends AbstractAppModel {
         };
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         const treeControl: FlatTreeControl<any> = new FlatTreeControl(node => node.level, node => node.expandable);
         const treeFlattener: MatTreeFlattener<any, any> = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.children);
         return {

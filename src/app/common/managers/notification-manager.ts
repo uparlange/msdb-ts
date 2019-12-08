@@ -8,12 +8,12 @@ import { ConfigProvider } from '../providers/config-provider';
 @Injectable({ providedIn: "root" })
 export class NotificationManager extends AbstractManager {
 
-    _vapidPublicKey: string = "BA9MoYd5le8mdTd7xm8fbIIPycrwkQ0ynBk9Z3hmlZrWHsf_3A-e62_dXrspX_Biz1FYIVO60pWHZ3oWw-QVuk4";
+    private _vapidPublicKey: string = "BA9MoYd5le8mdTd7xm8fbIIPycrwkQ0ynBk9Z3hmlZrWHsf_3A-e62_dXrspX_Biz1FYIVO60pWHZ3oWw-QVuk4";
 
-    _swPush: SwPush = null;
-    _msdbProvider: MsdbProvider = null;
-    _configProvider: ConfigProvider = null;
-    _sub: any = null;
+    private _swPush: SwPush = null;
+    private _msdbProvider: MsdbProvider = null;
+    private _configProvider: ConfigProvider = null;
+    private _sub: any = null;
 
     constructor(swPush: SwPush, msdbProvider: MsdbProvider, configProvider: ConfigProvider) {
         super();

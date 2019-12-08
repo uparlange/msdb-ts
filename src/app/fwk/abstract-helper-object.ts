@@ -13,12 +13,13 @@ import { FwkShell } from './providers/fwk-shell';
 
 export class AbstractHelperObject extends AbstractObject {
 
-  _title: Title = null;
-  _shell: FwkShell = null;
-  _httpClient: HttpClient = null;
-  _activatedRoute: ActivatedRoute = null;
-  _windowRef: WindowRef = null;
-  _meta: Meta = null;
+  protected _shell: FwkShell = null;
+
+  private _title: Title = null;
+  private _httpClient: HttpClient = null;
+  private _activatedRoute: ActivatedRoute = null;
+  private _windowRef: WindowRef = null;
+  private _meta: Meta = null;
 
   constructor(shell: FwkShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute,
     meta: Meta) {

@@ -7,8 +7,8 @@ export class AbstractPopup extends AbstractComponent {
 
   model: AbstractModel = null;
 
-  _popupsAfterOpenSubscription: Subscription = null;
-  _popupsBeforeCloseSubscription: Subscription = null;
+  private _popupsAfterOpenSubscription: Subscription = null;
+  private _popupsBeforeCloseSubscription: Subscription = null;
 
   constructor(AbstractHelperObject: AbstractHelperObject, model: AbstractModel) {
     super(AbstractHelperObject);

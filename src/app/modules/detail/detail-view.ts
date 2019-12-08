@@ -18,7 +18,7 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class DetailView extends AbstractAppView {
 
-  _matDialog: MatDialog = null;
+  private _matDialog: MatDialog = null;
 
   constructor(appHelperObject: AppHelperObject, detailModel: DetailModel, matDialog: MatDialog) {
     super(appHelperObject, detailModel);
@@ -85,7 +85,7 @@ export class DetailView extends AbstractAppView {
     this._openPopup(DeviceRefsPopup);
   }
 
-  _openPopup(clazz: any): void {
+  private _openPopup(clazz: any): void {
     this.getPopups().open(this._matDialog, clazz, { disableClose: true });
   }
 }

@@ -12,8 +12,8 @@ export class BlazyDirective extends AbstractDirective {
 
     @Input() blazySrc: String = null;
 
-    _lazyManager: BlazyManager = null;
-    _elementRef: ElementRef = null;
+    private _lazyManager: BlazyManager = null;
+    private _elementRef: ElementRef = null;
 
     constructor(appHelperObject: AppHelperObject, lazyManager: BlazyManager, elementRef: ElementRef) {
         super(appHelperObject);

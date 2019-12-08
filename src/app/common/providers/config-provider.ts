@@ -6,7 +6,7 @@ import { environment } from './../../../environments/environment';
 @Injectable({ providedIn: "root" })
 export class ConfigProvider extends AbstractObject {
 
-  _windowRef: WindowRef = null;
+  private _windowRef: WindowRef = null;
 
   constructor(windowRef: WindowRef) {
     super();
@@ -65,15 +65,15 @@ export class ConfigProvider extends AbstractObject {
     return "https://raw.githubusercontent.com/uparlange/msdb-ts/master/release/versions.nsis.json";
   }
 
-  _productionMode(): boolean {
+  private _productionMode(): boolean {
     return this._windowRef.nativeWindow.location.href.indexOf(this._getBaseServerUrl()) === -1;
   }
 
-  _getBaseServerUrl(): string {
+  private _getBaseServerUrl(): string {
     return "http://localhost";
   }
 
-  _getUnitLabel(value: number, steps: Array<string>, stepMultiplier: number): string {
+  private _getUnitLabel(value: number, steps: Array<string>, stepMultiplier: number): string {
     let step = null;
     steps.forEach((item, index) => {
       const stepValue = Math.pow(stepMultiplier, index);
@@ -87,7 +87,7 @@ export class ConfigProvider extends AbstractObject {
     return `${Math.round(value / step.value * 100) / 100} ${step.unit}`;
   }
 
-  _getBaseClientUrl(): string {
+  private _getBaseClientUrl(): string {
     return "https://msdb.lapli.fr/";
   }
 }

@@ -33,7 +33,7 @@ export class SeriesModel extends AbstractAppModel {
         this.getCache().setItem("searchBySeriesPageIndex", this.data.pageIndex, "version");
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             filterValue: "",
             pageIndex: 0,

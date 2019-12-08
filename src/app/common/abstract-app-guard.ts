@@ -12,7 +12,7 @@ export class AbstractAppGuard extends AbstractGuard {
         return this._getHelper().getConfigProvider();
     }
 
-    _getHelper(): AppHelperObject {
+    private _getHelper(): AppHelperObject {
         return <AppHelperObject>this._helper;
     }
 }

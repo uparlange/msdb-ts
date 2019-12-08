@@ -9,14 +9,14 @@ import { Location } from '@angular/common';
 @Injectable({ providedIn: "root" })
 export class RouterManager extends AbstractManager {
 
-    _router: Router = null;
-    _cacheManager: CacheManager = null;
-    _ngZone: NgZone = null;
-    _windowRef: WindowRef = null;
-    _mutationObserver: MutationObserver = null;
-    _eventsSubscription: Subscription = null;
-    _creationCompleteTimeout: any = null;
-    _location: Location = null;
+    private _router: Router = null;
+    private _cacheManager: CacheManager = null;
+    private _ngZone: NgZone = null;
+    private _windowRef: WindowRef = null;
+    private _mutationObserver: MutationObserver = null;
+    private _eventsSubscription: Subscription = null;
+    private _creationCompleteTimeout: any = null;
+    private _location: Location = null;
 
     constructor(router: Router, cacheManager: CacheManager, ngZone: NgZone, windowRef: WindowRef, location: Location) {
         super();
@@ -104,17 +104,17 @@ export class RouterManager extends AbstractManager {
         }
     }
 
-    _saveLastView(url: string): void {
+    private _saveLastView(url: string): void {
         this._cacheManager.setItem("lastView", url, "version");
     }
 
-    _restoreLastView(): void {
+    private _restoreLastView(): void {
         this._cacheManager.getItem("lastView", "/home").subscribe((value: string) => {
             this._router.navigateByUrl(value);
         });
     }
 
-    _getCurrentPath(): string {
+    private _getCurrentPath(): string {
         return this._router["location"].path(true);
     }
 }

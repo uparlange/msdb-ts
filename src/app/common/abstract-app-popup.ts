@@ -29,7 +29,7 @@ export class AbstractAppPopup extends AbstractPopup {
         return this._getHelper().getConfigProvider();
     }
 
-    _getHelper(): AppHelperObject {
+    protected _getHelper(): AppHelperObject {
         return <AppHelperObject>this._helper;
     }
 }

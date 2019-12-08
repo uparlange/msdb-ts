@@ -6,8 +6,8 @@ import { RouterManager } from 'src/app/fwk/managers/router-manager';
 @Injectable({ providedIn: "root" })
 export class HistoryManager extends AbstractManager {
 
-  _history: Array<any> = new Array();
-  _routerManager: RouterManager = null;
+  private _history: Array<any> = new Array();
+  private _routerManager: RouterManager = null;
 
   constructor(routerManager: RouterManager) {
     super();

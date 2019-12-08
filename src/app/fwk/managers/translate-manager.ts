@@ -7,13 +7,13 @@ import { environment } from './../../../environments/environment';
 @Injectable({ providedIn: "root" })
 export class TranslateManager extends AbstractManager {
 
-  _http: HttpClient = null;
-  _windowRef: WindowRef = null;
-  _properties: any = {};
-  _propertyFilePattern: string = environment.assetsFolder + "/data/{locale}.json";
-  _loading: boolean = false;
-  _pendingRequests: Array<any> = new Array();
-  _currentLang: string = null;
+  private _http: HttpClient = null;
+  private _windowRef: WindowRef = null;
+  private _properties: any = {};
+  private _propertyFilePattern: string = environment.assetsFolder + "/data/{locale}.json";
+  private _loading: boolean = false;
+  private _pendingRequests: Array<any> = new Array();
+  private _currentLang: string = null;
 
   constructor(http: HttpClient, windowRef: WindowRef) {
     super();
@@ -61,7 +61,7 @@ export class TranslateManager extends AbstractManager {
     return eventEmitter;
   }
 
-  _getValues(params: any): any {
+  private _getValues(params: any): any {
     const values = {};
     params.forEach((param: any) => {
       if (typeof (param) === "object") {
@@ -73,7 +73,7 @@ export class TranslateManager extends AbstractManager {
     return values;
   }
 
-  _getValue(key: string, properties: Array<string>): any {
+  private _getValue(key: string, properties: Array<string>): any {
     let value = key;
     if (this._properties[this._currentLang] !== undefined) {
       if (this._properties[this._currentLang].hasOwnProperty(key)) {
@@ -88,7 +88,7 @@ export class TranslateManager extends AbstractManager {
     return value;
   }
 
-  _checkPendingRequests(): void {
+  private _checkPendingRequests(): void {
     this._pendingRequests.forEach((request) => {
       const values = this._getValues(request.params);
       request.eventEmitter.emit(values);
@@ -96,7 +96,7 @@ export class TranslateManager extends AbstractManager {
     this._pendingRequests = new Array();
   }
 
-  _loadProperties(): EventEmitter<any> {
+  private _loadProperties(): EventEmitter<any> {
     const eventEmitter: EventEmitter<any> = new EventEmitter();
     if (!this._properties.hasOwnProperty(this._currentLang) && !this._loading) {
       this._loading = true;

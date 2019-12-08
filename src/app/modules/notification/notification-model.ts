@@ -29,11 +29,11 @@ export class NotificationModel extends AbstractAppModel {
         });
     }
 
-    _updateSub(sub: any) {
+    private _updateSub(sub: any): void {
         this.data.sub = sub;
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             enabled: false,
             sub: null

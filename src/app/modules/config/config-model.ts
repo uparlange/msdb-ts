@@ -42,7 +42,7 @@ export class ConfigModel extends AbstractAppModel {
         return (this.data.oldValue !== newValue);
     }
 
-    _getConfiguration(callback?: Function) {
+    private _getConfiguration(callback?: Function): void {
         this.getSocket().emit("GET_CONFIGURATION").subscribe((result: any) => {
             if (result !== null) {
                 this.data.oldValue = JSON.stringify(result);
@@ -55,7 +55,7 @@ export class ConfigModel extends AbstractAppModel {
         });
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         const availableLanguages = [
             { data: "en", label: "English" },
             { data: "fr", label: "Français" }

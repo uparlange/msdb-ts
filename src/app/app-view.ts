@@ -21,10 +21,10 @@ export class AppView extends AbstractAppView {
   @HostBinding("attr.app-version") appVersion: string = pkg.version;
   @HostBinding("style.background-image") backgroundImage: any = null;
 
-  _shell: AppShell = null;
-  _viewContainerRef: ViewContainerRef = null;
-  _matSnackBar: MatSnackBar = null;
-  _domSanitizer: DomSanitizer = null;
+  private _shell: AppShell = null;
+  private _viewContainerRef: ViewContainerRef = null;
+  private _matSnackBar: MatSnackBar = null;
+  private _domSanitizer: DomSanitizer = null;
 
   constructor(appHelperObject: AppHelperObject, appModel: AppModel, shell: AppShell, viewContainerRef: ViewContainerRef, matSnackBar: MatSnackBar,
     domSanitizer: DomSanitizer) {
@@ -54,7 +54,7 @@ export class AppView extends AbstractAppView {
     return environment.assetsFolder + "/logo.png";
   }
 
-  _initToaster() {
+  private _initToaster() {
     this.getConnection().on("change").subscribe((online: boolean) => {
       const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";
       this.getLabels().getValues([key]).subscribe((translations: any) => {
@@ -63,7 +63,7 @@ export class AppView extends AbstractAppView {
     });
   }
 
-  _showToast(message: string) {
+  private _showToast(message: string) {
     const config = new MatSnackBarConfig();
     config.duration = 1500;
     config.viewContainerRef = this._viewContainerRef;

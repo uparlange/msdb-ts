@@ -50,7 +50,7 @@ export class AbstractAppModel extends AbstractModel {
     return this._getHelper().getNwManager();
   }
 
-  _getHelper(): AppHelperObject {
+  private _getHelper(): AppHelperObject {
     return <AppHelperObject>this._helper;
   }
 }

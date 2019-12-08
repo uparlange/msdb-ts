@@ -6,7 +6,7 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 @Injectable()
 export class FavoritesModel extends AbstractAppModel {
 
-    _favoritesChangeSubscription: Subscription = null;
+    private _favoritesChangeSubscription: Subscription = null;
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);
@@ -46,7 +46,7 @@ export class FavoritesModel extends AbstractAppModel {
         this.getCache().setItem("favoritesPageIndex", this.data.pageIndex, "version");
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             filterValue: "",
             pageIndex: 0,

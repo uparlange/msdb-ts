@@ -9,7 +9,7 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class ClonesPopup extends AbstractAppPopup {
 
-  _routerAction: any = null;
+  private _routerAction: any = null;
 
   constructor(appHelperObject: AppHelperObject, detailModel: DetailModel) {
     super(appHelperObject, detailModel);

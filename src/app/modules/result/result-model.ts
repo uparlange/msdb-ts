@@ -5,10 +5,10 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 @Injectable()
 export class ResultModel extends AbstractAppModel {
 
-    _FILTER_MESS: string = "mess";
-    _FILTER_CLONE: string = "clone";
-    _FILTER_BIOS: string = "bios";
-    _FILTER_DEVICE: string = "device";
+    private _FILTER_MESS: string = "mess";
+    private _FILTER_CLONE: string = "clone";
+    private _FILTER_BIOS: string = "bios";
+    private _FILTER_DEVICE: string = "device";
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);
@@ -39,11 +39,11 @@ export class ResultModel extends AbstractAppModel {
         this._filterList();
     }
 
-    _setFilterList(value: Array<string>): void {
+    private _setFilterList(value: Array<string>): void {
         this.data.filter.list = value;
     }
 
-    _getTitle(): EventEmitter<any> {
+    private _getTitle(): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
         const labelKey = this._getSearchLabel(this.params.type);
         this.getLabels().getValues([labelKey]).subscribe((translations: any) => {
@@ -53,11 +53,11 @@ export class ResultModel extends AbstractAppModel {
         return eventEmitter;
     }
 
-    _getSearchLabel(type: string): string {
+    private _getSearchLabel(type: string): string {
         return (type) ? `L10N_SEARCH_BY_${type.toUpperCase()}` : "";
     }
 
-    _initFilters(): void {
+    private _initFilters(): void {
         this.data.filter.messDisabled = this.data.source.findIndex(game => game.ismess) === -1;
         this.data.filter.cloneDisabled = this.data.source.findIndex(game => game.cloneof != null) === -1;
         this.data.filter.biosDisabled = this.data.source.findIndex(game => game.isbios == "yes") === -1;
@@ -78,7 +78,7 @@ export class ResultModel extends AbstractAppModel {
         this._setFilterList(filterList);
     }
 
-    _filterList(): void {
+    private _filterList(): void {
         this.data.provider = this.data.source.filter((game: any) => {
             return !(
                 (game.ismess && !this.data.filter.list.includes(this._FILTER_MESS)) ||
@@ -89,7 +89,7 @@ export class ResultModel extends AbstractAppModel {
         });
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             source: [],
             filterValue: "",

@@ -9,9 +9,9 @@ export class ProgressBarDirective extends AbstractDirective {
 
     @HostBinding("style.display") display = "none";
 
-    _httpBeginSubscription: Subscription = null;
-    _httpEndSubscription: Subscription = null;
-    _counter: number = 0;
+    private _httpBeginSubscription: Subscription = null;
+    private _httpEndSubscription: Subscription = null;
+    private _counter: number = 0;
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);
@@ -38,11 +38,11 @@ export class ProgressBarDirective extends AbstractDirective {
         this._httpEndSubscription.unsubscribe();
     }
 
-    _hide(): void {
+    private _hide(): void {
         this.display = "none";
     }
 
-    _show(): void {
+    private _show(): void {
         this.display = "block";
     }
 }

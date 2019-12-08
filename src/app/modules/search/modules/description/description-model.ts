@@ -21,7 +21,7 @@ export class DescriptionModel extends AbstractAppModel {
         this.getCache().setItem("searchByDescriptionValue", this.data.value, "version");
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             value: ""
         };

@@ -31,7 +31,7 @@ export class SearchView extends AbstractAppView {
         return item ? item.key : undefined;
     }
 
-    _getModel(): SearchModel {
+    private _getModel(): SearchModel {
         return <SearchModel>this.model;
     }
 }

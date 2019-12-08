@@ -32,7 +32,7 @@ export class ManufacturersModel extends AbstractAppModel {
         this.getCache().setItem("searchByManufacturerPageIndex", this.data.pageIndex, "version");
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             filterValue: "",
             pageIndex: 0,

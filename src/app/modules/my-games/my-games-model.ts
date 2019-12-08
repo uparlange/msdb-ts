@@ -7,8 +7,8 @@ import { AppEvents } from 'src/app/app-events';
 @Injectable()
 export class MyGamesModel extends AbstractAppModel {
 
-    _configChangedSubscription: Subscription = null;
-    _changeInRomsDirectorySubscription: Subscription = null;
+    private _configChangedSubscription: Subscription = null;
+    private _changeInRomsDirectorySubscription: Subscription = null;
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);
@@ -66,7 +66,7 @@ export class MyGamesModel extends AbstractAppModel {
         this.getCache().setItem("myGamesPageIndex", this.data.pageIndex, "version");
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             filterValue: "",
             pageIndex: 0,

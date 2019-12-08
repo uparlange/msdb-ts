@@ -38,7 +38,7 @@ export class VersionsModel extends AbstractAppModel {
         this.getCache().setItem("searchByVersionsPageIndex", this.data.pageIndex, "version");
     }
 
-    _getInitData(): any {
+    protected _getInitData(): any {
         return {
             filterValue: "",
             pageIndex: 0,

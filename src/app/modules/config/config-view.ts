@@ -29,7 +29,7 @@ export class ConfigView extends AbstractAppView {
         this._getModel().cancel();
     }
 
-    _getModel(): ConfigModel {
+    private _getModel(): ConfigModel {
         return <ConfigModel>this.model;
     }
 }

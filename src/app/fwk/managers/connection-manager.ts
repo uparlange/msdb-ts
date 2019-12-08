@@ -5,7 +5,7 @@ import { WindowRef } from '../providers/window-ref';
 @Injectable({ providedIn: "root" })
 export class ConnectionManager extends AbstractManager {
 
-    _windowRef: WindowRef = null;
+    private _windowRef: WindowRef = null;
 
     online: boolean = false;
 
@@ -24,7 +24,8 @@ export class ConnectionManager extends AbstractManager {
             this._changeHandler();
         });
     }
-    _changeHandler(): void {
+
+    private _changeHandler(): void {
         this.online = this._windowRef.nativeWindow.navigator.onLine;
         this.emit("change", this.online);
     }

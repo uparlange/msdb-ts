@@ -3,7 +3,7 @@ import { AbstractObject } from './abstract-object';
 
 export class AbstractHelper extends AbstractObject {
 
-    _helper: AbstractHelperObject = null;
+    protected _helper: AbstractHelperObject = null;
 
     constructor(AbstractHelperObject: AbstractHelperObject) {
         super();

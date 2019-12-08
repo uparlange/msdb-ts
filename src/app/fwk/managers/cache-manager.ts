@@ -5,7 +5,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 @Injectable({ providedIn: "root" })
 export class CacheManager extends AbstractManager {
 
-    _db: Dexie = null;
+    private _db: Dexie = null;
 
     constructor() {
         super();

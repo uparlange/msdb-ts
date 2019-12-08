@@ -7,8 +7,8 @@ import { AppHelperObject } from './common/providers/app-helper-object';
 @Injectable()
 export class AppModel extends AbstractAppModel {
 
-    _cacheChangeSubscription: Subscription = null;
-    _setBackgroundClassSubscription: Subscription = null;
+    private _cacheChangeSubscription: Subscription = null;
+    private _setBackgroundClassSubscription: Subscription = null;
 
     constructor(appHelperObject: AppHelperObject) {
         super(appHelperObject);
@@ -31,13 +31,13 @@ export class AppModel extends AbstractAppModel {
         });
     }
 
-    onDestroy() {
+    onDestroy(): void {
         super.onDestroy();
         this._cacheChangeSubscription.unsubscribe();
         this._setBackgroundClassSubscription.unsubscribe();
     }
 
-    _getInitData() {
+    protected _getInitData(): any {
         return {
             searchLastType: null,
             contentClass: null,

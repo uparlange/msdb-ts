@@ -3,7 +3,7 @@ import { AbstractObject } from './abstract-object';
 
 export class AbstractEventManager extends AbstractObject {
 
-    _eventEmitters: Map<string, EventEmitter<any>> = new Map();
+    protected _eventEmitters: Map<string, EventEmitter<any>> = new Map();
 
     constructor() {
         super();

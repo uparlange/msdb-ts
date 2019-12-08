@@ -7,7 +7,7 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 @Injectable()
 export class DetailModel extends AbstractAppModel {
 
-  _socketConfigChangedSubscription: Subscription = null;
+  private _socketConfigChangedSubscription: Subscription = null;
 
   constructor(appHelperObject: AppHelperObject) {
     super(appHelperObject);
@@ -70,7 +70,7 @@ export class DetailModel extends AbstractAppModel {
     return this.getSizeLabel(size);
   }
 
-  _refreshGameAvailability(): void {
+  private _refreshGameAvailability(): void {
     this.data.gameAvailable = false;
     this.getSocket().emit("IS_ROM_AVAILABLE", this.params.name).subscribe((result: any) => {
       if (result !== null && result.name === this.params.name) {
@@ -79,7 +79,7 @@ export class DetailModel extends AbstractAppModel {
     });
   }
 
-  _getInitData(): any {
+  protected _getInitData(): any {
     return {
       game: {
         dipswitchs: [],

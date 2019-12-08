@@ -47,7 +47,7 @@ export class AbstractAppView extends AbstractView {
         return this._getHelper().getFavoritesManager();
     }
 
-    _getHelper(): AppHelperObject {
+    protected _getHelper(): AppHelperObject {
         return <AppHelperObject>this._helper;
     }
 }
