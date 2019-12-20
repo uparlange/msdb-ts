@@ -81,6 +81,14 @@ export class MsdbProvider extends AbstractObject {
         return this._callService(config);
     }
 
+    getRandomGame(): EventEmitter<any> {
+        const config = {
+            url: this._configProvider.getServiceUrl("randomgame"),
+            useCache: false
+        };
+        return this._callService(config);
+    }
+
     getDetail(name: string): EventEmitter<any> {
         const config = {
             url: this._configProvider.getServiceUrl("detail"),

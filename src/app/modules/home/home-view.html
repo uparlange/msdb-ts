@@ -6,37 +6,38 @@
 		{{'L10N_DESCRIPTION'|translate}}
 	</mat-card-content>
 </mat-card>
-<div class="default-spacer"></div>
-<mat-card *ngIf="model.data.mame.build != null">
-	<mat-card-title>
-		<a routerLink="/result"
-			[queryParams]="{type:'version',value:model.data.mame.version}">{{'L10N_VERSION'|translate}}
-			{{model.data.mame.version}}</a>
-	</mat-card-title>
-	<mat-card-content>
-		<ul>
-			<li>
-				Machines : {{model.data.mame.machineCount}}
-				<ul>
-					<li>Parent : {{model.data.mame.parentCount}}</li>
-					<li>Clones : {{model.data.mame.cloneCount}}</li>
-				</ul>
-			</li>
-			<li>{{'L10N_SEARCH_BY_BIOS'|translate}} : <a routerLink="/result"
-					[queryParams]="{type:'bios',value:'all'}">{{model.data.mame.biosCount}}</a></li>
-			<li>{{'L10N_SEARCH_BY_DEVICE'|translate}} : <a routerLink="/result"
-					[queryParams]="{type:'device',value:'all'}">{{model.data.mame.deviceCount}}</a></li>
-			<li>{{'L10N_SEARCH_BY_MECHANICAL'|translate}} : <a routerLink="/result"
-					[queryParams]="{type:'mechanical',value:'all'}">{{model.data.mame.mechanicalCount}}</a></li>
-			<li>{{'L10N_SEARCH_BY_MESS'|translate}} : <a routerLink="/result"
-					[queryParams]="{type:'mess',value:'all'}">{{model.data.mame.messCount}}</a></li>
-		</ul>
-	</mat-card-content>
-</mat-card>
+<div *ngIf="model.data.mame.build != null">
+	<div class="default-spacer"></div>
+	<mat-card>
+		<mat-card-title>
+			<a routerLink="/result" [queryParams]="{type:'version',value:model.data.mame.version}">MAME -
+				{{model.data.mame.version}}</a>
+		</mat-card-title>
+		<mat-card-content>
+			<ul>
+				<li>
+					Machines : {{model.data.mame.machineCount}}
+					<ul>
+						<li>Parent : {{model.data.mame.parentCount}}</li>
+						<li>Clones : {{model.data.mame.cloneCount}}</li>
+					</ul>
+				</li>
+				<li>{{'L10N_SEARCH_BY_BIOS'|translate}} : <a routerLink="/result"
+						[queryParams]="{type:'bios',value:'all'}">{{model.data.mame.biosCount}}</a></li>
+				<li>{{'L10N_SEARCH_BY_DEVICE'|translate}} : <a routerLink="/result"
+						[queryParams]="{type:'device',value:'all'}">{{model.data.mame.deviceCount}}</a></li>
+				<li>{{'L10N_SEARCH_BY_MECHANICAL'|translate}} : <a routerLink="/result"
+						[queryParams]="{type:'mechanical',value:'all'}">{{model.data.mame.mechanicalCount}}</a></li>
+				<li>{{'L10N_SEARCH_BY_MESS'|translate}} : <a routerLink="/result"
+						[queryParams]="{type:'mess',value:'all'}">{{model.data.mame.messCount}}</a></li>
+			</ul>
+		</mat-card-content>
+	</mat-card>
+</div>
 <div class="default-spacer"></div>
 <mat-card>
 	<mat-card-title>
-		{{'L10N_HOW_TO_PLAY'|translate}}
+		MAME - {{'L10N_HOW_TO_PLAY'|translate}}
 	</mat-card-title>
 	<mat-card-content>
 		<ol>
@@ -59,17 +60,31 @@
 				{{'L10N_DOWNLOAD_GAME'|translate}}
 				<ul>
 					<li><a href="http://www.planetemu.net/roms/mame-roms">Planetemu</a></li>
-					<li><a href="https://bda.retroroms.info:82/downloads/mame">Retroroms ({{'L10N_ACCOUNT_NEEDED'|translate}})</a></li>
+					<li><a href="https://bda.retroroms.info:82/downloads/mame">Retroroms
+							({{'L10N_ACCOUNT_NEEDED'|translate}})</a></li>
 				</ul>
 			</li>
 			<li>{{'L10N_HAVE_FUN'|translate}}</li>
 		</ol>
 	</mat-card-content>
 </mat-card>
+<div *ngIf="model.data.randomGame.detail != null">
+	<div class="default-spacer"></div>
+	<mat-card>
+		<mat-card-title>
+			<a routerLink="/detail" [queryParams]="{name:model.data.randomGame.detail.name}">
+				MAME - {{'L10N_RANDOM_GAME'|translate}} : {{model.data.randomGame.detail.description}}
+			</a>
+		</mat-card-title>
+		<mat-card-content>
+			<gallery [colcount]="3" [gap]="5" [provider]="model.data.randomGame.images"></gallery>
+		</mat-card-content>
+	</mat-card>
+</div>
 <div class="default-spacer"></div>
 <mat-card>
 	<mat-card-title>
-		{{'L10N_REFERENCES'|translate}}
+		MAME - {{'L10N_REFERENCES'|translate}}
 	</mat-card-title>
 	<mat-card-content>
 		<ul>
@@ -85,7 +100,7 @@
 <div class="default-spacer"></div>
 <mat-card>
 	<mat-card-title>
-		{{'L10N_COMMUNITY'|translate}}
+		MSDB - {{'L10N_COMMUNITY'|translate}}
 	</mat-card-title>
 	<mat-card-content>
 		<ul>

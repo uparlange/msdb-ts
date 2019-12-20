@@ -10,6 +10,7 @@ import { FwkSharedModule } from 'src/app/fwk/modules/fwk-shared-module';
 import { AdvTableComponent } from '../components/adv-table/adv-table-component';
 import { AdvTableColumnDirective } from '../components/adv-table/adv-table-column-directive';
 import { ScrollToTopDirective } from '../directives/scroll-to-top-directive';
+import { GalleryComponent } from '../components/gallery/gallery-component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ScrollToTopDirective } from '../directives/scroll-to-top-directive';
     NgForItemComponent,
     AdvTableComponent,
     AdvTableColumnDirective,
-    ScrollToTopDirective
+    ScrollToTopDirective,
+    GalleryComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { ScrollToTopDirective } from '../directives/scroll-to-top-directive';
     NgForItemComponent,
     AdvTableComponent,
     AdvTableColumnDirective,
-    ScrollToTopDirective
+    ScrollToTopDirective,
+    GalleryComponent
   ]
 })
 export class SharedModule extends AbstractModule {

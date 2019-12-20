@@ -33,7 +33,7 @@ export class DetailModel extends AbstractAppModel {
         }
         this.getHistory().add(this.data.game.description, "gamepad");
         const images = [];
-        this.data.game.images.forEach((image) => {
+        this.data.game.images.forEach((image:any) => {
           if (image.name.indexOf(".ico") === -1) {
             images.push({
               name: image.name,

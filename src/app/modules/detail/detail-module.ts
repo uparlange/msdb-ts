@@ -12,7 +12,6 @@ import { PortsPopup } from './popups/ports/ports-popup';
 import { RomsPopup } from './popups/roms/roms-popup';
 import { SharedModule } from 'src/app/common/modules/shared-module';
 import { AbstractModule } from 'src/app/fwk/abstract-module';
-import { GalleryComponent } from './components/gallery/gallery-component';
 
 const routes: Routes = [
   { path: "", component: DetailView }
@@ -36,7 +35,6 @@ const routes: Routes = [
     DriverPopup,
     PortsPopup,
     RomsPopup,
-    GalleryComponent
   ]
 })
 export class DetailModule extends AbstractModule {

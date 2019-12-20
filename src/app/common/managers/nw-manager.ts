@@ -296,7 +296,7 @@ export class NwManager extends AbstractManager {
 
     private _playGame(name: string, callback: Function): void {
         const fs = window.nw.require("fs");
-        this._getLogger().info(`(MAME) Launch game ${name}`);
+        this._getLogger().info(`() Launch game ${name}`);
         this._getConfiguration((configuration: any) => {
             const mameDirectory = configuration.mameDirectory;
             let mameFileName = "mame64.exe";
