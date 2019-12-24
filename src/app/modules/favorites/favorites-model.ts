@@ -33,9 +33,7 @@ export class FavoritesModel extends AbstractAppModel {
         this.getFavorites().getList().subscribe((list: Array<string>) => {
             this.getMsdbProvider().search("name", list).subscribe((data: any) => {
                 this.data.provider = data || [];
-                if (callback) {
-                    callback();
-                }
+                callback();
             });
         });
     }

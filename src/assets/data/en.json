@@ -108,5 +108,7 @@
 	"L10N_UNUBSCRIBE": "Unsubscribe",
 	"L10N_DOWLOAD": "Download",
 	"L10N_QUIT_AND_INSTALL": "Quit and install ?",
-	"L10N_RANDOM_GAME": "Random game"
+	"L10N_RANDOM_GAME": "Random game",
+	"L10N_FOLLOWERS": "Follower(s)",
+	"L10N_STATISTICS": "Statistics"
 }

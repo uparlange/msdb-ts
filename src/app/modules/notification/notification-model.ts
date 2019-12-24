@@ -31,12 +31,16 @@ export class NotificationModel extends AbstractAppModel {
 
     private _updateSub(sub: any): void {
         this.data.sub = sub;
+        this.getMsdbProvider().getSubscriptionsCount().subscribe((data: any) => {
+            this.data.followersCount = data || 0;
+        });
     }
 
     protected _getInitData(): any {
         return {
             enabled: false,
-            sub: null
+            sub: null,
+            followersCount: 0
         };
     }
 }

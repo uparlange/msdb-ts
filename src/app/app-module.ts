@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: "mygames", loadChildren: () => import("./modules/my-games/my-games-module").then(mod => mod.MyGamesModule) },
   { path: "notification", loadChildren: () => import("./modules/notification/notification-module").then(mod => mod.NotificationModule) },
   { path: "update", loadChildren: () => import("./modules/update/update-module").then(mod => mod.UpdateModule) },
+  { path: "statistic", loadChildren: () => import("./modules/statistic/statistic-module").then(mod => mod.StatisticModule) },
   { path: "**", loadChildren: () => import("./modules/page-not-found/page-not-found-module").then(mod => mod.PageNotFoundModule) }
 ];
 

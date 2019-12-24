@@ -16,7 +16,6 @@ export class AppModel extends AbstractAppModel {
 
     onInit(): void {
         super.onInit();
-        this.data.notificationsEnabled = (this.getNotification().isEnabled() && !this.getConfigProvider().runInNw());
         this.getCache().getItem("searchLastType", "description").subscribe((value: string) => {
             this.data.searchLastType = value;
         });
@@ -40,8 +39,7 @@ export class AppModel extends AbstractAppModel {
     protected _getInitData(): any {
         return {
             searchLastType: null,
-            contentClass: null,
-            notificationsEnabled: false
+            contentClass: null
         };
     }
 

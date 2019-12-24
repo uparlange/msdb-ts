@@ -60,7 +60,7 @@ export class AbstractModel extends AbstractHelper {
   }
 
   setTitle(value: string) {
-    let title = "Mame Smart Database";
+    let title = "MAME Smart Database";
     if (typeof value === "string") {
       title += ` - ${value}`;
     }

@@ -25,7 +25,11 @@
 						<mat-icon svgIcon="history"></mat-icon>
 						<span>{{"L10N_HISTORY"|translate}}</span>
 					</button>
-					<button *ngIf="model.data.notificationsEnabled" mat-menu-item routerLink="/notification">
+					<button mat-menu-item routerLink="/statistic">
+						<mat-icon svgIcon="chart-arc"></mat-icon>
+						<span>{{"L10N_STATISTICS"|translate}}</span>
+					</button>
+					<button mat-menu-item routerLink="/notification">
 						<mat-icon svgIcon="bell-outline"></mat-icon>
 						<span>{{"L10N_NOTIFICATION"|translate}}</span>
 					</button>

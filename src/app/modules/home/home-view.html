@@ -18,8 +18,9 @@
 				<li>
 					Machines : {{model.data.mame.machineCount}}
 					<ul>
-						<li>Parent : {{model.data.mame.parentCount}}</li>
-						<li>Clones : {{model.data.mame.cloneCount}}</li>
+						<li>MAME : {{model.data.mame.mameCount}}</li>
+						<li>{{'L10N_SEARCH_BY_MESS'|translate}} : <a routerLink="/result"
+								[queryParams]="{type:'mess',value:'all'}">{{model.data.mame.messCount}}</a></li>
 					</ul>
 				</li>
 				<li>{{'L10N_SEARCH_BY_BIOS'|translate}} : <a routerLink="/result"
@@ -28,8 +29,6 @@
 						[queryParams]="{type:'device',value:'all'}">{{model.data.mame.deviceCount}}</a></li>
 				<li>{{'L10N_SEARCH_BY_MECHANICAL'|translate}} : <a routerLink="/result"
 						[queryParams]="{type:'mechanical',value:'all'}">{{model.data.mame.mechanicalCount}}</a></li>
-				<li>{{'L10N_SEARCH_BY_MESS'|translate}} : <a routerLink="/result"
-						[queryParams]="{type:'mess',value:'all'}">{{model.data.mame.messCount}}</a></li>
 			</ul>
 		</mat-card-content>
 	</mat-card>

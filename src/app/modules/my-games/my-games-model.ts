@@ -48,14 +48,10 @@ export class MyGamesModel extends AbstractAppModel {
                         });
                     }
                     this.data.provider = data || [];
-                    if (callback) {
-                        callback();
-                    }
+                    callback();
                 });
             } else {
-                if (callback) {
-                    callback();
-                }
+                callback();
             }
         });
     }

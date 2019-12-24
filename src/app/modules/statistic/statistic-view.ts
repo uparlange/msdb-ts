@@ -1,0 +1,17 @@
+import { AbstractAppView } from 'src/app/common/abstract-app-view';
+import { Component } from '@angular/core';
+import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { environment } from './../../../environments/environment';
+import { StatisticModel } from './statistic-model';
+
+@Component({
+    templateUrl: './statistic-view.html',
+    styleUrls: ['./statistic-view.css']
+})
+export class StatisticView extends AbstractAppView {
+
+    constructor(appHelperObject: AppHelperObject, statisticModel: StatisticModel) {
+        super(appHelperObject, statisticModel);
+    }
+    
+}
