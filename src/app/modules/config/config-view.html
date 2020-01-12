@@ -1,60 +1,83 @@
-<mat-card>
-    <mat-card-title>
-        {{'L10N_APPLICATION'|translate}}
-    </mat-card-title>
-    <mat-card-content>
-        <div>
-            <mat-form-field>
-                <mat-select [placeholder]="'L10N_LANGUAGE'|translate" [value]="model.data.selectedLanguage"
-                    (selectionChange)="onLanguageChanged($event)">
-                    <mat-option *ngFor="let language of model.data.languages" [value]="language.data">
-                        {{language.label}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </mat-card-content>
-</mat-card>
-<div class="default-spacer"></div>
-<mat-card>
-    <mat-card-title>
-        {{'L10N_CONFIGURATION'|translate}}
-    </mat-card-title>
-    <mat-card-content>
-        <div>
-            <mat-form-field class="full-width">
-                <input matInput [(ngModel)]="model.data.newValue.mameDirectory"
-                    [placeholder]="'L10N_MAME_DIRECTORY'|translate" (keyup)="checkFormChanges()"
-                    (change)="checkFormChanges()">
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field class="full-width">
-                <input matInput [(ngModel)]="model.data.newValue.romsDirectory" disabled
-                    [placeholder]="'L10N_ROMS_DIRECTORY'|translate">
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-checkbox [(ngModel)]="model.data.newValue.autosave" (change)="checkFormChanges()">
-                {{'L10N_AUTOSAVE'|translate}}
-            </mat-checkbox>
-        </div>
-        <div>
-            <mat-checkbox [(ngModel)]="model.data.newValue.joystick" (change)="checkFormChanges()">
-                {{'L10N_JOYSTICK'|translate}}
-            </mat-checkbox>
-        </div>
-    </mat-card-content>
-</mat-card>
-<div class="default-spacer"></div>
-<mat-card>
-    <mat-card-content>
-        <button mat-raised-button color="primary" (click)="save()" [disabled]="!model.data.enabled">
-            {{'L10N_SAVE'|translate}}
-        </button>
-        <span class="sep"></span>
-        <button mat-raised-button color="accent" (click)="cancel()" [disabled]="!model.data.enabled">
-            {{'L10N_CANCEL'|translate}}
-        </button>
-    </mat-card-content>
-</mat-card>
+<mat-tab-group>
+    <mat-tab label="{{'L10N_CONFIGURATION'|translate}}">
+        <div class="default-spacer"></div>
+        <mat-card>
+            <mat-card-title>
+                {{'L10N_APPLICATION'|translate}}
+            </mat-card-title>
+            <mat-card-content>
+                <div>
+                    <mat-form-field>
+                        <mat-select [placeholder]="'L10N_LANGUAGE'|translate" [value]="model.data.selectedLanguage"
+                            (selectionChange)="onLanguageChanged($event)">
+                            <mat-option *ngFor="let language of model.data.languages" [value]="language.data">
+                                {{language.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <div class="default-spacer"></div>
+        <mat-card>
+            <mat-card-title>
+                {{'L10N_DIRECTORIES'|translate}}
+            </mat-card-title>
+            <mat-card-content>
+                <div>
+                    <mat-form-field class="full-width">
+                        <input matInput [(ngModel)]="model.data.configuration.newValue.mameDirectory" placeholder="MAME"
+                            (keyup)="checkConfigFormChanges()" (change)="checkConfigFormChanges()">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="full-width">
+                        <input matInput [(ngModel)]="model.data.configuration.newValue.romsDirectory" disabled
+                            placeholder="ROMS">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <div class="default-spacer"></div>
+        <mat-card>
+            <mat-card-content>
+                <button mat-raised-button color="primary" (click)="saveConfig()"
+                    [disabled]="!model.data.configuration.enabled">
+                    {{'L10N_SAVE'|translate}}
+                </button>
+                <span class="sep"></span>
+                <button mat-raised-button color="accent" (click)="cancelConfig()"
+                    [disabled]="!model.data.configuration.enabled">
+                    {{'L10N_CANCEL'|translate}}
+                </button>
+            </mat-card-content>
+        </mat-card>
+        <div class="default-spacer"></div>
+    </mat-tab>
+    <mat-tab label="{{'L10N_MAME_PARAMETERS'|translate}}">
+        <div class="default-spacer"></div>
+        <mat-card>
+            <mat-card-content>
+                <button mat-raised-button color="primary" (click)="saveMameIni()"
+                    [disabled]="!model.data.mameIni.enabled">
+                    {{'L10N_SAVE'|translate}}
+                </button>
+                <span class="sep"></span>
+                <button mat-raised-button color="accent" (click)="cancelMameIni()"
+                    [disabled]="!model.data.mameIni.enabled">
+                    {{'L10N_CANCEL'|translate}}
+                </button>
+            </mat-card-content>
+        </mat-card>
+        <div class="default-spacer"></div>
+        <advTable [provider]="model.data.mameIni.newValue" [(filterValue)]="model.data.mameIni.filterValue"
+            [paginationEnabled]="true" [filterEnabled]="true" [rowTrackId]="'key'">
+            <ng-template columnName="key" let-row>
+                {{row.key}}
+            </ng-template>
+            <ng-template columnName="value" columnWidth="100%" let-row>
+                <input matInput [(ngModel)]="row.value" (keyup)="checkMameIniFormChanges()" (change)="checkMameIniFormChanges()">
+            </ng-template>
+        </advTable>
+    </mat-tab>
+</mat-tab-group>

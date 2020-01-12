@@ -5,8 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RatingsModel extends AbstractAppModel {
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     onRefresh(callback: Function): void {

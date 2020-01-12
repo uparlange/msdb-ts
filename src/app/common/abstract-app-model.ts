@@ -7,11 +7,13 @@ import { AppHelperObject } from './providers/app-helper-object';
 import { NotificationManager } from './managers/notification-manager';
 import { ConfigProvider } from './providers/config-provider';
 import { NwManager } from './managers/nw-manager';
+import { AbstractHelperObject } from '../fwk/abstract-helper-object';
 
 export class AbstractAppModel extends AbstractModel {
 
-  constructor(appHelperObject: AppHelperObject) {
-    super(appHelperObject);
+  constructor(
+    protected _helper: AbstractHelperObject) {
+    super(_helper);
   }
 
   getSocket(): SocketManager {
@@ -50,7 +52,7 @@ export class AbstractAppModel extends AbstractModel {
     return this._getHelper().getNwManager();
   }
 
-  private _getHelper(): AppHelperObject {
+  protected _getHelper(): AppHelperObject {
     return <AppHelperObject>this._helper;
   }
 }

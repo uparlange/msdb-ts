@@ -10,22 +10,14 @@ import { PopupManager } from '../managers/popup-manager';
 @Injectable({ providedIn: "root" })
 export class FwkShell extends AbstractObject {
 
-  private _translateManager: TranslateManager = null;
-  private _connectionManager: ConnectionManager = null;
-  private _cacheManager: CacheManager = null;
-  private _routerManager: RouterManager = null;
-  private _eventManager: EventManager = null;
-  private _popupManager: PopupManager = null;
-
-  constructor(translateManager: TranslateManager, connectionManager: ConnectionManager, cacheManager: CacheManager, routerManager: RouterManager,
-    eventManager: EventManager, popupManager: PopupManager) {
+  constructor(
+    protected _translateManager: TranslateManager,
+    protected _connectionManager: ConnectionManager,
+    protected _cacheManager: CacheManager,
+    protected _routerManager: RouterManager,
+    protected _eventManager: EventManager,
+    protected _popupManager: PopupManager) {
     super();
-    this._translateManager = translateManager;
-    this._connectionManager = connectionManager;
-    this._cacheManager = cacheManager;
-    this._routerManager = routerManager;
-    this._eventManager = eventManager;
-    this._popupManager = popupManager;
   }
 
   init(): void {

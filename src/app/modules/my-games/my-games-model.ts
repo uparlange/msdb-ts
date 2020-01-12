@@ -10,8 +10,9 @@ export class MyGamesModel extends AbstractAppModel {
     private _configChangedSubscription: Subscription = null;
     private _changeInRomsDirectorySubscription: Subscription = null;
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     onInit(): void {

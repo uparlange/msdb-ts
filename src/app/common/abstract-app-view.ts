@@ -1,14 +1,17 @@
 import { AbstractView } from '../fwk/abstract-view';
-import { AbstractAppModel } from './abstract-app-model';
 import { FavoritesManager } from './managers/favorites-manager';
 import { SocketManager } from './managers/socket-manager';
 import { ConfigProvider } from './providers/config-provider';
 import { AppHelperObject } from './providers/app-helper-object';
+import { AbstractAppModel } from './abstract-app-model';
+import { AbstractHelperObject } from '../fwk/abstract-helper-object';
 
 export class AbstractAppView extends AbstractView {
 
-    constructor(appHelperObject: AppHelperObject, abstractAppModel: AbstractAppModel) {
-        super(appHelperObject, abstractAppModel);
+    constructor(
+        protected _helper: AbstractHelperObject,
+        public model: AbstractAppModel) {
+        super(_helper, model);
     }
 
     trackByName(index: number, item: any): string {

@@ -10,8 +10,10 @@ import { StatisticModel } from './statistic-model';
 })
 export class StatisticView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, statisticModel: StatisticModel) {
-        super(appHelperObject, statisticModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: StatisticModel) {
+        super(_helper, model);
     }
     
 }

@@ -9,8 +9,10 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class FavoritesView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, favoritesModel: FavoritesModel) {
-        super(appHelperObject, favoritesModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: FavoritesModel) {
+        super(_helper, model);
     }
 
 }

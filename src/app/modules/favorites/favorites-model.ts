@@ -8,8 +8,9 @@ export class FavoritesModel extends AbstractAppModel {
 
     private _favoritesChangeSubscription: Subscription = null;
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     onInit(): void {

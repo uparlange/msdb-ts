@@ -9,8 +9,10 @@ import { AbstractAppView } from 'src/app/common/abstract-app-view';
 })
 export class SearchView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, searchModel: SearchModel) {
-        super(appHelperObject, searchModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: SearchModel) {
+        super(_helper, model);
     }
 
     tabChanged(event: any): void {

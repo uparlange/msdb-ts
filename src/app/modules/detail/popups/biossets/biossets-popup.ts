@@ -9,7 +9,9 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class BiossetsPopup extends AbstractAppPopup {
 
-  constructor(appHelperObject: AppHelperObject, detailModel: DetailModel) {
-    super(appHelperObject, detailModel);
+  constructor(
+    protected _helper: AppHelperObject,
+    public model: DetailModel) {
+    super(_helper, model);
   }
 }

@@ -1,7 +1,7 @@
-import { Pipe, PipeTransform, OnDestroy } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractPipe } from '../abstract-pipe';
 import { Subscription } from 'rxjs';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { FwkHelperObject } from '../providers/fwk-helper-object';
 
 @Pipe({
   name: 'translate',
@@ -14,8 +14,9 @@ export class TranslatePipe extends AbstractPipe implements PipeTransform {
   private _tranlateValue: string = null;
   private _onLanguageChangeSubscription: Subscription = null;
 
-  constructor(appHelperObject: AppHelperObject) {
-    super(appHelperObject);
+  constructor(
+    protected _helper: FwkHelperObject) {
+    super(_helper);
     this._onLanguageChangeSubscription = this.getLabels().on("languageChange").subscribe(() => {
       this._refreshTranslation();
     });

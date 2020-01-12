@@ -7,13 +7,11 @@ import { WindowRef } from 'src/app/fwk/providers/window-ref';
 export class AnalyticsManager extends AbstractManager {
 
     private _gaMeasurementId: string = "UA-141763528-1";
-    private _routerManager: RouterManager = null;
-    private _windowRef: WindowRef = null;
 
-    constructor(routerManager: RouterManager, windowRef: WindowRef) {
+    constructor(
+        private _routerManager: RouterManager, 
+        private _windowRef: WindowRef) {
         super();
-        this._routerManager = routerManager;
-        this._windowRef = windowRef;
     }
 
     init(): void {

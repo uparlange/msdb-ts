@@ -5,7 +5,8 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 @Injectable()
 export class PageNotFoundModel extends AbstractAppModel {
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AbstractHelperObject } from 'src/app/fwk/abstract-helper-object';
 import { ConfigProvider } from './config-provider';
 import { AnalyticsManager } from '../managers/analytics-manager';
 import { HistoryManager } from '../managers/history-manager';
@@ -14,18 +13,21 @@ import { MsdbProvider } from './msdb-provider';
 import { BlazyManager } from '../managers/blazy-Manager';
 import { NotificationManager } from '../managers/notification-manager';
 import { NwManager } from '../managers/nw-manager';
+import { FwkHelperObject } from 'src/app/fwk/providers/fwk-helper-object';
 
 @Injectable({ providedIn: "root" })
-export class AppHelperObject extends AbstractHelperObject {
+export class AppHelperObject extends FwkHelperObject {
 
-  private _configProvider: ConfigProvider = null;
-  private _msdbProvider: MsdbProvider = null;
-
-  constructor(shell: AppShell, windowRef: WindowRef, title: Title, httpClient: HttpClient, activatedRoute: ActivatedRoute,
-    meta: Meta, configProvider: ConfigProvider, msdbProvider: MsdbProvider) {
-    super(shell, windowRef, title, httpClient, activatedRoute, meta);
-    this._configProvider = configProvider;
-    this._msdbProvider = msdbProvider;
+  constructor(
+    protected _shell: AppShell,
+    protected _windowRef: WindowRef,
+    protected _title: Title,
+    protected _httpClient: HttpClient,
+    protected _activatedRoute: ActivatedRoute,
+    protected _meta: Meta,
+    private _configProvider: ConfigProvider,
+    private _msdbProvider: MsdbProvider) {
+    super(_shell, _windowRef, _title, _httpClient, _activatedRoute, _meta);
   }
 
   getAnalyticsManager(): AnalyticsManager {

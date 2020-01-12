@@ -9,8 +9,10 @@ import { UpdateModel } from './update-model';
 })
 export class UpdateView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, updateModel: UpdateModel) {
-        super(appHelperObject, updateModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: UpdateModel) {
+        super(_helper, model);
     }
 
     update(): void {

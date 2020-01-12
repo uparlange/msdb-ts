@@ -10,8 +10,9 @@ export class ResultModel extends AbstractAppModel {
     private _FILTER_BIOS: string = "bios";
     private _FILTER_DEVICE: string = "device";
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     onInit(): void {

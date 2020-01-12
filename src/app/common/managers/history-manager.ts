@@ -7,11 +7,10 @@ import { RouterManager } from 'src/app/fwk/managers/router-manager';
 export class HistoryManager extends AbstractManager {
 
   private _history: Array<any> = new Array();
-  private _routerManager: RouterManager = null;
 
-  constructor(routerManager: RouterManager) {
+  constructor(
+    private _routerManager: RouterManager) {
     super();
-    this._routerManager = routerManager;
   }
 
   init(): void {

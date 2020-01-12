@@ -12,6 +12,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from './../environments/environment';
 import { SharedModule } from './common/modules/shared-module';
 import { HttpClientModule } from '@angular/common/http';
+import { ClosableSnackBarComponent } from './components/closable-snack-bar-component/closable-snack-bar-component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -32,7 +33,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppView,
-    ProgressBarDirective
+    ProgressBarDirective,
+    ClosableSnackBarComponent
   ],
   imports: [
     BrowserModule,

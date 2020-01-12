@@ -7,8 +7,9 @@ export class ScrollToTopDirective extends AbstractDirective {
 
     private _scrollDuration: number = 250;
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     @HostListener("click") onClick(event: any) {

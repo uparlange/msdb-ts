@@ -1,12 +1,15 @@
 import { AbstractPopup } from '../fwk/abstract-popup';
-import { AbstractModel } from '../fwk/abstract-model';
 import { ConfigProvider } from './providers/config-provider';
 import { AppHelperObject } from './providers/app-helper-object';
+import { AbstractHelperObject } from '../fwk/abstract-helper-object';
+import { AbstractModel } from '../fwk/abstract-model';
 
 export class AbstractAppPopup extends AbstractPopup {
 
-    constructor(appHelperObject: AppHelperObject, model: AbstractModel) {
-        super(appHelperObject, model);
+    constructor(
+        protected _helper: AbstractHelperObject,
+        public model: AbstractModel) {
+        super(_helper, model);
     }
 
     trackByName(index: number, item: any): string {

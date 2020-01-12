@@ -5,8 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class YearsModel extends AbstractAppModel {
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     onInit(): void {

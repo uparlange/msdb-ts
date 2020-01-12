@@ -9,8 +9,10 @@ import { Component } from '@angular/core';
 })
 export class CategoriesView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, categoriesModel: CategoriesModel) {
-        super(appHelperObject, categoriesModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: CategoriesModel) {
+        super(_helper, model);
     }
 
     hasChild(_: number, _nodeData: any): boolean {

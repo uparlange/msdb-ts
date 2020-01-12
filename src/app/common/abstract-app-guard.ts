@@ -1,18 +1,20 @@
 import { AbstractGuard } from '../fwk/abstract-guard';
 import { ConfigProvider } from './providers/config-provider';
 import { AppHelperObject } from './providers/app-helper-object';
+import { AbstractHelperObject } from '../fwk/abstract-helper-object';
 
 export class AbstractAppGuard extends AbstractGuard {
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AbstractHelperObject) {
+        super(_helper);
     }
 
     getConfigProvider(): ConfigProvider {
         return this._getHelper().getConfigProvider();
     }
 
-    private _getHelper(): AppHelperObject {
+    protected _getHelper(): AppHelperObject {
         return <AppHelperObject>this._helper;
     }
 }

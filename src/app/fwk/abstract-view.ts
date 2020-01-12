@@ -1,22 +1,22 @@
 import { AbstractComponent } from './abstract-component';
-import { AbstractHelperObject } from './abstract-helper-object';
 import { AbstractModel } from './abstract-model';
 import { Subscription } from 'rxjs';
+import { FwkHelperObject } from './providers/fwk-helper-object';
+import { AbstractHelperObject } from './abstract-helper-object';
 
 export class AbstractView extends AbstractComponent {
 
-    model: AbstractModel = null;
-
     private _queryParamsSubscription: Subscription = null;
 
-    constructor(AbstractHelperObject: AbstractHelperObject, model: AbstractModel) {
-        super(AbstractHelperObject);
-        this.model = model;
+    constructor(
+        protected _helper: AbstractHelperObject,
+        public model: AbstractModel) {
+        super(_helper);
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this._queryParamsSubscription = this._helper.getActivatedRoute().queryParams.subscribe((params) => {
+        this._queryParamsSubscription = this._getHelper().getActivatedRoute().queryParams.subscribe((params) => {
             this.model.init(params);
         });
     }
@@ -26,5 +26,9 @@ export class AbstractView extends AbstractComponent {
         this.model.destroy();
         this.model = null;
         this._queryParamsSubscription.unsubscribe();
+    }
+
+    protected _getHelper(): FwkHelperObject {
+        return <FwkHelperObject>this._helper;
     }
 }

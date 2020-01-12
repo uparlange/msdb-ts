@@ -6,11 +6,9 @@ import { environment } from './../../../environments/environment';
 @Injectable({ providedIn: "root" })
 export class ConfigProvider extends AbstractObject {
 
-  private _windowRef: WindowRef = null;
-
-  constructor(windowRef: WindowRef) {
+  constructor(
+    private _windowRef: WindowRef) {
     super();
-    this._windowRef = windowRef;
   }
 
   getServiceUrl(serviceName: string): string {

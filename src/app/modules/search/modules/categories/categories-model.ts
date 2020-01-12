@@ -7,8 +7,9 @@ import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree'
 @Injectable()
 export class CategoriesModel extends AbstractAppModel {
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     onRefresh(callback: Function): void {

@@ -12,9 +12,10 @@ export class NgForItemComponent extends AbstractComponent {
   @Input() last: boolean = false;
 
   @Output() onLast: EventEmitter<any> = new EventEmitter();
-  
-  constructor(appHelperObject: AppHelperObject) {
-    super(appHelperObject);
+
+  constructor(
+    protected _helper: AppHelperObject) {
+    super(_helper);
   }
 
   afterContentInit(): void {

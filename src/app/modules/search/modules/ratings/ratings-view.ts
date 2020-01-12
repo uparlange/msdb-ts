@@ -9,7 +9,9 @@ import { Component } from '@angular/core';
 })
 export class RatingsView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, ratingsModel: RatingsModel) {
-        super(appHelperObject, ratingsModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: RatingsModel) {
+        super(_helper, model);
     }
 }

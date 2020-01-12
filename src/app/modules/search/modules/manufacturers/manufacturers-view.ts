@@ -9,8 +9,10 @@ import { Component } from '@angular/core';
 })
 export class ManufacturersView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, manufacturersModel: ManufacturersModel) {
-        super(appHelperObject, manufacturersModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: ManufacturersModel) {
+        super(_helper, model);
     }
 
 }

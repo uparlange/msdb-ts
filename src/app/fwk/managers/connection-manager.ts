@@ -5,13 +5,11 @@ import { WindowRef } from '../providers/window-ref';
 @Injectable({ providedIn: "root" })
 export class ConnectionManager extends AbstractManager {
 
-    private _windowRef: WindowRef = null;
-
     online: boolean = false;
 
-    constructor(windowRef: WindowRef) {
+    constructor(
+        private _windowRef: WindowRef) {
         super();
-        this._windowRef = windowRef;
         this.online = this._windowRef.nativeWindow.navigator.onLine;
     }
 

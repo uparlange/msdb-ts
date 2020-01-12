@@ -8,14 +8,19 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 export class DetailModel extends AbstractAppModel {
 
   private _socketConfigChangedSubscription: Subscription = null;
+  private _socketChangeInRomsDirectorySubscription: Subscription = null;
 
-  constructor(appHelperObject: AppHelperObject) {
-    super(appHelperObject);
+  constructor(
+    protected _helper: AppHelperObject) {
+    super(_helper);
   }
 
   onInit(): void {
     super.onInit();
     this._socketConfigChangedSubscription = this.getSocket().on("CONFIG_CHANGED").subscribe(() => {
+      this._refreshGameAvailability();
+    });
+    this._socketChangeInRomsDirectorySubscription = this.getSocket().on("CHANGE_IN_ROMS_DIRECTORY").subscribe(() => {
       this._refreshGameAvailability();
     });
   }
@@ -58,12 +63,13 @@ export class DetailModel extends AbstractAppModel {
   onDestroy(): void {
     super.onDestroy();
     this._socketConfigChangedSubscription.unsubscribe();
+    this._socketChangeInRomsDirectorySubscription.unsubscribe();
   }
 
   getGameSizeLabel() {
     let size = 0;
     if (this.data.game.roms !== undefined) {
-      this.data.game.roms.forEach((element) => {
+      this.data.game.roms.forEach((element:any) => {
         size += parseInt(element.size);
       });
     }

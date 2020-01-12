@@ -9,22 +9,17 @@ import { Location } from '@angular/common';
 @Injectable({ providedIn: "root" })
 export class RouterManager extends AbstractManager {
 
-    private _router: Router = null;
-    private _cacheManager: CacheManager = null;
-    private _ngZone: NgZone = null;
-    private _windowRef: WindowRef = null;
     private _mutationObserver: MutationObserver = null;
     private _eventsSubscription: Subscription = null;
     private _creationCompleteTimeout: any = null;
-    private _location: Location = null;
 
-    constructor(router: Router, cacheManager: CacheManager, ngZone: NgZone, windowRef: WindowRef, location: Location) {
+    constructor(
+        private _router: Router, 
+        private _cacheManager: CacheManager, 
+        private _ngZone: NgZone, 
+        private _windowRef: WindowRef, 
+        private _location: Location) {
         super();
-        this._router = router;
-        this._cacheManager = cacheManager;
-        this._ngZone = ngZone;
-        this._windowRef = windowRef;
-        this._location = location;
     }
 
     init(): void {

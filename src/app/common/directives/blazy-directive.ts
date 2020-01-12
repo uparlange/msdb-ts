@@ -12,13 +12,11 @@ export class BlazyDirective extends AbstractDirective {
 
     @Input() blazySrc: String = null;
 
-    private _lazyManager: BlazyManager = null;
-    private _elementRef: ElementRef = null;
-
-    constructor(appHelperObject: AppHelperObject, lazyManager: BlazyManager, elementRef: ElementRef) {
-        super(appHelperObject);
-        this._lazyManager = lazyManager;
-        this._elementRef = elementRef;
+    constructor(
+        protected _helper: AppHelperObject,
+        private _lazyManager: BlazyManager,
+        private _elementRef: ElementRef) {
+        super(_helper);
     }
 
     onChanges(changes: SimpleChanges): void {

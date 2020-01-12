@@ -8,10 +8,9 @@ export class AdvTableColumnDirective extends AbstractDirective {
     @Input() columnName: string = "";
     @Input() columnWidth: string = "";
 
-    templateRef: TemplateRef<any> = null;
-
-    constructor(appHelperObject: AppHelperObject, templateRef: TemplateRef<any>) {
-        super(appHelperObject);
-        this.templateRef = templateRef;
+    constructor(
+        protected _helper: AppHelperObject,
+        public templateRef: TemplateRef<any>) {
+        super(_helper);
     }
 }

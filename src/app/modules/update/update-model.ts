@@ -9,8 +9,9 @@ export class UpdateModel extends AbstractAppModel {
     private _updatedVersionChangedSubscription: Subscription = null;
     private _downloadProgressSubscription: Subscription = null;
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     onInit(): void {

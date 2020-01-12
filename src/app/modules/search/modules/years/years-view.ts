@@ -9,7 +9,9 @@ import { YearsModel } from './years-model';
 })
 export class YearsView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, yearsModel: YearsModel) {
-        super(appHelperObject, yearsModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: YearsModel) {
+        super(_helper, model);
     }
 }

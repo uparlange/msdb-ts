@@ -7,14 +7,16 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 @Injectable()
 export class ConfigCanDeactivate extends AbstractAppGuard {
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     canDeactivate(component: ConfigView): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
         setTimeout(() => {
-            if ((<ConfigModel>component.model).hasChanges()) {
+            const model = (<ConfigModel>component.model);
+            if (model.hasConfigChanges() || model.hasMameIniChanges()) {
                 this.getLabels().getValues(["L10N_CONFIRM_QUIT"]).subscribe((translations: any) => {
                     eventEmitter.emit(this.getWindowRef().nativeWindow.confirm(translations.L10N_CONFIRM_QUIT));
                 });

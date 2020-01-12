@@ -2,3 +2,14 @@ mat-input-container
 {
     width:100%;
 }
+
+mat-card
+{
+    margin-left:1px;
+    margin-right:1px;
+}
+
+input
+{
+    margin-left:10px;
+}

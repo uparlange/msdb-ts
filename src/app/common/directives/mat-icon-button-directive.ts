@@ -6,18 +6,20 @@ import { AppHelperObject } from '../providers/app-helper-object';
 @Directive({ selector: "[mat-icon-button]" })
 export class MatIconButtonDirective extends AbstractDirective {
 
-    @ContentChild(MatIcon, { static: false }) matIcon !: MatIcon;
-
     @HostBinding("attr.aria-label") ariaLabel: string = "";
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    @ContentChild(MatIcon, { static: false })
+    private _matIcon !: MatIcon;
+
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     afterContentInit(): void {
         super.afterContentInit();
-        if (this.matIcon) {
-            this.ariaLabel = this.matIcon.svgIcon;
+        if (this._matIcon) {
+            this.ariaLabel = this._matIcon.svgIcon;
         }
     }
 }

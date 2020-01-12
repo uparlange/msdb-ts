@@ -9,7 +9,9 @@ import { Component } from '@angular/core';
 })
 export class LanguagesView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, languagesModel: LanguagesModel) {
-        super(appHelperObject, languagesModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: LanguagesModel) {
+        super(_helper, model);
     }
 }

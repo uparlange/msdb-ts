@@ -9,7 +9,9 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class HomeView extends AbstractAppView {
 
-  constructor(appHelperObject: AppHelperObject, homeModel: HomeModel) {
-    super(appHelperObject, homeModel);
+  constructor(
+    protected _helper: AppHelperObject, 
+    public model: HomeModel) {
+    super(_helper, model);
   }
 }

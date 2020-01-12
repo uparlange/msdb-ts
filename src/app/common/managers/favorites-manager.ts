@@ -5,12 +5,11 @@ import { EventEmitter, Injectable } from '@angular/core';
 @Injectable({ providedIn: "root" })
 export class FavoritesManager extends AbstractManager {
 
-  private _cacheManager: CacheManager = null;
   private _favorites: Array<string> = new Array();;
 
-  constructor(cacheManager: CacheManager) {
+  constructor(
+    private _cacheManager: CacheManager) {
     super();
-    this._cacheManager = cacheManager;
   }
 
   init(): void {

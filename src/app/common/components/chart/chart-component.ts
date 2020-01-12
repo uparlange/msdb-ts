@@ -20,8 +20,9 @@ export class ChartComponent extends AbstractComponent {
 
     private _chart: Chart = null;
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     afterViewInit(): void {

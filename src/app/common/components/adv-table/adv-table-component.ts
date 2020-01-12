@@ -12,10 +12,6 @@ import { AppHelperObject } from '../../providers/app-helper-object';
 })
 export class AdvTableComponent extends AbstractComponent {
 
-    @ViewChild(MatPaginator, { static: false }) matPaginator !: MatPaginator;
-
-    @ContentChildren(AdvTableColumnDirective) columns: QueryList<AdvTableColumnDirective>;
-
     @Input() provider: Array<any> = [];
     @Input() filterValue: string = "";
     @Input() paginationEnabled: boolean = true;
@@ -24,20 +20,26 @@ export class AdvTableComponent extends AbstractComponent {
     @Input() pageIndex: Number = 0;
     @Input() pageSize: Number = 100;
 
+    @ContentChildren(AdvTableColumnDirective) columns: QueryList<AdvTableColumnDirective>;
+
     @Output() filterValueChange: EventEmitter<any> = new EventEmitter();
     @Output() pageIndexChange: EventEmitter<any> = new EventEmitter();
 
     displayedColumns: Array<string> = [];
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    @ViewChild(MatPaginator, { static: false })
+    private _matPaginator !: MatPaginator;
+
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     afterViewInit(): void {
         super.afterViewInit();
         if (this.paginationEnabled) {
-            this.dataSource.paginator = this.matPaginator;
+            this.dataSource.paginator = this._matPaginator;
         }
     }
 

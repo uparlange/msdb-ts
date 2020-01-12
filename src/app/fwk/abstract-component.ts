@@ -3,7 +3,8 @@ import { AbstractHelperObject } from './abstract-helper-object';
 
 export class AbstractComponent extends AbstractDirective {
 
-    constructor(AbstractHelperObject: AbstractHelperObject) {
-        super(AbstractHelperObject);
+    constructor(
+        protected _helper: AbstractHelperObject) {
+        super(_helper);
     }
 }

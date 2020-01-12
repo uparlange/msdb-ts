@@ -9,8 +9,10 @@ import { AbstractAppView } from 'src/app/common/abstract-app-view';
 })
 export class ResultView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, resultModel: ResultModel) {
-        super(appHelperObject, resultModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: ResultModel) {
+        super(_helper, model);
     }
 
     filterChange(event: any): void {

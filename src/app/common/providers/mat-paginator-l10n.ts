@@ -5,11 +5,9 @@ import { AppHelperObject } from './app-helper-object';
 @Injectable({ providedIn: "root" })
 export class MatPaginatorL10n extends MatPaginatorIntl {
 
-    private _helper: AppHelperObject = null;
-
-    constructor(appHelperObject: AppHelperObject) {
+    constructor(
+        private _helper: AppHelperObject) {
         super();
-        this._helper = appHelperObject;
         this._refreshTranslation();
         this._getLabels().on("languageChange").subscribe(() => {
             this._refreshTranslation();

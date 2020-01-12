@@ -1,26 +1,26 @@
 import { AbstractComponent } from './abstract-component';
-import { AbstractHelperObject } from './abstract-helper-object';
 import { Subscription } from 'rxjs';
 import { AbstractModel } from './abstract-model';
+import { AbstractHelperObject } from './abstract-helper-object';
+import { FwkHelperObject } from './providers/fwk-helper-object';
 
 export class AbstractPopup extends AbstractComponent {
-
-  model: AbstractModel = null;
 
   private _popupsAfterOpenSubscription: Subscription = null;
   private _popupsBeforeCloseSubscription: Subscription = null;
 
-  constructor(AbstractHelperObject: AbstractHelperObject, model: AbstractModel) {
-    super(AbstractHelperObject);
-    this.model = model;
+  constructor(
+    protected _helper: AbstractHelperObject,
+    public model: AbstractModel) {
+    super(_helper);
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this._popupsAfterOpenSubscription = this._helper.getPopups().on("afterOpen").subscribe(() => {
+    this._popupsAfterOpenSubscription = this._getHelper().getPopups().on("afterOpen").subscribe(() => {
       this.afterOpen();
     });
-    this._popupsBeforeCloseSubscription = this._helper.getPopups().on("beforeClose").subscribe(() => {
+    this._popupsBeforeCloseSubscription = this._getHelper().getPopups().on("beforeClose").subscribe(() => {
       this.beforeClose();
     });
   }
@@ -41,6 +41,10 @@ export class AbstractPopup extends AbstractComponent {
   }
 
   close() {
-    this._helper.getPopups().closeActive();
+    this._getHelper().getPopups().closeActive();
+  }
+
+  protected _getHelper(): FwkHelperObject {
+    return <FwkHelperObject>this._helper;
   }
 }

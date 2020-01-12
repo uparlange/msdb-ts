@@ -13,8 +13,9 @@ export class ProgressBarDirective extends AbstractDirective {
     private _httpEndSubscription: Subscription = null;
     private _counter: number = 0;
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     onInit(): void {

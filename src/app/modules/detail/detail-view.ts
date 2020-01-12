@@ -11,6 +11,7 @@ import { PortsPopup } from './popups/ports/ports-popup';
 import { RomsPopup } from './popups/roms/roms-popup';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AppEvents } from 'src/app/app-events';
 
 @Component({
   templateUrl: './detail-view.html',
@@ -18,11 +19,11 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class DetailView extends AbstractAppView {
 
-  private _matDialog: MatDialog = null;
-
-  constructor(appHelperObject: AppHelperObject, detailModel: DetailModel, matDialog: MatDialog) {
-    super(appHelperObject, detailModel);
-    this._matDialog = matDialog;
+  constructor(
+    protected _helper: AppHelperObject, 
+    public model: DetailModel, 
+    private _matDialog: MatDialog) {
+    super(_helper, model);
   }
 
   getGameVideoUrl(game: any): string {
@@ -38,7 +39,11 @@ export class DetailView extends AbstractAppView {
   }
 
   playGame(game: any): void {
-    this.getSocket().emit("PLAY_GAME", game.name);
+    this.getSocket().emit("PLAY_GAME", game.name).subscribe((event: any) => {
+      if (event) {
+        this.getEventBus().emit(AppEvents.DISPLAY_TOASTER_MESSAGE, { message: event });
+      }
+    });
   }
 
   inFavorites(game: any): boolean {

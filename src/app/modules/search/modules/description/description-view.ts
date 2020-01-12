@@ -9,7 +9,9 @@ import { AbstractAppView } from 'src/app/common/abstract-app-view';
 })
 export class DescriptionView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, descriptionModel: DescriptionModel) {
-        super(appHelperObject, descriptionModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: DescriptionModel) {
+        super(_helper, model);
     }
 }

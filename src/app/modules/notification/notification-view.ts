@@ -9,8 +9,10 @@ import { NotificationModel } from './notification-model';
 })
 export class NotificationView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, notificationModel: NotificationModel) {
-        super(appHelperObject, notificationModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: NotificationModel) {
+        super(_helper, model);
     }
 
     subscribe(): void {

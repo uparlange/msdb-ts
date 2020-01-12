@@ -9,7 +9,9 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
   })
 export class HistoryView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, historyModel: HistoryModel) {
-        super(appHelperObject, historyModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: HistoryModel) {
+        super(_helper, model);
     }
 }

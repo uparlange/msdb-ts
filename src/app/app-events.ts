@@ -8,4 +8,6 @@ export class AppEvents {
 
     static SET_BACKGROUND_CLASS: string = "SET_BACKGROUND_CLASS";
 
+    static DISPLAY_TOASTER_MESSAGE: string = "DISPLAY_TOASTER_MESSAGE";
+
 }

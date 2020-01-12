@@ -12,17 +12,13 @@ export class MsdbProvider extends AbstractObject {
 
     _mameInfos: any = null;
     _token: string = null;
-    _configProvider: ConfigProvider = null;
-    _httpClient: HttpClient = null;
-    _eventManager: EventManager = null;
-    _cacheManager: CacheManager = null;
 
-    constructor(configProvider: ConfigProvider, httpClient: HttpClient, eventManager: EventManager, cacheManager: CacheManager) {
+    constructor(
+        private _configProvider: ConfigProvider, 
+        private _httpClient: HttpClient, 
+        private _eventManager: EventManager, 
+        private _cacheManager: CacheManager) {
         super();
-        this._configProvider = configProvider;
-        this._httpClient = httpClient;
-        this._eventManager = eventManager;
-        this._cacheManager = cacheManager;
     }
 
     httpGet(config: any): EventEmitter<any> {

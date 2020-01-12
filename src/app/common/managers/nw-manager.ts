@@ -9,27 +9,23 @@ import { ConfigProvider } from '../providers/config-provider';
 import { AppEvents } from 'src/app/app-events';
 import { EventManager } from 'src/app/fwk/managers/event-manager';
 
-// https://github.com/nwutils/nw-angular-cli-example
+// Angular 2 integration : https://github.com/nwutils/nw-angular-cli-example
+// Play mp4 videos : https://github.com/iteufel/nwjs-ffmpeg-prebuilt
 @Injectable({ providedIn: "root" })
 export class NwManager extends AbstractManager {
 
     private _watcher: any = null;
     private _socket: any = null;
     private _httpServer: any = null;
-    private _translateManager: TranslateManager = null;
-    private _routerManager: RouterManager = null;
-    private _eventManager: EventManager = null;
-    private _configProvider: ConfigProvider = null;
     private _updater: any = null;
     private _updatedVersion: any = null;
 
-    constructor(translateManager: TranslateManager, routerManager: RouterManager, configProvider: ConfigProvider,
-        eventManager: EventManager) {
+    constructor(
+        private _translateManager: TranslateManager, 
+        private _routerManager: RouterManager, 
+        private _configProvider: ConfigProvider,
+        private _eventManager: EventManager) {
         super();
-        this._translateManager = translateManager;
-        this._routerManager = routerManager;
-        this._configProvider = configProvider;
-        this._eventManager = eventManager;
     }
 
     init(): void {
@@ -181,6 +177,12 @@ export class NwManager extends AbstractManager {
             socket.on("SAVE_CONFIGURATION", (params: any, callback: Function) => {
                 this._saveConfiguration(params, callback);
             });
+            socket.on("GET_MAME_INI", (params: any, callback: Function) => {
+                this._getMameIni(callback);
+            });
+            socket.on("SAVE_MAME_INI", (params: any, callback: Function) => {
+                this._saveMameIni(params, callback);
+            });
         });
     }
 
@@ -207,7 +209,7 @@ export class NwManager extends AbstractManager {
         return `${os.homedir()}\\${pkg.name}.json`;
     }
 
-    private _saveConfiguration(config: string, callback: Function): void {
+    private _saveConfiguration(config: any, callback: Function): void {
         const fs = window.nw.require("fs");
         fs.writeFileSync(this._getConfigFile(), JSON.stringify(config));
         this._initUpdateWatcher();
@@ -225,54 +227,77 @@ export class NwManager extends AbstractManager {
         if (config === null) {
             config = {
                 "mameDirectory": null,
-                "romsDirectory": null,
-                "autosave": false,
-                "joystick": false
+                "romsDirectory": null
             };
         }
         callback(config);
     }
 
-    private _initMame(mameDirectory: string, mameFileName: string): EventEmitter<any> {
+    /* http://www.gamoover.net/tuto/am%C3%A9liorer-le-rendu-de-mame-sur-un-lcd 
+    params.multithreading = "1";
+    params.video = "d3d";
+    params.keepaspect = "1";
+    params.prescale = "2";
+    params.hwstretch = "1";
+    params.effect = "scanlines";
+    params.waitvsync = "1"
+    params.syncrefresh = "1"
+    */
+    private _getMameIniParameterList(mameIni: string): Array<string> {
         const fs = window.nw.require("fs");
-        const eventEmitter: EventEmitter<any> = new EventEmitter();
-        const mameIni = `${mameDirectory}\\mame.ini`;
-        if (fs.existsSync(mameIni)) {
-            let cmd = `cd ${mameDirectory} & ${mameFileName} -cc`;
-            this._execCmd(cmd).subscribe(() => {
-                let source = fs.readFileSync(mameIni, "utf8");
-                const params: any = {};
-                const all_lines_array = source.split("\r\n");
-                all_lines_array.forEach((line: string) => {
-                    if (line.length > 0 && line.indexOf("#") === -1) {
-                        const key = line.substring(0, line.indexOf(" "));
-                        const value = line.substring(line.lastIndexOf(" ") + 1);
-                        params[key] = value;
-                    }
+        const list = [];
+        const source = fs.readFileSync(mameIni, "utf8");
+        const params: any = {};
+        const all_lines_array = source.split("\r\n");
+        all_lines_array.forEach((line: string) => {
+            if (line.length > 0 && line.indexOf("#") === -1) {
+                const key = line.substring(0, line.indexOf(" "));
+                const value = line.substring(line.lastIndexOf(" ") + 1);
+                list.push({ key: key, value: value });
+            }
+        });
+        return list;
+    }
+
+    private _saveMameIni(parameters: Array<string>, callback: Function): void {
+        const fs = window.nw.require("fs");
+        let dest = "";
+        parameters.forEach((element:any) => {
+            dest += `${element.key} ${element.value}\r\n`;
+        });
+        this._getConfiguration((configuration: any) => {
+            const mameDirectory = configuration.mameDirectory;
+            const mameFileName = this._getMameFilename(mameDirectory);
+            const mameIni = `${mameDirectory}\\mame.ini`;
+            fs.writeFileSync(mameIni, dest);
+        });
+        callback();
+    }
+
+    private _getMameIni(callback: Function): void {
+        const fs = window.nw.require("fs");
+        this._getConfiguration((configuration: any) => {
+            const mameDirectory = configuration.mameDirectory;
+            const mameFileName = this._getMameFilename(mameDirectory);
+            const mameIni = `${mameDirectory}\\mame.ini`;
+            if (!fs.existsSync(mameIni)) {
+                const cmd = `cd ${mameDirectory} & ${mameFileName} -cc`;
+                this._execCmd(cmd).subscribe(() => {
+                    callback(this._getMameIniParameterList(mameIni));
                 });
-                /* http://www.gamoover.net/tuto/am%C3%A9liorer-le-rendu-de-mame-sur-un-lcd */
-                params.multithreading = "1";
-                params.video = "d3d";
-                params.keepaspect = "1";
-                params.prescale = "2";
-                params.hwstretch = "1";
-                params.effect = "scanlines";
-                params.waitvsync = "1"
-                params.syncrefresh = "1"
-                let dest = "";
-                for (let attr in params) {
+            } else {
+                callback(this._getMameIniParameterList(mameIni));
+            }
+        });
+    }
+
+    private _initMame(mameDirectory: string, mameFileName: string): void {
+        /*
+        for (let attr in params) {
                     dest += `${attr} ${params[attr]}\r\n`;
                 }
                 fs.writeFileSync(mameIni, dest);
-                eventEmitter.emit();
-            });
-        }
-        else {
-            setTimeout(() => {
-                eventEmitter.emit();
-            }, 0);
-        }
-        return eventEmitter;
+        */
     }
 
     private _execCmd(cmd: string): EventEmitter<any> {
@@ -281,39 +306,39 @@ export class NwManager extends AbstractManager {
         const child_process = window.nw.require("child_process");
         child_process.exec(cmd, (error: string, stdout: string, stderr: string) => {
             if (error != null && error.length > 0) {
-                this._getLogger().error(`(CMD) ${error.toString()}`);
+                this._getLogger().error(`(CMD:error) ${error.toString()}`);
+                eventEmitter.emit(error);
             }
             if (stdout != null && stdout.length > 0) {
-                this._getLogger().info(`(CMD) ${stdout}`);
+                this._getLogger().info(`(CMD:stdout) ${stdout}`);
+                eventEmitter.emit(stdout);
             }
             if (stderr != null && stderr.length > 0) {
-                this._getLogger().error(`(CMD) ${stderr}`);
+                this._getLogger().error(`(CMD:stderr) ${stderr}`);
+                eventEmitter.emit(stderr);
             }
-            eventEmitter.emit();
         });
         return eventEmitter;
     }
 
-    private _playGame(name: string, callback: Function): void {
+    private _getMameFilename(mameDirectory: string): string {
         const fs = window.nw.require("fs");
+        let mameFileName = "mame64.exe";
+        if (!fs.existsSync(`${mameDirectory}\\${mameFileName}`)) {
+            mameFileName = "mame.exe";
+        }
+        return mameFileName;
+    }
+
+    private _playGame(name: string, callback: Function): void {
         this._getLogger().info(`() Launch game ${name}`);
         this._getConfiguration((configuration: any) => {
             const mameDirectory = configuration.mameDirectory;
-            let mameFileName = "mame64.exe";
-            if (!fs.existsSync(`${mameDirectory}\\${mameFileName}`)) {
-                mameFileName = "mame.exe";
-            }
-            this._initMame(mameDirectory, mameFileName).subscribe(() => {
-                let cmd = `cd ${mameDirectory} & ${mameFileName} ${name}`;
-                if (configuration.autosave) {
-                    cmd += " -autosave";
-                }
-                if (configuration.joystick) {
-                    cmd += " -joystick";
-                }
-                this._execCmd(cmd);
+            const mameFileName = this._getMameFilename(mameDirectory);
+            const cmd = `cd ${mameDirectory} & ${mameFileName} ${name}`;
+            this._execCmd(cmd).subscribe((event: string) => {
+                callback(event);
             });
-            callback();
         });
     }
 

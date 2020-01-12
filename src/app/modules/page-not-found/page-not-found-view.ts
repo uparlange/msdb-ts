@@ -10,8 +10,10 @@ import { environment } from './../../../environments/environment';
 })
 export class PageNotFoundView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, pageNotFoundModel: PageNotFoundModel) {
-        super(appHelperObject, pageNotFoundModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: PageNotFoundModel) {
+        super(_helper, model);
     }
 
     getDeadLinkUrl() {

@@ -1,7 +1,7 @@
 import { AbstractDirective } from '../abstract-directive';
 import { Directive, HostBinding, PLATFORM_ID, Inject, Input, HostListener } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { FwkHelperObject } from '../providers/fwk-helper-object';
 
 @Directive({ selector: 'a[href]' })
 export class LinkDirective extends AbstractDirective {
@@ -12,8 +12,10 @@ export class LinkDirective extends AbstractDirective {
 
     @Input() href: string;
 
-    constructor(appHelperObject: AppHelperObject, @Inject(PLATFORM_ID) private platformId: string) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: FwkHelperObject, 
+        @Inject(PLATFORM_ID) private _platformId: string) {
+        super(_helper);
     }
 
     onChanges(event: any): void {
@@ -30,6 +32,6 @@ export class LinkDirective extends AbstractDirective {
     }
 
     private _isLinkExternal() {
-        return isPlatformBrowser(this.platformId) && !this.href.includes(location.hostname);
+        return isPlatformBrowser(this._platformId) && !this.href.includes(location.hostname);
     }
 }

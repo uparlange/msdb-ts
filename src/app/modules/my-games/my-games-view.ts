@@ -9,7 +9,9 @@ import { MyGamesModel } from './my-games-model';
 })
 export class MyGamesView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, myGamesModel: MyGamesModel) {
-        super(appHelperObject, myGamesModel);
+    constructor(
+        protected _helper: AppHelperObject, 
+        public model: MyGamesModel) {
+        super(_helper, model);
     }
 }

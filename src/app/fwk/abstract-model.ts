@@ -1,10 +1,11 @@
-import { AbstractHelperObject } from './abstract-helper-object';
 import { EventManager } from './managers/event-manager';
 import { RouterManager } from './managers/router-manager';
 import { CacheManager } from './managers/cache-manager';
 import { TranslateManager } from './managers/translate-manager';
 import { Subscription } from 'rxjs';
 import { AbstractHelper } from './abstract-helper';
+import { FwkHelperObject } from './providers/fwk-helper-object';
+import { AbstractHelperObject } from './abstract-helper-object';
 
 export class AbstractModel extends AbstractHelper {
 
@@ -14,13 +15,14 @@ export class AbstractModel extends AbstractHelper {
 
   private _connectionChangeSubscription: Subscription = null;
 
-  constructor(AbstractHelperObject: AbstractHelperObject) {
-    super(AbstractHelperObject);
+  constructor(
+    protected _helper: AbstractHelperObject) {
+    super(_helper);
     this.data = this._getInitData();
   }
 
   init(params: any) {
-    this._connectionChangeSubscription = this._helper.getConnection().on("change").subscribe((online: boolean) => {
+    this._connectionChangeSubscription = this._getHelper().getConnection().on("change").subscribe((online: boolean) => {
       this.params.online = online;
       if (online) {
         this.needRefresh = true;
@@ -29,7 +31,7 @@ export class AbstractModel extends AbstractHelper {
     });
     this.setTitle(null);
     this.setKeywords(null);
-    const newParams = Object.assign({ online: this._helper.getConnection().online }, params);
+    const newParams = Object.assign({ online: this._getHelper().getConnection().online }, params);
     if (JSON.stringify(this.params) !== JSON.stringify(newParams)) {
       this.params = newParams;
       this.needRefresh = true;
@@ -44,19 +46,19 @@ export class AbstractModel extends AbstractHelper {
   }
 
   getEventBus(): EventManager {
-    return this._helper.getEventBus();
+    return this._getHelper().getEventBus();
   }
 
   getRouter(): RouterManager {
-    return this._helper.getRouter();
+    return this._getHelper().getRouter();
   }
 
   getCache(): CacheManager {
-    return this._helper.getCache();
+    return this._getHelper().getCache();
   }
 
   getLabels(): TranslateManager {
-    return this._helper.getLabels();
+    return this._getHelper().getLabels();
   }
 
   setTitle(value: string) {
@@ -64,7 +66,7 @@ export class AbstractModel extends AbstractHelper {
     if (typeof value === "string") {
       title += ` - ${value}`;
     }
-    this._helper.getTitle().setTitle(title);
+    this._getHelper().getTitle().setTitle(title);
   }
 
   setKeywords(value: string): void {
@@ -72,7 +74,7 @@ export class AbstractModel extends AbstractHelper {
     if (typeof value === "string") {
       content += `, ${value}`;
     }
-    this._helper.getMeta().updateTag({
+    this._getHelper().getMeta().updateTag({
       content: content,
       name: "keywords"
     });
@@ -102,6 +104,10 @@ export class AbstractModel extends AbstractHelper {
         this.getRouter().restoreScrollPosition();
       });
     }
+  }
+
+  protected _getHelper(): FwkHelperObject {
+    return <FwkHelperObject>this._helper;
   }
 
   protected _getInitData(): any {

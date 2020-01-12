@@ -10,8 +10,9 @@ export class AppModel extends AbstractAppModel {
     private _cacheChangeSubscription: Subscription = null;
     private _setBackgroundClassSubscription: Subscription = null;
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
     }
 
     onInit(): void {

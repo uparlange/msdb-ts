@@ -9,24 +9,38 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class ConfigView extends AbstractAppView {
 
-    constructor(appHelperObject: AppHelperObject, configModel: ConfigModel) {
-        super(appHelperObject, configModel);
+    constructor(
+        protected _helper: AppHelperObject,
+        public model: ConfigModel) {
+        super(_helper, model);
     }
 
     onLanguageChanged(event: any) {
         this.getLabels().setLanguage(event.value);
     }
 
-    checkFormChanges(): void {
-        this._getModel().checkFormChanges();
+    checkConfigFormChanges(): void {
+        this._getModel().checkConfigFormChanges();
     }
 
-    save(): void {
-        this._getModel().save();
+    saveConfig(): void {
+        this._getModel().saveConfig();
     }
 
-    cancel(): void {
-        this._getModel().cancel();
+    cancelConfig(): void {
+        this._getModel().cancelConfig();
+    }
+
+    checkMameIniFormChanges(): void {
+        this._getModel().checkMameIniFormChanges();
+    }
+
+    saveMameIni(): void {
+        this._getModel().saveMameIni();
+    }
+
+    cancelMameIni(): void {
+        this._getModel().cancelMameIni();
     }
 
     private _getModel(): ConfigModel {

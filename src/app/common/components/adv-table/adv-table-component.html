@@ -2,7 +2,7 @@
     <input [ngModel]="filterValue" [disabled]="provider.length == 0" matInput (keyup)="applyFilter($event.target.value)"
         [placeholder]="'L10N_FILTER'|translate">
 </mat-form-field>
-<button *ngIf="filterEnabled && filterValue.length > 0" (click)="clearFilter()" type="button" mat-mini-fab>
+<button *ngIf="filterEnabled && filterValue?.length > 0" (click)="clearFilter()" type="button" mat-mini-fab>
     <mat-icon svgIcon="close" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
 </button>
 <mat-paginator [hidePageSize]="true" [pageSize]="pageSize" [pageIndex]="pageIndex" (page)="pageChanged($event)"

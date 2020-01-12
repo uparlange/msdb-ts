@@ -11,8 +11,10 @@ export class DriverPopup extends AbstractAppPopup {
 
   private _routerAction: any = null;
 
-  constructor(appHelperObject: AppHelperObject, detailModel: DetailModel) {
-    super(appHelperObject, detailModel);
+  constructor(
+    protected _helper: AppHelperObject, 
+    public model: DetailModel) {
+    super(_helper, model);
   }
 
   showGamesForMameVersion(version: string): void {

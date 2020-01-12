@@ -9,6 +9,8 @@ import { AppShell } from './common/providers/app-shell';
 import { environment } from './../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NavigationExtras } from '@angular/router';
+import { AppEvents } from './app-events';
+import { ClosableSnackBarComponent } from './components/closable-snack-bar-component/closable-snack-bar-component';
 
 @Component({
   selector: 'body',
@@ -21,18 +23,14 @@ export class AppView extends AbstractAppView {
   @HostBinding("attr.app-version") appVersion: string = pkg.version;
   @HostBinding("style.background-image") backgroundImage: any = null;
 
-  private _shell: AppShell = null;
-  private _viewContainerRef: ViewContainerRef = null;
-  private _matSnackBar: MatSnackBar = null;
-  private _domSanitizer: DomSanitizer = null;
-
-  constructor(appHelperObject: AppHelperObject, appModel: AppModel, shell: AppShell, viewContainerRef: ViewContainerRef, matSnackBar: MatSnackBar,
-    domSanitizer: DomSanitizer) {
-    super(appHelperObject, appModel);
-    this._shell = shell;
-    this._viewContainerRef = viewContainerRef;
-    this._matSnackBar = matSnackBar;
-    this._domSanitizer = domSanitizer;
+  constructor(
+    protected _helper: AppHelperObject,
+    public model: AppModel,
+    private _shell: AppShell,
+    private _viewContainerRef: ViewContainerRef,
+    private _matSnackBar: MatSnackBar,
+    private _domSanitizer: DomSanitizer) {
+    super(_helper, model);
   }
 
   onInit(): void {
@@ -50,24 +48,32 @@ export class AppView extends AbstractAppView {
     this.getRouter().navigate([view], extras);
   }
 
-  getLogoUrl() {
+  getLogoUrl(): string {
     return environment.assetsFolder + "/logo.png";
   }
 
-  private _initToaster() {
+  private _initToaster(): void {
+    this._initToasterConnectionChange();
+    this.getEventBus().on(AppEvents.DISPLAY_TOASTER_MESSAGE).subscribe((event: any) => {
+      this._showToast(event.message, event.duration);
+    });
+  }
+
+  private _initToasterConnectionChange(): void {
     this.getConnection().on("change").subscribe((online: boolean) => {
       const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";
       this.getLabels().getValues([key]).subscribe((translations: any) => {
-        this._showToast(translations[key]);
+        this._showToast(translations[key], 2000);
       });
     });
   }
 
-  private _showToast(message: string) {
+  private _showToast(message: string, duration: number): void {
     const config = new MatSnackBarConfig();
-    config.duration = 1500;
+    config.duration = duration;
     config.viewContainerRef = this._viewContainerRef;
-    this._matSnackBar.open(message, null, config);
+    config.data = { message: message };
+    this._matSnackBar.openFromComponent(ClosableSnackBarComponent, config);
   }
 
 }

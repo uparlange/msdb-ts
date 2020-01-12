@@ -11,8 +11,10 @@ export class ChipsPopup extends AbstractAppPopup {
 
   provider: Array<any> = null;
 
-  constructor(appHelperObject: AppHelperObject, detailModel: DetailModel) {
-    super(appHelperObject, detailModel);
+  constructor(
+    protected _helper: AppHelperObject, 
+    public model: DetailModel) {
+    super(_helper, model);
   }
 
   onInit(): void {

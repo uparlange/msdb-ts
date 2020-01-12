@@ -16,15 +16,19 @@ export class GalleryComponent extends AbstractComponent {
   @Input() colcount: number = 3;
   @Input() gap: number = 5;
 
-  @ViewChild("galleryContainer", { static: false }) galleryContainer: ElementRef;
-  @ViewChild("pswpContainer", { static: false }) pswpContainer: ElementRef;
+  @ViewChild("galleryContainer", { static: false })
+  private _galleryContainer: ElementRef;
+
+  @ViewChild("pswpContainer", { static: false })
+  private _pswpContainer: ElementRef;
 
   private _gallery: PhotoSwipe<any> = null;
   private _masonry: Masonry = null;
   private _refreshTimeout: any = null;
 
-  constructor(appHelperObject: AppHelperObject) {
-    super(appHelperObject);
+  constructor(
+    protected _helper: AppHelperObject) {
+    super(_helper);
   }
 
   onInit(): void {
@@ -70,7 +74,7 @@ export class GalleryComponent extends AbstractComponent {
       shareEl: false,
       history: false
     };
-    this._gallery = new PhotoSwipe<PhotoSwipeUI_Default.Options>(this.pswpContainer.nativeElement, PhotoSwipeUI_Default, this.provider, options);
+    this._gallery = new PhotoSwipe<PhotoSwipeUI_Default.Options>(this._pswpContainer.nativeElement, PhotoSwipeUI_Default, this.provider, options);
     this._gallery.init();
   }
 
@@ -102,8 +106,8 @@ export class GalleryComponent extends AbstractComponent {
   private _getColWidth(): number {
     const cCount = Math.min(this.colcount, this.provider.length);
     let cWidth = 0;
-    if (this.galleryContainer) {
-      cWidth = Math.round((this.galleryContainer.nativeElement.clientWidth - (cCount * this.gap)) / cCount);
+    if (this._galleryContainer) {
+      cWidth = Math.round((this._galleryContainer.nativeElement.clientWidth - (cCount * this.gap)) / cCount);
     }
     return cWidth;
   }

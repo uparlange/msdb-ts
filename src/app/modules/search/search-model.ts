@@ -7,8 +7,9 @@ export class SearchModel extends AbstractAppModel {
 
     private _tabsInfo: any = null;
 
-    constructor(appHelperObject: AppHelperObject) {
-        super(appHelperObject);
+    constructor(
+        protected _helper: AppHelperObject) {
+        super(_helper);
         this._tabsInfo = this._getTabsInfo();
     }
 

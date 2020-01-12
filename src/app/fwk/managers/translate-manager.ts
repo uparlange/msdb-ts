@@ -7,18 +7,16 @@ import { environment } from './../../../environments/environment';
 @Injectable({ providedIn: "root" })
 export class TranslateManager extends AbstractManager {
 
-  private _http: HttpClient = null;
-  private _windowRef: WindowRef = null;
   private _properties: any = {};
   private _propertyFilePattern: string = environment.assetsFolder + "/data/{locale}.json";
   private _loading: boolean = false;
   private _pendingRequests: Array<any> = new Array();
   private _currentLang: string = null;
 
-  constructor(http: HttpClient, windowRef: WindowRef) {
+  constructor(
+    private _http: HttpClient, 
+    private _windowRef: WindowRef) {
     super();
-    this._http = http;
-    this._windowRef = windowRef;
   }
 
   init(): void {

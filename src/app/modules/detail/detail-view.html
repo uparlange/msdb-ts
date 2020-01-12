@@ -74,7 +74,7 @@
 		<a routerLink="/result"
 			[queryParams]="{type:'language',value:model.data.game.language}">{{model.data.game.language}}</a>
 	</mat-list-item>
-	<mat-list-item *ngIf="model.data.game.driver != null && model.data.game.driver.status != null">
+	<mat-list-item *ngIf="model.data.game.driver?.status != null">
 		{{'L10N_STATUS'|translate}}
 		<span class="sep">:</span>
 		<button [class]="'link-button ' + getStatusClass(model.data.game.driver.status)"
@@ -86,12 +86,12 @@
 		<a routerLink="/result"
 			[queryParams]="{type:'rating',value:model.data.game.rating}">{{model.data.game.rating}}</a>
 	</mat-list-item>
-	<mat-list-item *ngIf="model.data.game.input != null && model.data.game.input.players != null">
+	<mat-list-item *ngIf="model.data.game.input?.players != null">
 		{{'L10N_PLAYERS_NUMBER'|translate}}
 		<span class="sep">:</span>
 		{{model.data.game.input.players}}
 	</mat-list-item>
-	<mat-list-item *ngIf="model.data.game.roms != null && model.data.game.roms.length > 0">
+	<mat-list-item *ngIf="model.data.game.roms?.length > 0">
 		{{'L10N_SIZE'|translate}}
 		<span class="sep">:</span>
 		{{model.getGameSizeLabel()}}
@@ -113,7 +113,7 @@
 		<span class="sep">:</span>
 		<a routerLink="/detail" [queryParams]="{name:model.data.game.cloneof}">{{model.data.game.cloneof}}</a>
 	</mat-list-item>
-	<mat-list-item *ngIf="model.data.clones != null && model.data.clones.length > 0">
+	<mat-list-item *ngIf="model.data.clones?.length > 0">
 		{{'L10N_CLONE_OR_CLONES'|translate}}
 		<span class="sep">:</span>
 		<button class="link-button" (click)="openClonesPopup()">{{model.data.clones.length}}</button>
@@ -129,7 +129,7 @@
 		<p matLine><b>{{'L10N_EMULATOR'|translate}}</b></p>
 		<p matLine>Mamedev : <a href="http://mamedev.org/">MAME</a></p>
 	</mat-list-item>
-	<mat-list-item *ngIf="model.data.game.isdevice == 'no'">
+	<mat-list-item>
 		<span matLine><b>Rom</b></span>
 		<span matLine>Planetemu : <a
 				[href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">{{model.data.game.description}}</a></span>
@@ -143,7 +143,7 @@
 				[href]="'https://bda.retroroms.info:82/downloads/mame/currentroms/'+model.data.game.romof+'.zip'">{{model.data.game.romof}}</a>
 		</span>
 	</mat-list-item>
-	<mat-list-item *ngIf="model.data.game.soundtracks != null && model.data.game.soundtracks.length > 0">
+	<mat-list-item *ngIf="model.data.game.soundtracks?.length > 0">
 		<span matLine><b>{{'L10N_SOUNDTRACKS'|translate}}</b></span>
 		<span matLine>Progettosnaps : <a
 				[href]="getGameSoundTrackUrl(model.data.game)">{{model.data.game.description}}</a></span>

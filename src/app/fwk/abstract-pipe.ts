@@ -1,18 +1,19 @@
 
 import { OnDestroy } from '@angular/core';
 import { TranslateManager } from './managers/translate-manager';
-import { AbstractHelperObject } from './abstract-helper-object';
 import { AbstractHelper } from './abstract-helper';
+import { AbstractHelperObject } from './abstract-helper-object';
+import { FwkHelperObject } from './providers/fwk-helper-object';
 
 export class AbstractPipe extends AbstractHelper implements OnDestroy {
 
-    constructor(AbstractHelperObject: AbstractHelperObject) {
-        super(AbstractHelperObject);
+    constructor(
+        protected _helper: AbstractHelperObject) {
+        super(_helper);
     }
 
     ngOnDestroy(): void {
         this.onDestroy();
-        this._helper = null;
     }
 
     onDestroy(): void {
@@ -20,6 +21,10 @@ export class AbstractPipe extends AbstractHelper implements OnDestroy {
     }
 
     getLabels(): TranslateManager {
-        return this._helper.getLabels();
+        return this._getHelper().getLabels();
+    }
+
+    protected _getHelper(): FwkHelperObject {
+        return <FwkHelperObject>this._helper;
     }
 }

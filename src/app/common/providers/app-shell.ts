@@ -17,28 +17,21 @@ import { NwManager } from '../managers/nw-manager';
 @Injectable({ providedIn: "root" })
 export class AppShell extends FwkShell {
 
-  private _analyticsManager: AnalyticsManager = null;
-  private _blazyManager: BlazyManager = null;
-  private _historyManager: HistoryManager = null;
-  private _favoritesManager: FavoritesManager = null;
-  private _socketManager: SocketManager = null;
-  private _notificationManager: NotificationManager = null;
-  private _nwManager: NwManager = null;
-
-  constructor(translateManager: TranslateManager, connectionManager: ConnectionManager, cacheManager: CacheManager,
-    routerManager: RouterManager, eventManager: EventManager, analyticsManager: AnalyticsManager,
-    blazyManager: BlazyManager, historyManager: HistoryManager, favoritesManager: FavoritesManager,
-    socketManager: SocketManager, popupManager: PopupManager, notificationManager: NotificationManager,
-    nwManager: NwManager) {
-    super(translateManager, connectionManager, cacheManager, routerManager, eventManager,
-      popupManager);
-    this._analyticsManager = analyticsManager;
-    this._blazyManager = blazyManager;
-    this._historyManager = historyManager;
-    this._favoritesManager = favoritesManager;
-    this._socketManager = socketManager;
-    this._notificationManager = notificationManager;
-    this._nwManager = nwManager;
+  constructor(
+    protected _translateManager: TranslateManager,
+    protected _connectionManager: ConnectionManager,
+    protected _cacheManager: CacheManager,
+    protected _routerManager: RouterManager,
+    protected _eventManager: EventManager,
+    protected _popupManager: PopupManager,
+    private _analyticsManager: AnalyticsManager,
+    private _blazyManager: BlazyManager,
+    private _historyManager: HistoryManager,
+    private _favoritesManager: FavoritesManager,
+    private _socketManager: SocketManager,
+    private _notificationManager: NotificationManager,
+    private _nwManager: NwManager) {
+    super(_translateManager, _connectionManager, _cacheManager, _routerManager, _eventManager, _popupManager);
   }
 
   init(): void {
