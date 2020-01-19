@@ -14,6 +14,7 @@ import { BlazyManager } from '../managers/blazy-Manager';
 import { NotificationManager } from '../managers/notification-manager';
 import { NwManager } from '../managers/nw-manager';
 import { FwkHelperObject } from 'src/app/fwk/providers/fwk-helper-object';
+import { IconProvider } from './icon-provider';
 
 @Injectable({ providedIn: "root" })
 export class AppHelperObject extends FwkHelperObject {
@@ -26,7 +27,8 @@ export class AppHelperObject extends FwkHelperObject {
     protected _activatedRoute: ActivatedRoute,
     protected _meta: Meta,
     private _configProvider: ConfigProvider,
-    private _msdbProvider: MsdbProvider) {
+    private _msdbProvider: MsdbProvider,
+    private _iconProvider: IconProvider) {
     super(_shell, _windowRef, _title, _httpClient, _activatedRoute, _meta);
   }
 
@@ -64,6 +66,10 @@ export class AppHelperObject extends FwkHelperObject {
 
   getMsdbProvider(): MsdbProvider {
     return this._msdbProvider;
+  }
+
+  getIconProvider(): IconProvider {
+    return this._iconProvider;
   }
 
   private _getShell(): AppShell {

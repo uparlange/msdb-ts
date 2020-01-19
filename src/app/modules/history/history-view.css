@@ -1,4 +1,11 @@
-mat-icon
+img
 {
-    padding-right:24px;
+    width:24px;
+    height:24px;
+    border-radius: 12px;
+}
+
+a
+{
+    padding-left:24px;
 }

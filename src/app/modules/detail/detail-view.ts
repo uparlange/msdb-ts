@@ -50,7 +50,7 @@ export class DetailView extends AbstractAppView {
     return this.getFavorites().has(game.name);
   }
 
-  addToFavorite(game: any): void {
+  addToFavorites(game: any): void {
     this.getFavorites().add(game.name);
   }
 

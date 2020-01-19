@@ -36,7 +36,6 @@ export class DetailModel extends AbstractAppModel {
         if (this.data.game.adult) {
           this.getEventBus().emit(AppEvents.SET_BACKGROUND_CLASS, "background-adult");
         }
-        this.getHistory().add(this.data.game.description, "gamepad");
         const images = [];
         this.data.game.images.forEach((image: any) => {
           if (image.name.indexOf(".ico") === -1) {
@@ -46,9 +45,12 @@ export class DetailModel extends AbstractAppModel {
               w: image.width,
               h: image.height
             });
+          } else {
+            this.data.game.icon = { name: image.name };
           }
         });
         this.data.images = images;
+        this.getHistory().add(this.data.game.description, this.getGameIconUrl(this.data.game));
         this.setTitle(`${this.data.game.description}`);
         this.setKeywords(`${this.data.game.name}, ${this.data.game.description}`);
         this.getMsdbProvider().search("clones", this.params.name).subscribe((data: any) => {
@@ -69,7 +71,7 @@ export class DetailModel extends AbstractAppModel {
   getGameSizeLabel() {
     let size = 0;
     if (this.data.game.roms !== undefined) {
-      this.data.game.roms.forEach((element:any) => {
+      this.data.game.roms.forEach((element: any) => {
         size += parseInt(element.size);
       });
     }

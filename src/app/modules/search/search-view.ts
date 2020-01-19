@@ -10,7 +10,7 @@ import { AbstractAppView } from 'src/app/common/abstract-app-view';
 export class SearchView extends AbstractAppView {
 
     constructor(
-        protected _helper: AppHelperObject, 
+        protected _helper: AppHelperObject,
         public model: SearchModel) {
         super(_helper, model);
     }
@@ -27,10 +27,6 @@ export class SearchView extends AbstractAppView {
 
     getTabsInfo(): any {
         return this._getModel().getTabsInfo();
-    }
-
-    trackByKey(index: number, item: any): any {
-        return item ? item.key : undefined;
     }
 
     private _getModel(): SearchModel {

@@ -8,33 +8,28 @@
 			</mat-form-field>
 			<button *ngIf="model.data.value.length > 0" (click)="model.data.value = '';valueInput.focus();"
 				type="button" mat-mini-fab>
-				<mat-icon svgIcon="close" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
+				<mat-icon [svgIcon]="getIconByType('delete')" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
 			</button>
 			<button *ngIf="descriptionForm.form.valid" routerLink="/result"
 				[queryParams]="{type:'description', value:model.data.value}" mat-mini-fab>
-				<mat-icon svgIcon="magnify" [matTooltip]="'L10N_SEARCH'|translate"></mat-icon>
+				<mat-icon [svgIcon]="getIconByType('search')" [matTooltip]="'L10N_SEARCH'|translate"></mat-icon>
 			</button>
 		</form>
 	</mat-card-content>
 </mat-card>
 <div class="default-spacer"></div>
 <mat-card>
-	<mat-card-content>
+	<mat-card-title>
 		{{'L10N_SHORTCUTS'|translate}}
-		<ul>
-			<li><a routerLink="/result" [queryParams]="{type:'bios',value:'all'}">{{'L10N_ALL_OF'|translate}}
-					"{{'L10N_SEARCH_BY_BIOS'|translate}}"</a>
-			</li>
-			<li><a routerLink="/result" [queryParams]="{type:'device',value:'all'}">{{'L10N_ALL_OF'|translate}}
-					"{{'L10N_SEARCH_BY_DEVICE'|translate}}"</a></li>
-			<li><a routerLink="/result" [queryParams]="{type:'mechanical',value:'all'}">{{'L10N_ALL_OF'|translate}}
-					"{{'L10N_SEARCH_BY_MECHANICAL'|translate}}"</a></li>
-			<li><a routerLink="/result" [queryParams]="{type:'mess',value:'all'}">{{'L10N_ALL_OF'|translate}}
-					"{{'L10N_SEARCH_BY_MESS'|translate}}"</a>
-			</li>
-			<li><a routerLink="/result" [queryParams]="{type:'adult',value:'all'}">{{'L10N_ALL_OF'|translate}}
-					"{{'L10N_SEARCH_BY_ADULT'|translate}}"</a>
-			</li>
-		</ul>
+	</mat-card-title>
+	<mat-card-content>
+		<mat-list>
+			<mat-list-item *ngFor="let shortcut of model.data.shortcuts; trackBy:trackByKey">
+				<mat-icon mat-list-icon [svgIcon]="getIconByType(shortcut.type)">
+				</mat-icon>
+				<p mat-line><a routerLink="/result"
+						[queryParams]="{type:shortcut.type,value:'all'}">{{shortcut.key|translate}}</a></p>
+			</mat-list-item>
+		</mat-list>
 	</mat-card-content>
 </mat-card>

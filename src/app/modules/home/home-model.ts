@@ -61,7 +61,17 @@ export class HomeModel extends AbstractAppModel {
             randomGame: {
                 images: [],
                 detail: null
-            }
+            },
+            searchTypes: [
+                { index: 0, key: "L10N_SEARCH_BY_DESCRIPTION", type: "description" },
+                { index: 1, key: "L10N_SEARCH_BY_RATING", type: "ratings" },
+                { index: 2, key: "L10N_SEARCH_BY_CATEGORY", type: "categories" },
+                { index: 3, key: "L10N_SEARCH_BY_SERIES", type: "series" },
+                { index: 4, key: "L10N_SEARCH_BY_YEAR", type: "years" },
+                { index: 4, key: "L10N_SEARCH_BY_LANGUAGE", type: "languages" },
+                { index: 4, key: "L10N_SEARCH_BY_VERSION", type: "versions" },
+                { index: 4, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers" }
+            ]
         };
     }
 }

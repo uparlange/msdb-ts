@@ -10,8 +10,8 @@ import { CacheManager } from 'src/app/fwk/managers/cache-manager';
 @Injectable({ providedIn: "root" })
 export class MsdbProvider extends AbstractObject {
 
-    _mameInfos: any = null;
-    _token: string = null;
+    private _mameInfos: any = null;
+    private _token: string = null;
 
     constructor(
         private _configProvider: ConfigProvider, 

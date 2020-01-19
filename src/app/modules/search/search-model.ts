@@ -37,14 +37,14 @@ export class SearchModel extends AbstractAppModel {
     private _getTabsInfo(): any {
         return {
             _tabs: [
-                { index: 0, key: "L10N_SEARCH_BY_DESCRIPTION", type: "description", icon: "magnify" },
-                { index: 1, key: "L10N_SEARCH_BY_RATING", type: "ratings", icon: "star-circle-outline" },
-                { index: 2, key: "L10N_SEARCH_BY_CATEGORY", type: "categories", icon: "folder-outline" },
-                { index: 3, key: "L10N_SEARCH_BY_SERIES", type: "series", icon: "format-list-bulleted" },
-                { index: 4, key: "L10N_SEARCH_BY_YEAR", type: "years", icon: "calendar" },
-                { index: 5, key: "L10N_SEARCH_BY_LANGUAGE", type: "languages", icon: "flag-outline" },
-                { index: 6, key: "L10N_SEARCH_BY_VERSION", type: "versions", icon: "plus-one" },
-                { index: 7, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers", icon: "domain" }
+                { index: 0, key: "L10N_SEARCH_BY_DESCRIPTION", type: "description" },
+                { index: 1, key: "L10N_SEARCH_BY_RATING", type: "ratings" },
+                { index: 2, key: "L10N_SEARCH_BY_CATEGORY", type: "categories" },
+                { index: 3, key: "L10N_SEARCH_BY_SERIES", type: "series" },
+                { index: 4, key: "L10N_SEARCH_BY_YEAR", type: "years" },
+                { index: 5, key: "L10N_SEARCH_BY_LANGUAGE", type: "languages" },
+                { index: 6, key: "L10N_SEARCH_BY_VERSION", type: "versions" },
+                { index: 7, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers" }
             ],
             getTabs(): any {
                 return this._tabs;

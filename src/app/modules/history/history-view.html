@@ -7,8 +7,10 @@
 <advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="false"
     [filterEnabled]="false" [rowTrackId]="'label'">
     <ng-template columnName="icon" let-row>
-        <mat-icon [svgIcon]="row.icon">
-        </mat-icon>
+        <img *ngIf="isImage(row.icon); else iconBlock" [alt]="row.name+'-icon'" mat-list-avatar [blazySrc]="row.icon">
+        <ng-template #iconBlock>
+            <mat-icon [svgIcon]="row.icon"></mat-icon>
+        </ng-template>
     </ng-template>
     <ng-template columnName="label" columnWidth="100%" let-row>
         <a [routerLink]="row.url" [queryParams]="row.queryParams">{{row.label}}</a>

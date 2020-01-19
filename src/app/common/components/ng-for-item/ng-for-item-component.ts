@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractComponent } from '../../../fwk/abstract-component';
 import { AppHelperObject } from '../../providers/app-helper-object';
+import { AbstractAppComponent } from '../../abstract-app-component';
 
 @Component({
   selector: "ngForItem",
   templateUrl: './ng-for-item-component.html',
   styleUrls: ['./ng-for-item-component.css']
 })
-export class NgForItemComponent extends AbstractComponent {
+export class NgForItemComponent extends AbstractAppComponent {
 
   @Input() last: boolean = false;
 

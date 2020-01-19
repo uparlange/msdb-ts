@@ -1,16 +1,16 @@
 import { Component, Input, ViewChild, SimpleChanges, ContentChildren, QueryList, Output, EventEmitter } from '@angular/core';
-import { AbstractComponent } from 'src/app/fwk/abstract-component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { AdvTableColumnDirective } from './adv-table-column-directive';
 import { AppHelperObject } from '../../providers/app-helper-object';
+import { AbstractAppComponent } from '../../abstract-app-component';
 
 @Component({
     selector: "advTable",
     templateUrl: './adv-table-component.html',
     styleUrls: ['./adv-table-component.css']
 })
-export class AdvTableComponent extends AbstractComponent {
+export class AdvTableComponent extends AbstractAppComponent {
 
     @Input() provider: Array<any> = [];
     @Input() filterValue: string = "";

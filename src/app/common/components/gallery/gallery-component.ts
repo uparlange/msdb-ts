@@ -2,15 +2,15 @@ import { Component, Input, HostListener, ViewChild, ElementRef } from '@angular/
 import Masonry from 'masonry-layout';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
-import { AbstractComponent } from 'src/app/fwk/abstract-component';
 import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppComponent } from '../../abstract-app-component';
 
 @Component({
   selector: "gallery",
   templateUrl: './gallery-component.html',
   styleUrls: ['./gallery-component.css']
 })
-export class GalleryComponent extends AbstractComponent {
+export class GalleryComponent extends AbstractAppComponent {
 
   @Input() provider: Array<any> = new Array();
   @Input() colcount: number = 3;

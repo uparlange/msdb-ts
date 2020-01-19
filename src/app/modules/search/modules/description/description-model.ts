@@ -24,7 +24,14 @@ export class DescriptionModel extends AbstractAppModel {
 
     protected _getInitData(): any {
         return {
-            value: ""
+            value: "",
+            shortcuts: [
+                { index: 0, key: "L10N_SEARCH_BY_BIOS", type: "bios" },
+                { index: 1, key: "L10N_SEARCH_BY_DEVICE", type: "device" },
+                { index: 2, key: "L10N_SEARCH_BY_MECHANICAL", type: "mechanical" },
+                { index: 3, key: "L10N_SEARCH_BY_MESS", type: "mess" },
+                { index: 4, key: "L10N_SEARCH_BY_ADULT", type: "adult" }
+            ]
         };
     }
 }

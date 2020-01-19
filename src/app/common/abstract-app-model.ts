@@ -8,6 +8,7 @@ import { NotificationManager } from './managers/notification-manager';
 import { ConfigProvider } from './providers/config-provider';
 import { NwManager } from './managers/nw-manager';
 import { AbstractHelperObject } from '../fwk/abstract-helper-object';
+import { IconProvider } from './providers/icon-provider';
 
 export class AbstractAppModel extends AbstractModel {
 
@@ -36,8 +37,20 @@ export class AbstractAppModel extends AbstractModel {
     return this._getHelper().getHistoryManager();
   }
 
+  getIconProvider(): IconProvider {
+    return this._getHelper().getIconProvider();
+  }
+
   getGameFolder(game: any): string {
     return this._getHelper().getConfigProvider().getGameFolder(game);
+  }
+
+  getGameIconUrl(game: any): string {
+    return this._getHelper().getConfigProvider().getGameIconUrl(game);
+  }
+
+  getIconByType(type: string): string {
+    return this.getIconProvider().getIconByType(type);
   }
 
   getSizeLabel(value: number): string {

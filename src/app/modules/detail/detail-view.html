@@ -1,32 +1,32 @@
 <mat-card>
 	<mat-card-title>
 		<span class="title">
-			<mat-icon svgIcon="heart-outline" *ngIf="inFavorites(model.data.game)"></mat-icon>
+			<mat-icon [svgIcon]="getIconByType('favorites')" *ngIf="inFavorites(model.data.game)"></mat-icon>
 			<span>{{model.data.game.description}}</span>
 		</span>
 		<button class="actions-menu" mat-icon-button [matMenuTriggerFor]="menu" *ngIf="model.data.game.name != null">
-			<mat-icon svgIcon="menu"></mat-icon>
+			<mat-icon [svgIcon]="getIconByType('menu')"></mat-icon>
 		</button>
 		<mat-menu #menu="matMenu">
 			<ng-template [ngIf]="!inFavorites(model.data.game)" [ngIfElse]="notInFavorites">
-				<button mat-menu-item (click)="addToFavorite(model.data.game)">
-					<mat-icon svgIcon="heart-outline"></mat-icon>
+				<button mat-menu-item (click)="addToFavorites(model.data.game)">
+					<mat-icon [svgIcon]="getIconByType('addFavory')"></mat-icon>
 					<span>{{"L10N_ADD_TO_FAVORITES"|translate}}</span>
 				</button>
 			</ng-template>
 			<ng-template #notInFavorites>
 				<button mat-menu-item (click)="removeFromFavorites(model.data.game)">
-					<mat-icon svgIcon="heart-broken-outline"></mat-icon>
+					<mat-icon [svgIcon]="getIconByType('removeFavory')"></mat-icon>
 					<span>{{"L10N_REMOVE_FROM_FAVORITES"|translate}}</span>
 				</button>
 			</ng-template>
 			<button mat-menu-item *ngIf="model.data.gameAvailable" (click)="playGame(model.data.game)">
-				<mat-icon svgIcon="gamepad-variant-outline"></mat-icon>
+				<mat-icon [svgIcon]="getIconByType('play')"></mat-icon>
 				<span>{{"L10N_PLAY_GAME"|translate}}</span>
 			</button>
 			<button mat-menu-item [matMenuTriggerFor]="subMenu"
 				*ngIf="model.data.game.dipswitchs.length > 0 || model.data.game.chips.length > 0 || model.data.game.biossets.length > 0 || model.data.game.ports.length > 0 || model.data.game.devicerefs.length > 0">
-				<mat-icon svgIcon="plus-circle-outline"></mat-icon>
+				<mat-icon [svgIcon]="getIconByType('more')"></mat-icon>
 				<span>{{"L10N_MORE"|translate}}</span>
 				<mat-menu #subMenu="matMenu">
 					<button mat-menu-item *ngIf="model.data.game.dipswitchs.length > 0"

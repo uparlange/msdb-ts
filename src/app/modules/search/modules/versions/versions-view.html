@@ -13,7 +13,7 @@
     </ng-template>
     <ng-template columnName="changelog" let-row>
         <a *ngIf="row.filename != null" [href]="'http://mamedev.org/releases/'+row.filename">
-            <mat-icon svgIcon="radar" [matTooltip]="'L10N_CHANGELOG'|translate"></mat-icon>
+            <mat-icon [svgIcon]="getIconByType('changelog')" [matTooltip]="'L10N_CHANGELOG'|translate"></mat-icon>
         </a>
     </ng-template>
 </advTable>

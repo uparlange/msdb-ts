@@ -2,44 +2,44 @@
 	<div class="header">
 		<mat-toolbar color="primary">
 			<div class="network-status">
-				<mat-icon [svgIcon]="model.params.online ? 'wifi' : 'wifi-off'"></mat-icon>
+				<mat-icon [svgIcon]="getIconByType(model.params.online ? 'wifi' : 'wifiOff')"></mat-icon>
 			</div>
 			<a routerLink="/home">
 				<img alt="logo" [src]="getLogoUrl()">
 			</a>
 			<span class="fill-remaining-space"></span>
 			<button mat-icon-button [matMenuTriggerFor]="menu">
-				<mat-icon svgIcon="menu"></mat-icon>
+				<mat-icon [svgIcon]="getIconByType('menu')"></mat-icon>
 			</button>
 			<mat-menu #menu="matMenu">
 				<nav>
 					<button mat-menu-item routerLink="/search/{{model.data.searchLastType}}">
-						<mat-icon svgIcon="magnify"></mat-icon>
+						<mat-icon [svgIcon]="getIconByType('search')"></mat-icon>
 						<span>{{"L10N_SEARCH"|translate}}</span>
 					</button>
 					<button mat-menu-item routerLink="/favorites">
-						<mat-icon svgIcon="heart-outline"></mat-icon>
+						<mat-icon [svgIcon]="getIconByType('favorites')"></mat-icon>
 						<span>{{"L10N_FAVORITES"|translate}}</span>
 					</button>
 					<button mat-menu-item routerLink="/history">
-						<mat-icon svgIcon="history"></mat-icon>
+						<mat-icon [svgIcon]="getIconByType('history')"></mat-icon>
 						<span>{{"L10N_HISTORY"|translate}}</span>
 					</button>
 					<button mat-menu-item routerLink="/statistic">
-						<mat-icon svgIcon="chart-arc"></mat-icon>
+						<mat-icon [svgIcon]="getIconByType('statistic')"></mat-icon>
 						<span>{{"L10N_STATISTICS"|translate}}</span>
 					</button>
 					<button mat-menu-item routerLink="/notification">
-						<mat-icon svgIcon="bell-outline"></mat-icon>
+						<mat-icon [svgIcon]="getIconByType('notification')"></mat-icon>
 						<span>{{"L10N_NOTIFICATION"|translate}}</span>
 					</button>
 					<mat-divider></mat-divider>
 					<button mat-menu-item (click)="showPreviousPage()">
-						<mat-icon svgIcon="arrow-left-bold-circle-outline"></mat-icon>
+						<mat-icon [svgIcon]="getIconByType('previousPage')"></mat-icon>
 						<span>{{"L10N_PREVIOUS"|translate}}</span>
 					</button>
 					<button mat-menu-item scrollToTop>
-						<mat-icon svgIcon="arrow-up-bold-circle-outline"></mat-icon>
+						<mat-icon [svgIcon]="getIconByType('scrollToTop')"></mat-icon>
 						<span>{{"L10N_SCROLL_TO_TOP"|translate}}</span>
 					</button>
 				</nav>

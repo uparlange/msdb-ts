@@ -3,6 +3,7 @@ import { ConfigProvider } from './providers/config-provider';
 import { AppHelperObject } from './providers/app-helper-object';
 import { AbstractHelperObject } from '../fwk/abstract-helper-object';
 import { AbstractModel } from '../fwk/abstract-model';
+import { IconProvider } from './providers/icon-provider';
 
 export class AbstractAppPopup extends AbstractPopup {
 
@@ -26,6 +27,14 @@ export class AbstractAppPopup extends AbstractPopup {
 
     getStatusLabel(status: string): string {
         return (status != null) ? `L10N_${status.toUpperCase()}` : null;
+    }
+
+    getIconByType(type: string): string {
+        return this.getIconProvider().getIconByType(type);
+    }
+
+    getIconProvider(): IconProvider {
+        return this._getHelper().getIconProvider();
     }
 
     getConfigProvider(): ConfigProvider {

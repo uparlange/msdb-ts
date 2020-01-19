@@ -1,15 +1,15 @@
 import { Component, ViewChild, ElementRef, Input, SimpleChanges } from '@angular/core';
-import { AbstractComponent } from '../../../fwk/abstract-component';
 import { AppHelperObject } from '../../providers/app-helper-object';
 import Chart from 'chart.js';
 import 'chartjs-plugin-labels';
+import { AbstractAppComponent } from '../../abstract-app-component';
 
 @Component({
     selector: "chart",
     templateUrl: './chart-component.html',
     styleUrls: ['./chart-component.css']
 })
-export class ChartComponent extends AbstractComponent {
+export class ChartComponent extends AbstractAppComponent {
 
     @Input() type: string = "bar";
     @Input() data: object = {};

@@ -5,6 +5,7 @@ import { ConfigProvider } from './providers/config-provider';
 import { AppHelperObject } from './providers/app-helper-object';
 import { AbstractAppModel } from './abstract-app-model';
 import { AbstractHelperObject } from '../fwk/abstract-helper-object';
+import { IconProvider } from './providers/icon-provider';
 
 export class AbstractAppView extends AbstractView {
 
@@ -26,8 +27,16 @@ export class AbstractAppView extends AbstractView {
         return item ? item.data : undefined;
     }
 
+    trackByKey(index: number, item: any): any {
+        return item ? item.key : undefined;
+    }
+
     getGameIconUrl(game: any): string {
         return this._getHelper().getConfigProvider().getGameIconUrl(game);
+    }
+
+    getIconByType(type: string): string {
+        return this.getIconProvider().getIconByType(type);
     }
 
     getStatusClass(status: string): string {
@@ -40,6 +49,10 @@ export class AbstractAppView extends AbstractView {
 
     getConfigProvider(): ConfigProvider {
         return this._getHelper().getConfigProvider();
+    }
+
+    getIconProvider(): IconProvider {
+        return this._getHelper().getIconProvider();
     }
 
     getSocket(): SocketManager {

@@ -1,0 +1,62 @@
+import { AbstractObject } from 'src/app/fwk/abstract-object';
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: "root" })
+export class IconProvider extends AbstractObject {
+
+    private _mapping: object = {
+        adult: "account-lock-outline",
+        bios: "chip",
+        category: "folder-outline",
+        categories: "folder-outline",
+        changelog: "radar",
+        close: "close",
+        delete: "close",
+        description: "textbox",
+        device: "devices",
+        download: "download",
+        language: "flag-outline",
+        languages: "flag-outline",
+        manufacturer: "domain",
+        manufacturers: "domain",
+        mechanical: "slot-machine-outline",
+        mess: "desktop-classic",
+        rating: "star-circle-outline",
+        ratings: "star-circle-outline",
+        search: "magnify",
+        series: "format-list-bulleted",
+        version: "plus-one",
+        versions: "plus-one",
+        year: "calendar",
+        years: "calendar",
+        menu: "menu",
+        favorites: "heart-outline",
+        addFavory: "heart-outline",
+        removeFavory: "heart-broken-outline",
+        history: "history",
+        statistic: "chart-arc",
+        notification: "bell-outline",
+        previousPage: "arrow-left-bold-circle-outline",
+        scrollToTop: "arrow-up-bold-circle-outline",
+        play: "gamepad-variant-outline",
+        more: "plus-circle-outline",
+        wifi: "wifi",
+        wifiOff: "wifi-off",
+        treeItem: "subdirectory-arrow-right",
+        nodeOpened: "chevron-down",
+        nodeClosed: "chevron-right"
+    }
+
+    constructor() {
+        super();
+    }
+
+    getIconByType(type: string): string {
+        let icon: string = this._mapping[type];
+        if (icon == null) {
+            icon = "cloud-question";
+        }
+        return icon;
+    }
+
+}
