@@ -12,6 +12,7 @@ import { RomsPopup } from './popups/roms/roms-popup';
 import { AbstractAppView } from 'src/app/common/abstract-app-view';
 import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { AppEvents } from 'src/app/app-events';
+import { AppSocketEvents } from 'src/app/app-socket-events';
 
 @Component({
   templateUrl: './detail-view.html',
@@ -39,7 +40,7 @@ export class DetailView extends AbstractAppView {
   }
 
   playGame(game: any): void {
-    this.getSocket().emit("PLAY_GAME", game.name).subscribe((event: any) => {
+    this.getSocket().emit(AppSocketEvents.PLAY_GAME, game.name).subscribe((event: any) => {
       if (event) {
         this.getEventBus().emit(AppEvents.DISPLAY_TOASTER_MESSAGE, { message: event });
       }

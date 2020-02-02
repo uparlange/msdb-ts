@@ -2,6 +2,7 @@ import { AbstractAppView } from 'src/app/common/abstract-app-view';
 import { ConfigModel } from './config-model';
 import { Component } from '@angular/core';
 import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AppLabels } from 'src/app/app-labels';
 
 @Component({
     templateUrl: './config-view.html',
@@ -15,35 +16,22 @@ export class ConfigView extends AbstractAppView {
         super(_helper, model);
     }
 
-    onLanguageChanged(event: any) {
-        this.getLabels().setLanguage(event.value);
+    tabChanged(event: any): void {
+        this._getModel().tabChanged(event);
+        const url = `/config/${this.getTabsInfo().byIndex(event.index).type}`;
+        this.getRouter().navigate([url]);
     }
 
-    checkConfigFormChanges(): void {
-        this._getModel().checkConfigFormChanges();
+    getTitle(): any {
+        return AppLabels.CONFIGURATION;
     }
 
-    saveConfig(): void {
-        this._getModel().saveConfig();
-    }
-
-    cancelConfig(): void {
-        this._getModel().cancelConfig();
-    }
-
-    checkMameIniFormChanges(): void {
-        this._getModel().checkMameIniFormChanges();
-    }
-
-    saveMameIni(): void {
-        this._getModel().saveMameIni();
-    }
-
-    cancelMameIni(): void {
-        this._getModel().cancelMameIni();
+    getTabsInfo(): any {
+        return this._getModel().getTabsInfo();
     }
 
     private _getModel(): ConfigModel {
         return <ConfigModel>this.model;
     }
+
 }

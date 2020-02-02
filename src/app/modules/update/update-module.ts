@@ -4,10 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/common/modules/shared-module';
 import { UpdateView } from './update-view';
 import { UpdateModel } from './update-model';
-import { UpdateCanActivate } from './guards/update-can-activate';
+import { NwjsCanActivate } from 'src/app/common/guards/nwjs-can-activate';
 
 const routes: Routes = [
-    { path: "", component: UpdateView, canActivate: [UpdateCanActivate] }
+    { path: "", component: UpdateView, canActivate: [NwjsCanActivate] }
 ];
 
 @NgModule({
@@ -17,7 +17,7 @@ const routes: Routes = [
     ],
     providers: [
         UpdateModel,
-        UpdateCanActivate
+        NwjsCanActivate
     ],
     declarations: [
         UpdateView

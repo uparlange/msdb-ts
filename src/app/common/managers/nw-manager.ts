@@ -8,9 +8,11 @@ import { environment } from './../../../environments/environment';
 import { ConfigProvider } from '../providers/config-provider';
 import { AppEvents } from 'src/app/app-events';
 import { EventManager } from 'src/app/fwk/managers/event-manager';
+import { CacheManager } from 'src/app/fwk/managers/cache-manager';
+import { AppLabels } from 'src/app/app-labels';
+import { AppSocketEvents } from 'src/app/app-socket-events';
 
 // Angular 2 integration : https://github.com/nwutils/nw-angular-cli-example
-// Play mp4 videos : https://github.com/iteufel/nwjs-ffmpeg-prebuilt
 @Injectable({ providedIn: "root" })
 export class NwManager extends AbstractManager {
 
@@ -21,10 +23,11 @@ export class NwManager extends AbstractManager {
     private _updatedVersion: any = null;
 
     constructor(
-        private _translateManager: TranslateManager, 
-        private _routerManager: RouterManager, 
+        private _translateManager: TranslateManager,
+        private _routerManager: RouterManager,
         private _configProvider: ConfigProvider,
-        private _eventManager: EventManager) {
+        private _eventManager: EventManager,
+        private _cacheManager: CacheManager) {
         super();
     }
 
@@ -103,9 +106,11 @@ export class NwManager extends AbstractManager {
                 }
             }));
             displaySubMenu.append(new window.nw.MenuItem({
-                label: translations.L10N_CONFIGURATION,
+                label: AppLabels.CONFIGURATION,
                 click: () => {
-                    this._showView("/config");
+                    this._cacheManager.getItem("configLastView", "application").subscribe((value: string) => {
+                        this._showView("/config/" + value);
+                    });
                 }
             }));
             menu.append(new window.nw.MenuItem({
@@ -162,25 +167,25 @@ export class NwManager extends AbstractManager {
         ioInstance.on("connection", (socket: any) => {
             this._getLogger().info(`(SOCKET.IO) User (${socket.id}) connected`);
             this._socket = socket;
-            socket.on("GET_MY_GAMES", (params: any, callback: Function) => {
+            socket.on(AppSocketEvents.GET_MY_GAMES, (params: any, callback: Function) => {
                 this._getMyGames(params, callback);
             });
-            socket.on("IS_ROM_AVAILABLE", (params: any, callback: Function) => {
+            socket.on(AppSocketEvents.IS_ROM_AVAILABLE, (params: any, callback: Function) => {
                 this._isRomAvailable(params, callback);
             });
-            socket.on("PLAY_GAME", (params: any, callback: Function) => {
+            socket.on(AppSocketEvents.PLAY_GAME, (params: any, callback: Function) => {
                 this._playGame(params, callback);
             });
-            socket.on("GET_CONFIGURATION", (params: any, callback: Function) => {
+            socket.on(AppSocketEvents.GET_CONFIGURATION, (params: any, callback: Function) => {
                 this._getConfiguration(callback);
             });
-            socket.on("SAVE_CONFIGURATION", (params: any, callback: Function) => {
+            socket.on(AppSocketEvents.SAVE_CONFIGURATION, (params: any, callback: Function) => {
                 this._saveConfiguration(params, callback);
             });
-            socket.on("GET_MAME_INI", (params: any, callback: Function) => {
+            socket.on(AppSocketEvents.GET_MAME_INI, (params: any, callback: Function) => {
                 this._getMameIni(callback);
             });
-            socket.on("SAVE_MAME_INI", (params: any, callback: Function) => {
+            socket.on(AppSocketEvents.SAVE_MAME_INI, (params: any, callback: Function) => {
                 this._saveMameIni(params, callback);
             });
         });
@@ -198,7 +203,7 @@ export class NwManager extends AbstractManager {
                     ignoreInitial: true
                 });
                 this._watcher.on("all", () => {
-                    this._socket.emit("CHANGE_IN_ROMS_DIRECTORY");
+                    this._socket.emit(AppSocketEvents.CHANGE_IN_ROMS_DIRECTORY);
                 });
             }
         });
@@ -262,7 +267,7 @@ export class NwManager extends AbstractManager {
     private _saveMameIni(parameters: Array<string>, callback: Function): void {
         const fs = window.nw.require("fs");
         let dest = "";
-        parameters.forEach((element:any) => {
+        parameters.forEach((element: any) => {
             dest += `${element.key} ${element.value}\r\n`;
         });
         this._getConfiguration((configuration: any) => {

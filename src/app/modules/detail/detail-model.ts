@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { AbstractAppModel } from 'src/app/common/abstract-app-model';
 import { AppEvents } from 'src/app/app-events';
 import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AppSocketEvents } from 'src/app/app-socket-events';
 
 @Injectable()
 export class DetailModel extends AbstractAppModel {
@@ -17,10 +18,10 @@ export class DetailModel extends AbstractAppModel {
 
   onInit(): void {
     super.onInit();
-    this._socketConfigChangedSubscription = this.getSocket().on("CONFIG_CHANGED").subscribe(() => {
+    this._socketConfigChangedSubscription = this.getSocket().on(AppSocketEvents.CONFIG_CHANGED).subscribe(() => {
       this._refreshGameAvailability();
     });
-    this._socketChangeInRomsDirectorySubscription = this.getSocket().on("CHANGE_IN_ROMS_DIRECTORY").subscribe(() => {
+    this._socketChangeInRomsDirectorySubscription = this.getSocket().on(AppSocketEvents.CHANGE_IN_ROMS_DIRECTORY).subscribe(() => {
       this._refreshGameAvailability();
     });
   }
@@ -80,7 +81,7 @@ export class DetailModel extends AbstractAppModel {
 
   private _refreshGameAvailability(): void {
     this.data.gameAvailable = false;
-    this.getSocket().emit("IS_ROM_AVAILABLE", this.params.name).subscribe((result: any) => {
+    this.getSocket().emit(AppSocketEvents.IS_ROM_AVAILABLE, this.params.name).subscribe((result: any) => {
       if (result !== null && result.name === this.params.name) {
         this.data.gameAvailable = result.available;
       }

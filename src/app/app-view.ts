@@ -35,7 +35,7 @@ export class AppView extends AbstractAppView {
 
   onInit(): void {
     super.onInit();
-    this.backgroundImage = this._domSanitizer.bypassSecurityTrustStyle("url(" + environment.assetsFolder + "/background.jpg)");
+    this.backgroundImage = this._domSanitizer.bypassSecurityTrustStyle("url(" + environment.assetsFolder + "/images/background.jpg)");
     this._shell.init();
     this._initToaster();
   }
@@ -49,7 +49,7 @@ export class AppView extends AbstractAppView {
   }
 
   getLogoUrl(): string {
-    return environment.assetsFolder + "/logo.png";
+    return environment.assetsFolder + "/images/logo.png";
   }
 
   private _initToaster(): void {

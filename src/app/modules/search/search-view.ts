@@ -17,7 +17,7 @@ export class SearchView extends AbstractAppView {
 
     tabChanged(event: any): void {
         this._getModel().tabChanged(event);
-        const url = `/search/${this._getModel().getTabsInfo().byIndex(event.index).type}`;
+        const url = `/search/${this.getTabsInfo().byIndex(event.index).type}`;
         this.getRouter().navigate([url]);
     }
 

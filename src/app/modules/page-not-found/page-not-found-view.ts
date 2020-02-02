@@ -17,6 +17,6 @@ export class PageNotFoundView extends AbstractAppView {
     }
 
     getDeadLinkUrl() {
-        return environment.assetsFolder + "/deadlink.jpg";
+        return environment.assetsFolder + "/images/deadlink.jpg";
     }
 }

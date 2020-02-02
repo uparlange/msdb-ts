@@ -3,6 +3,7 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AppEvents } from 'src/app/app-events';
+import { AppSocketEvents } from 'src/app/app-socket-events';
 
 @Injectable()
 export class MyGamesModel extends AbstractAppModel {
@@ -29,7 +30,7 @@ export class MyGamesModel extends AbstractAppModel {
             this.data.pageIndex = value;
         });
         if (this._changeInRomsDirectorySubscription == null) {
-            this._changeInRomsDirectorySubscription = this.getSocket().on("CHANGE_IN_ROMS_DIRECTORY").subscribe(() => {
+            this._changeInRomsDirectorySubscription = this.getSocket().on(AppSocketEvents.CHANGE_IN_ROMS_DIRECTORY).subscribe(() => {
                 this.needRefresh = true;
             });
         }
@@ -38,7 +39,7 @@ export class MyGamesModel extends AbstractAppModel {
     onRefresh(callback: Function): void {
         super.onRefresh(callback);
         this.data.provider = [];
-        this.getSocket().emit("GET_MY_GAMES", null).subscribe((result: any) => {
+        this.getSocket().emit(AppSocketEvents.GET_MY_GAMES, null).subscribe((result: any) => {
             if (Array.isArray(result)) {
                 this.getMsdbProvider().search("name", result).subscribe((data: any) => {
                     if (Array.isArray(data)) {

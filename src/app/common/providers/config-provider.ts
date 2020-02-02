@@ -16,7 +16,7 @@ export class ConfigProvider extends AbstractObject {
   }
 
   getGameIconUrl(game: any): string {
-    return game.icon !== null ? `${this.getGameFolder(game)}/${game.icon.name}` : environment.assetsFolder + "/game.png";
+    return game.icon !== null ? `${this.getGameFolder(game)}/${game.icon.name}` : environment.assetsFolder + "/images/game.png";
   }
 
   getGameFolder(game: any): string {

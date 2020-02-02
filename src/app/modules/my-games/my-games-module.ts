@@ -4,10 +4,10 @@ import { SharedModule } from 'src/app/common/modules/shared-module';
 import { NgModule } from '@angular/core';
 import { MyGamesView } from './my-games-view';
 import { MyGamesModel } from './my-games-model';
-import { MyGamesCanActivate } from './guards/my-games-can-activate';
+import { NwjsCanActivate } from 'src/app/common/guards/nwjs-can-activate';
 
 const routes: Routes = [
-    { path: "", component: MyGamesView, canActivate: [MyGamesCanActivate] }
+    { path: "", component: MyGamesView, canActivate: [NwjsCanActivate] }
 ];
 
 @NgModule({
@@ -17,7 +17,7 @@ const routes: Routes = [
     ],
     providers: [
         MyGamesModel,
-        MyGamesCanActivate
+        NwjsCanActivate
     ],
     declarations: [
         MyGamesView

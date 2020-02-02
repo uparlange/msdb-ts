@@ -3,6 +3,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { EventManager } from '../../fwk/managers/event-manager';
 import io from 'socket.io-client';
 import { ConfigProvider } from '../providers/config-provider';
+import { AppEvents } from 'src/app/app-events';
 
 @Injectable({ providedIn: "root" })
 export class SocketManager extends AbstractManager {
@@ -10,7 +11,7 @@ export class SocketManager extends AbstractManager {
   private _socket: SocketIOClient.Socket = null;
 
   constructor(
-    private _eventManager: EventManager, 
+    private _eventManager: EventManager,
     private _configProvider: ConfigProvider) {
     super();
   }
@@ -33,16 +34,16 @@ export class SocketManager extends AbstractManager {
 
   emit(eventName: string, params?: any): EventEmitter<any> {
     const eventEmitter: EventEmitter<any> = new EventEmitter();
-    this._eventManager.emit("HTTP_BEGIN");
+    this._eventManager.emit(AppEvents.HTTP_BEGIN);
     this._getSocket().subscribe((socket: any) => {
       if (socket !== null) {
         socket.emit(eventName, params, (result: any) => {
-          this._eventManager.emit("HTTP_END");
+          this._eventManager.emit(AppEvents.HTTP_END);
           eventEmitter.emit(result);
         });
       }
       else {
-        this._eventManager.emit("HTTP_END");
+        this._eventManager.emit(AppEvents.HTTP_END);
         eventEmitter.emit(null);
       }
     });

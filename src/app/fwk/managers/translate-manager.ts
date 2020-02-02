@@ -8,7 +8,7 @@ import { environment } from './../../../environments/environment';
 export class TranslateManager extends AbstractManager {
 
   private _properties: any = {};
-  private _propertyFilePattern: string = environment.assetsFolder + "/data/{locale}.json";
+  private _propertyFilePattern: string = environment.assetsFolder + "/i18n/{locale}.json";
   private _loading: boolean = false;
   private _pendingRequests: Array<any> = new Array();
   private _currentLang: string = null;

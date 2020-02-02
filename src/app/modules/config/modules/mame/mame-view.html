@@ -1,0 +1,53 @@
+<mat-card>
+    <mat-card-title>
+        {{'L10N_FOLDERS'|translate}}
+    </mat-card-title>
+    <mat-card-content>
+        <mat-form-field class="full-width">
+            <input matInput [(ngModel)]="model.data.configuration.newValue.mameDirectory" placeholder="MAME"
+                (keyup)="checkConfigFormChanges()" (change)="checkConfigFormChanges()">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput [(ngModel)]="model.data.configuration.newValue.romsDirectory" disabled placeholder="ROMS">
+        </mat-form-field>
+        <div>
+            <button mat-raised-button color="primary" (click)="saveConfig()"
+                [disabled]="!model.data.configuration.enabled">
+                {{'L10N_SAVE'|translate}}
+            </button>
+            <span class="sep"></span>
+            <button mat-raised-button color="accent" (click)="cancelConfig()"
+                [disabled]="!model.data.configuration.enabled">
+                {{'L10N_CANCEL'|translate}}
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>
+<div class="default-spacer"></div>
+<mat-card>
+    <mat-card-title>
+        {{'L10N_PARAMETERS'|translate}}
+    </mat-card-title>
+    <mat-card-content>
+        <advTable [provider]="model.data.mameIni.newValue" [(filterValue)]="model.data.mameIni.filterValue"
+            [paginationEnabled]="true" [pageSize]="5" [filterEnabled]="true" [rowTrackId]="'key'">
+            <ng-template columnName="key" let-row>
+                {{row.key}}
+            </ng-template>
+            <ng-template columnName="value" columnWidth="100%" let-row>
+                <input matInput [(ngModel)]="row.value" (keyup)="checkMameIniFormChanges()"
+                    (change)="checkMameIniFormChanges()">
+            </ng-template>
+        </advTable>
+        <div class="default-spacer"></div>
+        <div>
+            <button mat-raised-button color="primary" (click)="saveMameIni()" [disabled]="!model.data.mameIni.enabled">
+                {{'L10N_SAVE'|translate}}
+            </button>
+            <span class="sep"></span>
+            <button mat-raised-button color="accent" (click)="cancelMameIni()" [disabled]="!model.data.mameIni.enabled">
+                {{'L10N_CANCEL'|translate}}
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>
