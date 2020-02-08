@@ -29,8 +29,8 @@ export class AbstractAppPopup extends AbstractPopup {
         return (status != null) ? `L10N_${status.toUpperCase()}` : null;
     }
 
-    getIconByType(type: string): string {
-        return this.getIconProvider().getIconByType(type);
+    getMdiIconByType(type: string): string {
+        return this.getIconProvider().getMdiIconByType(type);
     }
 
     getIconProvider(): IconProvider {

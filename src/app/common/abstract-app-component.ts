@@ -9,8 +9,8 @@ export class AbstractAppComponent extends AbstractComponent {
         super(_helper);
     }
 
-    getIconByType(type: string): string {
-        return this._getHelper().getIconProvider().getIconByType(type);
+    getMdiIconByType(type: string): string {
+        return this._getHelper().getIconProvider().getMdiIconByType(type);
     }
 
     protected _getHelper(): AppHelperObject {

@@ -18,9 +18,14 @@ export class RatingsModel extends AbstractAppModel {
         });
     }
 
+    getRatingValue(index: number): number {
+        return this.data.ratingSize - index * 0.5;
+    }
+
     protected _getInitData(): any {
         return {
             filterValue: "",
+            ratingSize: 5,
             provider: []
         };
     }

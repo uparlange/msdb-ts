@@ -79,6 +79,11 @@ export class DetailModel extends AbstractAppModel {
     return this.getSizeLabel(size);
   }
 
+  getRatingValue(label: string): number {
+    const value = parseInt(label.substring(label.indexOf("to") + 3, label.indexOf("(") - 1));
+    return value / 20;
+  }
+
   private _refreshGameAvailability(): void {
     this.data.gameAvailable = false;
     this.getSocket().emit(AppSocketEvents.IS_ROM_AVAILABLE, this.params.name).subscribe((result: any) => {

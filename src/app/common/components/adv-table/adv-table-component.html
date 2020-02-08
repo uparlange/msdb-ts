@@ -3,14 +3,14 @@
         [placeholder]="'L10N_FILTER'|translate">
 </mat-form-field>
 <button *ngIf="filterEnabled && filterValue?.length > 0" (click)="clearFilter()" type="button" mat-mini-fab>
-    <mat-icon [svgIcon]="getIconByType('delete')" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
+    <mat-icon [svgIcon]="getMdiIconByType('delete')" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
 </button>
 <mat-paginator [hidePageSize]="true" [pageSize]="pageSize" [pageIndex]="pageIndex" (page)="pageChanged($event)"
     showFirstLastButtons *ngIf="paginationEnabled"></mat-paginator>
 <table mat-table [dataSource]="dataSource" [trackBy]="trackByRowId">
     <ng-container *ngFor="let column of columns; trackBy:trackByColumnName;" [matColumnDef]="column.columnName">
-        <td mat-cell *matCellDef="let row" [width]="column.columnWidth">
-            <ng-container [ngTemplateOutlet]="column.templateRef" [ngTemplateOutletContext]="{$implicit: row}">
+        <td mat-cell *matCellDef="let row; let i = index;" [width]="column.columnWidth">
+            <ng-container [ngTemplateOutlet]="column.templateRef" [ngTemplateOutletContext]="{$implicit: row, index: i}">
             </ng-container>
         </td>
     </ng-container>

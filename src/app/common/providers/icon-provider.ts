@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: "root" })
 export class IconProvider extends AbstractObject {
 
-    private _mapping: object = {
+    private _typeMdiIcon: object = {
         adult: "account-lock-outline",
         bios: "chip",
         category: "folder-outline",
@@ -44,19 +44,53 @@ export class IconProvider extends AbstractObject {
         wifiOff: "wifi-off",
         treeItem: "subdirectory-arrow-right",
         nodeOpened: "chevron-down",
-        nodeClosed: "chevron-right"
+        nodeClosed: "chevron-right",
+        star: "star-outline",
+        starHalf: "star-half",
+        starFull: "star"
+    }
+
+    private _languageCoutryCode: object = {
+        chinese: "cn",
+        croatian: "hr",
+        czech: "cz",
+        dutch: "nl",
+        english: "gb",
+        french: "fr",
+        german: "de",
+        greek: "gr",
+        hungarian: "hu",
+        italian: "it",
+        japanese: "jp",
+        korean: "kr",
+        polish: "pl",
+        portuguese: "pt",
+        russian: "ru",
+        slovak: "sk",
+        spanish: "es",
+        swedish: "se",
+        turkish: "tr"
     }
 
     constructor() {
         super();
     }
 
-    getIconByType(type: string): string {
-        let icon: string = this._mapping[type];
+    getMdiIconByType(type: string): string {
+        let icon: string = this._typeMdiIcon[type];
         if (icon == null) {
             icon = "cloud-question";
         }
         return icon;
+    }
+
+    getCoutryCodeIconByLanguage(language: string): string {
+        let code: string = this._languageCoutryCode[language.toLowerCase()];
+        if (code == null) {
+            code = "?";
+        }
+        return "/assets/flags.svg#flag-" + code;
+        //return "flag-" + code;
     }
 
 }

@@ -1,5 +1,12 @@
 <advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="false"
     [filterEnabled]="false" [rowTrackId]="'label'">
+    <ng-template columnName="icon" let-row>
+        <svg role="img">
+            <use [attr.href]="getCoutryCodeIconByLanguage(row.label)" /></svg>
+        <!--
+        <mat-icon color="null" [svgIcon]="getCoutryCodeIconByLanguage(row.label)"></mat-icon>
+        -->
+    </ng-template>
     <ng-template columnName="label" columnWidth="100%" let-row>
         <a routerLink="/result" [queryParams]="{type:'language', value:row.label}">{{row.label}}</a>
     </ng-template>

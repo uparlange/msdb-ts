@@ -1,0 +1,9 @@
+.stars
+{
+    display: flex;
+}
+
+.star
+{
+    color: gold;
+}

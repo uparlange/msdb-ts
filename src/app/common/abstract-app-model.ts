@@ -49,8 +49,8 @@ export class AbstractAppModel extends AbstractModel {
     return this._getHelper().getConfigProvider().getGameIconUrl(game);
   }
 
-  getIconByType(type: string): string {
-    return this.getIconProvider().getIconByType(type);
+  getMdiIconByType(type: string): string {
+    return this.getIconProvider().getMdiIconByType(type);
   }
 
   getSizeLabel(value: number): string {

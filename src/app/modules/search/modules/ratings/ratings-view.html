@@ -1,5 +1,8 @@
 <advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="false"
     [filterEnabled]="false" [rowTrackId]="'label'">
+    <ng-template columnName="rating" let-row let-i="index">
+        <star-rating [size]="model.data.ratingSize" [value]="model.getRatingValue(i)"></star-rating>
+    </ng-template>
     <ng-template columnName="label" columnWidth="100%" let-row>
         <a routerLink="/result" [queryParams]="{type:'rating', value:row.label}">{{row.label}}</a>
     </ng-template>

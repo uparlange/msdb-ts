@@ -12,6 +12,7 @@ import { AdvTableColumnDirective } from '../components/adv-table/adv-table-colum
 import { ScrollToTopDirective } from '../directives/scroll-to-top-directive';
 import { GalleryComponent } from '../components/gallery/gallery-component';
 import { ChartComponent } from '../components/chart/chart-component';
+import { StarRatingComponent } from '../components/star-rating/star-rating-component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ChartComponent } from '../components/chart/chart-component';
     AdvTableColumnDirective,
     ScrollToTopDirective,
     GalleryComponent,
-    ChartComponent
+    ChartComponent,
+    StarRatingComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { ChartComponent } from '../components/chart/chart-component';
     AdvTableColumnDirective,
     ScrollToTopDirective,
     GalleryComponent,
-    ChartComponent
+    ChartComponent,
+    StarRatingComponent
   ]
 })
 export class SharedModule extends AbstractModule {

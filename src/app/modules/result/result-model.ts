@@ -20,7 +20,7 @@ export class ResultModel extends AbstractAppModel {
         this._setFilterList([]);
         this._getTitle().subscribe((title: string) => {
             this.data.title = title;
-            this.getHistory().add(title, this.getIconByType(this.params.type));
+            this.getHistory().add(title, this.getMdiIconByType(this.params.type));
         })
     }
 

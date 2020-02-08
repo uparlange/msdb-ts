@@ -35,8 +35,12 @@ export class AbstractAppView extends AbstractView {
         return this._getHelper().getConfigProvider().getGameIconUrl(game);
     }
 
-    getIconByType(type: string): string {
-        return this.getIconProvider().getIconByType(type);
+    getMdiIconByType(type: string): string {
+        return this.getIconProvider().getMdiIconByType(type);
+    }
+
+    getCoutryCodeIconByLanguage(language: string): string {
+        return this.getIconProvider().getCoutryCodeIconByLanguage(language);
     }
 
     getStatusClass(status: string): string {

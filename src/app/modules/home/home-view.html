@@ -45,7 +45,7 @@
 				<div class="default-spacer"></div>
 				<mat-list>
 					<mat-list-item *ngFor="let searchType of model.data.searchTypes; trackBy:trackByKey">
-						<mat-icon mat-list-icon [svgIcon]="getIconByType(searchType.type)">
+						<mat-icon mat-list-icon [svgIcon]="getMdiIconByType(searchType.type)">
 						</mat-icon>
 						<p mat-line><a [routerLink]="'/search/' + searchType.type">{{searchType.key|translate}}</a></p>
 					</mat-list-item>

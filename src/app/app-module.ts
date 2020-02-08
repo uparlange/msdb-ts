@@ -57,6 +57,7 @@ export class AppModule extends AbstractModule {
   constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
     super();
     matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl(environment.assetsFolder + "/mdi.svg"));
+    //matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl(environment.assetsFolder + "/flags.svg"));
   }
 
 }
