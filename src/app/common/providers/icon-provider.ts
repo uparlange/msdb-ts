@@ -1,5 +1,6 @@
 import { AbstractObject } from 'src/app/fwk/abstract-object';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: "root" })
 export class IconProvider extends AbstractObject {
@@ -89,7 +90,7 @@ export class IconProvider extends AbstractObject {
         if (code == null) {
             code = "?";
         }
-        return "/assets/flags.svg#flag-" + code;
+        return environment.assetsFolder + "/flags.svg#flag-" + code;
         //return "flag-" + code;
     }
 
