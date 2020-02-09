@@ -25,19 +25,19 @@
 				<span>{{"L10N_PLAY_GAME"|translate}}</span>
 			</button>
 			<button mat-menu-item [matMenuTriggerFor]="subMenu"
-				*ngIf="model.data.game.dipswitchs.length > 0 || model.data.game.chips.length > 0 || model.data.game.biossets.length > 0 || model.data.game.ports.length > 0 || model.data.game.devicerefs.length > 0">
+				*ngIf="model.data.game.dipswitchs?.length > 0 || model.data.game.chips?.length > 0 || model.data.game.biossets?.length > 0 || model.data.game.ports?.length > 0 || model.data.game.devicerefs?.length > 0">
 				<mat-icon [svgIcon]="getMdiIconByType('more')"></mat-icon>
 				<span>{{"L10N_MORE"|translate}}</span>
 				<mat-menu #subMenu="matMenu">
-					<button mat-menu-item *ngIf="model.data.game.dipswitchs.length > 0"
+					<button mat-menu-item *ngIf="model.data.game.dipswitchs?.length > 0"
 						(click)="openDipSwitchsPopup()">{{'L10N_DIP_SWITCH'|translate}}</button>
-					<button mat-menu-item *ngIf="model.data.game.chips.length > 0"
+					<button mat-menu-item *ngIf="model.data.game.chips?.length > 0"
 						(click)="openChipsPopup()">{{'L10N_CHIP'|translate}}</button>
-					<button mat-menu-item *ngIf="model.data.game.biossets.length > 0"
+					<button mat-menu-item *ngIf="model.data.game.biossets?.length > 0"
 						(click)="openBiossetsPopup()">{{'L10N_BIOS_SET'|translate}}</button>
-					<button mat-menu-item *ngIf="model.data.game.ports.length > 0"
+					<button mat-menu-item *ngIf="model.data.game.ports?.length > 0"
 						(click)="openPortsPopup()">{{'L10N_PORT'|translate}}</button>
-					<button mat-menu-item *ngIf="model.data.game.devicerefs.length > 0"
+					<button mat-menu-item *ngIf="model.data.game.devicerefs?.length > 0"
 						(click)="openDeviceRefsPopup()">{{'L10N_DEVICE_REF'|translate}}</button>
 				</mat-menu>
 			</button>
@@ -125,41 +125,55 @@
 		<button class="link-button" (click)="openClonesPopup()">{{model.data.clones.length}}</button>
 	</mat-list-item>
 </mat-list>
-<mat-card *ngIf="model.data.game.name != null">
-	<mat-card-title>
-		{{'L10N_DOWNLOADS'|translate}}
-	</mat-card-title>
-</mat-card>
-<mat-list *ngIf="model.data.game.name != null">
-	<mat-list-item>
-		<p matLine><b>{{'L10N_EMULATOR'|translate}}</b></p>
-		<p matLine>Mamedev : <a href="http://mamedev.org/">MAME</a></p>
-	</mat-list-item>
-	<mat-list-item>
-		<span matLine><b>Rom</b></span>
-		<span matLine>Planetemu : <a
-				[href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">{{model.data.game.description}}</a></span>
-		<span matLine>Retroroms ({{'L10N_ACCOUNT_NEEDED'|translate}}) : <a
-				[href]="'https://bda.retroroms.info:82/downloads/mame/currentroms/'+model.data.game.name+'.zip'">{{model.data.game.description}}</a></span>
-	</mat-list-item>
-	<mat-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
-		<span matLine><b>Bios</b></span>
-		<span matLine>Planetemu : <a href="http://www.planetemu.net/roms/mame-bios-pack">MAME Bios Pack</a></span>
-		<span matLine>Retroroms ({{'L10N_ACCOUNT_NEEDED'|translate}}) : <a
-				[href]="'https://bda.retroroms.info:82/downloads/mame/currentroms/'+model.data.game.romof+'.zip'">{{model.data.game.romof}}</a>
-		</span>
-	</mat-list-item>
-	<mat-list-item *ngIf="model.data.game.soundtracks?.length > 0">
-		<span matLine><b>{{'L10N_SOUNDTRACKS'|translate}}</b></span>
-		<span matLine>Progettosnaps : <a
-				[href]="getGameSoundTrackUrl(model.data.game)">{{model.data.game.description}}</a></span>
-	</mat-list-item>
-	<mat-list-item *ngIf="model.data.game.manual === true">
-		<span matLine><b>{{'L10N_MANUAL'|translate}}</b></span>
-		<span matLine>Progettosnaps : <a
-				[href]="getGameManualUrl(model.data.game)">{{model.data.game.description}}</a></span>
-	</mat-list-item>
-</mat-list>
+<div *ngIf="model.data.game.links?.length > 0">
+	<mat-card>
+		<mat-card-title>
+			{{'L10N_LINKS'|translate}}
+		</mat-card-title>
+	</mat-card>
+	<mat-list>
+		<mat-list-item *ngFor="let link of model.data.game.links; trackBy:trackByLabel;">
+			<p matLine>{{link.label}} : <a [href]="link.data">{{model.data.game.description}}</a></p>
+		</mat-list-item>
+	</mat-list>
+</div>
+<div *ngIf="model.data.game.name != null">
+	<mat-card>
+		<mat-card-title>
+			{{'L10N_DOWNLOADS'|translate}}
+		</mat-card-title>
+	</mat-card>
+	<mat-list>
+		<mat-list-item>
+			<p matLine><b>{{'L10N_EMULATOR'|translate}}</b></p>
+			<p matLine>Mamedev : <a href="http://mamedev.org/">MAME</a></p>
+		</mat-list-item>
+		<mat-list-item>
+			<span matLine><b>Rom</b></span>
+			<span matLine>Planetemu : <a
+					[href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">{{model.data.game.description}}</a></span>
+			<span matLine>Retroroms ({{'L10N_ACCOUNT_NEEDED'|translate}}) : <a
+					[href]="'https://bda.retroroms.info:82/downloads/mame/currentroms/'+model.data.game.name+'.zip'">{{model.data.game.description}}</a></span>
+		</mat-list-item>
+		<mat-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
+			<span matLine><b>Bios</b></span>
+			<span matLine>Planetemu : <a href="http://www.planetemu.net/roms/mame-bios-pack">MAME Bios Pack</a></span>
+			<span matLine>Retroroms ({{'L10N_ACCOUNT_NEEDED'|translate}}) : <a
+					[href]="'https://bda.retroroms.info:82/downloads/mame/currentroms/'+model.data.game.romof+'.zip'">{{model.data.game.romof}}</a>
+			</span>
+		</mat-list-item>
+		<mat-list-item *ngIf="model.data.game.soundtracks?.length > 0">
+			<span matLine><b>{{'L10N_SOUNDTRACKS'|translate}}</b></span>
+			<span matLine>Progettosnaps : <a
+					[href]="getGameSoundTrackUrl(model.data.game)">{{model.data.game.description}}</a></span>
+		</mat-list-item>
+		<mat-list-item *ngIf="model.data.game.manual === true">
+			<span matLine><b>{{'L10N_MANUAL'|translate}}</b></span>
+			<span matLine>Progettosnaps : <a
+					[href]="getGameManualUrl(model.data.game)">{{model.data.game.description}}</a></span>
+		</mat-list-item>
+	</mat-list>
+</div>
 <div *ngIf="model.data.images.length > 0">
 	<mat-card>
 		<mat-card-title>

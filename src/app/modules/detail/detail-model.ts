@@ -95,13 +95,7 @@ export class DetailModel extends AbstractAppModel {
 
   protected _getInitData(): any {
     return {
-      game: {
-        dipswitchs: [],
-        chips: [],
-        biossets: [],
-        ports: [],
-        devicerefs: []
-      },
+      game: {},
       clones: [],
       images: [],
       gameAvailable: false
