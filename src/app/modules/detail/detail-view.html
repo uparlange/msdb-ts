@@ -125,18 +125,6 @@
 		<button class="link-button" (click)="openClonesPopup()">{{model.data.clones.length}}</button>
 	</mat-list-item>
 </mat-list>
-<div *ngIf="model.data.game.links?.length > 0">
-	<mat-card>
-		<mat-card-title>
-			{{'L10N_LINKS'|translate}}
-		</mat-card-title>
-	</mat-card>
-	<mat-list>
-		<mat-list-item *ngFor="let link of model.data.game.links; trackBy:trackByLabel;">
-			<p matLine>{{link.label}} : <a [href]="link.data">{{model.data.game.description}}</a></p>
-		</mat-list-item>
-	</mat-list>
-</div>
 <div *ngIf="model.data.game.name != null">
 	<mat-card>
 		<mat-card-title>
@@ -184,6 +172,7 @@
 	<gallery [colcount]="3" [gap]="5" [provider]="model.data.images"></gallery>
 </div>
 <div *ngIf="model.data.game.video === true">
+	<div class="default-spacer"></div>
 	<mat-card>
 		<mat-card-title>
 			{{'L10N_VIDEOS'|translate}}
@@ -193,4 +182,17 @@
 	<video controls>
 		<source [src]="getGameVideoUrl(model.data.game)" type="video/mp4" />
 	</video>
+</div>
+<div *ngIf="model.data.game.links?.length > 0">
+	<div class="default-spacer"></div>
+	<mat-card>
+		<mat-card-title>
+			{{'L10N_MORE_INFORMATIONS'|translate}}
+		</mat-card-title>
+	</mat-card>
+	<mat-list>
+		<mat-list-item *ngFor="let link of model.data.game.links; trackBy:trackByLabel;">
+			<p matLine>{{link.label}} : <a [href]="link.data">{{model.data.game.description}}</a></p>
+		</mat-list-item>
+	</mat-list>
 </div>
