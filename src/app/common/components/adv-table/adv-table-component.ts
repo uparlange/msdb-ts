@@ -1,6 +1,6 @@
-import { Component, Input, ViewChild, SimpleChanges, ContentChildren, QueryList, Output, EventEmitter } from '@angular/core';
+import { Component, Input, SimpleChanges, ContentChildren, QueryList, Output, EventEmitter, ViewChildren, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AdvTableColumnDirective } from './adv-table-column-directive';
 import { AppHelperObject } from '../../providers/app-helper-object';
 import { AbstractAppComponent } from '../../abstract-app-component';
@@ -17,8 +17,8 @@ export class AdvTableComponent extends AbstractAppComponent {
     @Input() paginationEnabled: boolean = true;
     @Input() filterEnabled: boolean = true;
     @Input() rowTrackId: string = null;
-    @Input() pageIndex: Number = 0;
-    @Input() pageSize: Number = 100;
+    @Input() pageIndex: number = 0;
+    @Input() pageSize: number = 100;
 
     @ContentChildren(AdvTableColumnDirective) columns: QueryList<AdvTableColumnDirective>;
 
@@ -28,8 +28,14 @@ export class AdvTableComponent extends AbstractAppComponent {
     displayedColumns: Array<string> = [];
     dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-    @ViewChild(MatPaginator, { static: false })
-    private _matPaginator !: MatPaginator;
+    @ViewChild("primaryPaginatorWrapper")
+    private _primaryPaginatorWrapper !: any;
+
+    @ViewChild("primaryPaginator")
+    private _primaryPaginator !: MatPaginator;
+
+    @ViewChild("secondaryPaginatorWrapper")
+    private _secondaryPaginatorWrapper: any;
 
     constructor(
         protected _helper: AppHelperObject) {
@@ -39,13 +45,20 @@ export class AdvTableComponent extends AbstractAppComponent {
     afterViewInit(): void {
         super.afterViewInit();
         if (this.paginationEnabled) {
-            this.dataSource.paginator = this._matPaginator;
+            this.dataSource.paginator = this._primaryPaginator;
+        } else {
+            this._primaryPaginatorWrapper.nativeElement.removeChild(this._primaryPaginatorWrapper.nativeElement.firstChild);
+            this._secondaryPaginatorWrapper.nativeElement.removeChild(this._secondaryPaginatorWrapper.nativeElement.firstChild);
         }
     }
 
     afterContentInit(): void {
         super.afterContentInit();
-        this._initDisplayedColumns();
+        const displayedColumns: Array<string> = [];
+        this.columns.forEach((column: AdvTableColumnDirective) => {
+            displayedColumns.push(column.columnName);
+        });
+        this.displayedColumns = displayedColumns;
     }
 
     onDestroy(): void {
@@ -56,13 +69,13 @@ export class AdvTableComponent extends AbstractAppComponent {
     onChanges(changes: SimpleChanges): void {
         super.onChanges(changes);
         if (changes.provider) {
-            this.dataSource.data = this.provider;
+            this._refreshData(this.provider);
         }
         if (changes.filterValue) {
             this._setFilterValue(this.filterValue);
         }
         if (changes.pageIndex) {
-            this.pageChanged({ pageIndex: this.pageIndex });
+            this._setPageIndex(this.pageIndex);
         }
     }
 
@@ -74,9 +87,14 @@ export class AdvTableComponent extends AbstractAppComponent {
         this._setFilterValue("");
     }
 
-    pageChanged(event: any): void {
-        this.pageIndex = event.pageIndex;
-        this.pageIndexChange.emit(this.pageIndex);
+    pageChanged(event: PageEvent): void {
+        this._setPageIndex(event.pageIndex);
+    }
+
+    syncPrimaryPaginator(event: PageEvent): void {
+        this._primaryPaginator.pageIndex = event.pageIndex;
+        this._primaryPaginator.pageSize = event.pageSize;
+        this._primaryPaginator.page.emit(event);
     }
 
     trackByColumnName(index: number, item: any): string {
@@ -87,17 +105,18 @@ export class AdvTableComponent extends AbstractAppComponent {
         return (item && this.rowTrackId) ? item[this.rowTrackId] : undefined;
     }
 
-    private _initDisplayedColumns(): void {
-        const displayedColumns: Array<string> = [];
-        this.columns.forEach((column: AdvTableColumnDirective) => {
-            displayedColumns.push(column.columnName);
-        });
-        this.displayedColumns = displayedColumns;
+    private _setFilterValue(value: string): void {
+        this.dataSource.filter = value;
+        this.filterValue = value;
+        this.filterValueChange.emit(value);
     }
 
-    private _setFilterValue(value: string): void {
-        this.filterValue = value;
-        this.dataSource.filter = value;
-        this.filterValueChange.emit(value);
+    private _setPageIndex(index: number) {
+        this.pageIndex = index;
+        this.pageIndexChange.emit(this.pageIndex);
+    }
+
+    private _refreshData(data: any[]) {
+        this.dataSource.data = data;
     }
 }
