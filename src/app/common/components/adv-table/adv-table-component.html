@@ -6,8 +6,8 @@
     <mat-icon [svgIcon]="getMdiIconByType('delete')" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
 </button>
 <div #primaryPaginatorWrapper class="primary-paginator">
-    <mat-paginator #primaryPaginator class="primary" [hidePageSize]="true" [pageSize]="pageSize"
-        [pageIndex]="pageIndex" (page)="pageChanged($event)" showFirstLastButtons></mat-paginator>
+    <mat-paginator #primaryPaginator class="primary" [hidePageSize]="true" [pageSize]="pageSize" [pageIndex]="pageIndex"
+        (page)="pageChanged($event)" showFirstLastButtons></mat-paginator>
 </div>
 <table mat-table [dataSource]="dataSource" [trackBy]="trackByRowId">
     <ng-container *ngFor="let column of columns; trackBy:trackByColumnName;" [matColumnDef]="column.columnName">
@@ -19,10 +19,9 @@
     </ng-container>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<h4 class="no-data" *ngIf="!dataSource.filteredData || dataSource.filteredData.length == 0">
+<h4 class="no-data" *ngIf="emptyResult()">
     {{'L10N_NO_RESULT'|translate}}</h4>
-<div #secondaryPaginatorWrapper>
-    <mat-paginator [hidePageSize]="true" (page)="syncPrimaryPaginator($event)" [pageSize]="primaryPaginator.pageSize"
-        [pageIndex]="primaryPaginator.pageIndex" [length]="primaryPaginator.length" showFirstLastButtons>
-    </mat-paginator>
-</div>
+<mat-paginator *ngIf="showSecondaryPaginator()" [hidePageSize]="true" (page)="syncPrimaryPaginator($event)"
+    [pageSize]="primaryPaginator.pageSize" [pageIndex]="primaryPaginator.pageIndex" [length]="primaryPaginator.length"
+    showFirstLastButtons>
+</mat-paginator>

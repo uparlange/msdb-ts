@@ -34,9 +34,6 @@ export class AdvTableComponent extends AbstractAppComponent {
     @ViewChild("primaryPaginator")
     private _primaryPaginator !: MatPaginator;
 
-    @ViewChild("secondaryPaginatorWrapper")
-    private _secondaryPaginatorWrapper: any;
-
     constructor(
         protected _helper: AppHelperObject) {
         super(_helper);
@@ -48,7 +45,6 @@ export class AdvTableComponent extends AbstractAppComponent {
             this.dataSource.paginator = this._primaryPaginator;
         } else {
             this._primaryPaginatorWrapper.nativeElement.removeChild(this._primaryPaginatorWrapper.nativeElement.firstChild);
-            this._secondaryPaginatorWrapper.nativeElement.removeChild(this._secondaryPaginatorWrapper.nativeElement.firstChild);
         }
     }
 
@@ -103,6 +99,14 @@ export class AdvTableComponent extends AbstractAppComponent {
 
     trackByRowId(index: number, item: any): string {
         return (item && this.rowTrackId) ? item[this.rowTrackId] : undefined;
+    }
+
+    emptyResult(): boolean {
+        return !this.dataSource.filteredData || this.dataSource.filteredData.length == 0;
+    }
+
+    showSecondaryPaginator(): boolean {
+        return !this.emptyResult() && this.paginationEnabled;
     }
 
     private _setFilterValue(value: string): void {
