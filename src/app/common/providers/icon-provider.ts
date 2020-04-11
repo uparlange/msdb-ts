@@ -70,7 +70,8 @@ export class IconProvider extends AbstractObject {
         slovak: "sk",
         spanish: "es",
         swedish: "se",
-        turkish: "tr"
+        turkish: "tr",
+        norwegian: "no"
     }
 
     constructor() {
