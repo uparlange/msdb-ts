@@ -3,7 +3,11 @@ import { AbstractModel } from './abstract-model';
 import { Subscription } from 'rxjs';
 import { FwkHelperObject } from './providers/fwk-helper-object';
 import { AbstractHelperObject } from './abstract-helper-object';
+import { Component } from '@angular/core';
 
+@Component({
+    template: ""
+  })
 export class AbstractView extends AbstractComponent {
 
     private _queryParamsSubscription: Subscription = null;

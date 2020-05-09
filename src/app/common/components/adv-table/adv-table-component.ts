@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, ContentChildren, QueryList, Output, EventEmitter, ViewChildren, ViewChild } from '@angular/core';
+import { Component, Input, SimpleChanges, ContentChildren, QueryList, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AdvTableColumnDirective } from './adv-table-column-directive';

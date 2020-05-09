@@ -1,10 +1,13 @@
 
-import { OnDestroy } from '@angular/core';
+import { OnDestroy, Pipe } from '@angular/core';
 import { TranslateManager } from './managers/translate-manager';
 import { AbstractHelper } from './abstract-helper';
 import { AbstractHelperObject } from './abstract-helper-object';
 import { FwkHelperObject } from './providers/fwk-helper-object';
 
+@Pipe({
+    name: ""
+})
 export class AbstractPipe extends AbstractHelper implements OnDestroy {
 
     constructor(

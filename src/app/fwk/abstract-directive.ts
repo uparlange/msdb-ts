@@ -1,4 +1,4 @@
-import { OnChanges, OnInit, DoCheck, OnDestroy, SimpleChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { OnChanges, OnInit, DoCheck, OnDestroy, SimpleChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, Directive } from '@angular/core';
 import { EventManager } from './managers/event-manager';
 import { RouterManager } from './managers/router-manager';
 import { ConnectionManager } from './managers/connection-manager';
@@ -9,6 +9,7 @@ import { WindowRef } from './providers/window-ref';
 import { AbstractHelperObject } from './abstract-helper-object';
 import { FwkHelperObject } from './providers/fwk-helper-object';
 
+@Directive()
 export class AbstractDirective extends AbstractHelper implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
   constructor(

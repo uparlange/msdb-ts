@@ -13,7 +13,7 @@ export class IconProvider extends AbstractObject {
         changelog: "radar",
         close: "close",
         delete: "close",
-        description: "textbox",
+        description: "form-textbox",
         device: "devices",
         download: "download",
         language: "flag-outline",

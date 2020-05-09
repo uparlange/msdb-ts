@@ -3,7 +3,11 @@ import { Subscription } from 'rxjs';
 import { AbstractModel } from './abstract-model';
 import { AbstractHelperObject } from './abstract-helper-object';
 import { FwkHelperObject } from './providers/fwk-helper-object';
+import { Component } from '@angular/core';
 
+@Component({
+  template: ""
+})
 export class AbstractPopup extends AbstractComponent {
 
   private _popupsAfterOpenSubscription: Subscription = null;
