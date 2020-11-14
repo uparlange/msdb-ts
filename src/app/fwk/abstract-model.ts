@@ -12,6 +12,7 @@ export class AbstractModel extends AbstractHelper {
   params: any = {};
   data: any = this._getInitData();
   needRefresh: boolean = true;
+  active: boolean = false;
 
   private _connectionChangeSubscription: Subscription = null;
 
@@ -36,6 +37,7 @@ export class AbstractModel extends AbstractHelper {
       this.params = newParams;
       this.needRefresh = true;
     }
+    this.active = true;
     this._init();
     this._refresh();
   }
@@ -43,6 +45,7 @@ export class AbstractModel extends AbstractHelper {
   destroy() {
     this.onDestroy();
     this._connectionChangeSubscription.unsubscribe();
+    this.active = false;
   }
 
   getEventBus(): EventManager {

@@ -8,8 +8,8 @@ import { AppSocketEvents } from 'src/app/app-socket-events';
 @Injectable()
 export class MyGamesModel extends AbstractAppModel {
 
-    private _configChangedSubscription: Subscription = null;
-    private _changeInRomsDirectorySubscription: Subscription = null;
+    private _socketConfigChangedSubscription: Subscription = null;
+    private _socketChangeInRomsDirectorySubscription: Subscription = null;
 
     constructor(
         protected _helper: AppHelperObject) {
@@ -18,9 +18,20 @@ export class MyGamesModel extends AbstractAppModel {
 
     onInit(): void {
         super.onInit();
-        if (this._configChangedSubscription == null) {
-            this._configChangedSubscription = this.getEventBus().on(AppEvents.CONFIG_CHANGED).subscribe(() => {
+        if (this._socketConfigChangedSubscription == null) {
+            this._socketConfigChangedSubscription = this.getEventBus().on(AppEvents.CONFIG_CHANGED).subscribe(() => {
                 this.needRefresh = true;
+                if (this.active) {
+                    this._refreshMyGames();
+                }
+            });
+        }
+        if (this._socketChangeInRomsDirectorySubscription == null) {
+            this._socketChangeInRomsDirectorySubscription = this.getSocket().on(AppSocketEvents.CHANGE_IN_ROMS_DIRECTORY).subscribe(() => {
+                this.needRefresh = true;
+                if (this.active) {
+                    this._refreshMyGames();
+                }
             });
         }
         this.getCache().getItem("myGamesFilterValue", "").subscribe((value: string) => {
@@ -29,33 +40,11 @@ export class MyGamesModel extends AbstractAppModel {
         this.getCache().getItem("myGamesPageIndex", 0).subscribe((value: number) => {
             this.data.pageIndex = value;
         });
-        if (this._changeInRomsDirectorySubscription == null) {
-            this._changeInRomsDirectorySubscription = this.getSocket().on(AppSocketEvents.CHANGE_IN_ROMS_DIRECTORY).subscribe(() => {
-                this.needRefresh = true;
-            });
-        }
     }
 
     onRefresh(callback: Function): void {
         super.onRefresh(callback);
-        this.data.provider = [];
-        this.getSocket().emit(AppSocketEvents.GET_MY_GAMES, null).subscribe((result: any) => {
-            if (Array.isArray(result)) {
-                this.getMsdbProvider().search("name", result).subscribe((data: any) => {
-                    if (Array.isArray(data)) {
-                        data.sort((x, y) => {
-                            if (x.isbios < y.isbios) return -1;
-                            if (x.isbios > y.isbios) return 1;
-                            return 0;
-                        });
-                    }
-                    this.data.provider = data || [];
-                    callback();
-                });
-            } else {
-                callback();
-            }
-        });
+        this._refreshMyGames();
     }
 
     onDestroy(): void {
@@ -70,5 +59,23 @@ export class MyGamesModel extends AbstractAppModel {
             pageIndex: 0,
             provider: []
         };
+    }
+
+    private _refreshMyGames(): void {
+        this.data.provider = [];
+        this.getSocket().emit(AppSocketEvents.GET_MY_GAMES, null).subscribe((result: any) => {
+            if (Array.isArray(result)) {
+                this.getMsdbProvider().search("name", result).subscribe((data: any) => {
+                    if (Array.isArray(data)) {
+                        data.sort((x, y) => {
+                            if (x.isbios < y.isbios) return -1;
+                            if (x.isbios > y.isbios) return 1;
+                            return 0;
+                        });
+                    }
+                    this.data.provider = data || [];
+                });
+            }
+        });
     }
 }

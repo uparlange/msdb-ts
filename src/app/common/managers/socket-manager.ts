@@ -1,14 +1,14 @@
 import { AbstractManager } from '../../fwk/abstract-manager';
 import { Injectable, EventEmitter } from '@angular/core';
 import { EventManager } from '../../fwk/managers/event-manager';
-import io from 'socket.io-client';
+import * as SocketIoClient from 'socket.io-client';
 import { ConfigProvider } from '../providers/config-provider';
 import { AppEvents } from 'src/app/app-events';
 
 @Injectable({ providedIn: "root" })
 export class SocketManager extends AbstractManager {
 
-  private _socket: SocketIOClient.Socket = null;
+  private _socket: SocketIoClient.Socket = null;
 
   constructor(
     private _eventManager: EventManager,
@@ -54,7 +54,7 @@ export class SocketManager extends AbstractManager {
     const eventEmitter: EventEmitter<any> = new EventEmitter();
     if (this._configProvider.runInNw()) {
       if (this._socket === null) {
-        this._socket = io(this._configProvider.getSocketUrl(), {
+        this._socket = SocketIoClient.io(this._configProvider.getSocketUrl(), {
           reconnection: false
         });
         this._socket.on("connect", () => {
