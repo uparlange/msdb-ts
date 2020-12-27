@@ -35,7 +35,7 @@ export class ConfigModel extends AbstractAppModel {
             _tabs: [
                 { index: 0, label: AppLabels.APPLICATION, type: "application" },
                 { index: 1, label: AppLabels.MAME, type: "mame" },
-                { index: 2, label: AppLabels.NWJS, type: "nwjs" }
+                //{ index: 2, label: AppLabels.NWJS, type: "nwjs" }
             ],
             getTabs(): any {
                 return this._tabs;

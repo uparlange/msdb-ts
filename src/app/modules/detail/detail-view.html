@@ -73,7 +73,8 @@
 		<span class="sep">:</span>
 		<a routerLink="/result" [queryParams]="{type:'language',value:model.data.game.language}">
 			<svg role="img">
-				<use [attr.href]="getCoutryCodeIconByLanguage(model.data.game.language)" /></svg>
+				<use [attr.href]="getCoutryCodeIconByLanguage(model.data.game.language)" />
+			</svg>
 			<!--
 				<mat-icon [svgIcon]="getCoutryCodeIconByLanguage(model.data.game.language)"></mat-icon>
 				-->
@@ -179,12 +180,17 @@
 		</mat-card-title>
 	</mat-card>
 	<div class="default-spacer"></div>
-	<video controls>
+	<video controls (error)="alert('toto')" (abort)="alert('toto')">
 		<source [src]="getGameVideoUrl(model.data.game)" type="video/mp4" />
 	</video>
+	<mat-list>
+		<mat-list-item>
+			<p matLine>{{'L10N_LINK'|translate}} : <a
+					[href]="getGameVideoUrl(model.data.game)">{{model.data.game.description}}</a></p>
+		</mat-list-item>
+	</mat-list>
 </div>
 <div *ngIf="model.data.game.links?.length > 0">
-	<div class="default-spacer"></div>
 	<mat-card>
 		<mat-card-title>
 			{{'L10N_MORE_INFORMATIONS'|translate}}
@@ -193,6 +199,12 @@
 	<mat-list>
 		<mat-list-item *ngFor="let link of model.data.game.links; trackBy:trackByLabel;">
 			<p matLine>{{link.label}} : <a [href]="link.data">{{model.data.game.description}}</a></p>
+		</mat-list-item>
+		<mat-list-item>
+			<p matLine>
+				Arcade Database : <a
+					[href]="'http://adb.arcadeitalia.net/dettaglio_mame.php?game_name='+model.data.game.name">{{model.data.game.description}}</a>
+			</p>
 		</mat-list-item>
 	</mat-list>
 </div>

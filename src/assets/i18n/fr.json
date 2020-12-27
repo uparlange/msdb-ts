@@ -107,5 +107,6 @@
 	"L10N_RANDOM_GAME": "Un jeu au hasard",
 	"L10N_FOLLOWERS": "Abonné(s)",
 	"L10N_STATISTICS": "Statistiques",
-	"L10N_MORE_INFORMATIONS": "Plus d'informations"
+	"L10N_MORE_INFORMATIONS": "Plus d'informations",
+	"L10N_LINK": "Lien"
 }

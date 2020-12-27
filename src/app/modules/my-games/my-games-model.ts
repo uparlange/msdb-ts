@@ -44,7 +44,7 @@ export class MyGamesModel extends AbstractAppModel {
 
     onRefresh(callback: Function): void {
         super.onRefresh(callback);
-        this._refreshMyGames();
+        this._refreshMyGames(callback);
     }
 
     onDestroy(): void {
@@ -61,7 +61,7 @@ export class MyGamesModel extends AbstractAppModel {
         };
     }
 
-    private _refreshMyGames(): void {
+    private _refreshMyGames(callback?: Function): void {
         this.data.provider = [];
         this.getSocket().emit(AppSocketEvents.GET_MY_GAMES, null).subscribe((result: any) => {
             if (Array.isArray(result)) {
@@ -74,7 +74,14 @@ export class MyGamesModel extends AbstractAppModel {
                         });
                     }
                     this.data.provider = data || [];
+                    if (callback != null) {
+                        callback();
+                    }
                 });
+            } else {
+                if (callback != null) {
+                    callback();
+                }
             }
         });
     }
