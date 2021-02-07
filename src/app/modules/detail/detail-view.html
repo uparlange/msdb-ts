@@ -135,27 +135,29 @@
 	<mat-list>
 		<mat-list-item>
 			<p matLine><b>{{'L10N_EMULATOR'|translate}}</b></p>
-			<p matLine>Mamedev : <a href="http://mamedev.org/">MAME</a></p>
+			<p matLine>Mamedev : <a href="https://mamedev.org/">MAME</a></p>
 		</mat-list-item>
 		<mat-list-item>
 			<span matLine><b>Rom</b></span>
 			<span matLine>Planetemu : <a
-					[href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">{{model.data.game.description}}</a></span>
+					[href]="'https://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">{{model.data.game.description}}</a></span>
 			<span matLine>Retroroms ({{'L10N_ACCOUNT_NEEDED'|translate}}) : <a
 					[href]="'https://bda.retroroms.info:82/downloads/mame/currentroms/'+model.data.game.name+'.zip'">{{model.data.game.description}}</a></span>
 		</mat-list-item>
 		<mat-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
 			<span matLine><b>Bios</b></span>
-			<span matLine>Planetemu : <a href="http://www.planetemu.net/roms/mame-bios-pack">MAME Bios Pack</a></span>
+			<span matLine>Planetemu : <a href="https://www.planetemu.net/roms/mame-bios-pack">MAME Bios Pack</a></span>
 			<span matLine>Retroroms ({{'L10N_ACCOUNT_NEEDED'|translate}}) : <a
 					[href]="'https://bda.retroroms.info:82/downloads/mame/currentroms/'+model.data.game.romof+'.zip'">{{model.data.game.romof}}</a>
 			</span>
 		</mat-list-item>
+		<!--
 		<mat-list-item *ngIf="model.data.game.soundtracks?.length > 0">
 			<span matLine><b>{{'L10N_SOUNDTRACKS'|translate}}</b></span>
 			<span matLine>Progettosnaps : <a
 					[href]="getGameSoundTrackUrl(model.data.game)">{{model.data.game.description}}</a></span>
 		</mat-list-item>
+		-->
 		<mat-list-item *ngIf="model.data.game.manual === true">
 			<span matLine><b>{{'L10N_MANUAL'|translate}}</b></span>
 			<span matLine>Progettosnaps : <a
@@ -180,17 +182,20 @@
 		</mat-card-title>
 	</mat-card>
 	<div class="default-spacer"></div>
-	<video controls (error)="alert('toto')" (abort)="alert('toto')">
+	<video controls>
 		<source [src]="getGameVideoUrl(model.data.game)" type="video/mp4" />
 	</video>
+	<!--
 	<mat-list>
 		<mat-list-item>
 			<p matLine>{{'L10N_LINK'|translate}} : <a
 					[href]="getGameVideoUrl(model.data.game)">{{model.data.game.description}}</a></p>
 		</mat-list-item>
 	</mat-list>
+	-->
 </div>
 <div *ngIf="model.data.game.links?.length > 0">
+	<div class="default-spacer"></div>
 	<mat-card>
 		<mat-card-title>
 			{{'L10N_MORE_INFORMATIONS'|translate}}

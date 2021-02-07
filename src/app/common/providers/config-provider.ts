@@ -24,15 +24,15 @@ export class ConfigProvider extends AbstractObject {
   }
 
   getGameManualUrl(game: any): string {
-    return `http://www.progettosnaps.net/manuals/pdf/${game.name}.pdf`;
+    return `https://www.progettosnaps.net/manuals/pdf/${game.name}.pdf`;
   }
 
   getGameVideoUrl(game: any): string {
-    return `http://www.progettosnaps.net/videosnaps/mp4/${game.name}.mp4`;
+    return `https://www.progettosnaps.net/videosnaps/mp4/${game.name}.mp4`;
   }
 
   getGameSoundTrackUrl(game: any): string {
-    return `http://www.progettosnaps.net/soundtrack/packs/mp3/${game.name}.zip`;
+    return `https://www.progettosnaps.net/soundtrack/packs/mp3/${game.name}.zip`;
   }
 
   getSocketPort(): string {
