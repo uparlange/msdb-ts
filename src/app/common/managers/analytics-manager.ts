@@ -6,21 +6,28 @@ import { WindowRef } from 'src/app/fwk/providers/window-ref';
 @Injectable({ providedIn: "root" })
 export class AnalyticsManager extends AbstractManager {
 
-    //private _gaMeasurementId: string = "UA-141763528-1";
-    private _gaMeasurementId: string = "G-SQ454DYNBT";
+    private _gaMeasurementIds: Array<string> = ["UA-141763528-1", "G-SQ454DYNBT"];
 
     constructor(
-        private _routerManager: RouterManager, 
+        private _routerManager: RouterManager,
         private _windowRef: WindowRef) {
         super();
     }
 
     init(): void {
         super.init();
-        this._windowRef.nativeWindow.gtag('js', new Date());
-        this._windowRef.nativeWindow.gtag('config', this._gaMeasurementId);
+        this._windowRef.nativeWindow.gtag("js", new Date());
+        this._gaMeasurementIds.forEach((element) => {
+            this._windowRef.nativeWindow.gtag("config", element);
+        });
         this._routerManager.on("navigationEnd").subscribe((event: any) => {
-            this._windowRef.nativeWindow.gtag("config", this._gaMeasurementId, { "page_path": event.urlAfterRedirects });
+            this._gaMeasurementIds.forEach((element) => {
+                this._windowRef.nativeWindow.gtag("event", "page_view", {
+                    page_path: event.urlAfterRedirects,
+                    send_to: element
+                });
+            });
         });
     }
+
 }
