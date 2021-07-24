@@ -109,6 +109,38 @@ export class StatisticModel extends AbstractAppModel {
                 mess2: {},
             },
             options: {
+                cutout: "50%",
+                rotation: -90,
+                circumference: 180,
+                aspectRatio: 2,
+                plugins: {
+                    datalabels: {
+                        labels: {
+                            value: {
+                                color: "green",
+                                font: {
+                                    weight: "bold"
+                                }
+                            },
+                            title: {
+                                color: "blue",
+                                anchor: "end",
+                                align: "top",
+                                formatter: function (value:number, context:any) {
+                                    return context.chart.data.labels[context.dataIndex];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    }
+}
+
+/**
+ *
+ * options: {
                 circumference: Math.PI,
                 rotation: -Math.PI,
                 cutoutPercentage: 50,
@@ -128,6 +160,4 @@ export class StatisticModel extends AbstractAppModel {
                     ]
                 }
             }
-        };
-    }
-}
+ */

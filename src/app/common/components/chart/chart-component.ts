@@ -1,8 +1,10 @@
 import { Component, ViewChild, ElementRef, Input, SimpleChanges } from '@angular/core';
 import { AppHelperObject } from '../../providers/app-helper-object';
-import Chart from 'chart.js';
-import 'chartjs-plugin-labels';
+import { Chart, PieController, ArcElement } from 'chart.js'
 import { AbstractAppComponent } from '../../abstract-app-component';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
+Chart.register(PieController, ArcElement, ChartDataLabels);
 
 @Component({
     selector: "chart",
@@ -11,8 +13,8 @@ import { AbstractAppComponent } from '../../abstract-app-component';
 })
 export class ChartComponent extends AbstractAppComponent {
 
-    @Input() type: string = "bar";
-    @Input() data: object = {};
+    @Input() type: any = "bar";
+    @Input() data: any = {};
     @Input() options: object = {};
 
     @ViewChild("canvas", { static: false })
