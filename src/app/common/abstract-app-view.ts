@@ -39,8 +39,8 @@ export class AbstractAppView extends AbstractView {
         return this.getIconProvider().getMdiIconByType(type);
     }
 
-    getCoutryCodeIconByLanguage(language: string): string {
-        return this.getIconProvider().getCoutryCodeIconByLanguage(language);
+    getCoutryCodeIconsByLanguage(language: string): Array<string> {
+        return this.getIconProvider().getCoutryCodeIconsByLanguage(language);
     }
 
     getStatusClass(status: string): string {

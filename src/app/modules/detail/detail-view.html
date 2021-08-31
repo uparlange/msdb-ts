@@ -72,12 +72,10 @@
 		{{'L10N_LANGUAGE'|translate}}
 		<span class="sep">:</span>
 		<a routerLink="/result" [queryParams]="{type:'language',value:model.data.game.language}">
-			<svg role="img">
-				<use [attr.href]="getCoutryCodeIconByLanguage(model.data.game.language)" />
+			<svg role="img"
+				*ngFor="let icon of getCoutryCodeIconsByLanguage(model.data.game.language); trackBy:trackByData;">
+				<use [attr.href]="icon.data" />
 			</svg>
-			<!--
-				<mat-icon [svgIcon]="getCoutryCodeIconByLanguage(model.data.game.language)"></mat-icon>
-				-->
 		</a>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.driver?.status != null">

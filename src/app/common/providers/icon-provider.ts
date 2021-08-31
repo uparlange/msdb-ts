@@ -89,13 +89,20 @@ export class IconProvider extends AbstractObject {
         return icon;
     }
 
-    getCoutryCodeIconByLanguage(language: string): string {
-        let code: string = this._languageCoutryCode[language.toLowerCase()];
-        if (code == null) {
-            code = "?";
+    getCoutryCodeIconsByLanguage(language: string): Array<string> {
+        const icons = [];
+        const languages_array = language.toLowerCase().split("/");
+        languages_array.forEach(language => {
+            console.log(language);
+            const code = this._languageCoutryCode[language];
+            if (code != null) {
+                icons.push({ data: environment.assetsFolder + "/flags.svg#flag-" + code });
+            }
+        });
+        if (icons.length == 0) {
+            icons.push({ data: "?" });
         }
-        return environment.assetsFolder + "/flags.svg#flag-" + code;
-        //return "flag-" + code;
+        return icons;
     }
 
 }

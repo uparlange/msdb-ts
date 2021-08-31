@@ -1,1 +1,1 @@
-{"latest":"5.5.8","versions":[{"version":"5.5.8","changelog":"","source":"msdb-ts-5.5.8-win-x64","installers":[{"arch":"x64","path":"msdb-ts-5.5.8-win-x64-Setup.exe","hash":"8ab50332f31eb824f2a6a8ac8338e6b71e3615ac425bdd575c71d9466893156b","created":1623595143651}],"updaters":[]}]}
+{"latest":"5.6.0","versions":[{"version":"5.6.0","changelog":"","source":"msdb-ts-5.6.0-win-x64","installers":[{"arch":"x64","path":"msdb-ts-5.6.0-win-x64-Setup.exe","hash":"42227874cf11faf589cd1235ef38a2ca0257d48f30b52299400902050b5bc6e2","created":1630441633159}],"updaters":[]}]}
