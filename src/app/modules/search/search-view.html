@@ -2,7 +2,7 @@
 	<mat-card-title>
 		<span>{{getSearchTabLabel(model.data.selectedIndex)|translate}}</span>
 		<div class="default-spacer"></div>
-		<mat-divider [inset]="true"></mat-divider>
+		<mat-divider></mat-divider>
 		<mat-tab-group (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="model.data.selectedIndex">
 			<mat-tab *ngFor="let tab of getTabsInfo().getTabs(); trackBy:trackByKey">
 				<ng-template matTabLabel>

@@ -2,7 +2,7 @@
 	<mat-card-title>
 		<span>{{model.data.title}}</span>
 		<div class="default-spacer"></div>
-		<mat-divider [inset]="true"></mat-divider>
+		<mat-divider></mat-divider>
 		<div class="default-spacer"></div>
 		<mat-button-toggle-group multiple [value]="model.data.filter.list" (change)="filterChange($event)">
 			<mat-button-toggle [disabled]="model.data.filter.messDisabled" value="mess">MESS</mat-button-toggle>
