@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs>
 <path id="s" d="M0,-1 0.587785,0.809017 -0.951057,-0.309017H0.951057L-0.587785,0.809017z" fill="#ffde00"/>
-</defs><symbol id="flag-bg" viewBox="0 0 5 3">
+</defs><symbol id="flag-be" viewBox="0 0 450 390">
+<rect fill="#ED2939" width="450" height="390"/>
+<rect fill="#FAE042" width="300" height="390"/>
+<rect width="150" height="390"/>
+</symbol><symbol id="flag-bg" viewBox="0 0 5 3">
 <rect width="5" height="3" fill="#fff"/>
 <rect width="5" height="2" y="1" fill="#00966E"/>
 <rect width="5" height="1" y="2" fill="#D62612"/>

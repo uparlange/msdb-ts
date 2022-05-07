@@ -74,7 +74,8 @@ export class IconProvider extends AbstractObject {
         norwegian: "no",
         bulgarian: "bg",
         latvian: "lv",
-        ukrainian: "ua"
+        ukrainian: "ua",
+        belgian: "be"
     }
 
     constructor() {
@@ -93,7 +94,6 @@ export class IconProvider extends AbstractObject {
         const icons = [];
         const languages_array = language.toLowerCase().split("/");
         languages_array.forEach(language => {
-            console.log(language);
             const code = this._languageCoutryCode[language];
             if (code != null) {
                 icons.push({ data: environment.assetsFolder + "/flags.svg#flag-" + code });
