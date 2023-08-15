@@ -6,7 +6,7 @@ import { AbstractHelperObject } from '../fwk/abstract-helper-object';
 export class AbstractAppGuard extends AbstractGuard {
 
     constructor(
-        protected _helper: AbstractHelperObject) {
+        protected override _helper: AbstractHelperObject) {
         super(_helper);
     }
 
@@ -14,7 +14,7 @@ export class AbstractAppGuard extends AbstractGuard {
         return this._getHelper().getConfigProvider();
     }
 
-    protected _getHelper(): AppHelperObject {
+    protected override _getHelper(): AppHelperObject {
         return <AppHelperObject>this._helper;
     }
 }

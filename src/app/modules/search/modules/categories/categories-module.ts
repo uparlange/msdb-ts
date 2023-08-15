@@ -1,6 +1,6 @@
-import { AbstractModule } from 'src/app/fwk/abstract-module';
+import { AbstractModule } from '../../../../fwk/abstract-module';
 import { Routes, RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/common/modules/shared-module';
+import { SharedModule } from '../../../../common/modules/shared-module';
 import { NgModule } from '@angular/core';
 import { CategoriesView } from './categories-view';
 import { CategoriesModel } from './categories-model';

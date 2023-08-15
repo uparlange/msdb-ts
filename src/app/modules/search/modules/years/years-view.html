@@ -1,6 +1,10 @@
-<advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="false"
-    [filterEnabled]="true" [rowTrackId]="'label'">
-    <ng-template columnName="label" columnWidth="100%" let-row>
-        <a routerLink="/result" [queryParams]="{type:'year', value:row.label}">{{row.label}}</a>
-    </ng-template>
-</advTable>
+<mat-card>
+    <mat-card-content>
+        <advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="false"
+            [filterEnabled]="true" [rowTrackId]="'label'">
+            <ng-template columnName="label" columnWidth="100%" let-row>
+                <a routerLink="/result" [queryParams]="{type:'year', value:row.label}">{{row.label}}</a>
+            </ng-template>
+        </advTable>
+    </mat-card-content>
+</mat-card>

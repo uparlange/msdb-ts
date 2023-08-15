@@ -1,4 +1,4 @@
-import { AbstractDirective } from 'src/app/fwk/abstract-directive';
+import { AbstractDirective } from '../fwk/abstract-directive';
 import { Directive, HostBinding } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppEvents } from '../app-events';
@@ -9,16 +9,16 @@ export class ProgressBarDirective extends AbstractDirective {
 
     @HostBinding("style.display") display = "none";
 
-    private _httpBeginSubscription: Subscription = null;
-    private _httpEndSubscription: Subscription = null;
+    private _httpBeginSubscription: Subscription = new Subscription();
+    private _httpEndSubscription: Subscription = new Subscription();
     private _counter: number = 0;
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 
-    onInit(): void {
+    override onInit(): void {
         super.onInit();
         this._hide();
         this._httpBeginSubscription = this.getEventBus().on(AppEvents.HTTP_BEGIN).subscribe(() => {
@@ -33,7 +33,7 @@ export class ProgressBarDirective extends AbstractDirective {
         });
     }
 
-    onDestroy(): void {
+    override onDestroy(): void {
         super.onDestroy();
         this._httpBeginSubscription.unsubscribe();
         this._httpEndSubscription.unsubscribe();

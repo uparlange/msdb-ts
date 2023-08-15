@@ -19,7 +19,7 @@ import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginato
 import { MatTreeModule } from '@angular/material/tree';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { AbstractModule } from 'src/app/fwk/abstract-module';
+import { AbstractModule } from '../../fwk/abstract-module';
 import { MatPaginatorL10n } from '../providers/mat-paginator-l10n';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -48,7 +48,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatChipsModule,
     MatButtonToggleModule,
     MatIconModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorL10n }

@@ -13,7 +13,7 @@ import { FwkHelperObject } from './providers/fwk-helper-object';
 export class AbstractDirective extends AbstractHelper implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
   constructor(
-    protected _helper: AbstractHelperObject) {
+    protected override _helper: AbstractHelperObject) {
     super(_helper);
   }
 

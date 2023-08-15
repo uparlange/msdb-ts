@@ -1,6 +1,7 @@
 .stars
 {
-    display: flex;
+    display: inline-flex;
+    vertical-align: middle;
 }
 
 .star

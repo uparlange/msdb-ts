@@ -8,8 +8,8 @@ import { IconProvider } from './providers/icon-provider';
 export class AbstractAppPopup extends AbstractPopup {
 
     constructor(
-        protected _helper: AbstractHelperObject,
-        public model: AbstractModel) {
+        protected override _helper: AbstractHelperObject,
+        public override model: AbstractModel) {
         super(_helper, model);
     }
 
@@ -26,7 +26,7 @@ export class AbstractAppPopup extends AbstractPopup {
     }
 
     getStatusLabel(status: string): string {
-        return (status != null) ? `L10N_${status.toUpperCase()}` : null;
+        return (status != null) ? `L10N_${status.toUpperCase()}` : "";
     }
 
     getMdiIconByType(type: string): string {
@@ -41,7 +41,7 @@ export class AbstractAppPopup extends AbstractPopup {
         return this._getHelper().getConfigProvider();
     }
 
-    protected _getHelper(): AppHelperObject {
+    protected override _getHelper(): AppHelperObject {
         return <AppHelperObject>this._helper;
     }
 }

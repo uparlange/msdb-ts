@@ -4,6 +4,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AdvTableColumnDirective } from './adv-table-column-directive';
 import { AppHelperObject } from '../../providers/app-helper-object';
 import { AbstractAppComponent } from '../../abstract-app-component';
+import { MatInput } from '@angular/material/input';
 
 @Component({
     selector: "advTable",
@@ -16,11 +17,12 @@ export class AdvTableComponent extends AbstractAppComponent {
     @Input() filterValue: string = "";
     @Input() paginationEnabled: boolean = true;
     @Input() filterEnabled: boolean = true;
-    @Input() rowTrackId: string = null;
+    @Input() rowTrackId: string = "";
     @Input() pageIndex: number = 0;
     @Input() pageSize: number = 100;
 
-    @ContentChildren(AdvTableColumnDirective) columns: QueryList<AdvTableColumnDirective>;
+    @ContentChildren(AdvTableColumnDirective)
+    columns!: QueryList<AdvTableColumnDirective>;
 
     @Output() filterValueChange: EventEmitter<any> = new EventEmitter();
     @Output() pageIndexChange: EventEmitter<any> = new EventEmitter();
@@ -35,11 +37,11 @@ export class AdvTableComponent extends AbstractAppComponent {
     private _primaryPaginator !: MatPaginator;
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 
-    afterViewInit(): void {
+    override afterViewInit(): void {
         super.afterViewInit();
         if (this.paginationEnabled) {
             this.dataSource.paginator = this._primaryPaginator;
@@ -48,7 +50,7 @@ export class AdvTableComponent extends AbstractAppComponent {
         }
     }
 
-    afterContentInit(): void {
+    override afterContentInit(): void {
         super.afterContentInit();
         const displayedColumns: Array<string> = [];
         this.columns.forEach((column: AdvTableColumnDirective) => {
@@ -57,26 +59,26 @@ export class AdvTableComponent extends AbstractAppComponent {
         this.displayedColumns = displayedColumns;
     }
 
-    onDestroy(): void {
+    override onDestroy(): void {
         super.onDestroy();
         this.dataSource.paginator = null;
     }
 
-    onChanges(changes: SimpleChanges): void {
+    override onChanges(changes: SimpleChanges): void {
         super.onChanges(changes);
-        if (changes.provider) {
+        if (changes['provider']) {
             this._refreshData(this.provider);
         }
-        if (changes.filterValue) {
+        if (changes['filterValue']) {
             this._setFilterValue(this.filterValue);
         }
-        if (changes.pageIndex) {
+        if (changes['pageIndex']) {
             this._setPageIndex(this.pageIndex);
         }
     }
 
-    applyFilter(value: string): void {
-        this._setFilterValue(value);
+    applyFilter(): void {
+        this._setFilterValue(this.filterValue);
     }
 
     clearFilter(): void {

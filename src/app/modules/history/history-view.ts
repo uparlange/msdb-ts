@@ -1,7 +1,7 @@
-import { AbstractAppView } from 'src/app/common/abstract-app-view';
+import { AbstractAppView } from '../../common/abstract-app-view';
 import { HistoryModel } from './history-model';
 import { Component } from '@angular/core';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 
 @Component({
     templateUrl: './history-view.html',
@@ -10,8 +10,8 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 export class HistoryView extends AbstractAppView {
 
     constructor(
-        protected _helper: AppHelperObject,
-        public model: HistoryModel) {
+        protected override _helper: AppHelperObject,
+        public override model: HistoryModel) {
         super(_helper, model);
     }
 

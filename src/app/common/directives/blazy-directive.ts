@@ -1,5 +1,5 @@
 import { Directive, SimpleChanges, Input, HostBinding, ElementRef } from '@angular/core';
-import { AbstractDirective } from 'src/app/fwk/abstract-directive';
+import { AbstractDirective } from '../../fwk/abstract-directive';
 import { BlazyManager } from '../managers/blazy-Manager';
 import { AppHelperObject } from '../providers/app-helper-object';
 
@@ -8,22 +8,22 @@ export class BlazyDirective extends AbstractDirective {
 
     @HostBinding("class.b-lazy") bLazy: boolean = true;
     @HostBinding("attr.src") src: string = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-    @HostBinding("attr.data-src") dataSrc: string = null;
+    @HostBinding("attr.data-src") dataSrc: string = "";
 
-    @Input() blazySrc: String = null;
+    @Input() blazySrc: String = "";
 
     constructor(
-        protected _helper: AppHelperObject,
+        protected override _helper: AppHelperObject,
         private _lazyManager: BlazyManager,
         private _elementRef: ElementRef) {
         super(_helper);
     }
 
-    onChanges(changes: SimpleChanges): void {
+    override onChanges(changes: SimpleChanges): void {
         super.onChanges(changes);
-        if (changes.blazySrc) {
+        if (changes['blazySrc']) {
             this._elementRef.nativeElement.classList.remove("b-loaded");
-            this.dataSrc = changes.blazySrc.currentValue;
+            this.dataSrc = changes['blazySrc'].currentValue;
             this._lazyManager.refresh();
         }
     }

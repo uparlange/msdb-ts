@@ -4,7 +4,7 @@ import { AbstractObject } from '../abstract-object';
 @Injectable({ providedIn: "root" })
 export class WindowRef extends AbstractObject {
 
-    nativeWindow: Window = window;
+    public nativeWindow: any = window;
 
     constructor() {
         super();
@@ -20,13 +20,13 @@ export class WindowRef extends AbstractObject {
 
     getScrollPosition(): any {
         return {
-            x: this.nativeWindow.pageXOffset,
-            y: this.nativeWindow.pageYOffset
+            x: this.nativeWindow.scrollX,
+            y: this.nativeWindow.scrollY
         }
     }
 
     private _isInWebAppiOS(): boolean {
-        return (this.nativeWindow.navigator["standalone"] == true);
+        return (this.nativeWindow.navigator.standalone == true);
     }
 
     private _isInWebAppChrome(): boolean {

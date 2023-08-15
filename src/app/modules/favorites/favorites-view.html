@@ -1,15 +1,20 @@
 <mat-card>
-    <mat-card-title>
-        {{'L10N_FAVORITES'|translate}}
-    </mat-card-title>
+    <mat-card-header>
+        <mat-card-title>
+            {{'L10N_FAVORITES'|translate}}
+        </mat-card-title>
+    </mat-card-header>
 </mat-card>
-<div class="default-spacer"></div>
-<advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="true"
-    [filterEnabled]="true" [rowTrackId]="'name'" [(pageIndex)]="model.data.pageIndex">
-    <ng-template columnName="icon" let-row>
-        <img [alt]="row.name+'-icon'" mat-list-avatar [blazySrc]="getGameIconUrl(row)">
-    </ng-template>
-    <ng-template columnName="description" columnWidth="100%" let-row>
-        <a routerLink="/detail" [queryParams]="{name:row.name}">{{row.description}}</a>
-    </ng-template>
-</advTable>
+<mat-card>
+    <mat-card-content>
+        <advTable [provider]="model.data.provider" [(filterValue)]="model.data.filterValue" [paginationEnabled]="true"
+            [filterEnabled]="true" [rowTrackId]="'name'" [(pageIndex)]="model.data.pageIndex">
+            <ng-template columnName="icon" let-row>
+                <img [alt]="row.name+'-icon'" mat-list-avatar [blazySrc]="getGameIconUrl(row)">
+            </ng-template>
+            <ng-template columnName="description" columnWidth="100%" let-row>
+                <a routerLink="/detail" [queryParams]="{name:row.name}">{{row.description}}</a>
+            </ng-template>
+        </advTable>
+    </mat-card-content>
+</mat-card>

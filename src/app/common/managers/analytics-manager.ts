@@ -1,7 +1,7 @@
 import { AbstractManager } from '../../fwk/abstract-manager';
-import { RouterManager } from 'src/app/fwk/managers/router-manager';
+import { RouterManager } from '../../fwk/managers/router-manager';
 import { Injectable } from '@angular/core';
-import { WindowRef } from 'src/app/fwk/providers/window-ref';
+import { WindowRef } from '../../fwk/providers/window-ref';
 
 @Injectable({ providedIn: "root" })
 export class AnalyticsManager extends AbstractManager {
@@ -14,7 +14,7 @@ export class AnalyticsManager extends AbstractManager {
         super();
     }
 
-    init(): void {
+    override init(): void {
         super.init();
         this._windowRef.nativeWindow.gtag("js", new Date());
         this._gaMeasurementIds.forEach((element) => {

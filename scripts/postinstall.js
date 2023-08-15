@@ -12,4 +12,4 @@ flags.forEach((flag) => {
         flagsSprite.add("flag-" + code, fs.readFileSync(flagDir + '/' + flag, 'utf8'))
     }
 });
-fs.writeFileSync('./src/assets/flags.svg', flagsSprite);
+fs.writeFileSync('./src/assets/flags.svg', flagsSprite.toString());

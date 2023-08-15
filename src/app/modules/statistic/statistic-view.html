@@ -1,33 +1,38 @@
 <mat-card>
-	<mat-card-title>
-		{{'L10N_STATISTICS'|translate}}
-	</mat-card-title>
+    <mat-card-header>
+        <mat-card-title>
+            {{'L10N_STATISTICS'|translate}}
+        </mat-card-title>
+    </mat-card-header>
 </mat-card>
-<div class="default-spacer"></div>
 <mat-card>
-    <mat-card-title>
-        Global ({{model.data.mame.machineCount}})
-    </mat-card-title>
+    <mat-card-header>
+        <mat-card-title>
+            Global ({{model.data.mame.machineCount}})
+        </mat-card-title>
+    </mat-card-header>
     <mat-card-content>
         <chart [type]="model.data.type" [data]="model.data.data.global1" [options]="model.data.options"></chart>
         <chart [type]="model.data.type" [data]="model.data.data.global2" [options]="model.data.options"></chart>
     </mat-card-content>
 </mat-card>
-<div class="default-spacer"></div>
 <mat-card>
-    <mat-card-title>
-        MAME ({{model.data.mame.mameCount}})
-    </mat-card-title>
+    <mat-card-header>
+        <mat-card-title>
+            MAME ({{model.data.mame.mameCount}})
+        </mat-card-title>
+    </mat-card-header>
     <mat-card-content>
         <chart [type]="model.data.type" [data]="model.data.data.mame1" [options]="model.data.options"></chart>
         <chart [type]="model.data.type" [data]="model.data.data.mame2" [options]="model.data.options"></chart>
     </mat-card-content>
 </mat-card>
-<div class="default-spacer"></div>
 <mat-card>
-    <mat-card-title>
-        MESS ({{model.data.mame.messCount}})
-    </mat-card-title>
+    <mat-card-header>
+        <mat-card-title>
+            MESS ({{model.data.mame.messCount}})
+        </mat-card-title>
+    </mat-card-header>
     <mat-card-content>
         <chart [type]="model.data.type" [data]="model.data.data.mess1" [options]="model.data.options"></chart>
         <chart [type]="model.data.type" [data]="model.data.data.mess2" [options]="model.data.options"></chart>

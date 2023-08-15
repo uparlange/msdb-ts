@@ -14,11 +14,11 @@ export class NgForItemComponent extends AbstractAppComponent {
   @Output() onLast: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    protected _helper: AppHelperObject) {
+    protected override _helper: AppHelperObject) {
     super(_helper);
   }
 
-  afterContentInit(): void {
+  override afterContentInit(): void {
     super.afterContentInit();
     if (this.last) {
       this.onLast.emit();

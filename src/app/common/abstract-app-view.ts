@@ -1,6 +1,5 @@
 import { AbstractView } from '../fwk/abstract-view';
 import { FavoritesManager } from './managers/favorites-manager';
-import { SocketManager } from './managers/socket-manager';
 import { ConfigProvider } from './providers/config-provider';
 import { AppHelperObject } from './providers/app-helper-object';
 import { AbstractAppModel } from './abstract-app-model';
@@ -10,8 +9,8 @@ import { IconProvider } from './providers/icon-provider';
 export class AbstractAppView extends AbstractView {
 
     constructor(
-        protected _helper: AbstractHelperObject,
-        public model: AbstractAppModel) {
+        protected override _helper: AbstractHelperObject,
+        public override model: AbstractAppModel) {
         super(_helper, model);
     }
 
@@ -39,7 +38,7 @@ export class AbstractAppView extends AbstractView {
         return this.getIconProvider().getMdiIconByType(type);
     }
 
-    getCoutryCodeIconsByLanguage(language: string): Array<string> {
+    getCoutryCodeIconsByLanguage(language: string): Array<any> {
         return this.getIconProvider().getCoutryCodeIconsByLanguage(language);
     }
 
@@ -48,7 +47,7 @@ export class AbstractAppView extends AbstractView {
     }
 
     getStatusLabel(status: string): string {
-        return (status != null) ? `L10N_${status.toUpperCase()}` : null;
+        return (status != null) ? `L10N_${status.toUpperCase()}` : "";
     }
 
     getConfigProvider(): ConfigProvider {
@@ -59,15 +58,11 @@ export class AbstractAppView extends AbstractView {
         return this._getHelper().getIconProvider();
     }
 
-    getSocket(): SocketManager {
-        return this._getHelper().getSocketManager();
-    }
-
     getFavorites(): FavoritesManager {
         return this._getHelper().getFavoritesManager();
     }
 
-    protected _getHelper(): AppHelperObject {
+    protected override _getHelper(): AppHelperObject {
         return <AppHelperObject>this._helper;
     }
 }

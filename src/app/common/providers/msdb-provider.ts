@@ -1,17 +1,17 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpParams, HttpClient, HttpClientModule } from '@angular/common/http';
 import { ConfigProvider } from './config-provider';
-import { AppEvents } from 'src/app/app-events';
+import { AppEvents } from '../../app-events';
 import { Observable } from 'rxjs';
-import { AbstractObject } from 'src/app/fwk/abstract-object';
-import { EventManager } from 'src/app/fwk/managers/event-manager';
-import { CacheManager } from 'src/app/fwk/managers/cache-manager';
+import { AbstractObject } from '../../fwk/abstract-object';
+import { EventManager } from '../../fwk/managers/event-manager';
+import { CacheManager } from '../../fwk/managers/cache-manager';
 
 @Injectable({ providedIn: "root" })
 export class MsdbProvider extends AbstractObject {
 
     private _mameInfos: any = null;
-    private _token: string = null;
+    private _token: string = "";
 
     constructor(
         private _configProvider: ConfigProvider, 
@@ -103,7 +103,7 @@ export class MsdbProvider extends AbstractObject {
     }
 
     search(type: string, value: Array<string>): EventEmitter<any> {
-        const s = {};
+        const s:any = {};
         s[type] = value;
         const config = {
             url: this._configProvider.getServiceUrl("search"),
@@ -186,7 +186,7 @@ export class MsdbProvider extends AbstractObject {
         return eventEmitter;
     }
 
-    _callService(config): EventEmitter<any> {
+    _callService(config:any): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
         const cacheKey = this._getCacheKey(config);
         this._cacheManager.getItem(cacheKey).subscribe((value: any) => {
@@ -247,7 +247,7 @@ export class MsdbProvider extends AbstractObject {
                 if (data !== null) {
                     this._token = data.token;
                     this._mameInfos = data.mameInfos;
-                    this._cacheManager.setItem("version", data.mameInfos.build, undefined).subscribe((event: any) => {
+                    this._cacheManager.setItem("version", data.mameInfos.build, "default").subscribe((event: any) => {
                         if (event.newValue !== event.oldValue) {
                             this._cacheManager.deleteNamespace("version");
                         }

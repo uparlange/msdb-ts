@@ -10,7 +10,7 @@ import { environment } from './../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NavigationExtras } from '@angular/router';
 import { AppEvents } from './app-events';
-import { ClosableSnackBarComponent } from './components/closable-snack-bar-component/closable-snack-bar-component';
+import { CustomSnackBarComponent } from './components/custom-snack-bar/custom-snack-bar-component';
 
 @Component({
   selector: 'body',
@@ -24,8 +24,8 @@ export class AppView extends AbstractAppView {
   @HostBinding("style.background-image") backgroundImage: any = null;
 
   constructor(
-    protected _helper: AppHelperObject,
-    public model: AppModel,
+    protected override _helper: AppHelperObject,
+    public override model: AppModel,
     private _shell: AppShell,
     private _viewContainerRef: ViewContainerRef,
     private _matSnackBar: MatSnackBar,
@@ -33,7 +33,7 @@ export class AppView extends AbstractAppView {
     super(_helper, model);
   }
 
-  onInit(): void {
+  override onInit(): void {
     super.onInit();
     this.backgroundImage = this._domSanitizer.bypassSecurityTrustStyle("url(" + environment.assetsFolder + "/images/background.jpg)");
     this._shell.init();
@@ -62,8 +62,8 @@ export class AppView extends AbstractAppView {
   private _initToasterConnectionChange(): void {
     this.getConnection().on("change").subscribe((online: boolean) => {
       const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";
-      this.getLabels().getValues([key]).subscribe((translations: any) => {
-        this._showToast(translations[key], 2000);
+      this.getLabels().getValues([key]).subscribe((translations: Map<string, any>) => {
+        this._showToast(translations.get(key), 2000);
       });
     });
   }
@@ -73,7 +73,7 @@ export class AppView extends AbstractAppView {
     config.duration = duration;
     config.viewContainerRef = this._viewContainerRef;
     config.data = { message: message };
-    this._matSnackBar.openFromComponent(ClosableSnackBarComponent, config);
+    this._matSnackBar.openFromComponent(CustomSnackBarComponent, config);
   }
 
 }

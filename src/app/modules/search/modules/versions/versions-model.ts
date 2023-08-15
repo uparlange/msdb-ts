@@ -1,16 +1,16 @@
-import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppModel } from '../../../../common/abstract-app-model';
+import { AppHelperObject } from '../../../../common/providers/app-helper-object';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class VersionsModel extends AbstractAppModel {
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 
-    onInit(): void {
+    override onInit(): void {
         super.onInit();
         this.getCache().getItem("searchByVersionsFilterValue", "").subscribe((value: string) => {
             this.data.filterValue = value;
@@ -20,7 +20,7 @@ export class VersionsModel extends AbstractAppModel {
         });
     }
 
-    onRefresh(callback: Function): void {
+    override onRefresh(callback: Function): void {
         super.onRefresh(callback);
         this.getMsdbProvider().getVersions().subscribe((data: any) => {
             this.getMsdbProvider().getMameInfos().subscribe((infos: any) => {
@@ -33,13 +33,13 @@ export class VersionsModel extends AbstractAppModel {
         });
     }
 
-    onDestroy(): void {
+    override onDestroy(): void {
         super.onDestroy();
         this.getCache().setItem("searchByVersionsFilterValue", this.data.filterValue, "version");
         this.getCache().setItem("searchByVersionsPageIndex", this.data.pageIndex, "version");
     }
 
-    protected _getInitData(): any {
+    protected override _getInitData(): any {
         return {
             filterValue: "",
             pageIndex: 0,

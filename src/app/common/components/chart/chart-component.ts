@@ -18,16 +18,16 @@ export class ChartComponent extends AbstractAppComponent {
     @Input() options: object = {};
 
     @ViewChild("canvas", { static: false })
-    private _canvas: ElementRef;
+    private _canvas!: ElementRef;
 
-    private _chart: Chart = null;
+    private _chart!: Chart;
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 
-    afterViewInit(): void {
+    override afterViewInit(): void {
         super.afterViewInit();
         this._chart = new Chart(this._canvas.nativeElement, {
             type: this.type,
@@ -36,20 +36,20 @@ export class ChartComponent extends AbstractAppComponent {
         });
     }
 
-    onChanges(changes: SimpleChanges): void {
+    override onChanges(changes: SimpleChanges): void {
         super.onChanges(changes);
         if (this._chart != null) {
-            if (changes.data) {
+            if (changes['data']) {
                 this._chart.data = this.data;
             }
-            if (changes.options) {
+            if (changes['options']) {
                 this._chart.options = this.options;
             }
             this._chart.update();
         }
     }
 
-    onDestroy(): void {
+    override onDestroy(): void {
         super.onDestroy();
         this._chart.destroy();
     }

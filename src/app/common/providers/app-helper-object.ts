@@ -6,26 +6,24 @@ import { ConfigProvider } from './config-provider';
 import { AnalyticsManager } from '../managers/analytics-manager';
 import { HistoryManager } from '../managers/history-manager';
 import { FavoritesManager } from '../managers/favorites-manager';
-import { SocketManager } from '../managers/socket-manager';
-import { WindowRef } from 'src/app/fwk/providers/window-ref';
 import { AppShell } from './app-shell';
 import { MsdbProvider } from './msdb-provider';
 import { BlazyManager } from '../managers/blazy-Manager';
 import { NotificationManager } from '../managers/notification-manager';
-import { NwManager } from '../managers/nw-manager';
-import { FwkHelperObject } from 'src/app/fwk/providers/fwk-helper-object';
 import { IconProvider } from './icon-provider';
+import { FwkHelperObject } from '../../fwk/providers/fwk-helper-object';
+import { WindowRef } from '../../fwk/providers/window-ref';
 
 @Injectable({ providedIn: "root" })
 export class AppHelperObject extends FwkHelperObject {
 
   constructor(
-    protected _shell: AppShell,
-    protected _windowRef: WindowRef,
-    protected _title: Title,
-    protected _httpClient: HttpClient,
-    protected _activatedRoute: ActivatedRoute,
-    protected _meta: Meta,
+    protected override _shell: AppShell,
+    protected override _windowRef: WindowRef,
+    protected override _title: Title,
+    protected override _httpClient: HttpClient,
+    protected override _activatedRoute: ActivatedRoute,
+    protected override _meta: Meta,
     private _configProvider: ConfigProvider,
     private _msdbProvider: MsdbProvider,
     private _iconProvider: IconProvider) {
@@ -48,16 +46,8 @@ export class AppHelperObject extends FwkHelperObject {
     return this._getShell().getFavoritesManager();
   }
 
-  getSocketManager(): SocketManager {
-    return this._getShell().getSocketManager();
-  }
-
   getNotificationManager(): NotificationManager {
     return this._getShell().getNotificationManager();
-  }
-
-  getNwManager(): NwManager {
-    return this._getShell().getNwManager();
   }
 
   getConfigProvider(): ConfigProvider {

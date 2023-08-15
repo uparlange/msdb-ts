@@ -5,13 +5,11 @@ import { AbstractHelper } from './abstract-helper';
 import { AbstractHelperObject } from './abstract-helper-object';
 import { FwkHelperObject } from './providers/fwk-helper-object';
 
-@Pipe({
-    name: ""
-})
+@Pipe({ name:"" })
 export class AbstractPipe extends AbstractHelper implements OnDestroy {
 
     constructor(
-        protected _helper: AbstractHelperObject) {
+        protected override _helper: AbstractHelperObject) {
         super(_helper);
     }
 

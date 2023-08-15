@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppModel } from '../../common/abstract-app-model';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 
 @Injectable()
 export class HomeModel extends AbstractAppModel {
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 
-    onInit(): void {
+   override onInit(): void {
         super.onInit();
         this.getCache().getItem("searchLastType", "description").subscribe((value: string) => {
             this.data.searchLastType = value;
         });
     }
 
-    onRefresh(callback: Function): void {
+    override onRefresh(callback: Function): void {
         super.onRefresh(callback);
         if (this.data.mame.build === null) {
             this.getMsdbProvider().getMameInfos().subscribe((data: any) => {
@@ -28,7 +28,7 @@ export class HomeModel extends AbstractAppModel {
                         this.getMsdbProvider().getRandomGame().subscribe((data: any) => {
                             if (data !== null) {
                                 this.data.randomGame.detail = data;
-                                const images = [];
+                                const images:Array<any> = [];
                                 data.images.forEach((image: any) => {
                                     if (image.name.indexOf(".ico") === -1) {
                                         images.push({
@@ -52,7 +52,7 @@ export class HomeModel extends AbstractAppModel {
         }
     }
 
-    protected _getInitData(): any {
+    protected override _getInitData(): any {
         return {
             searchLastType: null,
             mame: {

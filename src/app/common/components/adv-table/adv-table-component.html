@@ -1,10 +1,11 @@
-<mat-form-field *ngIf="filterEnabled">
-    <input [ngModel]="filterValue" [disabled]="provider.length == 0" matInput (keyup)="applyFilter($event.target.value)"
-        [placeholder]="'L10N_FILTER'|translate">
+<mat-form-field appearance="outline" *ngIf="filterEnabled">
+    <input #filterValueInput autoFocus [(ngModel)]="filterValue" [disabled]="provider.length == 0" matInput (keyup)="applyFilter()"
+        [placeholder]="'L10N_FILTER'|translate" autofocus>
+    <button *ngIf="filterEnabled && filterValue.length > 0" matSuffix mat-icon-button aria-label="Clear"
+        (click)="clearFilter();filterValueInput.focus();">
+        <mat-icon [svgIcon]="getMdiIconByType('del')" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
+    </button>
 </mat-form-field>
-<button *ngIf="filterEnabled && filterValue?.length > 0" (click)="clearFilter()" type="button" mat-mini-fab>
-    <mat-icon [svgIcon]="getMdiIconByType('delete')" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
-</button>
 <div #primaryPaginatorWrapper class="primary-paginator">
     <mat-paginator #primaryPaginator class="primary" [hidePageSize]="true" [pageSize]="pageSize" [pageIndex]="pageIndex"
         (page)="pageChanged($event)" showFirstLastButtons></mat-paginator>

@@ -1,6 +1,6 @@
-import { AbstractAppView } from 'src/app/common/abstract-app-view';
+import { AbstractAppView } from '../../common/abstract-app-view';
 import { Component } from '@angular/core';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 import { StatisticModel } from './statistic-model';
 
 @Component({
@@ -10,8 +10,8 @@ import { StatisticModel } from './statistic-model';
 export class StatisticView extends AbstractAppView {
 
     constructor(
-        protected _helper: AppHelperObject, 
-        public model: StatisticModel) {
+        protected override _helper: AppHelperObject, 
+        public override model: StatisticModel) {
         super(_helper, model);
     }
     

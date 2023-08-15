@@ -1,7 +1,7 @@
 import { DetailModel } from '../../detail-model';
 import { Component } from '@angular/core';
-import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppPopup } from '../../../../common/abstract-app-popup';
+import { AppHelperObject } from '../../../../common/providers/app-helper-object';
 
 @Component({
   templateUrl: './dip-switchs-popup.html',
@@ -9,25 +9,25 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class DipSwitchsPopup extends AbstractAppPopup {
 
-  provider: Array<any> = null;
+  provider: Array<any> = new Array();
 
   constructor(
-    protected _helper: AppHelperObject, 
-    public model: DetailModel) {
+    protected override _helper: AppHelperObject,
+    public override model: DetailModel) {
     super(_helper, model);
   }
 
-  onInit(): void {
+  override onInit(): void {
     super.onInit();
-    const map = {};
-    const provider = [];
+    const map = new Map<String, any>();
+    const list: Array<any> = new Array();
     this.model.data.game.dipswitchs.forEach((item: any) => {
-      if (map[item.tag] === undefined) {
-        map[item.tag] = { name: item.tag, switchs: [] };
-        provider.push(map[item.tag]);
+      if (map.get(item.tag) === undefined) {
+        map.set(item.tag, { name: item.tag, switchs: [] });
+        list.push(map.get(item.tag));
       }
-      map[item.tag].switchs.push(item);
+      map.get(item.tag).switchs.push(item);
     });
-    this.provider = provider;
+    this.provider = list;
   }
 }

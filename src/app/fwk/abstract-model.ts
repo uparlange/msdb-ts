@@ -14,10 +14,10 @@ export class AbstractModel extends AbstractHelper {
   needRefresh: boolean = true;
   active: boolean = false;
 
-  private _connectionChangeSubscription: Subscription = null;
+  private _connectionChangeSubscription: Subscription = new Subscription();
 
   constructor(
-    protected _helper: AbstractHelperObject) {
+    protected override _helper: AbstractHelperObject) {
     super(_helper);
     this.data = this._getInitData();
   }
@@ -30,8 +30,8 @@ export class AbstractModel extends AbstractHelper {
         this._refresh();
       }
     });
-    this.setTitle(null);
-    this.setKeywords(null);
+    this.setTitle("");
+    this.setKeywords("");
     const newParams = Object.assign({ online: this._getHelper().getConnection().online }, params);
     if (JSON.stringify(this.params) !== JSON.stringify(newParams)) {
       this.params = newParams;

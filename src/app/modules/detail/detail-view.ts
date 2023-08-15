@@ -9,10 +9,8 @@ import { DipSwitchsPopup } from './popups/dip-switchs/dip-switchs-popup';
 import { DriverPopup } from './popups/driver/driver-popup';
 import { PortsPopup } from './popups/ports/ports-popup';
 import { RomsPopup } from './popups/roms/roms-popup';
-import { AbstractAppView } from 'src/app/common/abstract-app-view';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
-import { AppEvents } from 'src/app/app-events';
-import { AppSocketEvents } from 'src/app/app-socket-events';
+import { AbstractAppView } from '../../common/abstract-app-view';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 
 @Component({
   templateUrl: './detail-view.html',
@@ -21,8 +19,8 @@ import { AppSocketEvents } from 'src/app/app-socket-events';
 export class DetailView extends AbstractAppView {
 
   constructor(
-    protected _helper: AppHelperObject, 
-    public model: DetailModel, 
+    protected override _helper: AppHelperObject,
+    public override model: DetailModel,
     private _matDialog: MatDialog) {
     super(_helper, model);
   }
@@ -40,11 +38,7 @@ export class DetailView extends AbstractAppView {
   }
 
   playGame(game: any): void {
-    this.getSocket().emit(AppSocketEvents.PLAY_GAME, game.name).subscribe((event: any) => {
-      if (event) {
-        this.getEventBus().emit(AppEvents.DISPLAY_TOASTER_MESSAGE, { message: event });
-      }
-    });
+    // TODO ?
   }
 
   inFavorites(game: any): boolean {
@@ -92,6 +86,9 @@ export class DetailView extends AbstractAppView {
   }
 
   private _openPopup(clazz: any): void {
-    this.getPopups().open(this._matDialog, clazz, { disableClose: true });
+    this.getPopups().open(this._matDialog, clazz, {
+      disableClose: true,
+      minWidth: 360
+    });
   }
 }

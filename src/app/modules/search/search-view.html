@@ -1,16 +1,16 @@
 <mat-card>
-	<mat-card-title>
-		<span>{{getSearchTabLabel(model.data.selectedIndex)|translate}}</span>
-		<div class="default-spacer"></div>
-		<mat-divider></mat-divider>
-		<mat-tab-group (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="model.data.selectedIndex">
-			<mat-tab *ngFor="let tab of getTabsInfo().getTabs(); trackBy:trackByKey">
-				<ng-template matTabLabel>
-					<mat-icon [svgIcon]="getMdiIconByType(tab.type)" [matTooltip]="tab.key|translate"></mat-icon>
-				</ng-template>
-			</mat-tab>
-		</mat-tab-group>
-	</mat-card-title>
+	<mat-card-header>
+		<mat-card-title>
+			<span>{{getSearchTabLabel(model.data.selectedIndex)|translate}}</span>
+			<mat-divider></mat-divider>
+			<mat-tab-group (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="model.data.selectedIndex">
+				<mat-tab *ngFor="let tab of getTabsInfo().getTabs(); trackBy:trackByKey">
+					<ng-template mat-tab-label>
+						<mat-icon [svgIcon]="getMdiIconByType(tab.type)" [matTooltip]="tab.key|translate"></mat-icon>
+					</ng-template>
+				</mat-tab>
+			</mat-tab-group>
+		</mat-card-title>
+	</mat-card-header>
 </mat-card>
-<div class="default-spacer"></div>
 <router-outlet></router-outlet>

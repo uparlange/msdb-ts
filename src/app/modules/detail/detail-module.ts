@@ -10,8 +10,8 @@ import { DipSwitchsPopup } from './popups/dip-switchs/dip-switchs-popup';
 import { DriverPopup } from './popups/driver/driver-popup';
 import { PortsPopup } from './popups/ports/ports-popup';
 import { RomsPopup } from './popups/roms/roms-popup';
-import { SharedModule } from 'src/app/common/modules/shared-module';
-import { AbstractModule } from 'src/app/fwk/abstract-module';
+import { SharedModule } from '../../common/modules/shared-module';
+import { AbstractModule } from '../../fwk/abstract-module';
 
 const routes: Routes = [
   { path: "", component: DetailView }

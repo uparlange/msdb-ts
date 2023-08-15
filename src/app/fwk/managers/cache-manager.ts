@@ -5,7 +5,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 @Injectable({ providedIn: "root" })
 export class CacheManager extends AbstractManager {
 
-    private _db: Dexie = null;
+    private _db: any;
 
     constructor() {
         super();
@@ -18,7 +18,7 @@ export class CacheManager extends AbstractManager {
     setItem(key: string, newValue: any, namespace: string): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
         this.getItem(key).subscribe((oldValue: any) => {
-            this._db["properties"].put({ key: key, value: newValue, namespace: (namespace || "default") });
+            this._db.properties.put({ key: key, value: newValue, namespace: (namespace || "default") });
             const change = {
                 key: key,
                 oldValue: oldValue,
@@ -32,7 +32,7 @@ export class CacheManager extends AbstractManager {
 
     getItem(key: string, defaultValue?: any): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
-        this._db["properties"].get({ key: key }).then((property: any) => {
+        this._db.properties.get({ key: key }).then((property: any) => {
             let value = null;
             if (property != undefined) {
                 value = property.value;
@@ -45,7 +45,7 @@ export class CacheManager extends AbstractManager {
     }
 
     deleteNamespace(namespace: string): void {
-        this._db["properties"].where("namespace").equals(namespace).delete().then((deleteCount: number) => {
+        this._db.properties.where("namespace").equals(namespace).delete().then((deleteCount: number) => {
             this._getLogger().info(deleteCount + " object(s) deleted from cache");
         });
     }

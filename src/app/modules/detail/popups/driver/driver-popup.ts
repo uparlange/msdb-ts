@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DetailModel } from '../../detail-model';
-import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppPopup } from '../../../../common/abstract-app-popup';
+import { AppHelperObject } from '../../../../common/providers/app-helper-object';
 
 @Component({
   templateUrl: './driver-popup.html',
@@ -12,8 +12,8 @@ export class DriverPopup extends AbstractAppPopup {
   private _routerAction: any = null;
 
   constructor(
-    protected _helper: AppHelperObject, 
-    public model: DetailModel) {
+    protected override _helper: AppHelperObject, 
+    public override model: DetailModel) {
     super(_helper, model);
   }
 
@@ -25,7 +25,7 @@ export class DriverPopup extends AbstractAppPopup {
     this.close();
   }
 
-  beforeClose(): void {
+  override beforeClose(): void {
     super.beforeClose();
     if (this._routerAction != null) {
       this.getRouter().navigate(this._routerAction.commands, this._routerAction.extras);

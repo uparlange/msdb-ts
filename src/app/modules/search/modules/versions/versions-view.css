@@ -1,4 +1,5 @@
-mat-icon
+.mat-mdc-chip 
 {
-	padding-left:24px;
+    min-width: 57px;
+    text-align: center;
 }

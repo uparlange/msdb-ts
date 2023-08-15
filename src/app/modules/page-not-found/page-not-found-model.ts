@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppModel } from '../../common/abstract-app-model';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 
 @Injectable()
 export class PageNotFoundModel extends AbstractAppModel {
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 }

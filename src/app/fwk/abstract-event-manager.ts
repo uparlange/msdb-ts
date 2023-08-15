@@ -3,14 +3,14 @@ import { AbstractObject } from './abstract-object';
 
 export class AbstractEventManager extends AbstractObject {
 
-    protected _eventEmitters: Map<string, EventEmitter<any>> = new Map();
+    protected _eventEmitters: Map<string, any> = new Map();
 
     constructor() {
         super();
     }
 
     on(eventName: string): EventEmitter<any> {
-        let eventEmitter: EventEmitter<any> = this._eventEmitters.get(eventName);
+        let eventEmitter: any = this._eventEmitters.get(eventName);
         if (eventEmitter === undefined) {
             eventEmitter = new EventEmitter();
             this._eventEmitters.set(eventName, eventEmitter);
@@ -19,7 +19,7 @@ export class AbstractEventManager extends AbstractObject {
     }
 
     emit(eventName: string, evt?: any) {
-        const eventEmitter: EventEmitter<any> = this._eventEmitters.get(eventName);
+        const eventEmitter: any = this._eventEmitters.get(eventName);
         if (eventEmitter !== undefined) {
             eventEmitter.emit(evt);
         }

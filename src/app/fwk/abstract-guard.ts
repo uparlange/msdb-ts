@@ -7,7 +7,7 @@ import { FwkHelperObject } from './providers/fwk-helper-object';
 export class AbstractGuard extends AbstractHelper {
 
     constructor(
-        protected _helper: AbstractHelperObject) {
+        protected override _helper: AbstractHelperObject) {
         super(_helper);
     }
 

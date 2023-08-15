@@ -1,6 +1,6 @@
-import { AbstractAppView } from 'src/app/common/abstract-app-view';
+import { AbstractAppView } from '../../common/abstract-app-view';
 import { Component } from '@angular/core';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 import { PageNotFoundModel } from './page-not-found-model';
 import { environment } from './../../../environments/environment';
 
@@ -11,8 +11,8 @@ import { environment } from './../../../environments/environment';
 export class PageNotFoundView extends AbstractAppView {
 
     constructor(
-        protected _helper: AppHelperObject, 
-        public model: PageNotFoundModel) {
+        protected override _helper: AppHelperObject, 
+        public override model: PageNotFoundModel) {
         super(_helper, model);
     }
 

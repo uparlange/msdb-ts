@@ -9,8 +9,8 @@ import { Location } from '@angular/common';
 @Injectable({ providedIn: "root" })
 export class RouterManager extends AbstractManager {
 
-    private _mutationObserver: MutationObserver = null;
-    private _eventsSubscription: Subscription = null;
+    private _mutationObserver: any;
+    private _eventsSubscription: Subscription = new Subscription();
     private _creationCompleteTimeout: any = null;
 
     constructor(
@@ -22,7 +22,7 @@ export class RouterManager extends AbstractManager {
         super();
     }
 
-    init(): void {
+   override init(): void {
         super.init();
         this._eventsSubscription = this._router.events.subscribe((e) => {
             if (e instanceof NavigationStart) {

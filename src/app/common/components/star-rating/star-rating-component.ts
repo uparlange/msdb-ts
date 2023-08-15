@@ -13,7 +13,7 @@ export class StarRatingComponent extends AbstractAppComponent {
     @Input() size: number = 3;
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 

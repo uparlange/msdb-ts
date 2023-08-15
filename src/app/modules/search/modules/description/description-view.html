@@ -1,34 +1,29 @@
 <mat-card>
 	<mat-card-content>
 		<form #descriptionForm="ngForm">
-			<mat-form-field>
-				<input matInput #valueInput pattern=".{3,}" required name="value"
+			<mat-form-field appearance="outline">
+				<input matInput autoFocus #valueInput pattern=".{3,}" required name="value"
 					[autocomplete]="'LION_GAME_NAME'|translate" autocomplete="game-description"
 					[placeholder]="'LION_GAME_NAME'|translate" [(ngModel)]="model.data.value">
+				<button *ngIf="model.data.value.length > 0" matSuffix mat-icon-button aria-label="Clear"
+					(click)="model.data.value = '';valueInput.focus();">
+					<mat-icon [svgIcon]="getMdiIconByType('del')"
+						[matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
+				</button>
 			</mat-form-field>
-			<button *ngIf="model.data.value.length > 0" (click)="model.data.value = '';valueInput.focus();"
-				type="button" mat-mini-fab>
-				<mat-icon [svgIcon]="getMdiIconByType('delete')" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mat-icon>
-			</button>
-			<button *ngIf="descriptionForm.form.valid" routerLink="/result"
-				[queryParams]="{type:'description', value:model.data.value}" mat-mini-fab>
+			<button class="searchButton" *ngIf="descriptionForm.form.valid" routerLink="/result"
+				[queryParams]="{type:'description', value:model.data.value}" mat-fab color="accent">
 				<mat-icon [svgIcon]="getMdiIconByType('search')" [matTooltip]="'L10N_SEARCH'|translate"></mat-icon>
 			</button>
 		</form>
-	</mat-card-content>
-</mat-card>
-<div class="default-spacer"></div>
-<mat-card>
-	<mat-card-title>
-		{{'L10N_SHORTCUTS'|translate}}
-	</mat-card-title>
-	<mat-card-content>
+		<div>{{'L10N_SHORTCUTS'|translate}}</div>
 		<mat-list>
 			<mat-list-item *ngFor="let shortcut of model.data.shortcuts; trackBy:trackByKey">
-				<mat-icon mat-list-icon [svgIcon]="getMdiIconByType(shortcut.type)">
-				</mat-icon>
-				<p mat-line><a routerLink="/result"
-						[queryParams]="{type:shortcut.type,value:'all'}">{{shortcut.key|translate}}</a></p>
+				<mat-icon matListItemIcon [svgIcon]="getMdiIconByType(shortcut.type)"></mat-icon>
+				<div matListItemTitle>
+					<a routerLink="/result"
+						[queryParams]="{type:shortcut.type,value:'all'}">{{shortcut.key|translate}}</a>
+				</div>
 			</mat-list-item>
 		</mat-list>
 	</mat-card-content>

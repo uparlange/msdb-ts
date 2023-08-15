@@ -1,7 +1,6 @@
 import { AbstractManager } from '../../fwk/abstract-manager';
 import { EventEmitter, Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { RouterManager } from 'src/app/fwk/managers/router-manager';
+import { RouterManager } from '../../fwk/managers/router-manager';
 
 @Injectable({ providedIn: "root" })
 export class HistoryManager extends AbstractManager {
@@ -13,7 +12,7 @@ export class HistoryManager extends AbstractManager {
     super();
   }
 
-  init(): void {
+  override init(): void {
     super.init();
   }
 

@@ -1,12 +1,12 @@
-import { AbstractAppGuard } from 'src/app/common/abstract-app-guard';
+import { AbstractAppGuard } from '../../common/abstract-app-guard';
 import { Injectable } from '@angular/core';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 
 @Injectable()
 export class NwjsCanActivate extends AbstractAppGuard {
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 

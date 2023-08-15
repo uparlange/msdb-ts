@@ -5,14 +5,14 @@ import Blazy from 'blazy';
 @Injectable({ providedIn: "root" })
 export class BlazyManager extends AbstractManager {
 
-  private _blazy: BlazyInstance = new Blazy(null);
+  private _blazy: BlazyInstance = new Blazy({});
   private _timeoutInterval: any = null;
 
   constructor() {
     super();
   }
 
-  init(): void {
+  override init(): void {
     super.init();
   }
 

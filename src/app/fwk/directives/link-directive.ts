@@ -1,5 +1,5 @@
 import { AbstractDirective } from '../abstract-directive';
-import { Directive, HostBinding, PLATFORM_ID, Inject, Input, HostListener } from '@angular/core';
+import { Directive, HostBinding, Input, HostListener, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { FwkHelperObject } from '../providers/fwk-helper-object';
 
@@ -10,15 +10,15 @@ export class LinkDirective extends AbstractDirective {
     @HostBinding("attr.target") targetAttr = '';
     @HostBinding("attr.href") hrefAttr = '';
 
-    @Input() href: string;
+    @Input() href: string = "";
 
     constructor(
-        protected _helper: FwkHelperObject, 
-        @Inject(PLATFORM_ID) private _platformId: string) {
+        protected override _helper: FwkHelperObject, 
+        @Inject(PLATFORM_ID) private _platformId: Object) {
         super(_helper);
     }
 
-    onChanges(event: any): void {
+    override onChanges(event: any): void {
         super.onChanges(event);
         this.hrefAttr = this.href;
         if (this._isLinkExternal()) {

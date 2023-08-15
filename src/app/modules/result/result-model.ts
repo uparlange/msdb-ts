@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppModel } from '../../common/abstract-app-model';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 
 @Injectable()
 export class ResultModel extends AbstractAppModel {
@@ -11,11 +11,11 @@ export class ResultModel extends AbstractAppModel {
     private _FILTER_DEVICE: string = "device";
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 
-    onInit(): void {
+    override onInit(): void {
         super.onInit();
         this._setFilterList([]);
         this._getTitle().subscribe((title: string) => {
@@ -24,7 +24,7 @@ export class ResultModel extends AbstractAppModel {
         })
     }
 
-    onRefresh(callback: Function): void {
+    override onRefresh(callback: Function): void {
         super.onRefresh(callback);
         this.data.provider = [];
         this.getMsdbProvider().search(this.params.type, this.params.value).subscribe((data: any) => {
@@ -47,8 +47,8 @@ export class ResultModel extends AbstractAppModel {
     private _getTitle(): EventEmitter<any> {
         const eventEmitter: EventEmitter<any> = new EventEmitter();
         const labelKey = this._getSearchLabel(this.params.type);
-        this.getLabels().getValues([labelKey]).subscribe((translations: any) => {
-            const title = `${translations[labelKey]} "${this.params.value}"`;
+        this.getLabels().getValues([labelKey]).subscribe((translations: Map<String, any>) => {
+            const title = `${translations.get(labelKey)} "${this.params.value}"`;
             eventEmitter.emit(title);
         });
         return eventEmitter;
@@ -59,11 +59,11 @@ export class ResultModel extends AbstractAppModel {
     }
 
     private _initFilters(): void {
-        this.data.filter.messDisabled = this.data.source.findIndex(game => game.ismess) === -1;
-        this.data.filter.cloneDisabled = this.data.source.findIndex(game => game.cloneof != null) === -1;
-        this.data.filter.biosDisabled = this.data.source.findIndex(game => game.isbios == "yes") === -1;
-        this.data.filter.deviceDisabled = this.data.source.findIndex(game => game.isdevice == "yes") === -1;
-        const filterList = [];
+        this.data.filter.messDisabled = this.data.source.findIndex((game: { ismess: boolean; }) => game.ismess) === -1;
+        this.data.filter.cloneDisabled = this.data.source.findIndex((game: { cloneof: string; }) => game.cloneof != null) === -1;
+        this.data.filter.biosDisabled = this.data.source.findIndex((game: { isbios: string; }) => game.isbios == "yes") === -1;
+        this.data.filter.deviceDisabled = this.data.source.findIndex((game: { isdevice: string; }) => game.isdevice == "yes") === -1;
+        const filterList : Array<string> = [];
         if (!this.data.filter.messDisabled) {
             filterList.push(this._FILTER_MESS);
         }
@@ -90,7 +90,7 @@ export class ResultModel extends AbstractAppModel {
         });
     }
 
-    protected _getInitData(): any {
+    protected override _getInitData(): any {
         return {
             source: [],
             filterValue: "",

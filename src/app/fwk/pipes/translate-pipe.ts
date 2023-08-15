@@ -9,13 +9,13 @@ import { FwkHelperObject } from '../providers/fwk-helper-object';
 })
 export class TranslatePipe extends AbstractPipe implements PipeTransform {
 
-  private _tranlateKey: string = null;
-  private _translateParams: string = null
-  private _tranlateValue: string = null;
-  private _onLanguageChangeSubscription: Subscription = null;
+  private _tranlateKey: string = "";
+  private _translateParams: string = "";
+  private _tranlateValue: string = "";
+  private _onLanguageChangeSubscription: Subscription;
 
   constructor(
-    protected _helper: FwkHelperObject) {
+    protected override _helper: FwkHelperObject) {
     super(_helper);
     this._onLanguageChangeSubscription = this.getLabels().on("languageChange").subscribe(() => {
       this._refreshTranslation();
@@ -26,9 +26,11 @@ export class TranslatePipe extends AbstractPipe implements PipeTransform {
     const args_array = Array.from(arguments);
     const key = args_array.shift();
     let params = args_array.join(",");
+    /*
     if (params == "") {
       params = null;
     }
+    */
     if (this._tranlateKey !== key || this._translateParams !== params) {
       this._tranlateKey = key;
       this._translateParams = params;
@@ -37,7 +39,7 @@ export class TranslatePipe extends AbstractPipe implements PipeTransform {
     return this._tranlateValue;
   }
 
-  onDestroy() {
+  override onDestroy() {
     super.onDestroy();
     this._onLanguageChangeSubscription.unsubscribe();
   }
@@ -50,8 +52,8 @@ export class TranslatePipe extends AbstractPipe implements PipeTransform {
         properties: this._translateParams.toString().split(",")
       };
     }
-    this.getLabels().getValues([param]).subscribe((translations: object) => {
-      this._tranlateValue = translations[this._tranlateKey];
+    this.getLabels().getValues([param]).subscribe((translations: Map<String, any>) => {
+      this._tranlateValue = translations.get(this._tranlateKey);
     });
 
   }

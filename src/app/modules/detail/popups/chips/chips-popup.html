@@ -1,18 +1,18 @@
-<h1 mat-dialog-title>
+<div mat-dialog-title>
 	{{'L10N_CHIP'|translate}}
-	<button mat-dialog-close mat-icon-button>
-		<mat-icon [svgIcon]="getMdiIconByType('close')"></mat-icon>
-	</button>
-</h1>
-<mat-dialog-content>
-	<div *ngFor="let item of provider; trackBy:trackByName">
-		<b>{{item.name}}</b>
-		<ul>
-			<li *ngFor="let value of item.values; trackBy:model.trackByTag">
+</div>
+<div mat-dialog-content>
+	<mat-list>
+		<mat-list-item *ngFor="let item of provider; trackBy:trackByName">
+			<span matListItemTitle>{{item.name}}</span>
+			<span *ngFor="let value of item.values; trackBy:trackByTag" matListItemLine>
 				{{value.tag}}
 				<b>{{value.name}}</b>
 				<span *ngIf="value.clock != null">@{{getFrequencyLabel(value.clock)}}</span>
-			</li>
-		</ul>
-	</div>
-</mat-dialog-content>
+			</span>
+		</mat-list-item>
+	</mat-list>
+</div>
+<div mat-dialog-actions align="end">
+	<button mat-raised-button color="accent" mat-dialog-close cdkFocusInitial>OK</button>
+</div>

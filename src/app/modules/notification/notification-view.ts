@@ -1,6 +1,6 @@
-import { AbstractAppView } from 'src/app/common/abstract-app-view';
+import { AbstractAppView } from '../../common/abstract-app-view';
 import { Component } from '@angular/core';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 import { NotificationModel } from './notification-model';
 
 @Component({
@@ -10,8 +10,8 @@ import { NotificationModel } from './notification-model';
 export class NotificationView extends AbstractAppView {
 
     constructor(
-        protected _helper: AppHelperObject, 
-        public model: NotificationModel) {
+        protected override _helper: AppHelperObject, 
+        public override model: NotificationModel) {
         super(_helper, model);
     }
 

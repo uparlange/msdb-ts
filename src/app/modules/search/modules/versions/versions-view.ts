@@ -1,5 +1,5 @@
-import { AbstractAppView } from 'src/app/common/abstract-app-view';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppView } from '../../../../common/abstract-app-view';
+import { AppHelperObject } from '../../../../common/providers/app-helper-object';
 import { VersionsModel } from './versions-model';
 import { Component } from '@angular/core';
 
@@ -10,8 +10,8 @@ import { Component } from '@angular/core';
 export class VersionsView extends AbstractAppView {
 
     constructor(
-        protected _helper: AppHelperObject, 
-        public model: VersionsModel) {
+        protected override _helper: AppHelperObject, 
+        public override model: VersionsModel) {
         super(_helper, model);
     }
 }

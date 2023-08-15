@@ -12,7 +12,7 @@ export class FavoritesManager extends AbstractManager {
     super();
   }
 
-  init(): void {
+  override init(): void {
     super.init();
     this._cacheManager.getItem("favorites", []).subscribe((value: Array<any>) => {
       this._favorites = value;

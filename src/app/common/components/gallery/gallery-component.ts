@@ -1,9 +1,8 @@
 import { Component, Input, HostListener, ViewChild, ElementRef } from '@angular/core';
 import Masonry from 'masonry-layout';
 import PhotoSwipe from 'photoswipe';
-import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 import { AbstractAppComponent } from '../../abstract-app-component';
+import { AppHelperObject } from '../../providers/app-helper-object';
 
 @Component({
   selector: "gallery",
@@ -17,30 +16,26 @@ export class GalleryComponent extends AbstractAppComponent {
   @Input() gap: number = 5;
 
   @ViewChild("galleryContainer", { static: false })
-  private _galleryContainer: ElementRef;
+  private _galleryContainer!: ElementRef;
 
   @ViewChild("pswpContainer", { static: false })
-  private _pswpContainer: ElementRef;
+  private _pswpContainer!: ElementRef;
 
-  private _gallery: PhotoSwipe<any> = null;
-  private _masonry: Masonry = null;
+  private _gallery!: any;
+  private _masonry!: any;
   private _refreshTimeout: any = null;
 
   constructor(
-    protected _helper: AppHelperObject) {
+    protected override _helper: AppHelperObject) {
     super(_helper);
   }
 
-  onInit(): void {
-    super.onInit();
-  }
-
-  onDestroy(): void {
+  override onDestroy(): void {
     super.onDestroy();
-    if (this._gallery !== null) {
+    if (this._gallery != null) {
       this._gallery.close();
     }
-    if (this._masonry !== null) {
+    if (this._masonry != null) {
       this._masonry.destroy();
     }
   }
@@ -65,16 +60,16 @@ export class GalleryComponent extends AbstractAppComponent {
 
   }
   openImage(image: string): void {
-    if (this._gallery !== null) {
+    if (this._gallery != null) {
       this._gallery.close();
     }
-    const options: any = {
+    this._gallery = new PhotoSwipe({
+      gallery: this._pswpContainer.nativeElement,
+      dataSource: this.provider,
       index: this.provider.indexOf(image),
       clickToCloseNonZoomable: false,
-      shareEl: false,
-      history: false
-    };
-    this._gallery = new PhotoSwipe<PhotoSwipeUI_Default.Options>(this._pswpContainer.nativeElement, PhotoSwipeUI_Default, this.provider, options);
+      pswpModule: () => import('photoswipe'),
+    });
     this._gallery.init();
   }
 
@@ -91,7 +86,7 @@ export class GalleryComponent extends AbstractAppComponent {
       clearTimeout(this._refreshTimeout);
     }
     this._refreshTimeout = setTimeout(() => {
-      if (this._masonry !== null) {
+      if (this._masonry != null) {
         this._masonry.destroy();
       }
       this._masonry = new Masonry(".grid", {

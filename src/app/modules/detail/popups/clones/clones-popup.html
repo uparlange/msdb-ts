@@ -1,13 +1,13 @@
-<h1 mat-dialog-title>
+<div mat-dialog-title>
 	{{'L10N_CLONE_INFOS'|translate}}
-	<button mat-dialog-close mat-icon-button>
-		<mat-icon [svgIcon]="getMdiIconByType('close')"></mat-icon>
-	</button>
-</h1>
-<mat-dialog-content>
+</div>
+<div mat-dialog-content>
 	<mat-list>
 		<mat-list-item *ngFor="let clone of model.data.clones; trackBy:trackByName">
 			<a (click)="showCloneDetail(clone.name)">{{clone.description}}</a>
 		</mat-list-item>
 	</mat-list>
-</mat-dialog-content>
+</div>
+<div mat-dialog-actions align="end">
+	<button mat-raised-button color="accent" mat-dialog-close cdkFocusInitial>OK</button>
+</div>

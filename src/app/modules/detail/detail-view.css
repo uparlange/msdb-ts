@@ -1,28 +1,26 @@
-svg
+.mat-mdc-card-title.game-title
+{
+    max-width:94%;
+}
+
+.language-icon
 {
     width:24px;
     height:24px;
-    margin-right: 5px;
+    margin-left: 5px;
+    vertical-align: middle;
 }
 
-.title
+.favorite-icon
 {
-    width: calc(100% - 24px - 40px);
-    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
 }
 
 .actions-menu
 {
-    float: right;
-    top: -6px;
-    right: -6px;
-}
-
-.mat-list-base .mat-list-item.mat-2-line, .mat-list-base .mat-list-option.mat-2-line
-{
-    height:64px;
-}
-
-.mat-list-base .mat-list-item.mat-3-line, .mat-list-base .mat-list-option.mat-3-line {
-    height: 80px;
+    position: absolute;
+    right: 0px;
+    vertical-align: middle;
+    top: 5px;
 }

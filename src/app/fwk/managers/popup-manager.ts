@@ -6,16 +6,16 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: "root" })
 export class PopupManager extends AbstractManager {
 
-  private _matDialogRef: MatDialogRef<any, any> = null;
-  private _matDialogRefAfterOpenedSubscription: Subscription = null;
-  private _matDialogRefBeforeCloseSubscription: Subscription = null;
-  private _matDialogRefAfterClosedSubscription: Subscription = null;
+  private _matDialogRef: any;
+  private _matDialogRefAfterOpenedSubscription: Subscription = new Subscription();
+  private _matDialogRefBeforeCloseSubscription: Subscription = new Subscription();
+  private _matDialogRefAfterClosedSubscription: Subscription = new Subscription();
 
   constructor() {
     super();
   }
 
-  init() {
+  override init() {
     super.init();
   }
 

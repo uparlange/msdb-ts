@@ -5,21 +5,19 @@ import { AbstractHelperObject } from './abstract-helper-object';
 import { FwkHelperObject } from './providers/fwk-helper-object';
 import { Component } from '@angular/core';
 
-@Component({
-  template: ""
-})
+@Component({ template: "" })
 export class AbstractPopup extends AbstractComponent {
 
-  private _popupsAfterOpenSubscription: Subscription = null;
-  private _popupsBeforeCloseSubscription: Subscription = null;
+  private _popupsAfterOpenSubscription: Subscription = new Subscription();
+  private _popupsBeforeCloseSubscription: Subscription = new Subscription();
 
   constructor(
-    protected _helper: AbstractHelperObject,
+    protected override _helper: AbstractHelperObject,
     public model: AbstractModel) {
     super(_helper);
   }
 
-  ngOnInit() {
+  override ngOnInit() {
     super.ngOnInit();
     this._popupsAfterOpenSubscription = this._getHelper().getPopups().on("afterOpen").subscribe(() => {
       this.afterOpen();
@@ -29,11 +27,11 @@ export class AbstractPopup extends AbstractComponent {
     });
   }
 
-  ngOnDestroy() {
+  override ngOnDestroy() {
     super.ngOnDestroy();
     this._popupsAfterOpenSubscription.unsubscribe();
     this._popupsBeforeCloseSubscription.unsubscribe();
-    this.model = null;
+    //this.model = null;
   }
 
   afterOpen(): void {
@@ -48,7 +46,7 @@ export class AbstractPopup extends AbstractComponent {
     this._getHelper().getPopups().closeActive();
   }
 
-  protected _getHelper(): FwkHelperObject {
+  protected override _getHelper(): FwkHelperObject {
     return <FwkHelperObject>this._helper;
   }
 }

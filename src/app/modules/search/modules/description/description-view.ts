@@ -1,7 +1,7 @@
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AppHelperObject } from '../../../../common/providers/app-helper-object';
 import { DescriptionModel } from './description-model';
 import { Component } from '@angular/core';
-import { AbstractAppView } from 'src/app/common/abstract-app-view';
+import { AbstractAppView } from '../../../../common/abstract-app-view';
 
 @Component({
     templateUrl: './description-view.html',
@@ -10,8 +10,8 @@ import { AbstractAppView } from 'src/app/common/abstract-app-view';
 export class DescriptionView extends AbstractAppView {
 
     constructor(
-        protected _helper: AppHelperObject, 
-        public model: DescriptionModel) {
+        protected override _helper: AppHelperObject, 
+        public override model: DescriptionModel) {
         super(_helper, model);
     }
 }

@@ -1,25 +1,21 @@
-<h1 mat-dialog-title>
+<div mat-dialog-title>
 	{{'L10N_DRIVER_INFOS'|translate}}
-	<button mat-dialog-close mat-icon-button>
-		<mat-icon [svgIcon]="getMdiIconByType('close')"></mat-icon>
-	</button>
-</h1>
-<mat-dialog-content>
+</div>
+<div mat-dialog-content>
 	<mat-list>
 		<mat-list-item>
-			{{'L10N_SINCE_MAME'|translate}}
-			<span class="sep">:</span>
-			<a (click)="showGamesForMameVersion(model.data.game.version)">{{model.data.game.version}}</a>
+			{{'L10N_SINCE_MAME'|translate}} : <a
+				(click)="showGamesForMameVersion(model.data.game.version)">{{model.data.game.version}}</a>
 		</mat-list-item>
 		<mat-list-item>
-			{{'L10N_EMULATION'|translate}}
-			<span class="sep">:</span>
-			<span [class]="getStatusClass(model.data.game.driver.emulation)">{{getStatusLabel(model.data.game.driver.emulation)|translate}}</span>
+			{{'L10N_EMULATION'|translate}} : <span
+				[class]="getStatusClass(model.data.game.driver.emulation)">{{getStatusLabel(model.data.game.driver.emulation)|translate}}</span>
 		</mat-list-item>
 		<mat-list-item>
-			{{'L10N_SAVESTATE'|translate}}
-			<span class="sep">:</span>
-			{{getStatusLabel(model.data.game.driver.savestate)|translate}}
+			{{'L10N_SAVESTATE'|translate}} : {{getStatusLabel(model.data.game.driver.savestate)|translate}}
 		</mat-list-item>
 	</mat-list>
-</mat-dialog-content>
+</div>
+<div mat-dialog-actions align="end">
+	<button mat-raised-button color="accent" mat-dialog-close cdkFocusInitial>OK</button>
+</div>

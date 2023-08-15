@@ -1,18 +1,23 @@
 <mat-card>
-	<mat-card-title>
-		{{'L10N_MAME_KESAKO'|translate}}
-	</mat-card-title>
+	<mat-card-header>
+		<mat-card-title>
+			{{'L10N_MAME_KESAKO'|translate}}
+		</mat-card-title>
+	</mat-card-header>
 	<mat-card-content class="justify">
-		{{'L10N_DESCRIPTION'|translate}}
+		<p>
+			{{'L10N_DESCRIPTION'|translate}}
+		</p>
 	</mat-card-content>
 </mat-card>
 <div *ngIf="model.data.mame.build != null">
-	<div class="default-spacer"></div>
 	<mat-card>
-		<mat-card-title>
-			<a routerLink="/result" [queryParams]="{type:'version',value:model.data.mame.version}">MAME -
-				{{model.data.mame.version}}</a>
-		</mat-card-title>
+		<mat-card-header>
+			<mat-card-title>
+				<a routerLink="/result" [queryParams]="{type:'version',value:model.data.mame.version}">MAME -
+					{{model.data.mame.version}}</a>
+			</mat-card-title>
+		</mat-card-header>
 		<mat-card-content>
 			<ul>
 				<li>
@@ -33,21 +38,22 @@
 		</mat-card-content>
 	</mat-card>
 </div>
-<div class="default-spacer"></div>
 <mat-card>
-	<mat-card-title>
-		MAME - {{'L10N_HOW_TO_PLAY'|translate}}
-	</mat-card-title>
+	<mat-card-header>
+		<mat-card-title>
+			MAME - {{'L10N_HOW_TO_PLAY'|translate}}
+		</mat-card-title>
+	</mat-card-header>
 	<mat-card-content>
 		<ol>
 			<li>
 				{{'L10N_FIND_GAME'|translate}}
-				<div class="default-spacer"></div>
 				<mat-list>
 					<mat-list-item *ngFor="let searchType of model.data.searchTypes; trackBy:trackByKey">
-						<mat-icon mat-list-icon [svgIcon]="getMdiIconByType(searchType.type)">
-						</mat-icon>
-						<p mat-line><a [routerLink]="'/search/' + searchType.type">{{searchType.key|translate}}</a></p>
+						<mat-icon matListItemIcon [svgIcon]="getMdiIconByType(searchType.type)"></mat-icon>
+						<div matListItemTitle>
+							<a [routerLink]="'/search/' + searchType.type">{{searchType.key|translate}}</a>
+						</div>
 					</mat-list-item>
 				</mat-list>
 			</li>
@@ -66,23 +72,25 @@
 	</mat-card-content>
 </mat-card>
 <div *ngIf="model.data.randomGame.detail != null">
-	<div class="default-spacer"></div>
 	<mat-card>
-		<mat-card-title>
-			<a routerLink="/detail" [queryParams]="{name:model.data.randomGame.detail.name}">
-				MAME - {{'L10N_RANDOM_GAME'|translate}} : {{model.data.randomGame.detail.description}}
-			</a>
-		</mat-card-title>
+		<mat-card-header>
+			<mat-card-title>
+				<a routerLink="/detail" [queryParams]="{name:model.data.randomGame.detail.name}">
+					MAME - {{'L10N_RANDOM_GAME'|translate}} : {{model.data.randomGame.detail.description}}
+				</a>
+			</mat-card-title>
+		</mat-card-header>
 		<mat-card-content>
 			<gallery [colcount]="3" [gap]="5" [provider]="model.data.randomGame.images"></gallery>
 		</mat-card-content>
 	</mat-card>
 </div>
-<div class="default-spacer"></div>
 <mat-card>
-	<mat-card-title>
-		MAME - {{'L10N_REFERENCES'|translate}}
-	</mat-card-title>
+	<mat-card-header>
+		<mat-card-title>
+			MAME - {{'L10N_REFERENCES'|translate}}
+		</mat-card-title>
+	</mat-card-header>
 	<mat-card-content>
 		<ul>
 			<li><a href="https://www.mame.net/">MAME Multiple Arcade Machine Emulator</a>
@@ -94,11 +102,12 @@
 		</ul>
 	</mat-card-content>
 </mat-card>
-<div class="default-spacer"></div>
 <mat-card>
-	<mat-card-title>
-		MSDB - {{'L10N_COMMUNITY'|translate}}
-	</mat-card-title>
+	<mat-card-header>
+		<mat-card-title>
+			MSDB - {{'L10N_COMMUNITY'|translate}}
+		</mat-card-title>
+	</mat-card-header>
 	<mat-card-content>
 		<ul>
 			<li><a href="https://github.com/uparlange/msdb-ts">Github</a></li>

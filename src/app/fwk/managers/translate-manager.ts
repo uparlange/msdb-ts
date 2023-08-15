@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { AbstractManager } from 'src/app/fwk/abstract-manager';
+import { AbstractManager } from '../../fwk/abstract-manager';
 import { HttpClient } from '@angular/common/http';
-import { WindowRef } from 'src/app/fwk/providers/window-ref';
+import { WindowRef } from '../../fwk/providers/window-ref';
 import { environment } from './../../../environments/environment';
 
 @Injectable({ providedIn: "root" })
@@ -11,7 +11,7 @@ export class TranslateManager extends AbstractManager {
   private _propertyFilePattern: string = environment.assetsFolder + "/i18n/{locale}.json";
   private _loading: boolean = false;
   private _pendingRequests: Array<any> = new Array();
-  private _currentLang: string = null;
+  private _currentLang: string = "";
 
   constructor(
     private _http: HttpClient, 
@@ -19,7 +19,7 @@ export class TranslateManager extends AbstractManager {
     super();
   }
 
-  init(): void {
+  override init(): void {
     super.init();
     const navigatorLang = this._windowRef.nativeWindow.navigator.language.split("-")[0];
     const defaultLang = /(fr|en)/gi.test(navigatorLang) ? navigatorLang : "en";
@@ -59,13 +59,13 @@ export class TranslateManager extends AbstractManager {
     return eventEmitter;
   }
 
-  private _getValues(params: any): any {
-    const values = {};
+  private _getValues(params: any): Map<String, any> {
+    const values:Map<String, any> = new Map();
     params.forEach((param: any) => {
       if (typeof (param) === "object") {
-        values[param.key] = this._getValue(param.key, param.properties);
+        values.set(param.key, this._getValue(param.key, param.properties));
       } else {
-        values[param] = this._getValue(param, null);
+        values.set(param, this._getValue(param, new Array()));
       }
     });
     return values;
@@ -73,7 +73,7 @@ export class TranslateManager extends AbstractManager {
 
   private _getValue(key: string, properties: Array<string>): any {
     let value = key;
-    if (this._properties[this._currentLang] !== undefined) {
+    if (this._properties[this._currentLang] != null) {
       if (this._properties[this._currentLang].hasOwnProperty(key)) {
         value = this._properties[this._currentLang][key];
       }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AbstractObject } from 'src/app/fwk/abstract-object';
-import { WindowRef } from 'src/app/fwk/providers/window-ref';
 import { environment } from './../../../environments/environment';
+import { AbstractObject } from '../../fwk/abstract-object';
+import { WindowRef } from '../../fwk/providers/window-ref';
 
 @Injectable({ providedIn: "root" })
 export class ConfigProvider extends AbstractObject {
@@ -72,7 +72,7 @@ export class ConfigProvider extends AbstractObject {
   }
 
   private _getUnitLabel(value: number, steps: Array<string>, stepMultiplier: number): string {
-    let step = null;
+    let step: any;
     steps.forEach((item, index) => {
       const stepValue = Math.pow(stepMultiplier, index);
       if (value >= stepValue) {

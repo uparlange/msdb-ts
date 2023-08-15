@@ -1,7 +1,7 @@
 import { DetailModel } from '../../detail-model';
 import { Component } from '@angular/core';
-import { AbstractAppPopup } from 'src/app/common/abstract-app-popup';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppPopup } from '../../../../common/abstract-app-popup';
+import { AppHelperObject } from '../../../../common/providers/app-helper-object';
 
 @Component({
   templateUrl: './chips-popup.html',
@@ -9,26 +9,26 @@ import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
 })
 export class ChipsPopup extends AbstractAppPopup {
 
-  provider: Array<any> = null;
+  provider = new Array();
 
   constructor(
-    protected _helper: AppHelperObject, 
-    public model: DetailModel) {
+    protected override _helper: AppHelperObject,
+    public override model: DetailModel) {
     super(_helper, model);
   }
 
-  onInit(): void {
+  override onInit(): void {
     super.onInit();
-    const map = {};
-    const provider: Array<any> = new Array();
+    const map = new Map<String, any>();
+    const list = new Array();
     this.model.data.game.chips.forEach((item: any) => {
-      if (map[item.type] === undefined) {
-        map[item.type] = { name: item.type.toUpperCase(), values: [] };
-        provider.push(map[item.type]);
+      if (map.get(item.type) === undefined) {
+        map.set(item.type, { name: item.type.toUpperCase(), values: [] });
+        list.push(map.get(item.type));
       }
-      map[item.type].values.push(item);
+      map.get(item.type).values.push(item);
     });
-    this.provider = provider;
+    this.provider = list;
   }
 
   getFrequencyLabel(value: number): string {

@@ -5,7 +5,7 @@ import { AppHelperObject } from './providers/app-helper-object';
 export class AbstractAppComponent extends AbstractComponent {
 
     constructor(
-        protected _helper: AbstractHelperObject) {
+        protected override _helper: AbstractHelperObject) {
         super(_helper);
     }
 
@@ -13,7 +13,7 @@ export class AbstractAppComponent extends AbstractComponent {
         return this._getHelper().getIconProvider().getMdiIconByType(type);
     }
 
-    protected _getHelper(): AppHelperObject {
+    protected override _getHelper(): AppHelperObject {
         return <AppHelperObject>this._helper;
     }
 }

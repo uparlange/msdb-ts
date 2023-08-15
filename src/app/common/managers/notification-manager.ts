@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { AbstractManager } from 'src/app/fwk/abstract-manager';
+import { AbstractManager } from '../../fwk/abstract-manager';
 import { SwPush } from '@angular/service-worker';
 import { MsdbProvider } from '../providers/msdb-provider';
 import { ConfigProvider } from '../providers/config-provider';
@@ -19,7 +19,7 @@ export class NotificationManager extends AbstractManager {
         super();
     }
 
-    init(): void {
+    override init(): void {
         this._getLogger().info("Push Notifications enabled : " + this.isEnabled());
         if (this.isEnabled()) {
             this._swPush.subscription.subscribe((sub) => {

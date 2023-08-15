@@ -5,34 +5,32 @@ import { FwkHelperObject } from './providers/fwk-helper-object';
 import { AbstractHelperObject } from './abstract-helper-object';
 import { Component } from '@angular/core';
 
-@Component({
-    template: ""
-  })
+@Component({ template: "" })
 export class AbstractView extends AbstractComponent {
 
-    private _queryParamsSubscription: Subscription = null;
+    private _queryParamsSubscription: Subscription = new Subscription();
 
     constructor(
-        protected _helper: AbstractHelperObject,
+        protected override _helper: AbstractHelperObject,
         public model: AbstractModel) {
         super(_helper);
     }
 
-    ngOnInit() {
+    override ngOnInit() {
         super.ngOnInit();
         this._queryParamsSubscription = this._getHelper().getActivatedRoute().queryParams.subscribe((params) => {
             this.model.init(params);
         });
     }
 
-    ngOnDestroy() {
+    override ngOnDestroy() {
         super.ngOnDestroy();
         this.model.destroy();
-        this.model = null;
+        //this.model = null;
         this._queryParamsSubscription.unsubscribe();
     }
 
-    protected _getHelper(): FwkHelperObject {
+    protected override _getHelper(): FwkHelperObject {
         return <FwkHelperObject>this._helper;
     }
 }

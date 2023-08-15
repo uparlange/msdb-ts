@@ -1,5 +1,5 @@
-import { AbstractAppModel } from 'src/app/common/abstract-app-model';
-import { AppHelperObject } from 'src/app/common/providers/app-helper-object';
+import { AbstractAppModel } from '../../common/abstract-app-model';
+import { AppHelperObject } from '../../common/providers/app-helper-object';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -8,12 +8,12 @@ export class SearchModel extends AbstractAppModel {
     private _tabsInfo: any = null;
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
         this._tabsInfo = this._getTabsInfo();
     }
 
-    onInit(): void {
+    override onInit(): void {
         super.onInit();
         const type = this.getRouter().getUrlWithoutQueryParams().split("/")[2];
         const tabInfo = this.getTabsInfo().byType(type);
@@ -72,7 +72,7 @@ export class SearchModel extends AbstractAppModel {
         };
     }
 
-    protected _getInitData(): any {
+    protected override _getInitData(): any {
         return {
             selectedIndex: 0
         };

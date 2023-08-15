@@ -10,7 +10,7 @@
 	z-index:2;
 }
 
-.header mat-toolbar
+.header .mat-toolbar
 {
 	height: 64px;
 }
@@ -20,7 +20,13 @@
 	vertical-align:middle;
 }
 
-.header mat-progress-bar
+.header .menu
+{
+	position:absolute;
+	right:10px;
+}
+
+.header .mat-progress-bar
 {
 	position:absolute;
 	top:64px;

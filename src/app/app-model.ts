@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AbstractAppModel } from 'src/app/common/abstract-app-model';
+import { AbstractAppModel } from './common/abstract-app-model';
 import { AppEvents } from './app-events';
 import { AppHelperObject } from './common/providers/app-helper-object';
 
 @Injectable()
 export class AppModel extends AbstractAppModel {
 
-    private _cacheChangeSubscription: Subscription = null;
-    private _setBackgroundClassSubscription: Subscription = null;
+    private _cacheChangeSubscription: Subscription = new Subscription();
+    private _setBackgroundClassSubscription: Subscription = new Subscription();
 
     constructor(
-        protected _helper: AppHelperObject) {
+        protected override _helper: AppHelperObject) {
         super(_helper);
     }
 
-    onInit(): void {
+    override onInit(): void {
         super.onInit();
         this.getCache().getItem("searchLastType", "description").subscribe((value: string) => {
             this.data.searchLastType = value;
@@ -31,13 +31,13 @@ export class AppModel extends AbstractAppModel {
         });
     }
 
-    onDestroy(): void {
+    override onDestroy(): void {
         super.onDestroy();
         this._cacheChangeSubscription.unsubscribe();
         this._setBackgroundClassSubscription.unsubscribe();
     }
 
-    protected _getInitData(): any {
+    protected override _getInitData(): any {
         return {
             searchLastType: null,
             contentClass: null

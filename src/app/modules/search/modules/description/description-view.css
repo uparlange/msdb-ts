@@ -1,3 +1,5 @@
-.mat-list-base .mat-list-item.mat-list-item-with-avatar, .mat-list-base .mat-list-option.mat-list-item-with-avatar {
-    height: 40px;
+.searchButton
+{
+    vertical-align: middle;
+    margin-left: 10px;
 }
